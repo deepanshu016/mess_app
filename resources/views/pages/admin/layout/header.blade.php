@@ -63,7 +63,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -73,7 +73,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{@Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -192,7 +192,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -630,7 +630,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -640,7 +640,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -659,7 +659,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -749,7 +749,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -759,7 +759,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -778,7 +778,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}l" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}l" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -1279,7 +1279,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -1289,7 +1289,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -1308,7 +1308,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -1398,7 +1398,7 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
                                 <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
                             </div>
                         </a>
@@ -1408,7 +1408,7 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">Super Admin</div>
                                         </div>
                                     </div>
@@ -1427,7 +1427,7 @@
 
                                     </div>
                                     <div class="card-footer p-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                        <a href="{{ route('admin.logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>

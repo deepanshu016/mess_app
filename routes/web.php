@@ -46,6 +46,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/settings', [SettingsController::class, 'index'])->name('mess_owner.settings');
     });
     Route::post('/settings', [SettingsController::class, 'store'])->name('update.settings');
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 

@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('pages.admin.layout.layout')
 @section('title','Mess App | Login Page')
 @section('content')
 <div class="row align-items-center justify-content-center vh-100">

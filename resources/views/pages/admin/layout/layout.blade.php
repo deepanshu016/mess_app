@@ -23,8 +23,10 @@
             <div class="logo"><img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="img"></div>
         </div>
     </div>
-    @include('pages.admin.layout.header')
-    @include('pages.admin.layout.sidebar')
+    @if(Request::segment(1) != '' && Request::segment(1) != 'login')
+        @include('pages.admin.layout.header')
+        @include('pages.admin.layout.sidebar')
+    @endif
     @yield('content')
     <!-- Core JS -->
     <script src="{{ asset('/') }}frontend/assets/js/jquery-3.6.0.min.js"></script>
