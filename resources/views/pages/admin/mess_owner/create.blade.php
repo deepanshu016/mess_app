@@ -50,8 +50,8 @@
                         <div class="form-group">
                             <label class="form-label">Logo</label>
                             <input type="file" class="form-control" name="mess_logo" accept="images/*">
-                            @if(empty($messOwner))
-                            <img src="{{ }}" width="100" height="100">
+                            @if(isset($messOwner->getMedia("MESS_LOGO_IMAGE")[0]))
+                                <img src="{{ asset('public/media/').'/'.$messOwner->getMedia("MESS_LOGO_IMAGE")[0]->id.'/'.$messOwner->getMedia("MESS_LOGO_IMAGE")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
                         <div class="form-group">

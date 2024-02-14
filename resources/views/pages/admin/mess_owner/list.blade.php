@@ -83,7 +83,15 @@
                     data: 'food_type',
                     name: 'food_type',
                     render:function(data, type, row, meta){
-                        return (row.food_type == 'veg') ? 'Veg' : 'Non Veg';
+                        var foodType = '';
+                        if(row.food_type == 'veg'){
+                            foodType = 'Veg';
+                        }else if(row.food_type == 'non_veg'){
+                            foodType = 'Non Veg'
+                        }else{
+                            foodType = 'Both'
+                        }
+                        return foodType;
                     }
                 },
                 {

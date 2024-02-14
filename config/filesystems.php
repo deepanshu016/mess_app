@@ -32,7 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => public_path('media'),
+            'root' => public_path('uploads'),
             'throw' => false,
             'url'    => env('APP_URL').'/media',
         ],

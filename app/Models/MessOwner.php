@@ -16,6 +16,9 @@ class MessOwner extends Model implements HasMedia
         'user_id',
         'mess_name',
         'mess_description',
+        'food_type',
+        'veg_price',
+        'non_veg_price'
     ];
     public function user()
     {
