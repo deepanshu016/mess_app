@@ -1,77 +1,98 @@
-@extends('layouts.app')
-
+@extends('pages.layout.layout')
+@section('title','Mess App | Register Page')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<div class="row align-items-center justify-content-center vh-100">
+    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6">
+        <div class="card rounded-2 border-0 p-5 m-0">
+            <div class="card-header border-0 p-0 text-center">
+                <a href="index.html" class="w-100 d-inline-block mb-5">
+                    <img src="{{ asset('/') }}frontend/assets/img/logo.svg" alt="img">
+                </a>
+                <h3>Welcome to Mess App!</h3>
+                <p class="fs-14 text-dark my-4">Signup here to create your own dashboard.</p>
+            </div>
+            <div class="position-relative text-center my-4">
+                <p class="mb-0 position-relative z-index-1 d-inline-block bg-white px-3">or Signup with</p>
+                <span class="border border-light position-absolute top-50 start-50 translate-middle d-inline-block w-100"></span>
+            </div>
+            <div class="card-body p-0">
+                <form class="form-horizontal" method="post" id="registerForm" action="{{ route('user.signup') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" value="" placeholder="Name or User Name">
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="email" value="" placeholder="Email">
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phone" value="" placeholder="Phone">
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" value="" placeholder="Type Password">
                             </div>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password_confirmation" value="" placeholder="Re-type Password">
                             </div>
                         </div>
-                    </form>
-                </div>
+                        @if(!empty($data))
+                        <input type="hidden" class="form-control" name="signup_type" value="customer" placeholder="Phone">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Choose Mess</label>
+                                <select class="form-control" name="mess_id">
+                                    <option value="">Select Mess</option>
+                                    @foreach($data as $key=>$mess)
+                                        <option value="{{ $mess->id }}">{{ $mess->mess_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <input type="checkbox" class="form-check-input" id="checkbox1"  value="1" name="terms_condition" value="">
+                            <label class="form-label mb-0" for="checkbox1">I accept the terms and conditions</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Sign up</button>
+
+                    <p class="d-flex align-items-center justify-content-center gap-2 mt-4 mb-0">Already have an account? <a href="{{ route('login') }}" class="text-secondary fw-bold text-decoration-underline">Sign In</a></p>
+                </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('page_scripts')
+<script>
+    $(function(){
+        $("body").on('submit','#registerForm',function(e){
+            e.preventDefault();
+            const url = $(this).attr('action');
+            const method = $(this).attr('method');
+            var formData = $('#registerForm')[0];
+            formData = new FormData(formData);
+            CommonLib.ajaxForm(formData,method,url).then(d=>{
+                if(d.status === 200){
+                    CommonLib.notification.success(d.msg);
+                    window.location = d.url;
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                const error = JSON.parse(e.responseText);
+                CommonLib.notification.error(error.errors);
+            });
+        });
+    });
+</script>
 @endsection

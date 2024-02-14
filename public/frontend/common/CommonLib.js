@@ -51,5 +51,51 @@ const CommonLib = {
                 hideMethod: "fadeOut"
             });
         },
+        warning:function(message){
+            return toastr.warning(message, "Info", {
+                closeButton: true,
+                debug: false,
+                newestOnTop: false,
+                progressBar: true,
+                positionClass: "toast-top-right",
+                preventDuplicates: false,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                timeOut: "5000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut"
+            });
+        },
+    },
+    sweetalert:{
+        confirm:function(formData,method,url){
+            swal({
+                title: "Are you sure ?",
+                text: "Data can't be reverted",
+                type: "warning",
+                confirmButtonText: "Yes",
+                showCancelButton: true
+            }).then((result) => {
+                if (result.value) {
+                    CommonLib.ajaxForm(formData,method,url).then(d=>{
+                        if(d.status === 200){
+                            CommonLib.notification.success(d.msg);
+                            window.location = d.url;
+                        }
+                    }).catch(e=>{
+                        CommonLib.notification.error(e.errors);
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    CommonLib.notification.warning("Action Cancelled!!!");
+                }
+            })
+        },
+        success:function(){
+
+        },
     }
 }

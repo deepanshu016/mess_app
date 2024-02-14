@@ -99,7 +99,7 @@
                     name: 'Action',
                     render:function(data, type, row, meta){
                         return `<a href="${row.id}/edit" class="btn-video square btn btn-outline-primary rounded-2 px-0 py-0 me-3"><i class="bi bi-pencil"></i></a>
-                            <a href="#video_url" class="btn-video square btn btn-outline-danger rounded-2 px-0 py-0 me-3"><i class="bi bi-trash"></i></a>`;
+                            <a href="javascript:void(0);" class="btn-video square btn btn-outline-danger rounded-2 px-0 py-0 me-3 delete" data-url="${row.id}/delete" data-id=""><i class="bi bi-trash"></i></a>`;
                     }
                 }
             ],
@@ -118,6 +118,14 @@
             info: true,
             autoWidth: false,
             rowId:'id'
+        });
+        $("body").on("click",'.delete',function(e){
+            e.preventDefault();
+            var formData = new FormData();
+            var id = $(this).data("id");
+            var url = $(this).data("url");
+            formData.append('id',id);
+            CommonLib.sweetalert.confirm(formData,'DELETE',url);
         });
     });
 </script>

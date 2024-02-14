@@ -18,14 +18,13 @@ class MessOwnerController extends Controller
     public function add(Request $request)
     {
         $service = new MessOwnerService();
-        $setting = $service->list();
-        return view('pages.admin.mess_owner.create',compact('setting'));
+        return view('pages.admin.mess_owner.create');
     }
     public function list(Request $request)
     {
         $service = new MessOwnerService();
-        $data = $service->list();
-        return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data->items(),'draw'=>$request->input('draw'),'recordsTotal'=>$data->total(),'recordsFiltered' => $data->total()]);
+        $data = $service->list($request);
+        return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
     public function edit($owner_id)
     {
@@ -48,6 +47,15 @@ class MessOwnerController extends Controller
         $service = $service->update($request);
         if($service){
             return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$service,'url'=>route('admin.mess_owner.list')]);
+        }
+        return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
+    }
+    public function delete($id)
+    {
+        $service = new MessOwnerService();
+        $service = $service->delete($id);
+        if($service){
+            return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>'','url'=>route('admin.mess_owner.list')]);
         }
         return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
     }

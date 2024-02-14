@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessDashboardController;
+use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MessOwnerController;
@@ -27,7 +28,10 @@ Auth::routes();
 
 Route::get('/dummy', [App\Http\Controllers\SettingsController::class, 'dummyRoute'])->name('dummy');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/become-mess-owner', [AuthController::class, 'becomeAMessOwner'])->name('become_mess_owner');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/check-login', [AuthController::class, 'login'])->name('check.login');
+Route::post('/user-signup', [AuthController::class, 'registration'])->name('user.signup');
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -39,11 +43,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/create', [MessOwnerController::class, 'save'])->name('admin.mess_owner.save');
             Route::get('/{owner_id}/edit', [MessOwnerController::class, 'edit'])->name('admin.mess_owner.edit');
             Route::post('/update', [MessOwnerController::class, 'update'])->name('admin.mess_owner.update');
+            Route::delete('{id}/delete', [MessOwnerController::class, 'delete'])->name('admin.mess_owner.delete');
         });
     });
     Route::group(['middleware' => ['role:MESS_OWNER'],'prefix'=>'mess-owner'], function () {
         Route::get('/dashboard', [MessDashboardController::class, 'index'])->name('mess_owner.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('mess_owner.settings');
+    });
+    Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
+        Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
+        Route::get('/settings', [SettingsController::class, 'index'])->name('customer.settings');
     });
     Route::post('/settings', [SettingsController::class, 'store'])->name('update.settings');
     Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');

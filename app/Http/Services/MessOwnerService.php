@@ -6,9 +6,32 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 class MessOwnerService {
 
-    public function list(){
-        $setting =  MessOwner::with('user')->paginate(1);
-        return $setting;
+    public function messOwner(){
+        $messOwner =  MessOwner::all();
+        return $messOwner;
+    }
+    public function list($request){
+        $listData = [];
+        $searchValue = $request->query('search')['value'];
+        $setting =  MessOwner::with('user')
+        ->where(function ($query) use ($searchValue){
+            $query->whereHas('user',function($query) use ($searchValue){
+                $query->where('name','like','%'. $searchValue . '%');
+                $query->orWhere('email','like','%'. $searchValue . '%');
+                $query->orWhere('phone','like','%'. $searchValue . '%');
+            });
+            $query->orWhere('mess_name','like','%'. $searchValue . '%');
+            $query->orWhere('mess_description','like','%'. $searchValue . '%');
+            $query->orWhere('food_type','like','%'. $searchValue . '%');
+        });
+        $totalRecords = $setting->count();
+        $setting = $setting->offset($request->input('start'))->limit($request->input('length'));
+        $setting = $setting->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $setting;
+        return $listData;
     }
     public function edit($owner_id){
         return MessOwner::with('user')->find($owner_id);
@@ -33,6 +56,13 @@ class MessOwnerService {
         }
         $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone]);
         return MessOwner::with('user')->find($request->mess_owner_id);
+    }
+    public function delete($id){
+        $mess_owner = MessOwner::with('user')->find($id);
+        $mess_owner->clearMediaCollection('MESS_LOGO_IMAGE');
+        $user = User::find($mess_owner->user_id);
+        $user->delete();
+        return $mess_owner->delete();
     }
  }
 

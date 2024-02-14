@@ -17,13 +17,7 @@
                 <ul class="main-menu">
                     <li class="menu-section-title text-gray ff-heading fs-16 fw-bold text-uppercase mt-4 mb-2"><span>Home</span></li>
                     <li class="menu-item"><a href="{{ route('admin.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
-                    <li class="menu-item menu-item-has-children"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Mess Owner</span></a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ route('admin.mess_owner.add') }}"> Add New</a></li>
-                            <li class="menu-item"><a href="{{ route('admin.mess_owner.list') }}"> List</a></li>
-                        </ul>
-                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
-                    </li>
+                    <li class="menu-item"><a href="{{ route('admin.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">My Mess</span></a></li>
                 </ul>
             </div>
         </div>
