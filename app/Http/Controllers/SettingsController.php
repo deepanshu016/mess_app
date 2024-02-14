@@ -15,7 +15,7 @@ Class SettingsController extends Controller {
     {
         $settings = new SettingsService();
         $setting = $settings->list();
-        return view('pages.admin.pages.settings',compact('setting'));
+        return view('pages.admin.settings',compact('setting'));
     }
     public function store(Request $request)
     {

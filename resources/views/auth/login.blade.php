@@ -1,4 +1,4 @@
-@extends('pages.admin.layout.layout')
+@extends('pages.layout.layout')
 @section('title','Mess App | Login Page')
 @section('content')
 <div class="row align-items-center justify-content-center vh-100">
@@ -20,9 +20,7 @@
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" name="password" placeholder="Type Password" @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
-
                     </div>
-
                     <button type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Login</button>
                     @if (Route::has('password.request'))
                         <p class="d-flex align-items-center justify-content-between mt-4 mb-4">Forgot your password? <a href="#" class="text-primary fw-bold text-decoration-underline">Reset Here</a></p>
@@ -47,6 +45,8 @@
                 if(d.status === 200){
                     CommonLib.notification.success(d.msg);
                     window.location = d.url;
+                }else{
+                    CommonLib.notification.error(d.msg);
                 }
             }).catch(e=>{
                 const error = JSON.parse(e.responseText);

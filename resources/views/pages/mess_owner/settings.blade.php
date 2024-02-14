@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('pages.layout.layout')
 @section('title','Mess App | Settings')
 @section('content')
 <main class="main-wrapper">

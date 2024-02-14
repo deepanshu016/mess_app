@@ -16,15 +16,18 @@ class SettingsService {
             $settings = $settings->update($request->toArray());
         }
         $settings =  Settings::find(1);
-        if($request->hasFile('site_logo') && $request->file('site_logo')->isValid()){
-            $settings->addMediaFromRequest('site_logo')->toMediaCollection('site_logo');
-        }
-        if($request->hasFile('site_favicon') && $request->file('site_favicon')->isValid()){
-            $settings->addMediaFromRequest('site_favicon')->toMediaCollection('site_favicon');
-        }
-        if($request->hasFile('site_banner') && $request->file('site_banner')->isValid()){
-            $settings->addMediaFromRequest('site_banner')->toMediaCollection('site_favicon');
-        }
+        // if($request->hasFile('site_logo') && $request->file('site_logo')->isValid()){
+        //     $settings->clearMediaCollection('SITE_LOGO');
+        //     $settings->addMedia($request->file('site_logo'))->storingConversionsOnDisk('local')->toMediaCollection('SITE_LOGO');
+        // }
+        // if($request->hasFile('site_favicon') && $request->file('site_favicon')->isValid()){
+        //     $settings->clearMediaCollection('SITE_FAVICON');
+        //     $settings->addMedia($request->file('site_logo'))->storingConversionsOnDisk('local')->toMediaCollection('SITE_FAVICON');
+        // }
+        // if($request->hasFile('site_banner') && $request->file('site_banner')->isValid()){
+        //     $settings->clearMediaCollection('SITE_BANNER');
+        //     $settings->addMedia($request->file('site_banner'))->storingConversionsOnDisk('local')->toMediaCollection('SITE_BANNER');
+        // }
         return $settings;
     }
  }

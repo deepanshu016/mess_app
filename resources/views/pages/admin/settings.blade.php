@@ -1,4 +1,4 @@
-@extends('pages.admin.layout.layout')
+@extends('pages.layout.layout')
 @section('title','Mess App | Settings')
 @section('content')
 <main class="main-wrapper">
@@ -31,23 +31,23 @@
                         <div class="form-group">
                             <label class="form-label">Logo</label>
                             <input type="file" class="form-control" name="site_logo">
-                            @if(isset($setting->getMedia('site_logo')[0]))
-                                <img src="{{ storage_path('app/public/1/').$setting->getMedia('site_logo')[0]->file_name }}" width="100" height="100">
-                            @endif
+                            {{-- @if(isset($setting->getFirstMediaUrl()))
+                                <img src="{{ storage_path('app/public/1/').$setting->getFirstMediaUrl(); }}" width="100" height="100">
+                            @endif --}}
                         </div>
                         <div class="form-group">
                             <label class="form-label">Favicon</label>
                             <input type="file" class="form-control" name="site_favicon">
-                            @if(isset($setting->getMedia('site_favicon')[0]))
-                                <img src="{{ storage_path('app/public/2/').$setting->getMedia('site_favicon')[0]->file_name }}" width="100" height="100">
-                            @endif
+                            {{-- @if(isset($setting->getMedia('site_favicon')[0]))
+                                <img src="{{ storage_path('app/public/2/').$setting->getFirstMediaUrl() }}" width="100" height="100">
+                            @endif --}}
                         </div>
                         <div class="form-group">
                             <label class="form-label">Banner</label>
                             <input type="file" class="form-control" name="site_banner">
-                            @if(isset($setting->getMedia('site_banner')[0]))
-                                <img src="{{ storage_path('app/public/3/').$setting->getMedia('site_banner')[0]->file_name }}" width="100" height="100">
-                            @endif
+                            {{-- @if(isset($setting->getMedia('site_banner')[0]))
+                                <img src="{{ storage_path('app/public/3/').$setting->getFirstMediaUrl(); }}" width="100" height="100">
+                            @endif --}}
                         </div>
 
                         <div class="form-group">
@@ -111,7 +111,6 @@
 <script>
     $(function(){
         $("body").on('submit','#settingsForm',function(e){
-
             e.preventDefault();
             const url = $(this).attr('action');
             const method = $(this).attr('method');

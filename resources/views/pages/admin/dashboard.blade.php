@@ -1,4 +1,4 @@
-@extends('pages.admin.layout.layout')
+@extends('pages.layout.layout')
 @section('title','Mess App | Dashboard')
 @section('content')
 <main class="main-wrapper">

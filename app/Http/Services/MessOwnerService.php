@@ -28,6 +28,7 @@ class MessOwnerService {
         $mess_owner = MessOwner::find($request->mess_owner_id);
         $m = $mess_owner->update(['mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_price'=>$request->veg_price,'non_veg_price'=>$request->non_veg_price]);
         if($request->hasFile('mess_logo') && $request->file('mess_logo')->isValid()){
+            $mess_owner->clearMediaCollection('MESS_LOGO_IMAGE');
             $mess_owner->addMedia($request->file('mess_logo'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_LOGO_IMAGE');
         }
         $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone]);

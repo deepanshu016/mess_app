@@ -13,27 +13,6 @@
 
             <div class="header-right-part d-flex align-items-center flex-shrink-0">
                 <ul class="nav-elements d-flex align-items-center list-unstyled m-0 p-0">
-                    <li class="nav-item nav-color-switch d-flex align-items-center gap-3">
-                        <div class="sun"><img src="{{ asset('/') }}frontend/assets/img/sun.svg" alt="img"></div>
-                        <div class="switch">
-                            <input type="checkbox" id="colorSwitch" value="false" name="defaultMode">
-                            <div class="shutter">
-                                <span class="lbl-off"></span>
-                                <span class="lbl-on"></span>
-                                <div class="slider bg-primary"></div>
-                            </div>
-                        </div>
-                        <div class="moon"><img src="{{ asset('/') }}frontend/assets/img/moon.svg" alt="img"></div>
-                    </li>
-
-                    <li class="nav-item nav-flag">
-                        <select class="kleon-select-single nav-toggler-content">
-                            <option selected value="en">Eng(US)</option>
-                            <option value="fr">French</option>
-                            <option value="de">German</option>
-                            <option value="sp">Spanish</option>
-                        </select>
-                    </li>
 
                     <li class="nav-item nav-notification dropdown">
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,18 +58,21 @@
                         </div>
                     </li>
 
-                    <li class="nav-item nav-settings">
-                        <a href="#" class="nav-toggler">
-                            <img src="{{ asset('/') }}frontend/assets/img/svg/settings.svg" alt="img">
-                        </a>
-                    </li>
 
                     <li class="nav-item nav-author">
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -99,8 +81,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                    Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
@@ -208,8 +198,16 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{@Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -218,8 +216,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                   Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
@@ -656,8 +662,16 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -666,8 +680,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                    Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
@@ -775,8 +797,16 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -785,8 +815,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                    Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
@@ -1305,8 +1343,16 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="54" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -1315,8 +1361,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="80" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
@@ -1424,8 +1478,16 @@
                         <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="40" class="rounded-2">
                             <div class="nav-toggler-content">
-                                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                                <div class="ff-heading fs-14 fw-normal text-gray">Super Admin</div>
+                                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                                <div class="ff-heading fs-14 fw-normal text-gray">
+                                    @can('admin')
+                                        Super Admin
+                                    @elsecan('mess_owner')
+                                        Mess Owner
+                                    @elsecan('customer')
+                                        Customer
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-widget dropdown-menu p-0 admin-card">
@@ -1434,8 +1496,16 @@
                                     <div class="card-header p-3 text-center">
                                         <img src="{{ asset('/') }}frontend/assets/img/nav_author.jpg" alt="img" width="60" class="rounded-circle avatar">
                                         <div class="mt-2">
-                                            <h6 class="mb-0 lh-18">{{ Auth::user()->name }}</h6>
-                                            <div class="fs-14 fw-normal text-gray">Super Admin</div>
+                                            <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
+                                            <div class="fs-14 fw-normal text-gray">
+                                                @can('admin')
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                    Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">

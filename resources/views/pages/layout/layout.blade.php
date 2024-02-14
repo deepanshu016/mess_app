@@ -23,9 +23,15 @@
             <div class="logo"><img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="img"></div>
         </div>
     </div>
-    @if(Request::segment(1) != 'login' && Request::segment(1) != '')
-        @include('pages.mess_owner.layout.header')
-        @include('pages.mess_owner.layout.sidebar')
+    @if(!empty(Auth::user()))
+        @include('pages.layout.header')
+        @can('admin')
+            @include('pages.admin.sidebar')
+        @elsecan('mess_owner')
+            @include('pages.mess_owner.sidebar')
+        @elsecan('customer')
+            @include('pages.customer.sidebar')
+        @endif
     @endif
     @yield('content')
     <!-- Core JS -->

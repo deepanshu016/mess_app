@@ -1,4 +1,4 @@
-@extends('pages.admin.layout.layout')
+@extends('pages.layout.layout')
 @section('title','Mess App | Manage Mess Owner')
 @section('content')
 <main class="main-wrapper">
@@ -50,7 +50,9 @@
                         <div class="form-group">
                             <label class="form-label">Logo</label>
                             <input type="file" class="form-control" name="mess_logo" accept="images/*">
-
+                            @if(empty($messOwner))
+                            <img src="{{ }}" width="100" height="100">
+                            @endif
                         </div>
                         <div class="form-group">
                             <label class="form-label">About Mess</label>
