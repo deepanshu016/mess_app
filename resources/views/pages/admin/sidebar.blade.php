@@ -2,12 +2,10 @@
         <div class="kleon-vertical-nav">
             <!-- Logo  -->
             <div class="logo d-flex align-items-center justify-content-between">
-                <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
-                    <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
-                    <div class="position-relative flex-shrink-0">
-                        <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">
-                        <img src="{{ asset('/') }}frontend/assets/img/logo-text-white.svg" alt="" class="logo-text-white">
-                    </div>
+                <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center gap-3 flex-shrink-0">
+                    @if(isset(setting()->getMedia("SITE_LOGO")[0]))
+                        <img src="{{ asset('public/media/').'/'.setting()->getMedia("SITE_LOGO")[0]->id.'/'.setting()->getMedia("SITE_LOGO")[0]->file_name }}" width="100" height="100">
+                    @endif
                 </a>
                 <button type="button" class="kleon-vertical-nav-toggle"><i class="bi bi-list"></i></button>
             </div>

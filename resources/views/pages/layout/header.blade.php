@@ -96,7 +96,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -231,7 +231,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -339,7 +339,7 @@
                                             <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                         </li>
                                         <li class="menu-item"><a href="files.html"> Files</a></li>
-                                        <li class="menu-item"><a href="profile.html"> Profile</a></li>
+                                        <li class="menu-item"><a href="{{ route('profile') }}"> Profile</a></li>
                                     </ul>
                                     <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                 </li>
@@ -695,7 +695,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -830,7 +830,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -1070,7 +1070,7 @@
                                             <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                         </li>
                                         <li class="menu-item"><a href="files.html"> Files</a></li>
-                                        <li class="menu-item"><a href="profile.html"> Profile</a></li>
+                                        <li class="menu-item"><a href="{{ route('profile') }}"> Profile</a></li>
                                     </ul>
                                     <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                 </li>
@@ -1376,7 +1376,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -1511,7 +1511,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="profile.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>

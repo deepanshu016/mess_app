@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MessOwnerController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -47,14 +48,24 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     Route::group(['middleware' => ['role:MESS_OWNER'],'prefix'=>'mess-owner'], function () {
-        Route::get('/dashboard', [MessDashboardController::class, 'index'])->name('mess_owner.dashboard');
-        Route::get('/settings', [SettingsController::class, 'index'])->name('mess_owner.settings');
+        Route::get('/dashboard', [MenuController::class, 'index'])->name('mess_owner.dashboard');
+        Route::group(['prefix'=>'menu'], function () {
+            Route::get('/create', [MenuController::class, 'add'])->name('mess_owner.menu.create');
+            Route::get('/get-list', [MenuController::class, 'list'])->name('mess_owner.menu.datatables');
+            Route::get('/list', [MenuController::class, 'index'])->name('mess_owner.menu.list');
+            Route::post('/create', [MenuController::class, 'save'])->name('mess_owner.menu.save');
+            Route::get('/{menu_id}/edit', [MenuController::class, 'edit'])->name('mess_owner.menu.edit');
+            Route::post('/update', [MenuController::class, 'update'])->name('mess_owner.menu.update');
+            Route::delete('{id}/delete', [MenuController::class, 'delete'])->name('mess_owner.menu.delete');
+        });
     });
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('customer.settings');
     });
+    Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
     Route::post('/settings', [SettingsController::class, 'store'])->name('update.settings');
+    Route::get('/profile', [AuthController::class, 'userProfile'])->name('profile');
     Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 

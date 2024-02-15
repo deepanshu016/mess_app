@@ -2,12 +2,10 @@
         <div class="kleon-vertical-nav">
             <!-- Logo  -->
             <div class="logo d-flex align-items-center justify-content-between">
-                <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
-                    <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
-                    <div class="position-relative flex-shrink-0">
-                        <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">
-                        <img src="{{ asset('/') }}frontend/assets/img/logo-text-white.svg" alt="" class="logo-text-white">
-                    </div>
+                <a href="{{ route('mess_owner.dashboard') }}" class="d-flex align-items-center gap-3 flex-shrink-0">
+                    @if(isset(setting()->getMedia("SITE_LOGO")[0]))
+                        <img src="{{ asset('public/media/').'/'.setting()->getMedia("SITE_LOGO")[0]->id.'/'.setting()->getMedia("SITE_LOGO")[0]->file_name }}" width="100" height="100">
+                    @endif
                 </a>
                 <button type="button" class="kleon-vertical-nav-toggle"><i class="bi bi-list"></i></button>
             </div>
@@ -17,7 +15,13 @@
                 <ul class="main-menu">
                     <li class="menu-section-title text-gray ff-heading fs-16 fw-bold text-uppercase mt-4 mb-2"><span>Home</span></li>
                     <li class="menu-item"><a href="{{ route('mess_owner.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
-
+                    <li class="menu-item menu-item-has-children"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Our Menus</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="{{ route('mess_owner.menu.create') }}"> Add New</a></li>
+                            <li class="menu-item"><a href="{{ route('mess_owner.menu.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
                 </ul>
             </div>
         </div>
