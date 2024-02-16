@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Services\MessOwnerService;
 use App\Http\Services\AuthService;
 use Illuminate\Http\Request;
@@ -21,8 +22,13 @@ Class AuthController extends Controller {
     }
     public function becomeAMessOwner(Request $request)
     {
-
         return view('auth.register');
+    }
+    public function userProfile(Request $request)
+    {
+        $auth = new AuthService();
+        $user = $auth->getProfile();
+        return view('pages.profile',compact('user'));
     }
     public function login(LoginRequest $request)
     {
@@ -50,6 +56,16 @@ Class AuthController extends Controller {
             return response()->json(['status'=>200,'msg'=>'Registration done successfully','data'=>$result,'url'=>route('login')]);
         }else{
             return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
+        }
+    }
+
+    public function updateProfile(UpdateProfileRequest $request){
+        try{
+            $auth = new AuthService();
+            $result = $auth->updateProfile($request);
+            return response()->json(['status'=>($result) ? 200 : 400,'msg'=>($result) ? 'Profile updated successfully' : 'Something went wrong','url'=>route('profile')]);
+        }catch(\Exception $e){
+            return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }
     }
 }

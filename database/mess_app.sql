@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 14, 2024 at 05:31 PM
+-- Generation Time: Feb 14, 2024 at 08:15 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -70,23 +70,18 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
 --
 
 INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\MessOwner', 1, 'dfda8be9-2d61-4db0-afdd-4659ed06492d', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'public', 65806, '[]', '[]', '[]', '[]', 1, '2024-02-13 13:33:24', '2024-02-13 13:33:24'),
-(2, 'App\\Models\\MessOwner', 2, '8fac2ba5-7baa-42f0-b265-c6604b167e3e', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'public', 65806, '[]', '[]', '[]', '[]', 1, '2024-02-13 13:34:09', '2024-02-13 13:34:09'),
+(30, 'App\\Models\\MessOwner', 4, 'c8e04031-f500-4aa8-af4e-cda050625869', 'MESS_LOGO_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-14 13:57:19', '2024-02-14 13:57:19'),
 (3, 'App\\Models\\MessOwner', 3, 'db7a59b1-6cba-45d6-aa7a-1657840fc21c', 'MESS_LOGO_IMAGE', 'Red2', 'Red2.jpg', 'image/jpeg', 'public', 'public', 19502, '[]', '[]', '[]', '[]', 1, '2024-02-13 13:36:18', '2024-02-13 13:36:18'),
-(4, 'App\\Models\\MessOwner', 1, '1ad97db1-0588-492d-8f18-ad4e911c31c1', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'public', 65806, '[]', '[]', '[]', '[]', 2, '2024-02-13 14:44:29', '2024-02-13 14:44:29'),
-(5, 'App\\Models\\MessOwner', 1, '850175ae-7f15-4652-8719-6e2ceb3e6ccc', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'public', 65806, '[]', '[]', '[]', '[]', 3, '2024-02-13 14:45:02', '2024-02-13 14:45:02'),
-(6, 'App\\Models\\MessOwner', 1, 'af49196b-1bbd-41ac-9de2-c031da6cc8e0', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'local', 65806, '[]', '[]', '[]', '[]', 4, '2024-02-13 14:46:00', '2024-02-13 14:46:00'),
-(7, 'App\\Models\\MessOwner', 1, 'baadfe3a-5443-4721-9d43-cffd980e826c', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'local', 65806, '[]', '[]', '[]', '[]', 5, '2024-02-13 14:46:59', '2024-02-13 14:46:59'),
-(8, 'App\\Models\\MessOwner', 1, '13eeebf2-7881-45a2-b672-0201ad530c86', 'MESS_LOGO_IMAGE', 'Mens', 'Mens.png', 'image/png', 'public', 'local', 65806, '[]', '[]', '[]', '[]', 6, '2024-02-13 14:49:53', '2024-02-13 14:49:53'),
-(13, 'App\\Models\\Settings', 1, '0d191ffa-74cf-49ea-95a0-aa5adcf99b50', 'SITE_LOGO', 'CompLap', 'CompLap.png', 'image/png', 'public', 'local', 167508, '[]', '[]', '[]', '[]', 1, '2024-02-14 11:58:45', '2024-02-14 11:58:45'),
-(14, 'App\\Models\\Settings', 1, 'dd939cd0-9d50-449e-82c0-07923c732e5b', 'SITE_LOGO', 'CompLap', 'CompLap.png', 'image/png', 'public', 'local', 167508, '[]', '[]', '[]', '[]', 2, '2024-02-14 11:59:21', '2024-02-14 11:59:21');
+(25, 'App\\Models\\Settings', 1, 'de284d8a-3d78-49be-b0f6-00600c009475', 'SITE_BANNER', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 2, '2024-02-14 12:29:21', '2024-02-14 12:29:21'),
+(29, 'App\\Models\\Settings', 1, 'f82e6ea6-ab9b-4f1d-95f3-196614d8be3b', 'SITE_LOGO', 'sucess-animation', 'sucess-animation.png', 'image/png', 'public', 'local', 36029, '[]', '[]', '[]', '[]', 4, '2024-02-14 12:58:40', '2024-02-14 12:58:40'),
+(26, 'App\\Models\\Settings', 1, 'd831fcee-4466-42de-a08f-334f8668fe35', 'SITE_FAVICON', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 3, '2024-02-14 12:29:21', '2024-02-14 12:29:21');
 
 -- --------------------------------------------------------
 
@@ -100,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `mess_name` varchar(191) NOT NULL,
   `mess_description` longtext DEFAULT NULL,
-  `food_type` enum('veg','non_veg') NOT NULL,
+  `food_type` enum('veg','non_veg','both') NOT NULL,
   `non_veg_price` double(10,2) DEFAULT NULL,
   `veg_price` double(10,2) DEFAULT NULL,
   `status` varchar(191) DEFAULT NULL,
@@ -108,15 +103,14 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `mess_owner_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `mess_owner`
 --
 
 INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_price`, `status`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Monu\'s Mess', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bono', 'veg', NULL, NULL, NULL, '2024-02-13 13:33:24', '2024-02-13 13:33:24'),
-(2, 5, 'Monu\'s Mess', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bono', 'veg', NULL, NULL, NULL, '2024-02-13 13:34:09', '2024-02-13 13:34:09'),
+(4, 7, 'Annapurna Mess', '\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or', 'both', 350.00, 500.00, NULL, '2024-02-14 13:57:19', '2024-02-14 13:57:19'),
 (3, 6, 'Deepanshu\'s mess', 'dfsgdgdsfgdfgfdsgsfdgdfgdfg', 'veg', NULL, NULL, NULL, '2024-02-13 13:36:18', '2024-02-13 13:36:18');
 
 -- --------------------------------------------------------
@@ -185,8 +179,10 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (2, 'App\\Models\\User', 4),
-(2, 'App\\Models\\User', 5),
-(2, 'App\\Models\\User', 6);
+(2, 'App\\Models\\User', 6),
+(2, 'App\\Models\\User', 7),
+(3, 'App\\Models\\User', 8),
+(3, 'App\\Models\\User', 9);
 
 -- --------------------------------------------------------
 
@@ -329,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `title`, `description`, `meta_title`, `meta_description`, `mobile_no`, `email`, `address`, `gst`, `about_us`, `terms_condition`, `privacy_policy`, `return_refund`, `analytics_code`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'dfgsgdfgdfg', 'echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";', 'echo \"<pre>\";         echo \"<pre>\";         echo \"<pre>\";         echo \"<pre>\";', 'echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";\r\n        echo \"<pre>\";', 'echo \"<pre>\";         echo \"<pre>\";         echo \"<pre>\";         echo \"<pre>\";', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-14 11:19:06', '2024-02-14 11:27:14');
+(1, 'Mess App', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 'Section 1.10.32 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC', '\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tem', 'Section 1.10.32 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC', 'mess_app@gmail.com', 'Lucknow', 'ERFFEUEHRK356443', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', NULL, '2024-02-14 11:19:06', '2024-02-14 12:58:30');
 
 -- --------------------------------------------------------
 
@@ -346,23 +342,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
+  `mess_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-13 13:08:50', '$2y$12$1YOffyX/iDTSFD0hUfgCCeULq6k6P4Tgph3N6dQRV26k1KJmbvsTK', '9MDpYc2m0iS4yHsEiuSl5g5BAkdVntFgc3hkhwaoOYAj3Y1PDnDtBL6UoruR', '2024-02-13 13:08:50', '2024-02-13 13:08:50'),
-(2, 'Monu Mishra', 'monu@gmail.com', NULL, NULL, '$2y$12$VerRah41PlgzhHGv6apequOlWq5BqtfjQx3CG1XgsBNeA1gI2ufQK', NULL, '2024-02-13 13:31:57', '2024-02-13 13:31:57'),
-(3, 'Monu Mishra', 'monu_mess@gmail.com', NULL, NULL, '$2y$12$wRThh2GLwOu2h.e2/GWKju7IcvqFuFYi4lV6KsVCasZr/7r1HW22.', NULL, '2024-02-13 13:32:45', '2024-02-13 13:32:45'),
-(4, 'Monu Mishra', 'monu_mess1234@gmail.com', NULL, NULL, '$2y$12$cTLJDWe6x6DpO0.zljZnz.KUM6bIqyg9GAqooUi5dWxrBDSF92BkW', NULL, '2024-02-13 13:33:24', '2024-02-13 13:33:24'),
-(5, 'Monu Mishra', 'monu_mess45677@gmail.com', NULL, NULL, '$2y$12$9sPDaaA9FhspVBZHHoQggObPJe4DXhBDrgNmwa2zjYWJ3ln9CshE2', NULL, '2024-02-13 13:34:09', '2024-02-13 13:34:09'),
-(6, 'Deepanshu Mishra', 'deepanshu@gmail.com', NULL, NULL, '$2y$12$4uPHFmE4at2zw4LqGhnqbeX94HMLeVnJ.pYek3QCLXbZVtXJ5lxo6', NULL, '2024-02-13 13:36:18', '2024-02-13 13:36:18');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `mess_id`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-13 13:08:50', '$2y$12$1YOffyX/iDTSFD0hUfgCCeULq6k6P4Tgph3N6dQRV26k1KJmbvsTK', 'VX7Im4jKvVFtjLcm6A5YqCb7bUDzMe4F4WDsfL7Pzd7olHb6o9Slnnwf0Y45', NULL, '2024-02-13 13:08:50', '2024-02-13 13:08:50'),
+(2, 'Monu Mishra', 'monu@gmail.com', NULL, NULL, '$2y$12$VerRah41PlgzhHGv6apequOlWq5BqtfjQx3CG1XgsBNeA1gI2ufQK', NULL, NULL, '2024-02-13 13:31:57', '2024-02-13 13:31:57'),
+(3, 'Monu Mishra', 'monu_mess@gmail.com', NULL, NULL, '$2y$12$wRThh2GLwOu2h.e2/GWKju7IcvqFuFYi4lV6KsVCasZr/7r1HW22.', NULL, NULL, '2024-02-13 13:32:45', '2024-02-13 13:32:45'),
+(4, 'Monu Mishra', 'monu_mess1234@gmail.com', '7786931286', NULL, '$2y$12$cTLJDWe6x6DpO0.zljZnz.KUM6bIqyg9GAqooUi5dWxrBDSF92BkW', NULL, NULL, '2024-02-13 13:33:24', '2024-02-14 12:32:23'),
+(7, 'Vishal Trivedi', 'annapurana@gmail.com', NULL, NULL, '$2y$12$c397OfC3touzXMwwGciGletEkA2YYoZxyPbiMBhwaGDQ9gawybzA2', NULL, NULL, '2024-02-14 13:57:19', '2024-02-14 13:57:19'),
+(6, 'Deepanshu Mishra', 'deepanshu@gmail.com', NULL, NULL, '$2y$12$4uPHFmE4at2zw4LqGhnqbeX94HMLeVnJ.pYek3QCLXbZVtXJ5lxo6', NULL, NULL, '2024-02-13 13:36:18', '2024-02-13 13:36:18'),
+(8, 'Deepanshu Mishra', 'deepanshu147852369@gmail.com', '7786931345', NULL, '$2y$12$RNVINMTaaKV.gYDwsHTV3eavLl.N7CDDn1a1gYpYeHKs5/4uoN3Vu', NULL, NULL, '2024-02-14 14:35:24', '2024-02-14 14:35:24'),
+(9, 'Deepanshu Mishra', 'deepanshu1tetert2369@gmail.com', '77869314545', NULL, '$2y$12$pE3.T9.PFlNt/gV.7MfSe.2SWFLGho5IUa2v7l7yUXeDoiB/59aUy', NULL, NULL, '2024-02-14 14:37:08', '2024-02-14 14:37:08');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

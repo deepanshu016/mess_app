@@ -44,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function mess_owner()
+    {
+        return $this->hasOne(MessOwner::class);
+    }
 }

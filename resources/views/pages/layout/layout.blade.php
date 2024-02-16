@@ -14,6 +14,7 @@
     <link href="{{ asset('frontend/assets/img/apple-touch-icon-144x144.html') }}" rel="apple-touch-icon" sizes="144x144">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main.css" id="stylesheet">
+    @yield('page_styles')
 </head>
 <body class="bg-light">
     <!-- Preloader -->
