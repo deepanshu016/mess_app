@@ -69,6 +69,7 @@
     <!-- Theme Custom JS -->
     <script src="{{ asset('/') }}frontend/assets/js/theme.js"></script>
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     @yield('page_scripts')
 </body>
 </html>

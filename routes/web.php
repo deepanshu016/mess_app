@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     Route::group(['middleware' => ['role:MESS_OWNER'],'prefix'=>'mess-owner'], function () {
-        Route::get('/dashboard', [MenuController::class, 'index'])->name('mess_owner.dashboard');
+        Route::get('/dashboard', [MessDashboardController::class, 'index'])->name('mess_owner.dashboard');
         Route::group(['prefix'=>'menu'], function () {
             Route::get('/create', [MenuController::class, 'add'])->name('mess_owner.menu.create');
             Route::get('/get-list', [MenuController::class, 'list'])->name('mess_owner.menu.datatables');

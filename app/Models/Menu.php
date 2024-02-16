@@ -16,22 +16,24 @@ class Menu extends Model implements HasMedia
         'added_by',
         'day',
         'menu_type',
-        'menu_detail'
+        'mess_detail_breakfast',
+        'mess_detail_lunch',
+        'mess_detail_dinner',
     ];
-    protected function menuType(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => strtoupper($value),
-        );
-    }
-    protected function day(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => strtoupper($value),
-        );
-    }
-    public function mess_owner(): HasOne
-    {
-        return $this->hasOne(MessOwner::class);
-    }
+    // protected function menuType(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => strtoupper($value),
+    //     );
+    // }
+    // protected function day(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => strtoupper($value),
+    //     );
+    // }
+    // public function mess_owner(): HasOne
+    // {
+    //     return $this->hasOne(MessOwner::class);
+    // }
 }

@@ -66,6 +66,8 @@
     </div>
 </main>
 @section('page_scripts')
+
+@endsection
 <script>
     $(function(){
         $("body").on('submit','#profileFrom',function(e){
@@ -90,5 +92,4 @@
         });
     });
 </script>
-@endsection
 @endsection
