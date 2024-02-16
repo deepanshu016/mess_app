@@ -31,21 +31,21 @@
                         <div class="form-group">
                             <label class="form-label">Logo</label>
                             <input type="file" class="form-control" name="site_logo">
-                            @if(isset($setting->getMedia("SITE_LOGO")[0]))
+                           @if(!empty($setting) && isset($setting->getMedia("SITE_LOGO")[0]))
                                 <img src="{{ asset('public/media/').'/'.$setting->getMedia("SITE_LOGO")[0]->id.'/'.$setting->getMedia("SITE_LOGO")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
                         <div class="form-group">
                             <label class="form-label">Favicon</label>
                             <input type="file" class="form-control" name="site_favicon">
-                            @if(isset($setting->getMedia("SITE_FAVICON")[0]))
+                           @if(!empty($setting) && isset($setting->getMedia("SITE_FAVICON")[0]))
                                 <img src="{{ asset('public/media/').'/'.$setting->getMedia("SITE_FAVICON")[0]->id.'/'.$setting->getMedia("SITE_FAVICON")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
                         <div class="form-group">
                             <label class="form-label">Banner</label>
                             <input type="file" class="form-control" name="site_banner">
-                            @if(isset($setting->getMedia("SITE_BANNER")[0]))
+                            @if(!empty($setting) && isset($setting->getMedia("SITE_BANNER")[0]))
                                 <img src="{{ asset('public/media/').'/'.$setting->getMedia("SITE_BANNER")[0]->id.'/'.$setting->getMedia("SITE_BANNER")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('mess_name');
             $table->longText('mess_description')->nullable();
             $table->enum('food_type', ['veg', 'non_veg']);
+            $table->string('veg_price')->nullable();
+            $table->string('non_veg_price')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

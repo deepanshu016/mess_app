@@ -27,8 +27,7 @@ class MenuRequest extends FormRequest
     {
         return [
             'day' => 'required',
-            'menu_type' => 'required',
-            'menu_detail' => 'required'
+            'menu_type' => 'required'
         ];
     }
 }

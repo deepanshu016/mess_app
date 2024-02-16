@@ -111,13 +111,23 @@
 <script>
     $(function(){
         $("body").on('submit','#settingsForm',function(e){
-
             e.preventDefault();
             const url = $(this).attr('action');
             const method = $(this).attr('method');
             var formData = $('#settingsForm')[0]; // You need to use standard javascript object here
             formData = new FormData(formData);
-            CommonLib.ajaxForm(formData,method,url);
+            CommonLib.ajaxForm(formData,method,url).then(d=>{
+                if(d.status === 200){
+                    CommonLib.notification.success(d.msg);
+                    setTimeout(() => {
+                        window.location = d.url;
+                    }, 1000);
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
         });
     });
 </script>

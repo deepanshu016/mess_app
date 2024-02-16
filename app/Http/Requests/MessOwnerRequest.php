@@ -32,7 +32,7 @@ class MessOwnerRequest extends FormRequest
             'email' => 'required|email|unique:users,email,except,id',
             'phone' => 'required|numeric',
             'password' => 'required',
-            'mess_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'mess_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'food_type' => 'required|in:veg,non_veg,both',
             'veg_price' => 'required_if:food_type,veg,both',
             'non_veg_price' => 'required_if:food_type,non_veg,both'

@@ -5,8 +5,10 @@
     <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6">
         <div class="card rounded-2 border-0 p-5 m-0">
             <div class="card-header border-0 p-0 text-center">
-                <a href="index.html" class="w-100 d-inline-block mb-5">
-                    <img src="{{ asset('/') }}frontend/assets/img/logo.svg" alt="img">
+                <a href="#" class="w-100 d-inline-block mb-5">
+                    @if(!empty(setting()) && isset(setting()->getMedia("SITE_LOGO")[0]))
+                        <img src="{{ asset('public/media/').'/'.setting()->getMedia("SITE_LOGO")[0]->id.'/'.setting()->getMedia("SITE_LOGO")[0]->file_name }}" width="100" height="100">
+                    @endif
                 </a>
                 <h3>Welcome to Mess App!</h3>
                 <p class="fs-14 text-dark my-4">Signup here to create your own dashboard.</p>

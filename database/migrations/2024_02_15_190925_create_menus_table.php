@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreign('added_by')->references('id')->on('mess_owner')->onUpdate('cascade')->onDelete('cascade');
             $table->string('day');
             $table->string('menu_type');
-            $table->longText('menu_detail');
+            $table->longText('mess_detail_breakfast');
+            $table->longText('mess_detail_lunch');
+            $table->longText('mess_detail_dinner');
             $table->string('status')->nullable();
             $table->timestamps();
         });

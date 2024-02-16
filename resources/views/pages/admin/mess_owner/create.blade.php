@@ -24,26 +24,26 @@
                     <form id="messOwnerForm" method="POST" action="{{ (empty($messOwner)) ? route('admin.mess_owner.save') : route('admin.mess_owner.update') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label class="form-label">Mess Name</label>
+                            <label class="form-label">Mess Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="mess_name" placeholder="Mess Name" value="{{ @$messOwner->mess_name}}">
                             <input type="hidden" class="form-control" name="mess_owner_id" value="{{ @$messOwner->id}}">
                             <input type="hidden" class="form-control" name="user_id" value="{{ @$messOwner->user->id}}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Mess Owner Name</label>
+                            <label class="form-label">Mess Owner Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="mess_owner_name" placeholder="Mess Owner Name"  value="{{ @$messOwner->user->name}}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Email </label>
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="email" placeholder="Email" value="{{ @$messOwner->user->email}}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Phone</label>
+                            <label class="form-label">Phone <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{ @$messOwner->user->phone}}">
                         </div>
                         @if(empty($messOwner))
                         <div class="form-group">
-                            <label class="form-label">Password </label>
+                            <label class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
                         @endif
@@ -55,10 +55,10 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label class="form-label">About Mess</label>
+                            <label class="form-label">About Mess <span class="text-danger">*</span></label>
                             <textarea class="form-control" name="mess_description"  placeholder="About Mess" maxlength="500">{{ @$messOwner->mess_description}}</textarea>
                         </div>
-                        <p>Food type</p>
+                        <p>Food type <span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input bg-primary border-0 choose_food_type" id="radio10" name="food_type" value="veg" {{ (isset($messOwner) && $messOwner->food_type == 'veg') ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio10">Veg</label><br>
@@ -73,23 +73,23 @@
                         </div>
                         @if(!empty($messOwner) && ($messOwner->food_type == 'veg' || $messOwner->food_type == 'both'))
                             <div class="form-group veg_price">
-                                <label class="form-label">Veg Price</label>
+                                <label class="form-label">Veg Price <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="veg_price" placeholder="Veg Price" value="{{ @$messOwner->veg_price}}">
                             </div>
                         @else
                             <div class="form-group veg_price d-none">
-                                <label class="form-label">Veg Price</label>
+                                <label class="form-label">Veg Price <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="veg_price" placeholder="Veg Price">
                             </div>
                         @endif
                         @if(!empty($messOwner) && ($messOwner->food_type == 'non_veg' || $messOwner->food_type == 'both'))
                             <div class="form-group non_veg_price">
-                                <label class="form-label">Non Veg Basic Price</label>
+                                <label class="form-label">Non Veg Basic Price <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="non_veg_price" placeholder="Non Veg Basic Price" value="{{ @$messOwner->non_veg_price}}">
                             </div>
                         @else
                             <div class="form-group non_veg_price d-none">
-                                <label class="form-label">Non Veg Basic Price</label>
+                                <label class="form-label">Non Veg Basic Price <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="non_veg_price" placeholder="Non Veg Basic Price">
                             </div>
                         @endif
@@ -114,10 +114,14 @@
             CommonLib.ajaxForm(formData,method,url).then(d=>{
                 if(d.status === 200){
                     CommonLib.notification.success(d.msg);
-                    window.location = d.url;
+                    setTimeout(() => {
+                        window.location = d.url;
+                    }, 1000);
+                }else{
+                    CommonLib.notification.error(d.msg);
                 }
             }).catch(e=>{
-                CommonLib.notification.error(e.errors);
+                CommonLib.notification.error(e.responseJSON.errors);
             });
         });
         $("body").on("click",'.choose_food_type',function(e){
