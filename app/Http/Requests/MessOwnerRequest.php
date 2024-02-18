@@ -33,9 +33,14 @@ class MessOwnerRequest extends FormRequest
             'phone' => 'required|numeric',
             'password' => 'required',
             'mess_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'mess_banner' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'food_type' => 'required|in:veg,non_veg,both',
-            'veg_price' => 'required_if:food_type,veg,both',
-            'non_veg_price' => 'required_if:food_type,non_veg,both'
+            'veg_breakfast_price' => 'required_if:food_type,veg,both',
+            'veg_lunch_price' => 'required_if:food_type,veg,both',
+            'veg_dinner_price' => 'required_if:food_type,veg,both',
+            'non_veg_breakfast_price' => 'required_if:food_type,non_veg,both',
+            'non_veg_lunch_price' => 'required_if:food_type,non_veg,both',
+            'non_veg_dinner_price' => 'required_if:food_type,non_veg,both'
         ];
     }
 }

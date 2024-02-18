@@ -14,11 +14,11 @@
                 <h6 class="hidden-header text-gray text-uppercase ls-1 ms-4 mb-4">Main Menu</h6>
                 <ul class="main-menu">
                     <li class="menu-section-title text-gray ff-heading fs-16 fw-bold text-uppercase mt-4 mb-2"><span>Home</span></li>
-                    <li class="menu-item"><a href="{{ route('admin.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
-                    <li class="menu-item menu-item-has-children"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Mess Owner</span></a>
+                    <li class="menu-item {{ (Request::segment(2) == 'dashboard') ? 'active' : ''}}"><a href="{{ route('admin.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'mess-owner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Mess Owner</span></a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ route('admin.mess_owner.add') }}"> Add New</a></li>
-                            <li class="menu-item"><a href="{{ route('admin.mess_owner.list') }}"> List</a></li>
+                            <li class="menu-item {{ (Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.list') }}"> List</a></li>
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
