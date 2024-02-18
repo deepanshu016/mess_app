@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
-                                            <li>
+                                            <li class="active">
                                                 <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >

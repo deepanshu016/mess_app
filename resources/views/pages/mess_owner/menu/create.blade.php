@@ -11,12 +11,6 @@
                 <div class="left-part">
                     <h2 class="text-dark">Our Menu</h2>
                 </div>
-                <div class="right-part">
-                    <form class="search-form w-auto" action="https://wpthemebooster.com/demo/themeforest/html/kleon/search.php">
-                        <input type="text" name="search" class=" bg-white form-control" placeholder="Search">
-                        <button type="button" class="add-edit-menu btn"><img src="{{ asset('/') }}frontend/assets/img/svg/search.svg" alt=""></button>
-                    </form>
-                </div>
             </div>
             <div class="card border-0">
                 <div class="card-header bg-transparent border-0 p-5 pb-0">

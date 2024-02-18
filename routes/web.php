@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MessOwnerController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessOwner\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{menu_id}/edit', [MenuController::class, 'edit'])->name('mess_owner.menu.edit');
             Route::post('/update', [MenuController::class, 'update'])->name('mess_owner.menu.update');
             Route::delete('{id}/delete', [MenuController::class, 'delete'])->name('mess_owner.menu.delete');
+        });
+        Route::group(['prefix'=>'customer'], function () {
+            Route::get('/create', [CustomerController::class, 'add'])->name('mess_owner.customer.create');
+            Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
+            Route::get('/list', [CustomerController::class, 'index'])->name('mess_owner.customer.list');
+            Route::post('/create', [CustomerController::class, 'save'])->name('mess_owner.customer.save');
+            Route::get('/{customer_id}/edit', [CustomerController::class, 'edit'])->name('mess_owner.customer.edit');
+            Route::post('/update', [CustomerController::class, 'update'])->name('mess_owner.customer.update');
+            Route::delete('{id}/delete', [CustomerController::class, 'delete'])->name('mess_owner.customer.delete');
         });
     });
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
