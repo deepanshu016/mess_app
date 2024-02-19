@@ -45,7 +45,7 @@
                                 <img src="{{ asset('public/media/').'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->id.'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
-                        <p>Meal type <span class="text-danger">*</span></p>
+                        {{-- <p>Meal type <span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input bg-primary border-0" id="radio10" name="food_type" value="veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'veg') ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio10">Veg</label><br>
@@ -87,7 +87,7 @@
                             @if(!empty($customer) && !empty($customer->payment) && isset($customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]))
                                 <img src="{{ asset('public/media/').'/'.$customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]->id.'/'.$customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]->file_name }}" width="100" height="100">
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ (isset($customer)) ? 'Update' : 'Save' }}</button>
                         </div>

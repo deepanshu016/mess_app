@@ -3,6 +3,7 @@ namespace App\Http\Services;
 
 use App\Models\Menu;
 use App\Models\MessOwner;
+use App\Models\MarkDay;
 use Illuminate\Support\Facades\DB;
 
 class MenuService {
@@ -48,6 +49,23 @@ class MenuService {
         $mess_owner = Menu::find($id);
         $mess_owner->clearMediaCollection('MENU_TEMPLATE');
         return $mess_owner->delete();
+    }
+    public function StoreAbsentDay(Object $request){
+        $markDay = MarkDay::create(['user_id'=>auth()->user()->id,'mess_id'=>auth()->user()->mess_id,'mark_date'=>date('Y-m-d',strtotime($request->mark_date))]);
+        return $markDay;
+    }
+    public function markDays(Object $request){
+        $listData = [];
+        $searchValue = $request->query('search')['value'];
+        $mark_day =  MarkDay::where('user_id',auth()->user()->id);
+        $totalRecords = $mark_day->count();
+        $mark_day = $mark_day->offset($request->input('start'))->limit($request->input('length'));
+        $mark_day = $mark_day->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $mark_day;
+        return $listData;
     }
  }
 
