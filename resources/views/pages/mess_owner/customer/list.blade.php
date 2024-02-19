@@ -8,12 +8,7 @@
                 <div class="left-part">
                     <h2 class="text-dark">Mess Owners</h2>
                 </div>
-                <div class="right-part">
-                    <form class="search-form w-auto" action="https://wpthemebooster.com/demo/themeforest/html/kleon/search.php">
-                        <input type="text" name="search" class=" bg-white form-control" placeholder="Search">
-                        <button type="submit" class="btn"><img src="{{ asset('/') }}frontend/assets/img/svg/search.svg" alt=""></button>
-                    </form>
-                </div>
+
             </div>
             <div class="card border-0 p-5">
                 <div class="card-header pb-5 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3">

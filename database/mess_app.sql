@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 18, 2024 at 08:27 PM
+-- Generation Time: Feb 19, 2024 at 07:58 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `mess_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `complains`
+--
+
+DROP TABLE IF EXISTS `complains`;
+CREATE TABLE IF NOT EXISTS `complains` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `mess_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) NOT NULL,
+  `description` longtext NOT NULL,
+  `status` enum('pending','accepted','rejected') NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `complains_user_id_foreign` (`user_id`),
+  KEY `complains_mess_id_foreign` (`mess_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `complains`
+--
+
+INSERT INTO `complains` (`id`, `user_id`, `mess_id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 18, 7, 'fdgdgdddfgfg', 'gdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgd', 'accepted', '2024-02-19 12:05:48', '2024-02-19 13:18:33');
 
 -- --------------------------------------------------------
 
@@ -74,6 +102,35 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mark_days`
+--
+
+DROP TABLE IF EXISTS `mark_days`;
+CREATE TABLE IF NOT EXISTS `mark_days` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `mess_id` bigint(20) UNSIGNED NOT NULL,
+  `mark_date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mark_days_user_id_foreign` (`user_id`),
+  KEY `mark_days_mess_id_foreign` (`mess_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mark_days`
+--
+
+INSERT INTO `mark_days` (`id`, `user_id`, `mess_id`, `mark_date`, `created_at`, `updated_at`) VALUES
+(1, 18, 6, '2024-02-22', '2024-02-19 13:32:17', '2024-02-19 13:32:17'),
+(2, 18, 6, '2024-02-23', '2024-02-19 13:33:20', '2024-02-19 13:33:20'),
+(3, 18, 6, '2024-02-27', '2024-02-19 13:34:45', '2024-02-19 13:34:45'),
+(4, 18, 6, '2024-02-29', '2024-02-19 13:39:12', '2024-02-19 13:39:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `media`
 --
 
@@ -101,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
@@ -118,6 +175,7 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (25, 'App\\Models\\Settings', 1, 'de284d8a-3d78-49be-b0f6-00600c009475', 'SITE_BANNER', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 2, '2024-02-14 12:29:21', '2024-02-14 12:29:21'),
 (29, 'App\\Models\\Settings', 1, 'f82e6ea6-ab9b-4f1d-95f3-196614d8be3b', 'SITE_LOGO', 'sucess-animation', 'sucess-animation.png', 'image/png', 'public', 'local', 36029, '[]', '[]', '[]', '[]', 4, '2024-02-14 12:58:40', '2024-02-14 12:58:40'),
 (26, 'App\\Models\\Settings', 1, 'd831fcee-4466-42de-a08f-334f8668fe35', 'SITE_FAVICON', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 3, '2024-02-14 12:29:21', '2024-02-14 12:29:21'),
+(41, 'App\\Models\\Complain', 1, 'ae667b72-0b52-473b-a47b-96944710a3c7', 'REQUEST_REFERENCE_DOC', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 1, '2024-02-19 12:05:48', '2024-02-19 12:05:48'),
 (40, 'App\\Models\\Payment', 4, '6ef7fca1-2802-4727-a5e1-606a959128bb', 'PAYMENT_SCREENSHOT', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 1, '2024-02-18 14:36:54', '2024-02-18 14:36:54');
 
 -- --------------------------------------------------------
@@ -207,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -225,7 +283,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2024_02_12_201537_create_permission_tables', 1),
 (10, '2024_02_15_190925_create_menus_table', 2),
 (11, '2024_02_18_161708_create_customer_menus_table', 3),
-(12, '2024_02_18_165200_create_payments_table', 4);
+(12, '2024_02_18_165200_create_payments_table', 4),
+(14, '2024_02_19_171820_create_complains_table', 5),
+(15, '2024_02_19_185417_create_mark_days_table', 6);
 
 -- --------------------------------------------------------
 
@@ -275,7 +335,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (3, 'App\\Models\\User', 13),
 (3, 'App\\Models\\User', 14),
 (3, 'App\\Models\\User', 15),
-(3, 'App\\Models\\User', 18);
+(3, 'App\\Models\\User', 18),
+(3, 'App\\Models\\User', 19);
 
 -- --------------------------------------------------------
 
@@ -471,14 +532,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `mess_id`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '44556677885', '2024-02-13 13:08:50', '$2y$12$1YOffyX/iDTSFD0hUfgCCeULq6k6P4Tgph3N6dQRV26k1KJmbvsTK', 'EA8SEKVghSAnZl9BA8RdPAle3pGlj1xDCVlgaVIh739MfPX6v2IRS0PhT5Nd', NULL, '2024-02-13 13:08:50', '2024-02-15 13:05:07'),
+(1, 'Admin', 'admin@gmail.com', '44556677885', '2024-02-13 13:08:50', '$2y$12$1YOffyX/iDTSFD0hUfgCCeULq6k6P4Tgph3N6dQRV26k1KJmbvsTK', 'nkW8OO74O5RzfcMTQZRiSVeI33qOjpAPHxd4DxFZ8THtnBrTQDMfoPHs4Gkz', NULL, '2024-02-13 13:08:50', '2024-02-15 13:05:07'),
 (2, 'Monu Mishra', 'monu@gmail.com', NULL, NULL, '$2y$12$VerRah41PlgzhHGv6apequOlWq5BqtfjQx3CG1XgsBNeA1gI2ufQK', NULL, NULL, '2024-02-13 13:31:57', '2024-02-13 13:31:57'),
 (3, 'Monu Mishra', 'monu_mess@gmail.com', NULL, NULL, '$2y$12$wRThh2GLwOu2h.e2/GWKju7IcvqFuFYi4lV6KsVCasZr/7r1HW22.', NULL, NULL, '2024-02-13 13:32:45', '2024-02-13 13:32:45'),
 (4, 'Monu Mishra', 'monu_mess1234@gmail.com', '7786931286', NULL, '$2y$12$cTLJDWe6x6DpO0.zljZnz.KUM6bIqyg9GAqooUi5dWxrBDSF92BkW', NULL, NULL, '2024-02-13 13:33:24', '2024-02-14 12:32:23'),
@@ -493,7 +554,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `passw
 (14, 'Deepanshu Mishra Customer', 'deepanshu_mishra_custome456@gmail.com', '7744110032', NULL, '$2y$12$1uiRjjlph71PB0caiSeJHeNpjUXy.PQWWM7Hdg97yPLVHwFUbcTMm', NULL, 6, '2024-02-18 12:28:56', '2024-02-18 12:28:56'),
 (15, 'Deepanshu Mishra Customer', 'deepanshu_mishraerttome456@gmail.com', '7744156756', NULL, '$2y$12$hUbIpiJqznMe0dscy6Qg3eWTC23XA3d/GobpO0o5zcI4phGcCVcS.', NULL, 6, '2024-02-18 12:29:59', '2024-02-18 12:29:59'),
 (16, 'New Mess Owner', 'anna@gmail.com', NULL, NULL, '$2y$12$9RVuEZ/ralwsWorZksovYurjf0T22YBHdNRMJArz5XCLx1cODDN5e', NULL, NULL, '2024-02-18 13:34:11', '2024-02-18 13:34:11'),
-(18, 'Rajul Dixit', 'rajul@mail.com', '7788996633', NULL, '$2y$12$u1Ai.4Ufp6IqNsPubmX11.cwmXdOiEov5Ycretw58cPLui/9NsNYy', NULL, 6, '2024-02-18 14:36:54', '2024-02-18 14:36:54');
+(18, 'Rajul Dixit', 'rajul@mail.com', '7788996633', NULL, '$2y$12$u1Ai.4Ufp6IqNsPubmX11.cwmXdOiEov5Ycretw58cPLui/9NsNYy', NULL, 6, '2024-02-18 14:36:54', '2024-02-18 14:36:54'),
+(19, 'Sumit Kumar', 'sumit_kumar@mail.com', '9988552266', NULL, '$2y$12$A9AAFWdW/IruO4tC8yeD1OZkv9zDmoTEnvlRiwvJDtbhxRwVi7E/q', NULL, 7, '2024-02-19 14:20:18', '2024-02-19 14:20:18');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

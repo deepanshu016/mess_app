@@ -11,6 +11,7 @@ use App\Http\Controllers\MessOwnerController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
+use App\Http\Controllers\RequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,10 +69,27 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/update', [CustomerController::class, 'update'])->name('mess_owner.customer.update');
             Route::delete('{id}/delete', [CustomerController::class, 'delete'])->name('mess_owner.customer.delete');
         });
+        Route::group(['prefix'=>'request'], function () {
+            Route::get('/list', [RequestController::class, 'pendingRequest'])->name('mess_owner.request.list');
+            Route::post('/update', [RequestController::class, 'update'])->name('mess_owner.request.update');
+            Route::get('{request_id}/view', [RequestController::class, 'view'])->name('mess_owner.request.view');
+        });
     });
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('customer.settings');
+        Route::group(['prefix'=>'request'], function () {
+            Route::get('/create', [RequestController::class, 'add'])->name('customer.request.create');
+            Route::get('/get-list', [RequestController::class, 'list'])->name('customer.request.datatables');
+            Route::get('/list', [RequestController::class, 'index'])->name('customer.request.list');
+            Route::post('/create', [RequestController::class, 'save'])->name('customer.request.save');
+        });
+        Route::group(['prefix'=>'menu'], function () {
+            Route::get('/create', [MenuController::class, 'mark_day'])->name('customer.menu.mark_day');
+            Route::get('/get-list', [MenuController::class, 'markDays'])->name('customer.menu.mark_day.datatables');
+            Route::get('/list', [MenuController::class, 'mark_day_list'])->name('customer.menu.mark_day.list');
+            Route::post('/store-absent-date', [MenuController::class, 'StoreAbsentDay'])->name('customer.mark_days.save');
+        });
     });
     Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
     Route::post('/settings', [SettingsController::class, 'store'])->name('update.settings');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\MenuService;
 use App\Http\Requests\MenuRequest;
+use App\Http\Requests\MarkDayRequest;
 class MenuController extends Controller
 {
     public function __construct()
@@ -64,5 +65,34 @@ class MenuController extends Controller
             return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>'','url'=>route('admin.mess_owner.list')]);
         }
         return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
+    }
+
+
+    public function mark_day(Request $request)
+    {
+        return view('pages.customer.menu.create');
+    }
+    public function mark_day_list(Request $request)
+    {
+        return view('pages.customer.menu.list');
+    }
+
+
+    public function StoreAbsentDay(MarkDayRequest $request)
+    {
+        try{
+            $service = new MenuService();
+            $service = $service->StoreAbsentDay($request);
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('customer.menu.mark_day.list') : '']);
+        }catch(\Exception $e){
+            return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
+        }
+    }
+
+    public function markDays(Request $request)
+    {
+        $service = new MenuService();
+        $data = $service->markDays($request);
+        return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
 }
