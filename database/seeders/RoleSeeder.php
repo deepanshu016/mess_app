@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // $adminRole = ModelsRole::create(['name' => 'ADMIN','guard_name'=>'web']);
+        $adminRole = ModelsRole::create(['name' => 'ADMIN','guard_name'=>'web']);
         $messRole = ModelsRole::create(['name' => 'MESS_OWNER','guard_name'=>'web']);
         $customerRole = ModelsRole::create(['name' => 'CUSTOMER','guard_name'=>'web']);
     }

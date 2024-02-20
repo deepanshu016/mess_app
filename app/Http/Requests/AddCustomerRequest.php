@@ -25,12 +25,40 @@ class AddCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $routeName = $this->route()->getName();
+        switch ($routeName) {
+            case 'mess_owner.customer.save.subscription':
+                return $this->manageCustomerSubscriptionRules();
+            case 'mess_owner.customer.save':
+                return $this->addCustomerRules();
+            case 'mess_owner.customer.mark.attendance':
+                return $this->markAttendanceRules();
+            default:
+                return [];
+        }
+    }
+    public function manageCustomerSubscriptionRules(){
+        return [
+            'subscription_start' =>'required|date',
+            'payment_mode'=>'required'
+        ];
+    }
+    public function markAttendanceRules(){
+        return [
+            'attendance_start' =>'required|date'
+        ];
+    }
+    public function addCustomerRules(){
         return [
             'name' =>'required',
             'email'=>'required|email|unique:users,email,except,id',
             'phone'=>'required|numeric|unique:users,phone,except,id',
             'email'=>'required|email|unique:users,email,except,id',
-            'password' => 'required'
+            'food_type' => ['required',Rule::in(['veg', 'non_veg'])],
+            'meal_time' => 'required|array',
+            'meal_time.*' => 'in:breakfast,lunch,dinner',
+            'password' => 'required',
+            'payment' => 'required'
         ];
     }
 }

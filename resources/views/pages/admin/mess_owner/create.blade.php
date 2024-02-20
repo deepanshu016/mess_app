@@ -52,7 +52,7 @@
                             <label class="form-label">Mess Banner</label>
                             <input type="file" class="form-control" name="mess_banner" accept="images/*">
                             @if(!empty($messOwner) && isset($messOwner->getMedia("MESS_BANNER")[0]))
-                                <img src="{{ asset('public/media/').'/'.$messOwner->getMedia("MESS_BANNER")[0]->id.'/'.$messOwner->getMedia("MESS_LOGO_IMAGE")[0]->file_name }}" width="100" height="100">
+                                <img src="{{ asset('public/media/').'/'.$messOwner->getMedia("MESS_BANNER")[0]->id.'/'.$messOwner->getMedia("MESS_BANNER")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
                         <div class="form-group">
@@ -72,58 +72,71 @@
                             <input type="radio" class="form-check-input bg-warning border-0 choose_food_type" id="radio11" name="food_type" value="both" {{ (isset($messOwner) && $messOwner->food_type == 'both') ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio11">Both</label><br>
                         </div>
+
                         @if(!empty($messOwner) && ($messOwner->food_type == 'veg' || $messOwner->food_type == 'both'))
-                            <div class="form-group veg_price">
-                                <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_breakfast_price" placeholder="Breakfast Price" value="{{ @$messOwner->veg_breakfast_price}}">
-                            </div>
-                            <div class="form-group veg_price">
-                                <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_lunch_price" placeholder="Lunch Price" value="{{ @$messOwner->veg_lunch_price}}">
-                            </div>
-                            <div class="form-group veg_price">
-                                <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_dinner_price" placeholder="Dinner Price" value="{{ @$messOwner->veg_dinner_price}}">
+                            <div class="veg_price">
+                                <p>Veg Price <span class="text-danger">*</span></p>
+                                <div class="form-group">
+                                    <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_breakfast_price" placeholder="Breakfast Price" value="{{ @$messOwner->veg_breakfast_price}}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_lunch_price" placeholder="Lunch Price" value="{{ @$messOwner->veg_lunch_price}}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_dinner_price" placeholder="Dinner Price" value="{{ @$messOwner->veg_dinner_price}}">
+                                </div>
                             </div>
                         @else
-                            <div class="form-group veg_price d-none">
-                                <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_breakfast_price" placeholder="Breakfast Price">
-                            </div>
-                            <div class="form-group veg_price d-none">
-                                <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_lunch_price" placeholder="Lunch Price" value="{{ @$messOwner->veg_price}}">
-                            </div>
-                            <div class="form-group veg_price d-none">
-                                <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="veg_dinner_price" placeholder="Dinner Price" value="{{ @$messOwner->veg_price}}">
+                            <div class="veg_price">
+                                <p>Veg Price <span class="text-danger">*</span></p>
+                                <div class="form-group">
+                                    <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_breakfast_price" placeholder="Breakfast Price">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_lunch_price" placeholder="Lunch Price">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="veg_dinner_price" placeholder="Dinner Price">
+                                </div>
                             </div>
                         @endif
                         @if(!empty($messOwner) && ($messOwner->food_type == 'non_veg' || $messOwner->food_type == 'both'))
-                            <div class="form-group non_veg_price">
-                                <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_breakfast_price" placeholder="Breakfast Price" value="{{ @$messOwner->non_venon_veg_breakfast_priceg_price}}">
-                            </div>
-                            <div class="form-group non_veg_price">
-                                <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_lunch_price" placeholder="Lunch Price" value="{{ @$messOwner->non_veg_lunch_price}}">
-                            </div>
-                            <div class="form-group non_veg_price">
-                                <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_dinner_price" placeholder="Dinner Price" value="{{ @$messOwner->non_veg_dinner_price}}">
+                            <div class="non_veg_price">
+                                <p>Non Veg Price <span class="text-danger">*</span></p>
+                                <div class="form-group">
+                                    <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_breakfast_price" placeholder="Breakfast Price" value="{{ @$messOwner->non_veg_breakfast_price}}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_lunch_price" placeholder="Lunch Price" value="{{ @$messOwner->non_veg_lunch_price}}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_dinner_price" placeholder="Dinner Price" value="{{ @$messOwner->non_veg_dinner_price}}">
+                                </div>
                             </div>
                         @else
-                            <div class="form-group non_veg_price d-none">
-                                <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_price" placeholder="Breakfast Price">
-                            </div>
-                            <div class="form-group non_veg_price d-none">
-                                <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_lunch_price" placeholder="Lunch Price">
-                            </div>
-                            <div class="form-group non_veg_price d-none">
-                                <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="non_veg_dinner_price" placeholder="Dinner Price">
+                            <div class="non_veg_price d-none">
+                                <p>Non Veg Price <span class="text-danger">*</span></p>
+                                <div class="form-group">
+                                    <label class="form-label">Breakfast Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_breakfast_price" placeholder="Breakfast Price">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lunch Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_lunch_price" placeholder="Lunch Price">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dinner Price <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="non_veg_dinner_price" placeholder="Dinner Price">
+                                </div>
                             </div>
                         @endif
                         <div class="form-group">

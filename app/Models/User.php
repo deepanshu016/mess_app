@@ -25,7 +25,8 @@ class User extends Authenticatable implements HasMedia
         'email',
         'password',
         'phone',
-        'mess_id'
+        'mess_id',
+        'payment'
     ];
 
     /**
@@ -56,8 +57,12 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(CustomerMenu::class)->latest();
     }
-    public function payment()
+    public function payments()
     {
         return $this->hasOne(Payment::class);
+    }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }
