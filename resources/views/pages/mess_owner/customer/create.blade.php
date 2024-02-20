@@ -45,49 +45,10 @@
                                 <img src="{{ asset('public/media/').'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->id.'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
-                        {{-- <p>Meal type <span class="text-danger">*</span></p>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input bg-primary border-0" id="radio10" name="food_type" value="veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'veg') ? 'checked' : '' }}>
-                            <label class="form-label mb-0" for="radio10">Veg</label><br>
+                        <div class="form-group">
+                            <label class="form-label">Advance Payment <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="payment" placeholder="Advance Payment" value="{{ @$customer->payment}}">
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input bg-secondary border-0" id="radio11" name="food_type" value="non_veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'non_veg') ? 'checked' : '' }}>
-                            <label class="form-label mb-0" for="radio11">Non Veg</label><br>
-                        </div>
-                        <p>Meal to be Deliver<span class="text-danger">*</span></p>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-primary border-0" name="meal_time[]" value="breakfast" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->breakfast == 1) ? 'checked' : '' }}>
-                            <label class="form-label mb-0" for="radio10">Breakfast</label><br>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-secondary border-0" name="meal_time[]" value="lunch" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->lunch == 1) ? 'checked' : '' }}>
-                            <label class="form-label mb-0" for="radio11">Lunch</label><br>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-warning border-0" name="meal_time[]" value="dinner" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->dinner == 1) ? 'checked' : '' }}>
-                            <label class="form-label mb-0" for="radio11">Dinner</label><br>
-                        </div>
-                        <p>Payment <span class="text-danger">*</span></p>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input bg-primary border-0 payment_status" name="payment_status" value="paid" {{ (isset($customer) && !empty($customer->payment)) ? 'checked' : '' }}>
-                            <label class="form-label mb-0">Paid</label><br>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input bg-secondary border-0 payment_status" name="payment_status" value="unpaid" {{ (isset($customer) && empty($customer->payment)) ? 'checked' : '' }}>
-                            <label class="form-label mb-0">Unpaid</label><br>
-                        </div>
-
-                        <div class="form-group payment_screenshot {{ empty($customer) ? 'd-none' : '' }}">
-                            <label class="form-label">Paid at <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="payment_date"  value="{!! @date('Y-m-d',strtotime($customer->payment->payment_date)) !!}">
-                        </div>
-                        <div class="form-group payment_screenshot {{ empty($customer) ? 'd-none' : '' }}">
-                            <label class="form-label">Payment Screenshot <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="payment_screenshot" accept="images/*">
-                            @if(!empty($customer) && !empty($customer->payment) && isset($customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]))
-                                <img src="{{ asset('public/media/').'/'.$customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]->id.'/'.$customer->payment->getMedia("PAYMENT_SCREENSHOT")[0]->file_name }}" width="100" height="100">
-                            @endif
-                        </div> --}}
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ (isset($customer)) ? 'Update' : 'Save' }}</button>
                         </div>

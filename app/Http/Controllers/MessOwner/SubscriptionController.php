@@ -8,15 +8,17 @@ use App\Http\Services\CustomerService;
 use App\Http\Requests\AddCustomerRequest;
 use Illuminate\Support\Facades\DB;
 
-class CustomerController extends Controller
+class SubscriptionController extends Controller
 {
     public function __construct()
     {
 
     }
-    public function index(Request $request)
+    public function manage_subscription($customer_id)
     {
-        return view('pages.mess_owner.customer.list');
+        $service = new CustomerService();
+        $customer = $service->edit($customer_id);
+        return view('pages.mess_owner.customer.manage_subscription',compact('customer'));
     }
     public function add(Request $request)
     {
@@ -35,16 +37,13 @@ class CustomerController extends Controller
         $customer = $service->edit($customer_id);
         return view('pages.mess_owner.customer.create',compact('customer'));
     }
-    public function save(AddCustomerRequest $request)
+    public function save_manage_subscription(AddCustomerRequest $request)
     {
-        DB::beginTransaction();
         try{
             $service = new CustomerService();
-            $service = $service->store($request);
-            DB::commit();
+            $service = $service->save_subscription($request);
             return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '']);
         }catch(\Exception $e){
-            DB::rollback();
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }
     }
@@ -66,20 +65,5 @@ class CustomerController extends Controller
             return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>'','url'=>route('mess_owner.customer.list')]);
         }
         return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
-    }
-    public function markAttendancePage($customer_id)
-    {
-        $service = new CustomerService();
-        $customer = $service->edit($customer_id);
-        return view('pages.mess_owner.customer.mark_attendance',compact('customer'));
-    }
-    public function markAttendance(AddCustomerRequest $request){
-        try{
-            $service = new CustomerService();
-            $service = $service->markAttendance($request);
-            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '']);
-        }catch(\Exception $e){
-            return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
-        }
     }
 }

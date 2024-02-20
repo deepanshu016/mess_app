@@ -13,7 +13,6 @@ class Complain extends Model implements HasMedia
     protected $table = "complains";
     protected $fillable = [
         'user_id',
-        'user_id',
         'title',
         'description',
         'status'

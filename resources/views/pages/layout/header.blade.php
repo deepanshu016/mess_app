@@ -98,9 +98,6 @@
                                             <li class="active">
                                                 <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
                                             <li>
                                                 <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
                                             </li>

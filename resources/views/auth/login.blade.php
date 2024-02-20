@@ -24,9 +24,6 @@
                         <input type="password" class="form-control" name="password" placeholder="Type Password" @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
                     </div>
                     <button type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Login</button>
-                    @if (Route::has('password.request'))
-                        <p class="d-flex align-items-center justify-content-between mt-4 mb-4">Forgot your password? <a href="#" class="text-primary fw-bold text-decoration-underline">Reset Here</a></p>
-                    @endif
                     <a href="{{ route('register') }}" class="btn btn-secondary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold">Create an Account</a>
                     <a href="{{ route('become_mess_owner') }}" class="btn btn-success w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold">Become a Mess Owner</a>
                 </form>

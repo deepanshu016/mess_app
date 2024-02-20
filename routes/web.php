@@ -11,6 +11,7 @@ use App\Http\Controllers\MessOwnerController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
+use App\Http\Controllers\MessOwner\SubscriptionController;
 use App\Http\Controllers\RequestController;
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{customer_id}/edit', [CustomerController::class, 'edit'])->name('mess_owner.customer.edit');
             Route::post('/update', [CustomerController::class, 'update'])->name('mess_owner.customer.update');
             Route::delete('{id}/delete', [CustomerController::class, 'delete'])->name('mess_owner.customer.delete');
+            Route::get('{id}/manage-subscription', [SubscriptionController::class, 'manage_subscription'])->name('mess_owner.customer.manage_subscription');
+            Route::post('/manage-subscription', [SubscriptionController::class, 'save_manage_subscription'])->name('mess_owner.customer.save.subscription');
+            Route::get('{id}/mark-customer-attendance', [CustomerController::class, 'markAttendancePage'])->name('mess_owner.customer.mark.attendance.page');
+            Route::post('mark-attendance', [CustomerController::class, 'markAttendance'])->name('mess_owner.customer.mark.attendance');
         });
         Route::group(['prefix'=>'request'], function () {
             Route::get('/list', [RequestController::class, 'pendingRequest'])->name('mess_owner.request.list');

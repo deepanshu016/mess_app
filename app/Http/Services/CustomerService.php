@@ -5,6 +5,7 @@ use App\Models\Menu;
 use App\Models\MessOwner;
 use App\Models\Payment;
 use App\Models\CustomerMenu;
+use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,14 +20,14 @@ class CustomerService {
     public function list($request){
         $listData = [];
         $searchValue = $request->query('search')['value'];
-        $user =  User::with(['customer_menu','payment'])->whereHas('roles', function ($query) {
+        $user =  User::with(['customer_menu','payments','attendances'])->whereHas('roles', function ($query) {
             $query->where('name', 'CUSTOMER');
         })
         ->where(function ($query) use ($searchValue){
             $query->whereHas('customer_menu',function($query) use ($searchValue){
                 $query->where('meal_type','like','%'. $searchValue . '%');
             });
-            $query->whereHas('payment',function($query) use ($searchValue){
+            $query->whereHas('payments',function($query) use ($searchValue){
                 $query->whereDate('expiry', '<', Carbon::today());
             });
             $query->orWhere('name','like','%'. $searchValue . '%');
@@ -43,29 +44,27 @@ class CustomerService {
         return $listData;
     }
     public function edit($customer_id){
-        return User::with(['customer_menu','payment'])->find($customer_id);
+        return User::with(['customer_menu','payments'])->find($customer_id);
+    }
+    public function save_subscription(Object $request){
+        $customer = User::with(['customer_menu','payments'])->find($request->customer_id);
+        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
+        $customermenu = CustomerMenu::create(['user_id'=>$customer->id,'meal_type'=>$request->food_type,'breakfast'=>in_array('breakfast',$request->meal_time) ? 1: 0,'lunch'=>in_array('lunch',$request->meal_time) ? 1: 0,'dinner'=>in_array('lunch',$request->meal_time) ? 1: 0]);
+        if($request->payment_status == 'paid'){
+            $payment = Payment::create([
+                'user_id'=>$customer->id,
+                'mess_id'=>$messOwner->id,
+                'payment_date'=>date('Y-m-d',strtotime($request->subscription_start)),
+                'payment_mode'=> $request->payment_mode
+            ]);
+        }
+        return $customer;
+
     }
     public function store(Object $request){
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
-        $customer = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password),'mess_id'=>$messOwner->id]);
+        $customer = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password),'mess_id'=>$messOwner->id,'payment'=>$request->payment]);
         $customer->assignRole('CUSTOMER');
-        // $customer = User::with(['customer_menu','payment'])->find($customer->id);
-        // if($request->hasFile('customer_photo') && $request->file('customer_photo')->isValid()){
-        //     $customer->addMediaFromRequest('customer_photo')->toMediaCollection('CUSTOMER_PHOTO');
-        // }
-        // $customermenu = CustomerMenu::create(['user_id'=>$customer->id,'meal_type'=>$request->food_type,'breakfast'=>in_array('breakfast',$request->meal_time) ? 1: 0,'lunch'=>in_array('lunch',$request->meal_time) ? 1: 0,'dinner'=>in_array('lunch',$request->meal_time) ? 1: 0]);
-        // if($request->payment_status == 'paid'){
-        //     $expiry = date('Y-m-d',strtotime($request->payment_date . ' +30 days'));
-        //     $payment = Payment::create([
-        //         'user_id'=>$customer->id,
-        //         'mess_id'=>$messOwner->id,
-        //         'payment_date'=>date('Y-m-d',strtotime($request->payment_date)),
-        //         'expiry'=>$expiry
-        //     ]);
-        //     if($request->hasFile('payment_screenshot') && $request->file('payment_screenshot')->isValid()){
-        //         $payment->addMediaFromRequest('payment_screenshot')->toMediaCollection('PAYMENT_SCREENSHOT');
-        //     }
-        // }
         return $customer;
     }
     public function update(Object $request){
@@ -101,6 +100,14 @@ class CustomerService {
             $user->payment->clearMediaCollection('PAYMENT_SCREENSHOT');
         }
         return $user->delete();
+    }
+
+
+    public function markAttendance(Object $request){
+        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
+        $customer = User::find($request->customer_id);
+        $attendance = Attendance::create(['user_id'=>$customer->id,'mess_id'=>$messOwner->id,'date'=>date('Y-m-d',strtotime($request->attendance_start))]);
+        return $attendance;
     }
  }
 

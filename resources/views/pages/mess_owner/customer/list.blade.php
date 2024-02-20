@@ -6,25 +6,13 @@
         <div class="inner-contents">
             <div class="page-header d-flex align-items-center justify-content-between mr-bottom-30">
                 <div class="left-part">
-                    <h2 class="text-dark">Mess Owners</h2>
+                    <h2 class="text-dark">Customers List</h2>
                 </div>
 
             </div>
             <div class="card border-0 p-5">
                 <div class="card-header pb-5 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3">
-                    <h4 class="mb-0">Mess Owners Info</h4>
-                    <div class="ms-auto d-flex align-items-center gap-3">
-                        <div class="dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="fs-24 text-gray">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu p-0">
-                                <a class="dropdown-item" href="#">View</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item text-danger" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="mb-0">Customers List</h4>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -34,11 +22,12 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Total Attendance</th>
                                     <th>Meal Type</th>
                                     <th>Breakfast</th>
                                     <th>Lunch</th>
                                     <th>Dinner</th>
-                                    <th>Payment</th>
+                                    <th>Subscription</th>
                                     <th>Action</th>
                                     <th></th>
                                 </tr>
@@ -73,6 +62,13 @@
                     name: 'phone'
                 },
                 {
+                    data: 'total_attendance',
+                    name: 'Total Attendance',
+                    render:function(data, type, row, meta){
+                        return row.attendances.length+' days till now';
+                    }
+                },
+                {
                     data: 'meal_type',
                     name: 'Meal Type',
                     render:function(data, type, row, meta){
@@ -101,25 +97,12 @@
                     }
                 },
                 {
-                    data: 'payment',
-                    name: 'Payment Status',
+                    data: 'subscription',
+                    name: 'Subscription',
                     render:function(data, type, row, meta){
-                        var payment_status = '';
-                        if(row.payment){
-                            var currentDate = new Date();
-                            var expiryDate = new Date(row.payment.expiry);
-                            if (expiryDate < currentDate) {
-                                payment_status += `<span class="badge text-bg-warning">Expired</span>`;
-                            } else {
-                                var timeDifference = expiryDate.getTime() - currentDate.getTime();
-
-                                var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-                                payment_status += `<span class="badge text-bg-success">Expire within ${daysDifference} days</span>`;
-                            }
-                        }else{
-                            payment_status += '<span class="badge text-bg-danger">Not Paid</span>';
-                        }
-                        return payment_status;
+                        return `<a href="${row.id}/manage-subscription" class="btn btn-outline-primary rounded-2">Manage</a>
+                        <a href="${row.id}/mark-customer-attendance" class="btn btn-outline-success rounded-2">Attendance</a>
+                        `;
                     }
                 },
                 {
