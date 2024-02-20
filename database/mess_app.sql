@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 19, 2024 at 07:58 PM
+-- Generation Time: Feb 20, 2024 at 08:36 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attendances`
+--
+
+DROP TABLE IF EXISTS `attendances`;
+CREATE TABLE IF NOT EXISTS `attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `mess_id` bigint(20) UNSIGNED NOT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `attendances_user_id_foreign` (`user_id`),
+  KEY `attendances_mess_id_foreign` (`mess_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `complains`
 --
 
@@ -40,14 +59,7 @@ CREATE TABLE IF NOT EXISTS `complains` (
   PRIMARY KEY (`id`),
   KEY `complains_user_id_foreign` (`user_id`),
   KEY `complains_mess_id_foreign` (`mess_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `complains`
---
-
-INSERT INTO `complains` (`id`, `user_id`, `mess_id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 18, 7, 'fdgdgdddfgfg', 'gdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgdgdsdgdfgsfdgsgdfgfggdgsgd', 'accepted', '2024-02-19 12:05:48', '2024-02-19 13:18:33');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -68,17 +80,7 @@ CREATE TABLE IF NOT EXISTS `customer_menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_menus_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `customer_menus`
---
-
-INSERT INTO `customer_menus` (`id`, `user_id`, `meal_type`, `breakfast`, `lunch`, `dinner`, `status`, `created_at`, `updated_at`) VALUES
-(1, 14, 'veg', 1, 1, 1, '', '2024-02-18 12:28:56', '2024-02-18 12:28:56'),
-(2, 15, 'veg', 1, 1, 1, '', '2024-02-18 12:29:59', '2024-02-18 12:29:59'),
-(3, 17, 'non_veg', 1, 1, 1, '', '2024-02-18 13:35:10', '2024-02-18 14:22:00'),
-(4, 18, 'veg', 1, 1, 1, '', '2024-02-18 14:36:54', '2024-02-18 14:36:54');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -116,17 +118,7 @@ CREATE TABLE IF NOT EXISTS `mark_days` (
   PRIMARY KEY (`id`),
   KEY `mark_days_user_id_foreign` (`user_id`),
   KEY `mark_days_mess_id_foreign` (`mess_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `mark_days`
---
-
-INSERT INTO `mark_days` (`id`, `user_id`, `mess_id`, `mark_date`, `created_at`, `updated_at`) VALUES
-(1, 18, 6, '2024-02-22', '2024-02-19 13:32:17', '2024-02-19 13:32:17'),
-(2, 18, 6, '2024-02-23', '2024-02-19 13:33:20', '2024-02-19 13:33:20'),
-(3, 18, 6, '2024-02-27', '2024-02-19 13:34:45', '2024-02-19 13:34:45'),
-(4, 18, 6, '2024-02-29', '2024-02-19 13:39:12', '2024-02-19 13:39:12');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -198,21 +190,7 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `menus_added_by_foreign` (`added_by`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `menus`
---
-
-INSERT INTO `menus` (`id`, `added_by`, `day`, `menu_type`, `mess_detail_breakfast`, `mess_detail_lunch`, `mess_detail_dinner`, `status`, `created_at`, `updated_at`) VALUES
-(3, 6, 'Tue', 'dinner', '<p>Sbji Paratha</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad&nbsp;</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad + 1 Sweet</p>', NULL, '2024-02-16 14:25:00', '2024-02-16 14:25:00'),
-(2, 6, 'Mon', 'dinner', '<p>Sbji Paratha</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad&nbsp;</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad + Sweet</p>', NULL, '2024-02-16 14:14:52', '2024-02-16 14:14:52'),
-(4, 6, 'Wed', 'dinner', '<p>Egg Omlettessss</p>', '<p>Kadhai Paneer</p>', '<p>Veg paratha</p>', NULL, '2024-02-16 14:25:01', '2024-02-16 14:58:12'),
-(6, 6, 'Thu', 'dinner', '<p>Aloo Sbji</p>', '<p>Dal Chawal</p>', '<p>Sbji Roti</p>', NULL, '2024-02-16 14:26:17', '2024-02-16 14:26:17'),
-(7, 6, 'Fri', 'dinner', '<p>Bread Malai</p>', '<p>Sbji Paneer</p>', '<p>Dal Roti</p>', NULL, '2024-02-16 14:26:41', '2024-02-16 14:26:41'),
-(8, 6, 'Sun', 'dinnner', '<p>Upma</p>', '<p>Dosa</p>', '<p>Paneer</p>', NULL, '2024-02-16 14:26:58', '2024-02-16 14:26:58'),
-(9, 6, 'Sat', 'breakfast', '<p>Dal + Roti</p>', '<p>Dal + Rotisss</p>', '<p>Dal + Roti</p>', NULL, '2024-02-16 14:46:58', '2024-02-16 14:48:07'),
-(10, 6, 'Tue', 'dinner', '<p>Sbji Paratha</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad&nbsp;</p>', '<p>Dal + Chawal + Sabzi + 4 Roti + Raita + Salad + 1 Sweet</p>', NULL, '2024-02-16 14:48:40', '2024-02-16 14:48:40');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -240,18 +218,7 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `mess_owner_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `mess_owner`
---
-
-INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `status`, `created_at`, `updated_at`) VALUES
-(5, 10, 'My New Mess', 'fghdgfhgfhhfghh', 'non_veg', 345.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-15 12:13:44', '2024-02-15 13:00:08'),
-(6, 11, 'Princess Mess', 'sdgfdgsdfgfdgfdgdfgfgfdgfdg', 'veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 240.00, NULL, '2024-02-16 12:12:20', '2024-02-16 12:12:20'),
-(4, 7, 'Annapurna Mess', '\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or', 'both', 350.00, NULL, NULL, NULL, NULL, NULL, NULL, 500.00, NULL, '2024-02-14 13:57:19', '2024-02-14 13:57:19'),
-(3, 6, 'Deepanshu\'s mess', 'dfsgdgdsfgdfgfdsgsfdgdfgdfg', 'veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 13:36:18', '2024-02-13 13:36:18'),
-(7, 16, 'Anna Mess', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dicti', 'veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-18 13:34:11', '2024-02-18 13:34:11');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -265,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -285,7 +252,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2024_02_18_161708_create_customer_menus_table', 3),
 (12, '2024_02_18_165200_create_payments_table', 4),
 (14, '2024_02_19_171820_create_complains_table', 5),
-(15, '2024_02_19_185417_create_mark_days_table', 6);
+(15, '2024_02_19_185417_create_mark_days_table', 6),
+(16, '2024_02_20_180644_create_attendances_table', 7);
 
 -- --------------------------------------------------------
 
@@ -322,21 +290,7 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 4),
-(2, 'App\\Models\\User', 6),
-(2, 'App\\Models\\User', 7),
-(2, 'App\\Models\\User', 10),
-(2, 'App\\Models\\User', 11),
-(2, 'App\\Models\\User', 16),
-(3, 'App\\Models\\User', 8),
-(3, 'App\\Models\\User', 9),
-(3, 'App\\Models\\User', 12),
-(3, 'App\\Models\\User', 13),
-(3, 'App\\Models\\User', 14),
-(3, 'App\\Models\\User', 15),
-(3, 'App\\Models\\User', 18),
-(3, 'App\\Models\\User', 19);
+(1, 'App\\Models\\User', 1);
 
 -- --------------------------------------------------------
 
@@ -377,7 +331,8 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `mess_id` bigint(20) UNSIGNED NOT NULL,
-  `payment_date` date NOT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_mode` enum('cash','online') DEFAULT NULL,
   `expiry` date DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -385,17 +340,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   PRIMARY KEY (`id`),
   KEY `payments_user_id_foreign` (`user_id`),
   KEY `payments_mess_id_foreign` (`mess_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `user_id`, `mess_id`, `payment_date`, `expiry`, `status`, `created_at`, `updated_at`) VALUES
-(1, 15, 6, '2024-02-19', '2024-03-20', 1, '2024-02-18 12:29:59', '2024-02-18 12:29:59'),
-(2, 17, 6, '2024-04-30', '2024-02-11', 1, '2024-02-18 13:35:10', '2024-02-18 14:25:25'),
-(3, 17, 6, '2024-06-30', '2024-07-30', 1, '2024-02-18 14:28:32', '2024-02-18 14:28:32'),
-(4, 18, 6, '2024-02-19', '2024-03-20', 1, '2024-02-18 14:36:54', '2024-02-18 14:36:54');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -459,9 +404,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'ADMIN', 'web', '2024-02-13 13:08:15', '2024-02-13 13:08:15'),
-(2, 'MESS_OWNER', 'web', '2024-02-13 13:33:13', '2024-02-13 13:33:13'),
-(3, 'CUSTOMER', 'web', '2024-02-13 13:33:13', '2024-02-13 13:33:13');
+(1, 'ADMIN', 'web', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
+(2, 'MESS_OWNER', 'web', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
+(3, 'CUSTOMER', 'web', '2024-02-20 15:01:03', '2024-02-20 15:01:03');
 
 -- --------------------------------------------------------
 
@@ -526,36 +471,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phone` varchar(50) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) NOT NULL,
+  `payment` double(10,2) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `mess_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `mess_id`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '44556677885', '2024-02-13 13:08:50', '$2y$12$1YOffyX/iDTSFD0hUfgCCeULq6k6P4Tgph3N6dQRV26k1KJmbvsTK', 'nkW8OO74O5RzfcMTQZRiSVeI33qOjpAPHxd4DxFZ8THtnBrTQDMfoPHs4Gkz', NULL, '2024-02-13 13:08:50', '2024-02-15 13:05:07'),
-(2, 'Monu Mishra', 'monu@gmail.com', NULL, NULL, '$2y$12$VerRah41PlgzhHGv6apequOlWq5BqtfjQx3CG1XgsBNeA1gI2ufQK', NULL, NULL, '2024-02-13 13:31:57', '2024-02-13 13:31:57'),
-(3, 'Monu Mishra', 'monu_mess@gmail.com', NULL, NULL, '$2y$12$wRThh2GLwOu2h.e2/GWKju7IcvqFuFYi4lV6KsVCasZr/7r1HW22.', NULL, NULL, '2024-02-13 13:32:45', '2024-02-13 13:32:45'),
-(4, 'Monu Mishra', 'monu_mess1234@gmail.com', '7786931286', NULL, '$2y$12$cTLJDWe6x6DpO0.zljZnz.KUM6bIqyg9GAqooUi5dWxrBDSF92BkW', NULL, NULL, '2024-02-13 13:33:24', '2024-02-14 12:32:23'),
-(7, 'Vishal Trivedi', 'annapurana@gmail.com', NULL, NULL, '$2y$12$c397OfC3touzXMwwGciGletEkA2YYoZxyPbiMBhwaGDQ9gawybzA2', NULL, NULL, '2024-02-14 13:57:19', '2024-02-14 13:57:19'),
-(6, 'Deepanshu Mishra', 'deepanshu@gmail.com', NULL, NULL, '$2y$12$4uPHFmE4at2zw4LqGhnqbeX94HMLeVnJ.pYek3QCLXbZVtXJ5lxo6', NULL, NULL, '2024-02-13 13:36:18', '2024-02-13 13:36:18'),
-(8, 'Deepanshu Mishra', 'deepanshu147852369@gmail.com', '7786931345', NULL, '$2y$12$RNVINMTaaKV.gYDwsHTV3eavLl.N7CDDn1a1gYpYeHKs5/4uoN3Vu', NULL, NULL, '2024-02-14 14:35:24', '2024-02-14 14:35:24'),
-(9, 'Deepanshu Mishra', 'deepanshu1tetert2369@gmail.com', '77869314545', NULL, '$2y$12$pE3.T9.PFlNt/gV.7MfSe.2SWFLGho5IUa2v7l7yUXeDoiB/59aUy', NULL, NULL, '2024-02-14 14:37:08', '2024-02-14 14:37:08'),
-(10, 'Deepanshu Mishrassss', 'new_mess@gmail.com', '774411002255', NULL, '$2y$12$h52.dZmwSZam01j7oXLgo..fCackOyOKdMyLz7z/qSDP/9FG5Lpk.', NULL, NULL, '2024-02-15 12:13:44', '2024-02-15 12:59:35'),
-(11, 'Prince Rathore', 'prince@gmail.com', NULL, NULL, '$2y$12$/z3c8hyYyivGZrM2UHbq/utzZtFEoTKQsCNLxk4J/6R4zZstLTTy6', NULL, NULL, '2024-02-16 12:12:20', '2024-02-16 12:12:20'),
-(12, 'Deepanshu Mishra Customer', 'deepanshu_mishra_customer@gmail.com', '7744110022', NULL, '$2y$12$/.MCXzAomaUyJozb90vsneGCMwTG8bDcLwA80ix7MxZummDxd9IZC', NULL, 6, '2024-02-18 12:25:32', '2024-02-18 12:25:32'),
-(13, 'Deepanshu Mishra Customer', 'deepanshu_mishra_customer1234@gmail.com', '7744110034', NULL, '$2y$12$JeAiv0ww88qGYu6FakIsnuRr1eQt.5ozn88qWAcbQi4ABlYN4lRQy', NULL, 6, '2024-02-18 12:28:26', '2024-02-18 12:28:26'),
-(14, 'Deepanshu Mishra Customer', 'deepanshu_mishra_custome456@gmail.com', '7744110032', NULL, '$2y$12$1uiRjjlph71PB0caiSeJHeNpjUXy.PQWWM7Hdg97yPLVHwFUbcTMm', NULL, 6, '2024-02-18 12:28:56', '2024-02-18 12:28:56'),
-(15, 'Deepanshu Mishra Customer', 'deepanshu_mishraerttome456@gmail.com', '7744156756', NULL, '$2y$12$hUbIpiJqznMe0dscy6Qg3eWTC23XA3d/GobpO0o5zcI4phGcCVcS.', NULL, 6, '2024-02-18 12:29:59', '2024-02-18 12:29:59'),
-(16, 'New Mess Owner', 'anna@gmail.com', NULL, NULL, '$2y$12$9RVuEZ/ralwsWorZksovYurjf0T22YBHdNRMJArz5XCLx1cODDN5e', NULL, NULL, '2024-02-18 13:34:11', '2024-02-18 13:34:11'),
-(18, 'Rajul Dixit', 'rajul@mail.com', '7788996633', NULL, '$2y$12$u1Ai.4Ufp6IqNsPubmX11.cwmXdOiEov5Ycretw58cPLui/9NsNYy', NULL, 6, '2024-02-18 14:36:54', '2024-02-18 14:36:54'),
-(19, 'Sumit Kumar', 'sumit_kumar@mail.com', '9988552266', NULL, '$2y$12$A9AAFWdW/IruO4tC8yeD1OZkv9zDmoTEnvlRiwvJDtbhxRwVi7E/q', NULL, 7, '2024-02-19 14:20:18', '2024-02-19 14:20:18');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `remember_token`, `mess_id`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, 'eP0tvHOhAUDIDrukH0eHJDnxfy02SgvyPdzk5HfNeNTwNex4yj9wEquxN1Ym', NULL, '2024-02-20 15:01:03', '2024-02-20 15:01:03');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
