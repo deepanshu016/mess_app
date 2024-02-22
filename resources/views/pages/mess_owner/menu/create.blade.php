@@ -153,12 +153,10 @@
     });
     const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
     function createEditor(elementId) {
-    ClassicEditor.create(document.querySelector(elementId))
-        .then(editor => {
-            console.log(editor);
-        })
-        .catch(error => {
-            console.error(error);
+        ClassicEditor.create(document.querySelector(elementId)).then(editor => {
+                console.log(editor);
+        }).catch(error => {
+                console.error(error);
         });
     }
     daysOfWeek.forEach(day => {

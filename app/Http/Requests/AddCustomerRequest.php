@@ -33,19 +33,22 @@ class AddCustomerRequest extends FormRequest
                 return $this->addCustomerRules();
             case 'mess_owner.customer.mark.attendance':
                 return $this->markAttendanceRules();
+            case 'mess_owner.customer.filter.attendance':
+                return $this->filterAttendanceRules();
             default:
                 return [];
         }
     }
     public function manageCustomerSubscriptionRules(){
         return [
-            'subscription_start' =>'required|date',
-            'payment_mode'=>'required'
+            'refill_amount' =>'required',
         ];
     }
     public function markAttendanceRules(){
         return [
-            'attendance_start' =>'required|date'
+            'attendance_start' =>'required|date',
+            'meal_time' => 'required|array',
+            'meal_time.*' => 'in:breakfast,lunch,dinner',
         ];
     }
     public function addCustomerRules(){
@@ -54,11 +57,16 @@ class AddCustomerRequest extends FormRequest
             'email'=>'required|email|unique:users,email,except,id',
             'phone'=>'required|numeric|unique:users,phone,except,id',
             'email'=>'required|email|unique:users,email,except,id',
-            'food_type' => ['required',Rule::in(['veg', 'non_veg'])],
-            'meal_time' => 'required|array',
-            'meal_time.*' => 'in:breakfast,lunch,dinner',
             'password' => 'required',
-            'payment' => 'required'
+            'payment' => 'required',
+            'food_type' => 'required|in:veg,non_veg',
+            'subscription_starts_at' => 'required|date'
+        ];
+    }
+    public function filterAttendanceRules(){
+        return [
+            'customer_id'=>'required',
+            'month'=>'required'
         ];
     }
 }

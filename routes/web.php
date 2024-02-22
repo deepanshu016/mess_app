@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
 use App\Http\Controllers\MessOwner\SubscriptionController;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/check-login', [AuthController::class, 'login'])->name('check.login');
 Route::post('/user-signup', [AuthController::class, 'registration'])->name('user.signup');
 Route::group(['middleware' => ['auth']], function () {
+    Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
+    Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
@@ -63,9 +66,11 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::group(['prefix'=>'customer'], function () {
             Route::get('/create', [CustomerController::class, 'add'])->name('mess_owner.customer.create');
+            Route::get('/view-attendance', [CustomerController::class, 'viewAttendancePage'])->name('mess_owner.customer.view.attendance');
             Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
             Route::get('/list', [CustomerController::class, 'index'])->name('mess_owner.customer.list');
             Route::post('/create', [CustomerController::class, 'save'])->name('mess_owner.customer.save');
+            Route::post('/filter-attendance', [CustomerController::class, 'filterAttendance'])->name('mess_owner.customer.filter.attendance');
             Route::get('/{customer_id}/edit', [CustomerController::class, 'edit'])->name('mess_owner.customer.edit');
             Route::post('/update', [CustomerController::class, 'update'])->name('mess_owner.customer.update');
             Route::delete('{id}/delete', [CustomerController::class, 'delete'])->name('mess_owner.customer.delete');

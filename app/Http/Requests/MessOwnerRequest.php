@@ -40,7 +40,11 @@ class MessOwnerRequest extends FormRequest
             'veg_dinner_price' => 'required_if:food_type,veg,both',
             'non_veg_breakfast_price' => 'required_if:food_type,non_veg,both',
             'non_veg_lunch_price' => 'required_if:food_type,non_veg,both',
-            'non_veg_dinner_price' => 'required_if:food_type,non_veg,both'
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
+            'address' => 'required',
+            'pincode' => 'required'
         ];
     }
 }

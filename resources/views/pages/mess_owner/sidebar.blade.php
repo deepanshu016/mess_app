@@ -20,6 +20,7 @@
                         <ul class="sub-menu">
                             <li class="menu-item {{ (Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.create') }}"> Add New</a></li>
                             <li class="menu-item {{ (Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.list') }}"> List</a></li>
+                            <li class="menu-item {{ (Request::segment(3) == 'view-attendance') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.view.attendance') }}"> View Attendance</a></li>
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>

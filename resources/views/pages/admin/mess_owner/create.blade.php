@@ -56,8 +56,54 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <select class="form-control get-state" name="country_id">
+                                <option value="">Select Country</option>
+                                @if(!empty($countries))
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}"  {{ ( $messOwner->country_id  == $country->id) ? 'selected' : ''}}>{{ $country->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group state-data">
+                            @if(!empty($messOwner) &&  !empty($states))
+                                <label class="form-label">State</label>
+                                <select class="form-control get-city" name="state_id">
+                                    <option value="">Select State</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}" {{ ( $messOwner->state_id  == $state->id) ? 'selected' : ''}}>{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        <div class="form-group city-data">
+                            @if(!empty($messOwner) && !empty($cities))
+                                <label class="form-label">City</label>
+                                <select class="form-control" name="city_id">
+                                    <option value="">Select City</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{ $city->id }}" {{ ( $messOwner->city_id  == $city->id) ? 'selected' : ''}}>{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Address <span class="text-danger">*</span></label>
+                            <textarea class="form-control" name="address"  placeholder="Address" maxlength="500">{{ @$messOwner->address}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pincode</label>
+                            <input type="text" class="form-control" name="pincode" placeholder="Pincode" value="{{ @$messOwner->pincode}}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Map Link</label>
+                            <input type="text" class="form-control" name="address_link" placeholder="Map Link" value="{{ @$messOwner->address_link}}">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">About Mess <span class="text-danger">*</span></label>
-                            <textarea class="form-control" name="mess_description"  placeholder="About Mess" maxlength="500">{{ @$messOwner->mess_description}}</textarea>
+                            <textarea class="form-control" name="mess_description" id="about_mess"  placeholder="About Mess" maxlength="500">{{ @$messOwner->mess_description}}</textarea>
                         </div>
                         <p>Food type <span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
@@ -187,6 +233,45 @@
                 default:
                     break;
             }
+        });
+        $("body").on("change",".get-state",function(e){
+            e.preventDefault();
+            const url = "{{ route('get.state.list') }}";
+            const id = $(this).val();
+            formData = new FormData();
+            formData.append('country_id',id);
+            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+                if(d.status === 200){
+                    $(".state-data").html(d.html);
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
+        });
+        $("body").on("change",".get-city",function(e){
+            e.preventDefault();
+            const url = "{{ route('get.city.list') }}";
+            const id = $(this).val();
+            formData = new FormData();
+            formData.append('state_id',id);
+            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+                if(d.status === 200){
+                    $(".city-data").html(d.html);
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
+        });
+        ClassicEditor.create(document.getElementById("about_mess"), {
+            height: '80vh'
+        }).then(editor => {
+            console.log(editor);
+        }).catch(error => {
+            console.error(error);
         });
     });
 </script>

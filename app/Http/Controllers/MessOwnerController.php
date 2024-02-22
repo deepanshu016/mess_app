@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\MessOwnerService;
+use App\Http\Services\CommonService;
 use App\Http\Requests\MessOwnerRequest;
 class MessOwnerController extends Controller
 {
@@ -18,7 +19,9 @@ class MessOwnerController extends Controller
     public function add(Request $request)
     {
         $service = new MessOwnerService();
-        return view('pages.admin.mess_owner.create');
+        $common = new CommonService();
+        $countries = $common->getCountries();
+        return view('pages.admin.mess_owner.create',compact('countries'));
     }
     public function list(Request $request)
     {
@@ -30,7 +33,11 @@ class MessOwnerController extends Controller
     {
         $service = new MessOwnerService();
         $messOwner = $service->edit($owner_id);
-        return view('pages.admin.mess_owner.create',compact('messOwner'));
+        $common = new CommonService();
+        $countries = $common->getCountries();
+        $states = $common->getStateList($messOwner->country_id);
+        $cities = $common->getCityList($messOwner->state_id);
+        return view('pages.admin.mess_owner.create',compact('messOwner','states','countries','cities'));
     }
     public function save(MessOwnerRequest $request)
     {

@@ -39,7 +39,7 @@ class MessOwnerService {
     public function store(Object $request){
         $user = User::create(['name'=>$request->mess_owner_name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
         $user->assignRole('MESS_OWNER');
-        $mess_owner = MessOwner::create(['user_id'=>$user->id,'mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_breakfast_price'=>$request->veg_breakfast_price,'veg_lunch_price'=>$request->veg_lunch_price,'veg_dinner_price'=>$request->veg_dinner_price,'non_veg_breakfast_price'=>$request->non_veg_breakfast_price,'non_veg_lunch_price'=>$request->non_veg_lunch_price,'non_veg_dinner_price'=>$request->non_veg_dinner_price]);
+        $mess_owner = MessOwner::create(['user_id'=>$user->id,'mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_breakfast_price'=>$request->veg_breakfast_price,'veg_lunch_price'=>$request->veg_lunch_price,'veg_dinner_price'=>$request->veg_dinner_price,'non_veg_breakfast_price'=>$request->non_veg_breakfast_price,'non_veg_lunch_price'=>$request->non_veg_lunch_price,'non_veg_dinner_price'=>$request->non_veg_dinner_price,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'address'=>$request->address,'pincode'=>$request->pincode,'address_link'=>$request->address_link]);
         $mess_owner = MessOwner::find($mess_owner->id);
         if($request->hasFile('mess_logo') && $request->file('mess_logo')->isValid()){
             $mess_owner->addMediaFromRequest('mess_logo')->toMediaCollection('MESS_LOGO_IMAGE');
@@ -52,7 +52,7 @@ class MessOwnerService {
     public function update(Object $request){
         $user = User::find($request->user_id);
         $mess_owner = MessOwner::find($request->mess_owner_id);
-        $m = $mess_owner->update(['mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_breakfast_price'=>$request->veg_breakfast_price,'veg_lunch_price'=>$request->veg_lunch_price,'veg_dinner_price'=>$request->veg_dinner_price,'non_veg_breakfast_price'=>$request->non_veg_breakfast_price,'non_veg_lunch_price'=>$request->non_veg_lunch_price,'non_veg_dinner_price'=>$request->non_veg_dinner_price]);
+        $m = $mess_owner->update(['mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_breakfast_price'=>$request->veg_breakfast_price,'veg_lunch_price'=>$request->veg_lunch_price,'veg_dinner_price'=>$request->veg_dinner_price,'non_veg_breakfast_price'=>$request->non_veg_breakfast_price,'non_veg_lunch_price'=>$request->non_veg_lunch_price,'non_veg_dinner_price'=>$request->non_veg_dinner_price,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'address'=>$request->address,'pincode'=>$request->pincode,'address_link'=>$request->address_link]);
         if($request->hasFile('mess_logo') && $request->file('mess_logo')->isValid()){
             $mess_owner->clearMediaCollection('MESS_LOGO_IMAGE');
             $mess_owner->addMedia($request->file('mess_logo'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_LOGO_IMAGE');

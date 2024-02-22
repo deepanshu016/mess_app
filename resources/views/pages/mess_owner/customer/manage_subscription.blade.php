@@ -34,7 +34,20 @@
                             <label class="form-label">Wallet Balance</label>
                             <p>INR {{ ($customer->payment) ? @number_format(count_total_attend_days($customer->id,$customer->mess_id)) : 0.0}}</p>
                         </div>
-                        <p>Meal type <span class="text-danger">*</span></p>
+                        <div class="form-group">
+                            <label class="form-label">Refill Amount <span class="text-danger">*</span></label><small>(Amount will be added in current wallet amount)</small>
+                            <input type="text" class="form-control" name="refill_amount" placeholder="Refill Amount">
+                        </div>
+                        {{-- <p>Meal type <span class="text-danger">*</span></p>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input bg-primary border-0" id="radio10" name="food_type" value="veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'veg') ? 'checked' : '' }}>
+                            <label class="form-label mb-0" for="radio10">Veg</label><br>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input bg-secondary border-0" id="radio11" name="food_type" value="non_veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'non_veg') ? 'checked' : '' }}>
+                            <label class="form-label mb-0" for="radio11">Non Veg</label><br>
+                        </div> --}}
+                        {{-- <p>Meal type <span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input bg-primary border-0" id="radio10" name="food_type" value="veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'veg') ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio10">Veg</label><br>
@@ -55,12 +68,12 @@
                         <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input bg-warning border-0" name="meal_time[]" value="dinner" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->dinner == 1) ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio11">Dinner</label><br>
-                        </div>
-                        <div class="form-group payment_screenshon">
+                        </div> --}}
+                        {{-- <div class="form-group payment_screenshon">
                             <label class="form-label">Subscription Starts from <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="subscription_start">
-                        </div>
-                        <p>Payment <span class="text-danger">*</span></p>
+                        </div> --}}
+                        {{-- <p>Payment <span class="text-danger">*</span></p>
                         <div class="form-group payment_screenshot {{ empty($customer) ? 'd-none' : '' }}">
                             <label class="form-label">Payment Mode <span class="text-danger">*</span></label>
                             <select class="form-control" name="payment_mode">
@@ -68,7 +81,7 @@
                                 <option value="cash">Cash</option>
                                 <option value="online">Online</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ (isset($customer)) ? 'Update' : 'Save' }}</button>
                         </div>

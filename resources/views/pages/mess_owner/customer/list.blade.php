@@ -22,11 +22,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Total Attendance</th>
                                     <th>Meal Type</th>
-                                    <th>Breakfast</th>
-                                    <th>Lunch</th>
-                                    <th>Dinner</th>
                                     <th>Subscription</th>
                                     <th>Action</th>
                                     <th></th>
@@ -62,38 +58,10 @@
                     name: 'phone'
                 },
                 {
-                    data: 'total_attendance',
-                    name: 'Total Attendance',
-                    render:function(data, type, row, meta){
-                        return row.attendances.length+' days till now';
-                    }
-                },
-                {
                     data: 'meal_type',
                     name: 'Meal Type',
                     render:function(data, type, row, meta){
-                        return (row.customer_menu && row.customer_menu.meal_type == 'veg') ? 'Veg' : 'Non Veg';
-                    }
-                },
-                {
-                    data: 'breakfast',
-                    name: 'Breakfast',
-                    render:function(data, type, row, meta){
-                        return (row.customer_menu && row.customer_menu.breakfast ==  1) ? 'Yes' : 'No';
-                    }
-                },
-                {
-                    data: 'lunch',
-                    name: 'Lunch',
-                    render:function(data, type, row, meta){
-                        return (row.customer_menu && row.customer_menu.lunch ==  1) ? 'Yes' : 'No';
-                    }
-                },
-                {
-                    data: 'dinner',
-                    name: 'Dinner',
-                    render:function(data, type, row, meta){
-                        return (row.customer_menu && row.customer_menu.dinner ==  1) ? 'Yes' : 'No';
+                        return (row.meal_type == 'veg') ? 'Veg' : 'Non Veg';
                     }
                 },
                 {
@@ -101,7 +69,7 @@
                     name: 'Subscription',
                     render:function(data, type, row, meta){
                         return `<a href="${row.id}/manage-subscription" class="btn btn-outline-primary rounded-2">Manage</a>
-                        <a href="${row.id}/mark-customer-attendance" class="btn btn-outline-success rounded-2">Attendance</a>
+                        <a href="${row.id}/mark-customer-attendance" class="btn btn-outline-success rounded-2">Transaction</a>
                         `;
                     }
                 },

@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Description</label>
-                            <textarea class="form-control" name="description"  placeholder="Description" maxlength="500">{{ @$setting->description}}</textarea>
+                            <textarea class="form-control" name="description"  placeholder="Description" maxlength="500" id="settings_description">{{ @$setting->description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Meta Title</label>
@@ -60,11 +60,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Meta Description</label>
-                            <textarea class="form-control" name="meta_description"  placeholder="Meta Description" maxlength="500">{{ @$setting->meta_description}}</textarea>
+                            <textarea class="form-control" name="meta_description"  placeholder="Meta Description" id="settings_meta_description" maxlength="500">{{ @$setting->meta_description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Mobile Number</label>
-                            <input type="text" class="form-control" name="mobile_no" placeholder="Mobile Number" value="{{ @$setting->meta_title}}">
+                            <input type="text" class="form-control" name="mobile_no" placeholder="Mobile Number"  value="{{ @$setting->mobile_no}}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email</label>
@@ -80,23 +80,23 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">About Us</label>
-                            <textarea class="form-control" name="about_us"  placeholder="About Us">{{ @$setting->about_us}}</textarea>
+                            <textarea class="form-control" name="about_us"  placeholder="About Us" id="settings_about_us">{{ @$setting->about_us}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Terms Conditions</label>
-                            <textarea class="form-control" name="terms_condition"  placeholder="Terms Conditions">{{ @$setting->terms_condition}}</textarea>
+                            <textarea class="form-control" name="terms_condition"  placeholder="Terms Conditions" id="settings_terms">{{ @$setting->terms_condition}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Privacy Policy</label>
-                            <textarea class="form-control" name="privacy_policy"  placeholder="Privacy Policys">{{ @$setting->privacy_policy}}</textarea>
+                            <textarea class="form-control" name="privacy_policy"  placeholder="Privacy Policys" id="settings_privacy">{{ @$setting->privacy_policy}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Return Refund</label>
-                            <textarea class="form-control" name="return_refund"  placeholder="Return Refund">{{ @$setting->return_refund}}</textarea>
+                            <textarea class="form-control" name="return_refund"  placeholder="Return Refund" id="settings_refund">{{ @$setting->return_refund}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Analytics Code</label>
-                            <textarea class="form-control" name="analytics_code"  placeholder="Analytics Code">{{ @$setting->analytics_code}}</textarea>
+                            <textarea class="form-control" name="analytics_code"  placeholder="Analytics Code" id="settings_analytics">{{ @$setting->analytics_code}}</textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -125,6 +125,17 @@
             }).catch(e=>{
                 CommonLib.notification.error(e.errors);
             });
+        });
+        const types = ['description', 'meta_description', 'about_us', 'terms', 'privacy', 'refund','analytics'];
+        function createEditor(elementId) {
+            ClassicEditor.create(document.querySelector(elementId)).then(editor => {
+                    console.log(editor);
+            }).catch(error => {
+                    console.error(error);
+            });
+        }
+        types.forEach(day => {
+            createEditor(`#settings_${day}`);
         });
     });
 </script>

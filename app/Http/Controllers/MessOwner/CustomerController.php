@@ -5,9 +5,12 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Services\CustomerService;
+use App\Http\Services\CommonService;
 use App\Http\Requests\AddCustomerRequest;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Transaction;
+use Illuminate\Support\Facades\View;
+use App\Models\User;
 class CustomerController extends Controller
 {
     public function __construct()
@@ -73,11 +76,33 @@ class CustomerController extends Controller
         $customer = $service->edit($customer_id);
         return view('pages.mess_owner.customer.mark_attendance',compact('customer'));
     }
+    public function viewAttendancePage(Request $request)
+    {
+        $service = new CustomerService();
+        $customers = $service->customerList();
+        return view('pages.mess_owner.customer.view_attendance',compact('customers'));
+    }
     public function markAttendance(AddCustomerRequest $request){
         try{
+            $customer = User::find($request->customer_id);
+            $attendance = Transaction::where('user_id',$customer->id)->whereDate('transaction_date',date('Y-m-d',strtotime($request->attendance_start)))->first();
+            if(empty($attendance)){
+                $service = new CustomerService();
+                $service = $service->markAttendance($request);
+                return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '']);
+            }else{
+                return response()->json(['status'=>400,'msg'=>'Attendance already recorded for selected date','url'=>'']);
+            }
+        }catch(\Exception $e){
+            return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
+        }
+    }
+    public function filterAttendance(AddCustomerRequest $request){
+        try{
             $service = new CustomerService();
-            $service = $service->markAttendance($request);
-            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '']);
+            $attendance = $service->filterAttendance($request);
+            $html = View::make('pages.common.attendance_data',['attendance'=>$attendance])->render();
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '','html'=>$html]);
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }

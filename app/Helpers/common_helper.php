@@ -5,6 +5,7 @@ use \App\Models\Settings;
 use \App\Models\MessOwner;
 use \App\Models\User;
 use \App\Models\Payment;
+use \App\Models\Attendance;
 use \App\Models\CustomerMenu;
 
 if (!function_exists('setting')) {
@@ -71,6 +72,43 @@ if (!function_exists('date_difference')) {
         $interval = $date1->diff($date2);
         $daysDifference = $interval->days;
         return $daysDifference;
+    }
+}
+if (!function_exists('getTotalPerDay')) {
+    function getTotalPerDay($customer_id,$mess_id,$meal_type) {
+        $totalSpend = 0;
+        $customerData = User::with(['customer_menu','payments','attendances'])->find($customer_id);
+        $messOwnerData = MessOwner::find($mess_id);
+        if(!empty($customerData) && !empty($messOwnerData) && !empty($meal_type)){
+            if($customerData->meal_type == 'veg'){
+                if(in_array('breakfast',$meal_type)){
+                    $breakFastPerDay = ($messOwnerData->veg_breakfast_price / 30);
+                    $totalSpend += $breakFastPerDay;
+                }
+                if(in_array('lunch',$meal_type)){
+                    $lunchFastPerDay = ($messOwnerData->veg_lunch_price / 30);
+                    $totalSpend += $lunchFastPerDay;
+                }
+                if(in_array('dinner',$meal_type)){
+                    $dinnerFastPerDay = ($messOwnerData->veg_dinner_price / 30);
+                    $totalSpend += $dinnerFastPerDay;
+                }
+            }else {
+                if(in_array('breakfast',$meal_type)){
+                    $breakFastPerDay = ($messOwnerData->non_veg_breakfast_price / 30);
+                    $totalSpend += $breakFastPerDay;
+                }
+                if(in_array('lunch',$meal_type)){
+                    $lunchFastPerDay = ($messOwnerData->non_veg_lunch_price / 30);
+                    $totalSpend += $lunchFastPerDay;
+                }
+                if(in_array('dinner',$meal_type)){
+                    $dinnerFastPerDay = ($messOwnerData->non_veg_dinner_price / 30);
+                    $totalSpend += $dinnerFastPerDay;
+                }
+            }
+        }
+        return number_format($totalSpend,2);
     }
 }
 ?>

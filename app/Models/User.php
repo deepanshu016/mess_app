@@ -26,7 +26,8 @@ class User extends Authenticatable implements HasMedia
         'password',
         'phone',
         'mess_id',
-        'payment'
+        'payment',
+        'subscription_starts_at'
     ];
 
     /**

@@ -45,6 +45,19 @@
                                 <img src="{{ asset('public/media/').'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->id.'/'.$customer->getMedia("CUSTOMER_PHOTO")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
+                        <p>Meal type <span class="text-danger">*</span></p>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input bg-primary border-0" id="radio10" name="food_type" value="veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'veg') ? 'checked' : '' }}>
+                            <label class="form-label mb-0" for="radio10">Veg</label><br>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input bg-secondary border-0" id="radio11" name="food_type" value="non_veg" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->meal_type == 'non_veg') ? 'checked' : '' }}>
+                            <label class="form-label mb-0" for="radio11">Non Veg</label><br>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subscription start from  <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" name="subscription_starts_at" placeholder="Subscription start from" value="{{ @$customer->subscription_starts_at}}">
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Advance Payment <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="payment" placeholder="Advance Payment" value="{{ @$customer->payment}}">
