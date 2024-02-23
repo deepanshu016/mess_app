@@ -18,4 +18,12 @@ class Transaction extends Model
         'amount',
         'balance'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function mess_owner()
+    {
+        return $this->belongsTo(MessOwner::class,'mess_id');
+    }
 }

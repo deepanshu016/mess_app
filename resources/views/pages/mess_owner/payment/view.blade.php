@@ -1,5 +1,5 @@
 @extends('pages.layout.layout')
-@section('title','Mess App | Manage Requests')
+@section('title','Mess App | Manage Payment Requests')
 @section('content')
 <main class="main-wrapper">
     <div class="container-fluid">
@@ -15,44 +15,52 @@
                 </div>
 
                 <div class="card-body pt-3">
-                    <form id="updateRequestForm" method="POST" action="{{ route('mess_owner.request.update') }}" enctype="multipart/form-data">
+                    <form id="updatePaymentRequestsForm" method="POST" action="{{ route('mess_owner.payment.request.update') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Customer Name </label>
-                            <input type="hidden" class="form-control" name="request_id" value="{{ @$requestData->id}}">
-                            <p>{{ @$requestData->user->name}}</p>
+                            <input type="hidden" class="form-control" name="payment_id" value="{{ @$payment->id}}">
+                            <p>{{ @$payment->user->name}}</p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Customer Email </label>
-                            <p>{{ @$requestData->user->email}}</p>
+                            <p>{{ @$payment->user->email}}</p>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Subject </label>
-                            <p>{{ @$requestData->subject}}</p>
+                            <label class="form-label">Payment Mode  </label>
+                            <p>{{ @strtoupper($payment->payment)}}</p>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Description </label>
-                            <p>{{ @$requestData->description}}</p>
+                            <label class="form-label">Payment Date </label>
+                            <p>{{ @date('d M Y',strtotime($payment->payment_date))}}</p>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Status </label>
-                            <p>{{ @strtoupper($requestData->status)}}</p>
+                            <label class="form-label">Screenshot </label>
+                            @if(!empty($payment->media))
+                                <p><i class="bi bi-paperclip"></i> <a href="{{ $payment->medias}}" class="text-primary mb-3" download="{{ $payment->medias}}">{{ $payment->media[0]->uuid}}</a></p>
+                            @endif
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Request Submitted at</label>
-                            <p>{{ date('d M Y H:i A',strtotime($requestData->created_at)) }}</p>
-                        </div>
+                        @if($payment->status == 'pending')
                         <div class="form-group">
                             <label class="form-label">Mark Status</label>
                             <select class="form-control" name="status">
                                 <option value="">Select Status</option>
-                                <option value="accepted">Accept</option>
+                                <option value="accept">Accept</option>
                                 <option value="rejected">Reject</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
+                        @else
+                            {!! ($payment->status == 'accept') ? '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-success"></span> Accepted</h6>' : '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-danger"></span> Rejected</h6>' !!}
+                        @endif
+                        @if($payment->status == 'pending')
+                            <div class="form-group">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" name="notes"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -62,11 +70,11 @@
 @section('page_scripts')
 <script>
     $(function(){
-        $("body").on('submit','#updateRequestForm',function(e){
+        $("body").on('submit','#updatePaymentRequestsForm',function(e){
             e.preventDefault();
             const url = $(this).attr('action');
             const method = $(this).attr('method');
-            var formData = $('#updateRequestForm')[0]; // You need to use standard javascript object here
+            var formData = $('#updatePaymentRequestsForm')[0]; // You need to use standard javascript object here
             formData = new FormData(formData);
             CommonLib.ajaxForm(formData,method,url).then(d=>{
                 if(d.status === 200){

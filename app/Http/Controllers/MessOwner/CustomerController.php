@@ -76,11 +76,12 @@ class CustomerController extends Controller
         $customer = $service->edit($customer_id);
         return view('pages.mess_owner.customer.mark_attendance',compact('customer'));
     }
-    public function viewAttendancePage(Request $request)
+    public function viewTransaction(Request $request)
     {
         $service = new CustomerService();
         $customers = $service->customerList();
-        return view('pages.mess_owner.customer.view_attendance',compact('customers'));
+        $transaction = $service->filterTransaction($request);
+        return view('pages.mess_owner.customer.transaction',compact('customers','transaction'));
     }
     public function markAttendance(AddCustomerRequest $request){
         try{
@@ -97,11 +98,11 @@ class CustomerController extends Controller
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }
     }
-    public function filterAttendance(AddCustomerRequest $request){
+    public function filterTransaction(AddCustomerRequest $request){
         try{
             $service = new CustomerService();
-            $attendance = $service->filterAttendance($request);
-            $html = View::make('pages.common.attendance_data',['attendance'=>$attendance])->render();
+            $transaction = $service->filterTransaction($request);
+            $html = View::make('pages.common.transaction_data',['transaction'=>$transaction])->render();
             return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '','html'=>$html]);
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);

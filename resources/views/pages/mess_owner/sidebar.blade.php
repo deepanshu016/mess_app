@@ -16,15 +16,16 @@
                     <li class="menu-section-title text-gray ff-heading fs-16 fw-bold text-uppercase mt-4 mb-2"><span>Home</span></li>
                     <li class="menu-item {{ (Request::segment(2) == 'dashboard') ? 'active' : ''}}"><a href="{{ route('mess_owner.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
                     <li class="menu-item {{ (Request::segment(2) == 'menu') ? 'active' : ''}}"><a href="{{ route('mess_owner.menu.create') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Our Menus</span></a></li>
-                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'customer') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Our Customers</span></a>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'customer' && (Request::segment(3) == 'create' || Request::segment(3) == 'list')) ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Our Customers</span></a>
                         <ul class="sub-menu">
                             <li class="menu-item {{ (Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.create') }}"> Add New</a></li>
                             <li class="menu-item {{ (Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.list') }}"> List</a></li>
-                            <li class="menu-item {{ (Request::segment(3) == 'view-attendance') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.view.attendance') }}"> View Attendance</a></li>
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
                     <li class="menu-item {{ (Request::segment(2) == 'request') ? 'active' : ''}}"><a href="{{ route('mess_owner.request.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-calendar2-check fs-18"></i></span> <span class="nav-text">My Requests</span></a></li>
+                    <li class="menu-item {{ (Request::segment(3) == 'transaction') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.view.transaction') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-calendar2-check fs-18"></i></span> <span class="nav-text">Transaction</span></a></li>
+                    <li class="menu-item {{ (Request::segment(2) == 'payment') ? 'active' : ''}}"><a href="{{ route('mess_owner.payment.view.requests') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-rupee fs-18"></i></span> <span class="nav-text">Payment Requests</span></a></li>
                 </ul>
             </div>
         </div>

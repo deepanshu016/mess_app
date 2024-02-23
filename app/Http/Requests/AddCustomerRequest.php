@@ -65,8 +65,7 @@ class AddCustomerRequest extends FormRequest
     }
     public function filterAttendanceRules(){
         return [
-            'customer_id'=>'required',
-            'month'=>'required'
+            'customer_id'=>'required'
         ];
     }
 }

@@ -20,10 +20,12 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Wallet Amount</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Meal Type</th>
-                                    <th>Subscription</th>
+                                    <th>Wallet</th>
+                                    <th>Transaction</th>
                                     <th>Action</th>
                                     <th></th>
                                 </tr>
@@ -50,6 +52,13 @@
             columns: [
                 { data: 'name', name: 'Name' },
                 {
+                    data: 'wallet_amount',
+                    name: 'Wallet Amount',
+                    render:function(data, type, row, meta){
+                        return (row.payment) ? `INR ${parseFloat(row.payment)}` : `INR 0.00`;
+                    }
+                },
+                {
                     data: 'email',
                     name: 'email'
                 },
@@ -68,9 +77,15 @@
                     data: 'subscription',
                     name: 'Subscription',
                     render:function(data, type, row, meta){
-                        return `<a href="${row.id}/manage-subscription" class="btn btn-outline-primary rounded-2">Manage</a>
-                        <a href="${row.id}/mark-customer-attendance" class="btn btn-outline-success rounded-2">Transaction</a>
-                        `;
+                        return `<a href="${row.id}/manage-subscription" class="bg-primary text-white fs-12 lh-26 text-uppercase px-2 rounded-4 float-end">Refill</a>`;
+                    }
+                },
+                {
+                    data: 'transaction',
+                    name: 'Transaction',
+                    render:function(data, type, row, meta){
+                        return `<a href="${row.id}/mark-customer-attendance" class="bg-success text-white fs-12 lh-26 text-uppercase px-5 rounded-4 float-end">Add New</a>
+                        <a href="/mess-owner/customer/transaction?user_id=${row.id}" class="bg-warning text-white fs-12 lh-26 text-uppercase px-5 rounded-4 float-end">View</a>`;
                     }
                 },
                 {

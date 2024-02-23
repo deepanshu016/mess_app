@@ -32,7 +32,7 @@ class CommonService {
                 'transaction_tag' => $transaction_tag,
                 'amount' => $amount,
                 'balance' => $balance,
-                'transaction_date' => date('Y-m-d',strtotime($transaction_date)),
+                'transaction_date' => ($transaction_date != '') ? date('Y-m-d',strtotime($transaction_date)) : date('Y-m-d'),
             ]
         );
         return $transaction;

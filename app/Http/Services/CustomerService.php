@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\CustomerMenu;
 use App\Http\Services\CommonService;
 use App\Models\Attendance;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,9 +34,6 @@ class CustomerService {
             $query->whereHas('customer_menu',function($query) use ($searchValue){
                 $query->where('meal_type','like','%'. $searchValue . '%');
             });
-            $query->whereHas('payments',function($query) use ($searchValue){
-                $query->whereDate('expiry', '<', Carbon::today());
-            });
             $query->orWhere('name','like','%'. $searchValue . '%');
             $query->orWhere('email','like','%'. $searchValue . '%');
             $query->orWhere('phone','like','%'. $searchValue . '%');
@@ -53,18 +51,13 @@ class CustomerService {
         return User::with(['customer_menu','payments'])->find($customer_id);
     }
     public function save_subscription(Object $request){
+        $common = new CommonService();
+        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         $customer = User::with(['customer_menu','payments'])->find($request->customer_id);
-        $customer = $customer->update(['payment'=> $customer->payment + $request->refill_amount]);
-        // $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
-        // $customermenu = CustomerMenu::create(['user_id'=>$customer->id,'meal_type'=>$request->food_type,'breakfast'=>in_array('breakfast',$request->meal_time) ? 1: 0,'lunch'=>in_array('lunch',$request->meal_time) ? 1: 0,'dinner'=>in_array('lunch',$request->meal_time) ? 1: 0]);
-        // if($request->payment_status == 'paid'){
-        //     $payment = Payment::create([
-        //         'user_id'=>$customer->id,
-        //         'mess_id'=>$messOwner->id,
-        //         'payment_date'=>date('Y-m-d',strtotime($request->subscription_start)),
-        //         'payment_mode'=> $request->payment_mode
-        //     ]);
-        // }
+        $wallet = $this->user_wallet_updatation($customer->id,'credit',$request->refill_amount);
+        if($wallet){
+            $common->record_transaction($customer->id,$messOwner->id,'credit','REFILL','',$request->refill_amount,$wallet->payment);
+        }
         return $customer;
 
     }
@@ -121,11 +114,21 @@ class CustomerService {
         }
         return $wallet;
     }
-    public function filterAttendance(Object $request){
-        $attendance = Attendance::where('user_id',$request->customer_id)->whereMonth('date',$request->month)->get();
-        return $attendance;
+    public function filterTransaction(Object $request){
+        $transaction = Transaction::with(['user','mess_owner']);
+        if($request->user_id){
+            $transaction = $transaction->where('user_id',$request->user_id);
+        }
+        if($request->transaction_type){
+            $transaction = $transaction->where('transaction_type',$request->transaction_type);
+        }
+        if($request->month){
+            $transaction = $transaction->whereMonth('transaction_date',$request->month);
+        }
+        $transaction = $transaction->orderBy('transaction_date','DESC')->get();
+        return $transaction;
     }
-    public function user_wallet_updatation($customer_id,$type='debit',$amount){
+    public function user_wallet_updatation($customer_id,$type,$amount){
         $user = User::find($customer_id);
         if($type == 'debit'){
             $user->decrement('payment', $amount);

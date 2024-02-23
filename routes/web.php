@@ -14,6 +14,7 @@ use App\Http\Controllers\MessOwner\CustomerController;
 use App\Http\Controllers\MessOwner\SubscriptionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +54,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('{id}/delete', [MessOwnerController::class, 'delete'])->name('admin.mess_owner.delete');
         });
     });
+    Route::group(['prefix'=>'common'], function () {
+        Route::group(['prefix'=>'payment'], function () {
+            Route::get('/get-list', [PaymentController::class, 'list'])->name('common.payment.request.datatables');
+        });
+    });
     Route::group(['middleware' => ['role:MESS_OWNER'],'prefix'=>'mess-owner'], function () {
         Route::get('/dashboard', [MessDashboardController::class, 'index'])->name('mess_owner.dashboard');
         Route::group(['prefix'=>'menu'], function () {
@@ -67,10 +73,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix'=>'customer'], function () {
             Route::get('/create', [CustomerController::class, 'add'])->name('mess_owner.customer.create');
             Route::get('/view-attendance', [CustomerController::class, 'viewAttendancePage'])->name('mess_owner.customer.view.attendance');
+            Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('mess_owner.customer.view.transaction');
             Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
             Route::get('/list', [CustomerController::class, 'index'])->name('mess_owner.customer.list');
             Route::post('/create', [CustomerController::class, 'save'])->name('mess_owner.customer.save');
-            Route::post('/filter-attendance', [CustomerController::class, 'filterAttendance'])->name('mess_owner.customer.filter.attendance');
+            Route::post('/filter-attendance', [CustomerController::class, 'filterTransaction'])->name('mess_owner.customer.filter.transaction');
             Route::get('/{customer_id}/edit', [CustomerController::class, 'edit'])->name('mess_owner.customer.edit');
             Route::post('/update', [CustomerController::class, 'update'])->name('mess_owner.customer.update');
             Route::delete('{id}/delete', [CustomerController::class, 'delete'])->name('mess_owner.customer.delete');
@@ -84,6 +91,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/update', [RequestController::class, 'update'])->name('mess_owner.request.update');
             Route::get('{request_id}/view', [RequestController::class, 'view'])->name('mess_owner.request.view');
         });
+        Route::group(['prefix'=>'payment'], function () {
+            Route::get('/list', [PaymentController::class, 'viewRequestsPage'])->name('mess_owner.payment.view.requests');
+            Route::post('/update', [PaymentController::class, 'updatePaymentRequest'])->name('mess_owner.payment.request.update');
+            Route::get('{payment_id}/view', [PaymentController::class, 'editRequestPage'])->name('mess_owner.payment.request.view');
+        });
     });
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
@@ -94,6 +106,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/list', [RequestController::class, 'index'])->name('customer.request.list');
             Route::post('/create', [RequestController::class, 'save'])->name('customer.request.save');
         });
+        Route::group(['prefix'=>'payment'], function () {
+            Route::get('/create', [PaymentController::class, 'add'])->name('customer.payment.request.create');
+
+            Route::get('/list', [PaymentController::class, 'index'])->name('customer.payment.request.list');
+            Route::post('/create', [PaymentController::class, 'save'])->name('customer.payment.request.save');
+        });
+
         Route::group(['prefix'=>'menu'], function () {
             Route::get('/create', [MenuController::class, 'mark_day'])->name('customer.menu.mark_day');
             Route::get('/get-list', [MenuController::class, 'markDays'])->name('customer.menu.mark_day.datatables');
