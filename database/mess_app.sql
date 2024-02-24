@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 23, 2024 at 10:02 PM
+-- Generation Time: Feb 24, 2024 at 09:25 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -48807,7 +48807,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
@@ -48831,7 +48831,8 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (44, 'App\\Models\\MessOwner', 2, '57d4c8f2-7679-4609-a373-e71dc8beafaf', 'MESS_LOGO_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-22 13:43:10', '2024-02-22 13:43:10'),
 (45, 'App\\Models\\MessOwner', 2, '9d1d64bb-bb8c-4f3d-b44d-bb3db247132c', 'MESS_BANNER', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 2, '2024-02-22 13:43:10', '2024-02-22 13:43:10'),
 (46, 'App\\Models\\Payment', 2, '93038985-658d-4f8d-92be-05bff6c5e80b', 'PAYMENT_SCREENSHOT', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 1, '2024-02-23 15:30:54', '2024-02-23 15:30:54'),
-(47, 'App\\Models\\Payment', 3, '5402044f-ab2c-48b9-a79d-c877cfaafcb3', 'PAYMENT_SCREENSHOT', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-23 16:29:20', '2024-02-23 16:29:20');
+(47, 'App\\Models\\Payment', 3, '5402044f-ab2c-48b9-a79d-c877cfaafcb3', 'PAYMENT_SCREENSHOT', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-23 16:29:20', '2024-02-23 16:29:20'),
+(48, 'App\\Models\\MessOwner', 1, 'ed7f0832-443e-4694-9b2d-b4388015b551', 'MESS_QR_CODE', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 3, '2024-02-24 15:45:07', '2024-02-24 15:45:07');
 
 -- --------------------------------------------------------
 
@@ -48882,6 +48883,7 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `address` longtext DEFAULT NULL,
   `pincode` varchar(55) DEFAULT NULL,
   `address_link` longtext DEFAULT NULL,
+  `account_details` longtext DEFAULT NULL,
   `status` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -48893,9 +48895,9 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
 -- Dumping data for table `mess_owner`
 --
 
-INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `country_id`, `state_id`, `city_id`, `address`, `pincode`, `address_link`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Anna Restaurant', 'dfgdfgdfgdgdgdfgfg', 'veg', NULL, 600.00, 700.00, 800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-22 10:41:34', '2024-02-22 10:41:34'),
-(2, 4, 'dfgdgdfgfdg', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, '2024-02-22 13:43:10', '2024-02-22 13:53:48');
+INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `country_id`, `state_id`, `city_id`, `address`, `pincode`, `address_link`, `account_details`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Anna Restaurant', '<p>dfgdfgdfgdgdgdfgfg</p>', 'veg', NULL, 600.00, 700.00, 800.00, NULL, NULL, NULL, NULL, 101, 10, 706, 'fghdfhgfhdgfhgfhgfhdgfhgf', '225566', 'fghdgfhgfhgfhgfhfghgfhgfhgfh', '<p>dhfghgfhgfhdfghfhgfhf</p>', NULL, '2024-02-22 10:41:34', '2024-02-24 15:47:18'),
+(2, 4, 'dfgdgdfgfdg', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, NULL, '2024-02-22 13:43:10', '2024-02-22 13:53:48');
 
 -- --------------------------------------------------------
 
@@ -53349,6 +53351,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `meal_type` enum('veg','non_veg') DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `mess_id` int(11) DEFAULT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -53359,11 +53362,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'Xgq6N2WYaVmg8iQv3QIBlyArJHVB8NjfTKjzQEys62qf1Vd2VOOSRAbok6vg', NULL, '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
-(2, 'Anna Iyyer', 'annaiyyer@mail.com', NULL, NULL, '$2y$12$0g.KPcSho1krWpGExGiQvuIkMIwTAlLFEYa6eYB28kt5yOrCa9gFq', NULL, NULL, NULL, NULL, NULL, '2024-02-22 10:41:34', '2024-02-22 10:41:34'),
-(3, 'Anna Customer', 'annacustomer@gmail.com', '7744112255', NULL, '$2y$12$gLPOAH78gyO9njvD4EO2XOenxkwJdub0mJhHjVMB3sVNhtFJliohe', 32953.33, NULL, 'veg', NULL, 1, '2024-02-22 10:42:54', '2024-02-23 16:29:53'),
-(4, 'fdgdfgfdgfdg', 'dfgfdgfdg@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, '2024-02-22 13:43:10', '2024-02-22 13:43:10');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'AZsQUccSR9rG06svA2AITntf0b1ABUzILNXBrOYLqNtM7aChEXoxwGdqdH79', NULL, 'active', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
+(2, 'Anna Mess owner', 'annamesowner@mail.com', '7788996655', NULL, '$2y$12$0g.KPcSho1krWpGExGiQvuIkMIwTAlLFEYa6eYB28kt5yOrCa9gFq', NULL, NULL, NULL, NULL, NULL, '', '2024-02-22 10:41:34', '2024-02-24 15:48:45'),
+(3, 'Anna Customer', 'annacustomer@gmail.com', '7744112255', NULL, '$2y$12$gLPOAH78gyO9njvD4EO2XOenxkwJdub0mJhHjVMB3sVNhtFJliohe', 32953.33, '2024-02-20', 'veg', NULL, 1, 'inactive', '2024-02-22 10:42:54', '2024-02-24 15:14:51'),
+(4, 'fdgdfgfdgfdg', 'dfgfdgfdg@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, 'active', '2024-02-22 13:43:10', '2024-02-22 13:43:10');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
