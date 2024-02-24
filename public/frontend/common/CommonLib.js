@@ -97,5 +97,9 @@ const CommonLib = {
         success:function(){
 
         },
+    },
+    baseUrl:()=>{
+        var base_url = window.location;
+        console.log(base_url);
     }
 }

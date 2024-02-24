@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{owner_id}/edit', [MessOwnerController::class, 'edit'])->name('admin.mess_owner.edit');
             Route::post('/update', [MessOwnerController::class, 'update'])->name('admin.mess_owner.update');
             Route::delete('{id}/delete', [MessOwnerController::class, 'delete'])->name('admin.mess_owner.delete');
+            Route::get('{user_id}/guest-login', [AuthController::class, 'loginAsGuestLogin'])->name('guest.login');
         });
     });
     Route::group(['prefix'=>'common'], function () {
@@ -100,6 +101,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('customer.settings');
+        Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('customer.view.transaction');
+        Route::post('/filter-attendance', [CustomerController::class, 'filterTransaction'])->name('customer.filter.transaction');
         Route::group(['prefix'=>'request'], function () {
             Route::get('/create', [RequestController::class, 'add'])->name('customer.request.create');
             Route::get('/get-list', [RequestController::class, 'list'])->name('customer.request.datatables');
@@ -121,8 +124,10 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
+    Route::post('/change-password', [AuthController::class, 'changePassword'])->name('change.password');
+    Route::post('/save-payment-details', [AuthController::class, 'savePaymentDetails'])->name('save.payment.details');
     Route::post('/settings', [SettingsController::class, 'store'])->name('update.settings');
-    Route::get('/profile', [AuthController::class, 'userProfile'])->name('profile');
+    Route::get('/profile', [AuthController::class, 'userProfile'])->name('user.profile');
     Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 

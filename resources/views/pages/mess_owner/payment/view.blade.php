@@ -36,8 +36,10 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Screenshot </label>
-                            @if(!empty($payment->media))
-                                <p><i class="bi bi-paperclip"></i> <a href="{{ $payment->medias}}" class="text-primary mb-3" download="{{ $payment->medias}}">{{ $payment->media[0]->uuid}}</a></p>
+                            @if(!empty($payment->media[0]))
+                                <p><i class="bi bi-paperclip"></i> <a href="{{ $payment->medias}}" class="text-primary mb-3" download="{{ $payment->medias}}">{{ (isset($payment->media[0])) ? $payment->media[0]->uuid : ''}}</a></p>
+                            @else
+                                <p>Not Uploaded</p>
                             @endif
                         </div>
                         @if($payment->status == 'pending')

@@ -53,6 +53,9 @@ class MessOwnerService {
         $user = User::find($request->user_id);
         $mess_owner = MessOwner::find($request->mess_owner_id);
         $m = $mess_owner->update(['mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description,'food_type'=>$request->food_type,'veg_breakfast_price'=>$request->veg_breakfast_price,'veg_lunch_price'=>$request->veg_lunch_price,'veg_dinner_price'=>$request->veg_dinner_price,'non_veg_breakfast_price'=>$request->non_veg_breakfast_price,'non_veg_lunch_price'=>$request->non_veg_lunch_price,'non_veg_dinner_price'=>$request->non_veg_dinner_price,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'address'=>$request->address,'pincode'=>$request->pincode,'address_link'=>$request->address_link]);
+        if(isset($request->account_details)){
+            $mess_owner->update(['account_details'=>$request->account_details]);
+        }
         if($request->hasFile('mess_logo') && $request->file('mess_logo')->isValid()){
             $mess_owner->clearMediaCollection('MESS_LOGO_IMAGE');
             $mess_owner->addMedia($request->file('mess_logo'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_LOGO_IMAGE');
@@ -61,7 +64,11 @@ class MessOwnerService {
             $mess_owner->clearMediaCollection('MESS_BANNER');
             $mess_owner->addMedia($request->file('mess_banner'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_BANNER');
         }
-        $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone]);
+        if($request->hasFile('qr_code') && $request->file('qr_code')->isValid()){
+            $mess_owner->clearMediaCollection('MESS_QR_CODE');
+            $mess_owner->addMedia($request->file('qr_code'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_QR_CODE');
+        }
+        $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone,'status'=>$request->status]);
         return MessOwner::with('user')->find($request->mess_owner_id);
     }
     public function delete($id){

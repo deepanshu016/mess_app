@@ -44,6 +44,11 @@ class AuthService {
         $user = $user->update(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone]);
         return $user;
     }
+    public function changePassword(Object $request){
+        $user = User::find($request->user_id);
+        $user = $user->update(['passsword'=>Hash::make($request->password)]);
+        return $user;
+    }
  }
 
 

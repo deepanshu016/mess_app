@@ -25,6 +25,7 @@
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li> --}}
                     <li class="menu-item {{ (Request::segment(2) == 'payment') ? 'active' : ''}}"><a href="{{ route('customer.payment.request.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-rupee fs-18"></i></span> <span class="nav-text">Payment Requests</span></a></li>
+                    <li class="menu-item {{ (Request::segment(2) == 'transaction') ? 'active' : ''}}"><a href="{{ route('customer.view.transaction') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-rupee fs-18"></i></span> <span class="nav-text">Transaction History</span></a></li>
                 </ul>
             </div>
         </div>

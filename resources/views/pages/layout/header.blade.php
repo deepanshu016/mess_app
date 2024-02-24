@@ -96,13 +96,14 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li class="active">
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li>
-                                                <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
-                                            </li>
+                                            @can('admin')
+                                                <li>
+                                                    <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
+                                                </li>
+                                            @endcan
                                         </ul>
-
                                     </div>
                                     <div class="card-footer p-3">
                                         <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
@@ -228,7 +229,7 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
                                             <li >
                                                 <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
@@ -336,7 +337,7 @@
                                             <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                         </li>
                                         <li class="menu-item"><a href="files.html"> Files</a></li>
-                                        <li class="menu-item"><a href="{{ route('profile') }}"> Profile</a></li>
+                                        <li class="menu-item"><a href="{{ route('user.profile') }}"> Profile</a></li>
                                     </ul>
                                     <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                 </li>
@@ -692,14 +693,13 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
-                                            </li>
+                                            @can('admin')
+                                                <li>
+                                                    <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
+                                                </li>
+                                            @endcan
                                         </ul>
 
                                     </div>
@@ -827,14 +827,13 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
-                                            </li>
+                                            @can('admin')
+                                                <li>
+                                                    <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
+                                                </li>
+                                            @endcan
                                         </ul>
 
                                     </div>
@@ -1067,7 +1066,7 @@
                                             <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                         </li>
                                         <li class="menu-item"><a href="files.html"> Files</a></li>
-                                        <li class="menu-item"><a href="{{ route('profile') }}"> Profile</a></li>
+                                        <li class="menu-item"><a href="{{ route('user.profile') }}"> Profile</a></li>
                                     </ul>
                                     <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                                 </li>
@@ -1361,28 +1360,26 @@
                                             <h6 class="mb-0 lh-18">{{ @Auth::user()->name }}</h6>
                                             <div class="fs-14 fw-normal text-gray">
                                                 @can('admin')
-                                        Super Admin
-                                    @elsecan('mess_owner')
-                                        Mess Owner
-                                    @elsecan('customer')
-                                        Customer
-                                    @endif
+                                                    Super Admin
+                                                @elsecan('mess_owner')
+                                                    Mess Owner
+                                                @elsecan('customer')
+                                                    Customer
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
-                                            </li>
+                                            @can('admin')
+                                                <li>
+                                                    <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
+                                                </li>
+                                            @endcan
                                         </ul>
-
                                     </div>
                                     <div class="card-footer p-3">
                                         <a href="{{ route('logout') }}" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
@@ -1508,14 +1505,13 @@
                                     <div class="card-body p-3">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <a href="{{ route('profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
+                                                <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
-                                            </li>
+                                            @can('admin')
+                                                <li>
+                                                    <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
+                                                </li>
+                                            @endcan
                                         </ul>
 
                                     </div>

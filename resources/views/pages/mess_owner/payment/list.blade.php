@@ -15,9 +15,9 @@
                 <div class="left-part">
                     <h2 class="text-dark">Payment Requests</h2>
                 </div>
-                <div class="right-part">
+                {{-- <div class="right-part">
                     <a href="{{ route('customer.payment.request.create') }}" class="btn btn-primary btn-sm rounded-1"><i class="bi bi-plus-circle"></i>  Add New </a>
-                </div>
+                </div> --}}
             </div>
             <div class="card border-0 p-5">
                 <div class="card-header pb-5 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3">

@@ -39,6 +39,7 @@
                                     <th>Mess Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Status</th>
                                     <th>Food Type</th>
                                     <th>Action</th>
                                     <th></th>
@@ -80,6 +81,19 @@
                     }
                 },
                 {
+                    data: 'status',
+                    name: 'Status',
+                    render:function(data, type, row, meta){
+                        var status = '';
+                        if(row.user.status == 'active'){
+                            status = '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-success"></span> ACTIVE</h6>';
+                        }else{
+                            status = '<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> INACTIVE</h6>'
+                        }
+                        return status;
+                    }
+                },
+                {
                     data: 'food_type',
                     name: 'food_type',
                     render:function(data, type, row, meta){
@@ -98,8 +112,10 @@
                     data: 'id',
                     name: 'Action',
                     render:function(data, type, row, meta){
-                        return `<a href="${row.id}/edit" class="btn-video square btn btn-outline-primary rounded-2 px-0 py-0 me-3"><i class="bi bi-pencil"></i></a>
-                            <a href="javascript:void(0);" class="btn-video square btn btn-outline-danger rounded-2 px-0 py-0 me-3 delete" data-url="${row.id}/delete" data-id=""><i class="bi bi-trash"></i></a>`;
+                        return `<a href="${row.id}/guest-login" class="btn-video square btn btn-outline-success rounded-2 px-0 py-0 me-3"><i class="bi bi-box-arrow-right"></i></a>
+                                <a href="${row.id}/edit" class="btn-video square btn btn-outline-primary rounded-2 px-0 py-0 me-3"><i class="bi bi-pencil"></i></a>
+                                <a href="javascript:void(0);" class="btn-video square btn btn-outline-warning rounded-2 px-0 py-0 me-3 change-password" data-id="${row.user.id}" data-bs-toggle="modal" data-bs-target="#changePasswordModal"><i class="bi bi-file-lock"></i></a>
+                                <a href="javascript:void(0);" class="btn-video square btn btn-outline-danger rounded-2 px-0 py-0 me-3 delete" data-url="${row.id}/delete" data-id=""><i class="bi bi-trash"></i></a>`;
                     }
                 }
             ],
@@ -126,6 +142,30 @@
             var url = $(this).data("url");
             formData.append('id',id);
             CommonLib.sweetalert.confirm(formData,'DELETE',url);
+        });
+        $("body").on("click",'.change-password',function(e){
+            e.preventDefault();
+            var user_id = $(this).data('id');
+            $("#changePasswordModal").find('.user_id').val(user_id);
+        });
+        $("body").on('submit','#changePasswordFrom',function(e){
+            e.preventDefault();
+            const url = $(this).attr('action');
+            const method = $(this).attr('method');
+            var formData = $('#changePasswordFrom')[0];
+            formData = new FormData(formData);
+            CommonLib.ajaxForm(formData,method,url).then(d=>{
+                if(d.status === 200){
+                    CommonLib.notification.success(d.msg);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                }else{
+                    CommonLib.notification.error(d.errors);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
         });
     });
 </script>

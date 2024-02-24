@@ -23,6 +23,7 @@
                                     <th>Wallet Amount</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Status</th>
                                     <th>Meal Type</th>
                                     <th>Wallet</th>
                                     <th>Transaction</th>
@@ -65,6 +66,19 @@
                 {
                     data: 'phone',
                     name: 'phone'
+                },
+                {
+                    data: 'status',
+                    name: 'Status',
+                    render:function(data, type, row, meta){
+                        var status = '';
+                        if(row.status == 'active'){
+                            status = '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-success"></span> ACTIVE</h6>';
+                        }else{
+                            status = '<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> INACTIVE</h6>'
+                        }
+                        return status;
+                    }
                 },
                 {
                     data: 'meal_type',

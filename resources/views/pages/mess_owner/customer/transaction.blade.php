@@ -9,23 +9,30 @@
                     <h2 class="text-dark">View Transaction</h2>
                 </div>
             </div>
+            @can('mess_owner')
             <form id="viewTransactionForm" method="POST" action="{{ route('mess_owner.customer.filter.transaction')  }}" enctype="multipart/form-data">
+            @elsecan('customer')
+            <form id="viewTransactionForm" method="POST" action="{{ route('customer.filter.transaction')  }}" enctype="multipart/form-data">
+            @endif
                 @csrf
                 <div class="col">
                     <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label class="form-label">Customer</label>
-                                <select class="form-control" name="user_id">
-                                    <option value="">Select Customer</option>
-                                    @if(!empty($customers))
-                                        @foreach ($customers as $customer)
-                                            <option value="{{ $customer->id }}">{{ $customer->name }}({{ $customer->email }})</option>
-                                        @endforeach
-                                    @endif
-                                </select>
+                        @can('mess_owner')
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label class="form-label">Customer</label>
+                                    <select class="form-control" name="user_id">
+                                        <option value="">Select Customer</option>
+                                        @if(!empty($customers))
+                                            @foreach ($customers as $customer)
+                                                <option value="{{ $customer->id }}">{{ $customer->name }}({{ $customer->email }})</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endcan
+
                         <div class="col-3">
                             <label class="form-label">Month</label>
                             <select class="form-control" name="month">

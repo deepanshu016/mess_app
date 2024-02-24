@@ -61,7 +61,7 @@
                                 <option value="">Select Country</option>
                                 @if(!empty($countries))
                                     @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}"  {{ ( $messOwner->country_id  == $country->id) ? 'selected' : ''}}>{{ $country->name }}</option>
+                                        <option value="{{ $country->id }}"  {{ (isset($messOwner) && ($messOwner->country_id  == $country->id)) ? 'selected' : ''}}>{{ $country->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -72,7 +72,7 @@
                                 <select class="form-control get-city" name="state_id">
                                     <option value="">Select State</option>
                                     @foreach ($states as $state)
-                                        <option value="{{ $state->id }}" {{ ( $messOwner->state_id  == $state->id) ? 'selected' : ''}}>{{ $state->name }}</option>
+                                        <option value="{{ $state->id }}" {{ (isset($messOwner) && ($messOwner->state_id  == $state->id)) ? 'selected' : ''}}>{{ $state->name }}</option>
                                     @endforeach
                                 </select>
                             @endif
@@ -83,7 +83,7 @@
                                 <select class="form-control" name="city_id">
                                     <option value="">Select City</option>
                                     @foreach ($cities as $city)
-                                        <option value="{{ $city->id }}" {{ ( $messOwner->city_id  == $city->id) ? 'selected' : ''}}>{{ $city->name }}</option>
+                                        <option value="{{ $city->id }}" {{ (isset($messOwner) && ($messOwner->city_id  == $city->id)) ? 'selected' : ''}}>{{ $city->name }}</option>
                                     @endforeach
                                 </select>
                             @endif
@@ -185,6 +185,14 @@
                                 </div>
                             </div>
                         @endif
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" name="status">
+                                <option value="">Select Status</option>
+                                <option value="active" {{ (isset($messOwner) && ($messOwner->user->status  == 'active')) ? 'selected' : ''}}>Active</option>
+                                <option value="inactive" {{ (isset($messOwner) && ($messOwner->user->status  == 'inactive')) ? 'selected' : ''}}>Inactive</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ (isset($messOwner)) ? 'Update' : 'Save' }}</button>
                         </div>

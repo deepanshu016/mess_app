@@ -28,7 +28,8 @@ class MessOwner extends Model implements HasMedia
         'city_id',
         'address',
         'pincode',
-        'address_link'
+        'address_link',
+        'account_details'
     ];
     public function user()
     {

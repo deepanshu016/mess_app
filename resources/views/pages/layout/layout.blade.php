@@ -35,6 +35,34 @@
         @endif
     @endif
     @yield('content')
+    <div class="modal fade" id="changePasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordFrom" method="POST" action="{{ route('change.password') }}">
+                        @csrf
+                        <input type="hidden" class="form-control user_id" name="user_id" value="{{ @$user->id}}">
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="New Password">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password </label>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-light-200 text-danger btn-sm px-2" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary  btn-sm px-2">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Core JS -->
     <script src="{{ asset('/') }}frontend/assets/js/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('/') }}frontend/assets/js/bootstrap.bundle.min.js"></script>
