@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 24, 2024 at 09:25 PM
+-- Generation Time: Feb 26, 2024 at 08:04 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -52,6 +52,29 @@ INSERT INTO `attendances` (`id`, `user_id`, `mess_id`, `date`, `breakfast`, `lun
 (3, 3, 1, '2024-02-28', 1, 1, 0, '2024-02-22 11:40:00', '2024-02-22 11:40:00'),
 (4, 3, 1, '2024-02-29', 1, 0, 1, '2024-02-22 11:40:15', '2024-02-22 11:40:15'),
 (5, 3, 1, '2024-03-01', 1, 1, 0, '2024-02-22 11:40:30', '2024-02-22 11:40:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banners`
+--
+
+DROP TABLE IF EXISTS `banners`;
+CREATE TABLE IF NOT EXISTS `banners` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `banners`
+--
+
+INSERT INTO `banners` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Banner Two', 'active', '2024-02-26 12:51:01', '2024-02-26 13:00:23');
 
 -- --------------------------------------------------------
 
@@ -48761,6 +48784,30 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `faqs`
+--
+
+DROP TABLE IF EXISTS `faqs`;
+CREATE TABLE IF NOT EXISTS `faqs` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `question` varchar(191) NOT NULL,
+  `answer` longtext NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `question`, `answer`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'What is Lorem Ipsum?', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt; is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;', 'active', '2024-02-26 14:06:56', '2024-02-26 14:12:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mark_days`
 --
 
@@ -48807,7 +48854,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
@@ -48832,7 +48879,9 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (45, 'App\\Models\\MessOwner', 2, '9d1d64bb-bb8c-4f3d-b44d-bb3db247132c', 'MESS_BANNER', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 2, '2024-02-22 13:43:10', '2024-02-22 13:43:10'),
 (46, 'App\\Models\\Payment', 2, '93038985-658d-4f8d-92be-05bff6c5e80b', 'PAYMENT_SCREENSHOT', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 1, '2024-02-23 15:30:54', '2024-02-23 15:30:54'),
 (47, 'App\\Models\\Payment', 3, '5402044f-ab2c-48b9-a79d-c877cfaafcb3', 'PAYMENT_SCREENSHOT', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-23 16:29:20', '2024-02-23 16:29:20'),
-(48, 'App\\Models\\MessOwner', 1, 'ed7f0832-443e-4694-9b2d-b4388015b551', 'MESS_QR_CODE', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 3, '2024-02-24 15:45:07', '2024-02-24 15:45:07');
+(48, 'App\\Models\\MessOwner', 1, 'ed7f0832-443e-4694-9b2d-b4388015b551', 'MESS_QR_CODE', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 3, '2024-02-24 15:45:07', '2024-02-24 15:45:07'),
+(52, 'App\\Models\\Banner', 1, 'cb0b7939-73ac-4da4-9274-12a967d88acc', 'BANNER_IMAGE', 'sucess-animation', 'sucess-animation.png', 'image/png', 'public', 'local', 36029, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:00:34', '2024-02-26 13:00:34'),
+(55, 'App\\Models\\News', 1, 'fac520f5-b803-4349-972b-d952f0391457', 'NEWS_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:36:44', '2024-02-26 13:36:44');
 
 -- --------------------------------------------------------
 
@@ -48911,7 +48960,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -48936,7 +48985,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2017_05_06_173745_create_countries_table', 8),
 (18, '2017_05_06_173711_create_states_table', 9),
 (19, '2017_05_06_172817_create_cities_table', 10),
-(21, '2024_02_22_182445_create_transactions_table', 11);
+(21, '2024_02_22_182445_create_transactions_table', 11),
+(23, '2024_02_26_172011_create_banners_table', 12),
+(24, '2024_02_26_183555_create_news_table', 13),
+(26, '2024_02_26_191300_create_faqs_table', 14);
 
 -- --------------------------------------------------------
 
@@ -48977,6 +49029,31 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 2),
 (2, 'App\\Models\\User', 4),
 (3, 'App\\Models\\User', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) NOT NULL,
+  `short_description` varchar(191) NOT NULL,
+  `full_description` longtext NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `short_description`, `full_description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Where does it come from?', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slig', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'active', '2024-02-26 13:30:54', '2024-02-26 13:40:24');
 
 -- --------------------------------------------------------
 
