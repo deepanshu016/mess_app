@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="tbody">
-                @if(!$transaction->isEmpty())
+                @if(isset($transaction)  && !$transaction->isEmpty())
                     @foreach($transaction as $key=>$transaction)
                         <div class="row px-2 border-bottom border-1 border-light-200">
                             <div class="col text-center">{{ $key+1}}</div>

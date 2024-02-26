@@ -12,6 +12,10 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
 use App\Http\Controllers\MessOwner\SubscriptionController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
@@ -53,6 +57,37 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/update', [MessOwnerController::class, 'update'])->name('admin.mess_owner.update');
             Route::delete('{id}/delete', [MessOwnerController::class, 'delete'])->name('admin.mess_owner.delete');
             Route::get('{user_id}/guest-login', [AuthController::class, 'loginAsGuestLogin'])->name('guest.login');
+        });
+        Route::group(['prefix' => 'banner'], function () {
+            Route::get('/create', [BannerController::class, 'add'])->name('admin.banner.add');
+            Route::get('/get-list', [BannerController::class, 'list'])->name('admin.banner.datatables');
+            Route::get('/list', [BannerController::class, 'index'])->name('admin.banner.list');
+            Route::post('/create', [BannerController::class, 'save'])->name('admin.banner.save');
+            Route::get('/{banner_id}/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
+            Route::post('/update', [BannerController::class, 'update'])->name('admin.banner.update');
+            Route::delete('{id}/delete', [BannerController::class, 'delete'])->name('admin.banner.delete');
+        });
+        Route::group(['prefix' => 'news'], function () {
+            Route::get('/create', [NewsController::class, 'add'])->name('admin.news.add');
+            Route::get('/get-list', [NewsController::class, 'list'])->name('admin.news.datatables');
+            Route::get('/list', [NewsController::class, 'index'])->name('admin.news.list');
+            Route::post('/create', [NewsController::class, 'save'])->name('admin.news.save');
+            Route::get('/{news_id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+            Route::post('/update', [NewsController::class, 'update'])->name('admin.news.update');
+            Route::delete('{id}/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+        });
+        Route::group(['prefix' => 'faq'], function () {
+            Route::get('/create', [FaqController::class, 'add'])->name('admin.faq.add');
+            Route::get('/get-list', [FaqController::class, 'list'])->name('admin.faq.datatables');
+            Route::get('/list', [FaqController::class, 'index'])->name('admin.faq.list');
+            Route::post('/create', [FaqController::class, 'save'])->name('admin.faq.save');
+            Route::get('/{faq_id}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
+            Route::post('/update', [FaqController::class, 'update'])->name('admin.faq.update');
+            Route::post('delete', [FaqController::class, 'delete'])->name('admin.faq.delete');
+        });
+        Route::group(['prefix' => 'transaction'], function () {
+            Route::get('/list', [TransactionController::class, 'index'])->name('admin.transaction.list');
+            Route::post('/filter', [TransactionController::class, 'filter'])->name('admin.transaction.filter');
         });
     });
     Route::group(['prefix'=>'common'], function () {

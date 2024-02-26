@@ -17,11 +17,33 @@
                     <li class="menu-item {{ (Request::segment(2) == 'dashboard') ? 'active' : ''}}"><a href="{{ route('admin.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
                     <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'mess-owner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Mess Owner</span></a>
                         <ul class="sub-menu">
-                            <li class="menu-item {{ (Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.add') }}"> Add New</a></li>
-                            <li class="menu-item {{ (Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.list') }}"> List</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'mess-owner' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'mess-owner' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.mess_owner.list') }}"> List</a></li>
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Banners</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.banner.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.banner.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'news') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-newspaper"></i></span> <span class="nav-text">News</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'news' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.news.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'news' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.news.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'faq') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-patch-question"></i></span> <span class="nav-text">FAQs</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'faq' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.faq.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'faq' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.faq.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
+                    <li class="menu-item {{ (Request::segment(2) == 'transaction') ? 'active' : ''}}"><a href="{{ route('admin.transaction.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Transaction</span></a></li>
                 </ul>
             </div>
         </div>

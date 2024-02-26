@@ -32,7 +32,6 @@ class Payment extends Model implements HasMedia
     protected function getMediasAttribute()
     {
         $media = $this->getMedia("PAYMENT_SCREENSHOT")->first();
-
         if ($media) {
             return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
         }

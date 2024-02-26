@@ -99,5 +99,19 @@
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     @yield('page_scripts')
+    <script>
+        $(function() {
+            var maxChars = 250;
+            $(".short_description").on("input", function() {
+                var charCount = $(this).val().length;
+                $(this).closest('.form-group').find(".short_description_count").text(charCount + " / " + maxChars + " characters");
+                if (charCount > maxChars) {
+                    $(this).val($(this).val().substring(0, maxChars - 1));
+                    $(this).closest('.form-group').find(".short_description_count").text("250 / " + maxChars + " characters");
+                    CommonLib.notification.error('Limit Exceeded');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

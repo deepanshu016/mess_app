@@ -103,7 +103,7 @@ class CustomerController extends Controller
             $service = new CustomerService();
             $transaction = $service->filterTransaction($request);
             $html = View::make('pages.common.transaction_data',['transaction'=>$transaction])->render();
-            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '','html'=>$html]);
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>'','html'=>$html]);
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }

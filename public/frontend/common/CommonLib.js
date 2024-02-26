@@ -101,5 +101,11 @@ const CommonLib = {
     baseUrl:()=>{
         var base_url = window.location;
         console.log(base_url);
+    },
+    truncateString:(str, maxLength)=>{
+        if (str.length > maxLength) {
+            return str.substring(0, maxLength) + "...";
+        }
+        return str;
     }
 }
