@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 26, 2024 at 08:04 PM
+-- Generation Time: Feb 27, 2024 at 08:00 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -48808,6 +48808,29 @@ INSERT INTO `faqs` (`id`, `question`, `answer`, `status`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `galleries`
+--
+
+DROP TABLE IF EXISTS `galleries`;
+CREATE TABLE IF NOT EXISTS `galleries` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'Gallery Uploadingsssssss', 'inactive', '2024-02-27 12:16:40', '2024-02-27 13:25:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mark_days`
 --
 
@@ -48854,7 +48877,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
@@ -48881,7 +48904,14 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (47, 'App\\Models\\Payment', 3, '5402044f-ab2c-48b9-a79d-c877cfaafcb3', 'PAYMENT_SCREENSHOT', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-23 16:29:20', '2024-02-23 16:29:20'),
 (48, 'App\\Models\\MessOwner', 1, 'ed7f0832-443e-4694-9b2d-b4388015b551', 'MESS_QR_CODE', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 3, '2024-02-24 15:45:07', '2024-02-24 15:45:07'),
 (52, 'App\\Models\\Banner', 1, 'cb0b7939-73ac-4da4-9274-12a967d88acc', 'BANNER_IMAGE', 'sucess-animation', 'sucess-animation.png', 'image/png', 'public', 'local', 36029, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:00:34', '2024-02-26 13:00:34'),
-(55, 'App\\Models\\News', 1, 'fac520f5-b803-4349-972b-d952f0391457', 'NEWS_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:36:44', '2024-02-26 13:36:44');
+(55, 'App\\Models\\News', 1, 'fac520f5-b803-4349-972b-d952f0391457', 'NEWS_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:36:44', '2024-02-26 13:36:44'),
+(58, 'App\\Models\\Gallery', 2, '20503e1e-85d6-4a0c-aaf0-662a4a87c243', 'GALLERY_MEDIA', 'ADIDAS', 'ADIDAS.png', 'image/png', 'public', 'public', 55555, '[]', '[]', '[]', '[]', 1, '2024-02-27 12:16:40', '2024-02-27 12:16:40'),
+(59, 'App\\Models\\Gallery', 2, 'deb72554-e8f4-4274-9c07-e80a2f4c5af7', 'GALLERY_MEDIA', 'FIZZY_GOBLET', 'FIZZY_GOBLET.png', 'image/png', 'public', 'public', 13056, '[]', '[]', '[]', '[]', 2, '2024-02-27 12:16:40', '2024-02-27 12:16:40'),
+(60, 'App\\Models\\Gallery', 2, 'b62ad934-2667-4c32-8cc1-ad50b27dd515', 'GALLERY_MEDIA', 'FOSSIL', 'FOSSIL.png', 'image/png', 'public', 'public', 33681, '[]', '[]', '[]', '[]', 3, '2024-02-27 12:16:40', '2024-02-27 12:16:40'),
+(62, 'App\\Models\\Gallery', 2, '8eb1b79b-495b-4870-a30a-2254e7d2a52f', 'GALLERY_MEDIA', 'oneplus', 'oneplus.jpg', 'image/jpeg', 'public', 'public', 14083, '[]', '[]', '[]', '[]', 4, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
+(63, 'App\\Models\\Gallery', 2, '754ff48b-7617-403c-aaec-abc9882e8296', 'GALLERY_MEDIA', 'PUMA', 'PUMA.png', 'image/png', 'public', 'public', 38893, '[]', '[]', '[]', '[]', 5, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
+(64, 'App\\Models\\Gallery', 2, '11640a6a-5057-4723-8131-e1516513b8de', 'GALLERY_MEDIA', 's22_ultra', 's22_ultra.jpg', 'image/jpeg', 'public', 'public', 166263, '[]', '[]', '[]', '[]', 6, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
+(65, 'App\\Models\\Gallery', 2, '9dcb17d7-6b27-4a75-9b5e-004b2167e4db', 'GALLERY_MEDIA', 'Samsung_galaxy_s23_Ultra_a', 'Samsung_galaxy_s23_Ultra_a.jpg', 'image/jpeg', 'public', 'public', 47119, '[]', '[]', '[]', '[]', 7, '2024-02-27 13:23:53', '2024-02-27 13:23:53');
 
 -- --------------------------------------------------------
 
@@ -48946,7 +48976,7 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
 
 INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `country_id`, `state_id`, `city_id`, `address`, `pincode`, `address_link`, `account_details`, `status`, `created_at`, `updated_at`) VALUES
 (1, 2, 'Anna Restaurant', '<p>dfgdfgdfgdgdgdfgfg</p>', 'veg', NULL, 600.00, 700.00, 800.00, NULL, NULL, NULL, NULL, 101, 10, 706, 'fghdfhgfhdgfhgfhgfhdgfhgf', '225566', 'fghdgfhgfhgfhgfhfghgfhgfhgfh', '<p>dhfghgfhgfhdfghfhgfhf</p>', NULL, '2024-02-22 10:41:34', '2024-02-24 15:47:18'),
-(2, 4, 'dfgdgdfgfdg', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, NULL, '2024-02-22 13:43:10', '2024-02-22 13:53:48');
+(2, 4, 'Anna Food Corner', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, NULL, '2024-02-22 13:43:10', '2024-02-22 13:53:48');
 
 -- --------------------------------------------------------
 
@@ -48960,7 +48990,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -48988,7 +49018,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2024_02_22_182445_create_transactions_table', 11),
 (23, '2024_02_26_172011_create_banners_table', 12),
 (24, '2024_02_26_183555_create_news_table', 13),
-(26, '2024_02_26_191300_create_faqs_table', 14);
+(26, '2024_02_26_191300_create_faqs_table', 14),
+(27, '2024_02_27_172149_create_galleries_table', 15);
 
 -- --------------------------------------------------------
 
@@ -53440,10 +53471,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'AZsQUccSR9rG06svA2AITntf0b1ABUzILNXBrOYLqNtM7aChEXoxwGdqdH79', NULL, 'active', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'eCj2YXSdQxqXRIVPAfXXjm546HaoSPOwgjw9yzdvGC4MiCxUoAmtJTZ3svo5', NULL, 'active', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
 (2, 'Anna Mess owner', 'annamesowner@mail.com', '7788996655', NULL, '$2y$12$0g.KPcSho1krWpGExGiQvuIkMIwTAlLFEYa6eYB28kt5yOrCa9gFq', NULL, NULL, NULL, NULL, NULL, '', '2024-02-22 10:41:34', '2024-02-24 15:48:45'),
 (3, 'Anna Customer', 'annacustomer@gmail.com', '7744112255', NULL, '$2y$12$gLPOAH78gyO9njvD4EO2XOenxkwJdub0mJhHjVMB3sVNhtFJliohe', 32953.33, '2024-02-20', 'veg', NULL, 1, 'inactive', '2024-02-22 10:42:54', '2024-02-24 15:14:51'),
-(4, 'fdgdfgfdgfdg', 'dfgfdgfdg@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, 'active', '2024-02-22 13:43:10', '2024-02-22 13:43:10');
+(4, 'Anna Iyyer', 'annaiyyer@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, 'active', '2024-02-22 13:43:10', '2024-02-22 13:43:10');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
