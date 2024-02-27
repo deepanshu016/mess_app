@@ -23,9 +23,17 @@
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'gallery' && (Request::segment(3) == 'create' || Request::segment(3) == 'list')) ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-images"></i></span> <span class="nav-text">Gallery</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'news' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('mess_owner.gallery.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'news' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('mess_owner.gallery.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
                     <li class="menu-item {{ (Request::segment(2) == 'request') ? 'active' : ''}}"><a href="{{ route('mess_owner.request.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-calendar2-check fs-18"></i></span> <span class="nav-text">Admission Requests</span></a></li>
                     <li class="menu-item {{ (Request::segment(3) == 'transaction') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.view.transaction') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-calendar2-check fs-18"></i></span> <span class="nav-text">Transaction</span></a></li>
                     <li class="menu-item {{ (Request::segment(2) == 'payment') ? 'active' : ''}}"><a href="{{ route('mess_owner.payment.view.requests') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-rupee fs-18"></i></span> <span class="nav-text">Payment Requests</span></a></li>
+
                 </ul>
             </div>
         </div>

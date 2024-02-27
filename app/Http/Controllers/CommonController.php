@@ -3,11 +3,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\GalleryRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Services\MessOwnerService;
 use App\Http\Services\CommonService;
+use App\Http\Services\BannerService;
 use App\Http\Services\AuthService;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Models\User;
 Class CommonController extends Controller {
     public function __construct()
@@ -96,5 +99,11 @@ Class CommonController extends Controller {
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }
+    }
+    public function deleteMedia(GalleryRequest $request)
+    {
+        $service = new BannerService(Media::class);
+        $service = $service->deleteMedia($request);
+        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.gallery.list') : '']);
     }
 }

@@ -111,6 +111,14 @@
                     CommonLib.notification.error('Limit Exceeded');
                 }
             });
+            $("body").on("click",'.delete-media',function(e){
+                e.preventDefault();
+                var formData = new FormData();
+                var id = $(this).data("id");
+                var url = $(this).data("url");
+                formData.append('id',id);
+                CommonLib.sweetalert.confirm(formData,'POST',url);
+            });
         });
     </script>
 </body>

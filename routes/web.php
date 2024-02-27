@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
 use App\Http\Controllers\MessOwner\SubscriptionController;
+use App\Http\Controllers\MessOwner\GalleryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\FaqController;
@@ -45,6 +46,7 @@ Route::post('/user-signup', [AuthController::class, 'registration'])->name('user
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
     Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
+    Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
@@ -131,6 +133,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/list', [PaymentController::class, 'viewRequestsPage'])->name('mess_owner.payment.view.requests');
             Route::post('/update', [PaymentController::class, 'updatePaymentRequest'])->name('mess_owner.payment.request.update');
             Route::get('{payment_id}/view', [PaymentController::class, 'editRequestPage'])->name('mess_owner.payment.request.view');
+        });
+        Route::group(['prefix' => 'gallery'], function () {
+            Route::get('/create', [GalleryController::class, 'add'])->name('mess_owner.gallery.add');
+            Route::get('/get-list', [GalleryController::class, 'list'])->name('mess_owner.gallery.datatables');
+            Route::get('/list', [GalleryController::class, 'index'])->name('mess_owner.gallery.list');
+            Route::post('/create', [GalleryController::class, 'save'])->name('mess_owner.gallery.save');
+            Route::get('/{gallery_id}/edit', [GalleryController::class, 'edit'])->name('mess_owner.gallery.edit');
+            Route::post('/update', [GalleryController::class, 'update'])->name('mess_owner.gallery.update');
+            Route::delete('{id}/delete', [GalleryController::class, 'delete'])->name('mess_owner.gallery.delete');
         });
     });
     Route::group(['middleware' => ['role:CUSTOMER'],'prefix'=>'customer'], function () {

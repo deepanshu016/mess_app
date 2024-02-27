@@ -60,10 +60,11 @@ class BannerService {
         return $banner;
     }
     public function update(Object $request,$file_name = '',$file_tag=''){
+
         $banner = $this->model::find($request->id);
         $banners = $banner->update($request->toArray());
         if($file_name != '' && $file_tag != ''){
-            $uploaded = $this->media->update($file_name,$file_tag,$request,$banner);
+            $uploaded = ($file_tag == 'GALLERY_MEDIA') ? $this->media->store($file_name,$file_tag,$request,$banner) : $this->media->update($file_name,$file_tag,$request,$banner);
         }
         return $banner;
     }
@@ -73,6 +74,10 @@ class BannerService {
             $this->media->delete($file_tag,$banner);
         }
         return $banner->delete();
+    }
+    public function deleteMedia(Object $request){
+        $media = $this->model::find($request->id);
+        return $media->delete();
     }
  }
 

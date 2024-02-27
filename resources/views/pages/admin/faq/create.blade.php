@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Answer<span class="text-danger">*</span></label>
-                            <textarea class="form-control full_description" id="answer" name="answer" rows="4" cols="50" placeholder="Answer">{{ @$faq->answer}}</textarea>
+                            <textarea class="form-control full_description" id="answer" name="answer" rows="4" cols="50" placeholder="Answer">{{ @$faq->gallery}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>

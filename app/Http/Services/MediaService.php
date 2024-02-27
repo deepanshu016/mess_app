@@ -8,11 +8,19 @@ use Illuminate\Support\Facades\Auth;
 class MediaService {
 
     public function store($file_name,$file_tag,$request,$model){
-
         $success = false;
-        if($request->hasFile($file_name) && $request->file($file_name)->isValid()){
-            $model->addMediaFromRequest($file_name)->toMediaCollection($file_tag);
-            $success = true;
+        if($file_tag === 'GALLERY_MEDIA'){
+            if($request->hasFile($file_name)){
+                foreach ($request->file($file_name) as $file) {
+                    $model->addMedia($file)->toMediaCollection($file_tag);
+                }
+                $success = true;
+            }
+        }else{
+            if($request->hasFile($file_name) && $request->file($file_name)->isValid()){
+                $model->addMediaFromRequest($file_name)->toMediaCollection($file_tag);
+                $success = true;
+            }
         }
         return $success;
     }
