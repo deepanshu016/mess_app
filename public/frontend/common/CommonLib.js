@@ -1,5 +1,5 @@
 const CommonLib = {
-    ajaxForm:function(formData,method,url) {
+    ajaxForm:function(formData='',method,url) {
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         return $.ajax({
             type: method,

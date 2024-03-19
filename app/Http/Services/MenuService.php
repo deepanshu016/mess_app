@@ -12,15 +12,19 @@ class MenuService {
         $messOwner = Menu::all();
         return $messOwner;
     }
-    public function list($request){
-        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
+    public function list($request,$mess_id = ''){
+        if($mess_id){
+            $messOwner = MessOwner::find($mess_id);
+        }else{
+            $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
+        }
         $menu['sunday'] = Menu::where('added_by',$messOwner->id)->where('day','Sun')->first();
-        $menu['monday'] = Menu::where('added_by',$messOwner->id)->where('day','Tue')->first();
+        $menu['monday'] = Menu::where('added_by',$messOwner->id)->where('day','Mon')->first();
+        $menu['tuesday'] = Menu::where('added_by',$messOwner->id)->where('day','Tue')->first();
         $menu['wednesday'] = Menu::where('added_by',$messOwner->id)->where('day','Wed')->first();
         $menu['thursday'] = Menu::where('added_by',$messOwner->id)->where('day','Thu')->first();
         $menu['friday'] = Menu::where('added_by',$messOwner->id)->where('day','Fri')->first();
         $menu['saturday'] = Menu::where('added_by',$messOwner->id)->where('day','Sat')->first();
-        $menu['sunday'] = Menu::where('added_by',$messOwner->id)->where('day','Sun')->first();
         return $menu;
     }
     public function edit($menu_id){

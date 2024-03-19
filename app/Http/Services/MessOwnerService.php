@@ -33,8 +33,11 @@ class MessOwnerService {
         $listData['data'] = $setting;
         return $listData;
     }
+    public function allMess($request){
+        return MessOwner::with(['user','country','state','city'])->paginate(1);
+    }
     public function edit($owner_id){
-        return MessOwner::with('user')->find($owner_id);
+        return MessOwner::with(['user','country','state','city'])->find($owner_id);
     }
     public function store(Object $request){
         $user = User::create(['name'=>$request->mess_owner_name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
@@ -77,6 +80,10 @@ class MessOwnerService {
         $user = User::find($mess_owner->user_id);
         $user->delete();
         return $mess_owner->delete();
+    }
+
+    public function getAllCount(){
+        return MessOwner::with('user')->where('status',1)->count();
     }
  }
 

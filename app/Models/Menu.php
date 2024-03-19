@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Menu extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
+    protected $appends = ['count'];
     protected $fillable = [
         'added_by',
         'day',
@@ -20,20 +21,25 @@ class Menu extends Model implements HasMedia
         'mess_detail_lunch',
         'mess_detail_dinner',
     ];
-    // protected function menuType(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (string $value) => strtoupper($value),
-    //     );
-    // }
-    // protected function day(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (string $value) => strtoupper($value),
-    //     );
-    // }
-    // public function mess_owner(): HasOne
-    // {
-    //     return $this->hasOne(MessOwner::class);
-    // }
+    protected function menuType(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => strtoupper($value),
+        );
+    }
+    protected function getCountAttribute()
+    {
+
+        $returnable = 0;
+        if($this->mess_detail_breakfast){
+            $returnable += 1;
+        }
+        if($this->mess_detail_lunch){
+            $returnable += 1;
+        }
+        if($this->mess_detail_dinner){
+            $returnable += 1;
+        }
+        return $returnable;
+    }
 }

@@ -34,9 +34,9 @@
                                 @csrf
                                 <div class="row px-2 border-bottom border-1 border-light-200">
                                     <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['sunday']->id}}"><input type="hidden" class="form-control" name="day" value="Mon">Monday</div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_mon" name="mess_detail_breakfast">{!! @$menu['sunday']->mess_detail_breakfast !!}</textarea></div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_mon" name="mess_detail_lunch">{!! @$menu['sunday']->mess_detail_lunch !!}</textarea></div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_mon" name="mess_detail_dinner">{!! @$menu['sunday']->mess_detail_dinner !!}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_mon" name="mess_detail_breakfast">{!! @$menu['monday']->mess_detail_breakfast !!}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_mon" name="mess_detail_lunch">{!! @$menu['monday']->mess_detail_lunch !!}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_mon" name="mess_detail_dinner">{!! @$menu['monday']->mess_detail_dinner !!}</textarea></div>
                                     <div class="col col-1 text-center">
                                         <button type="submit" class="add-edit-menu btn btn-primary btn-sm rounded-pill">Update</button>
                                     </div>
@@ -46,9 +46,9 @@
                                 @csrf
                                 <div class="row px-2 border-bottom border-1 border-light-200">
                                     <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['monday']->id}}"><input type="hidden" class="form-control" name="day" value="Tue">Tuesday</div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_tue" name="mess_detail_breakfast">{{ @$menu['monday']->mess_detail_breakfast}}</textarea></div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_tue" name="mess_detail_lunch">{!! @$menu['monday']->mess_detail_lunch !!}</textarea></div>
-                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_tue" name="mess_detail_dinner">{!! @$menu['monday']->mess_detail_dinner !!}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_tue" name="mess_detail_breakfast">{{ @$menu['tuesday']->mess_detail_breakfast}}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_tue" name="mess_detail_lunch">{!! @$menu['tuesday']->mess_detail_lunch !!}</textarea></div>
+                                    <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_tue" name="mess_detail_dinner">{!! @$menu['tuesday']->mess_detail_dinner !!}</textarea></div>
                                     <div class="col col-1 text-center">
                                         <button type="submit" class="add-edit-menu btn btn-primary btn-sm rounded-pill">Update</button>
                                     </div>

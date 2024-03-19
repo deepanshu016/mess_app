@@ -122,6 +122,12 @@ class CustomerService {
         $user = User::find($customer_id);
         return $user;
     }
+
+    public function getAllCustomer(){
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'CUSTOMER');
+        })->count();
+    }
  }
 
 

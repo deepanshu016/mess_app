@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +32,10 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/mess-list', [HomeController::class,'messList'])->name('mess.list');
+Route::get('/load-more-mess', [HomeController::class,'loadMoreMess'])->name('load.more.mess');
+Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
 
 Auth::routes();
 

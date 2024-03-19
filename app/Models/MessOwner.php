@@ -12,6 +12,7 @@ class MessOwner extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
     protected $table = "mess_owner";
+    protected $appends = ['logo','banner'];
     protected $fillable = [
         'user_id',
         'mess_name',
@@ -34,5 +35,34 @@ class MessOwner extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected function getLogoAttribute()
+    {
+        $media = $this->getMedia("MESS_LOGO_IMAGE")->first();
+        if ($media) {
+            return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
+        }
+        return null;
+    }
+    protected function getBannerAttribute()
+    {
+        $media = $this->getMedia("MESS_BANNER")->first();
+        if ($media) {
+            return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
+        }
+        return null;
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }
