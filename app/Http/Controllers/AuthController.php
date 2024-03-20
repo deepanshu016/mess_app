@@ -67,7 +67,7 @@ Class AuthController extends Controller {
             }elseif($user->hasRole('MESS_OWNER')){
                 $url = route('mess_owner.dashboard');
             }else{
-                $url = route('customer.dashboard');
+                $url = route('home');
             }
             return response()->json(['status'=>200,'msg'=>'Logged in successfully','url'=>$url]);
         }else{

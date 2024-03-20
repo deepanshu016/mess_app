@@ -78,10 +78,6 @@
                 </p>
             </div>
         </div>
-    </div><!-- End row -->
-    <div id="delivery_time" class="d-none d-sm-block">
-        <strong><span>2</span><span>5</span></strong>
-        <h4>The minutes that usually takes to deliver!</h4>
     </div>
 </div>
 <!-- End container -->
@@ -94,7 +90,31 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            @if($messList)
+                @foreach($messList as $mess)
+                <div class="col-lg-6">
+                    <a href="{{ route('mess.detail',['mess_id'=>$mess->id]) }}" class="strip_list">
+                        <div class="ribbon_1">Popular</div>
+                        <div class="desc">
+                            <div class="thumb_strip">
+                                <img src="{{ ($mess->logo) ? $mess->logo : assets('site/Frame-5.avif') }}" alt="">
+                            </div>
+                            <div class="rating">
+                                <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+                            </div>
+                            <h3>{{ $mess->mess_name }}</h3>
+                            <div class="type">
+                                {{ $mess->food_type }}
+                            </div>
+                            <div class="location">
+                                {{ $mess->address }},{{ $mess->city->name }}, {{ $mess->state->name }}, {{ $mess->country->name }},{{ $mess->pincode }}
+                            </div>
+                        </div><!-- End desc-->
+                    </a>
+                </div>
+                @endforeach
+            @endif
+            {{-- <div class="col-lg-6">
                 <a href="detail_page.html" class="strip_list">
                     <div class="ribbon_1">Popular</div>
                     <div class="desc">
@@ -229,7 +249,7 @@
                         </ul>
                     </div><!-- End desc-->
                 </a><!-- End strip_list-->
-            </div>
+            </div> --}}
         </div><!-- End row -->
     </div><!-- End container -->
 </div>
@@ -283,4 +303,9 @@
     </div><!-- End row -->
 </div>
 <!-- End container -->
+@endsection
+@section('page_script')
+
+<script type="text/javascript" src="{{ asset('/') }}site/js/pop_up.min.js"></script>
+<script type="text/javascript" src="{{ asset('/') }}site/js/pop_up_func.js"></script>
 @endsection

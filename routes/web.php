@@ -35,7 +35,10 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/mess-list', [HomeController::class,'messList'])->name('mess.list');
 Route::get('/load-more-mess', [HomeController::class,'loadMoreMess'])->name('load.more.mess');
+Route::get('/about-us', [HomeController::class,'aboutUs'])->name('about.us');
+Route::get('/contact-us', [HomeController::class,'contactUs'])->name('contact.us');
 Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
+Route::get('/{mess_id}/mess-detail', [HomeController::class,'messDetail'])->name('mess.detail');
 
 Auth::routes();
 

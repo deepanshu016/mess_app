@@ -8,7 +8,7 @@
             <div class="col-md-9">
                 <div class="desc">
                     <div class="thumb_strip">
-                        <a href="detail_page.html"><img src="{{ ($current->logo) ? $current->logo : assets('site/Frame-5.avif') }}" alt=""></a>
+                        <a href="{{ route('mess.detail',['mess_id'=>$current->id]) }}"><img src="{{ ($current->logo) ? $current->logo : assets('site/Frame-5.avif') }}" alt=""></a>
                     </div>
                     <div class="rating">
                         <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)

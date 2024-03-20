@@ -18,9 +18,9 @@
 <div id="position">
     <div class="container">
         <ul>
-            <li><a href="#0">Home</a></li>
-            <li><a href="#0">Category</a></li>
-            <li>Page active</li>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('mess.list') }}">Mess</a></li>
+            <li>{{ $singleMess->mess_name }} Menus</li>
         </ul>
         <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
@@ -42,12 +42,12 @@
                     <li><a href="#sunday">Sunday <span>({{ ($menuList['sunday']) ? $menuList['sunday']['count'] : 0}} Meals)</span></a></li>
                 </ul>
             </div><!-- End box_style_1 -->
-            <div class="box_style_2 d-none d-sm-block" id="help">
+            {{-- <div class="box_style_2 d-none d-sm-block" id="help">
                 <i class="icon_lifesaver"></i>
                 <h4>Need <span>Help?</span></h4>
                 <a href="tel://004542344599" class="phone">+45 423 445 99</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
-            </div>
+            </div> --}}
         </div><!-- End col -->
         <div class="col-lg-9">
             <div class="box_style_2" id="main_menu">
@@ -59,6 +59,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,17 +68,44 @@
                             <td>
                                 {!! ($menuList['monday'] && $menuList['monday']['mess_detail_breakfast']) ? $menuList['monday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{ $singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['monday'] && $menuList['monday']['mess_detail_lunch']) ? $menuList['monday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{ $singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['monday'] && $menuList['monday']['mess_detail_dinner']) ? $menuList['monday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{ $singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -90,6 +118,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,17 +127,44 @@
                             <td>
                                 {!! ($menuList['tuesday'] && $menuList['tuesday']['mess_detail_breakfast']) ? $menuList['tuesday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['tuesday'] && $menuList['tuesday']['mess_detail_lunch']) ? $menuList['tuesday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['tuesday'] && $menuList['tuesday']['mess_detail_dinner']) ? $menuList['tuesday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -121,6 +177,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,17 +186,44 @@
                             <td>
                                 {!! ($menuList['wednesday'] && $menuList['wednesday']['mess_detail_breakfast']) ? $menuList['wednesday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{ $singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['wednesday'] && $menuList['wednesday']['mess_detail_lunch']) ? $menuList['wednesday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['wednesday'] && $menuList['wednesday']['mess_detail_dinner']) ? $menuList['wednesday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -152,6 +236,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,17 +245,44 @@
                             <td>
                                 {!! ($menuList['thursday'] && $menuList['thursday']['mess_detail_breakfast']) ? $menuList['thursday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['thursday'] && $menuList['thursday']['mess_detail_lunch']) ? $menuList['thursday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['thursday'] && $menuList['thursday']['mess_detail_dinner']) ? $menuList['thursday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -182,6 +294,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,17 +303,44 @@
                             <td>
                                 {!! ($menuList['friday'] && $menuList['friday']['mess_detail_breakfast']) ? $menuList['friday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['friday'] && $menuList['friday']['mess_detail_lunch']) ? $menuList['friday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['friday'] && $menuList['friday']['mess_detail_dinner']) ? $menuList['friday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -212,6 +352,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -220,17 +361,44 @@
                             <td>
                                 {!! ($menuList['saturday'] && $menuList['saturday']['mess_detail_breakfast']) ? $menuList['saturday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['saturday'] && $menuList['saturday']['mess_detail_lunch']) ? $menuList['saturday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['saturday'] && $menuList['saturday']['mess_detail_dinner']) ? $menuList['saturday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -242,6 +410,7 @@
                         <tr>
                             <th> Meal Type</th>
                             <th>Meal Detail</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,17 +419,44 @@
                             <td>
                                 {!! ($menuList['sunday'] && $menuList['sunday']['mess_detail_breakfast']) ? $menuList['sunday']['mess_detail_breakfast'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Lunch</td>
                             <td>
                                 {!! ($menuList['sunday'] && $menuList['sunday']['mess_detail_lunch']) ? $menuList['sunday']['mess_detail_lunch'] : 'Not Added' !!}
                             </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                @else
+                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Dinner</td>
                             <td>
                                 {!! ($menuList['sunday'] && $menuList['sunday']['mess_detail_dinner']) ? $menuList['sunday']['mess_detail_dinner'] : 'Not Added' !!}
+                            </td>
+                            <td>
+                                @if($singleMess->food_type == 'both')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                @elseif($singleMess->food_type == 'veg')
+                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                @else
+                                    Non Veg INR {{ $singleMess->non_veg_dinner_price}})
+                                @endif
                             </td>
                         </tr>
                     </tbody>

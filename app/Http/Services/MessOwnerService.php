@@ -33,8 +33,18 @@ class MessOwnerService {
         $listData['data'] = $setting;
         return $listData;
     }
-    public function allMess($request){
-        return MessOwner::with(['user','country','state','city'])->paginate(1);
+    public function allMess($request,$order_by='',$limit=''){
+        $page = $request->input('page');
+        $messOwner = MessOwner::with(['user','country','state','city']);
+        if($order_by){
+            $messOwner = $messOwner->orderBy('id',$order_by);
+        }
+        if($page){
+            $perPage = 1;
+            $offset = ($page - 1) * $perPage;
+            return $messOwner->skip($offset)->take($perPage)->get();
+        }
+        return $messOwner->paginate($limit);
     }
     public function edit($owner_id){
         return MessOwner::with(['user','country','state','city'])->find($owner_id);

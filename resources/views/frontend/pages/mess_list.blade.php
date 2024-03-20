@@ -15,9 +15,8 @@
 <div id="position">
     <div class="container">
         <ul>
-            <li><a href="#0">Home</a></li>
-            <li><a href="#0">Category</a></li>
-            <li>Page active</li>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('mess.list') }}">Mess</a></li>
         </ul>
          <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
@@ -118,14 +117,19 @@
 @endsection
 @section('page_script')
 <script>
+
+    var page = 1;
     $("body").on("click",".load_more_bt",function(e){
         e.preventDefault();
-        var page = 1;
-        var url = "{{ url('load-more-mess') }}"+'?page='+page + 1;
-        CommonLib.ajaxForm('GET',url).then(d=>{
+        var url = "{{ url('load-more-mess') }}" + '?page=' + (parseInt(page) + 1);
+        const id = $(this).val();
+        formData = new FormData();
+        formData.append('page',parseInt(page) + 1);
+        CommonLib.ajaxForm(formData,'GET',url).then(d=>{
             if(d.status === 200){
                 CommonLib.notification.success(d.msg);
                 $(".mess-wrapper").append(d.html);
+                page = (parseInt(page) + 1);
             }else{
                 CommonLib.notification.error(d.msg);
             }

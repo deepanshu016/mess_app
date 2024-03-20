@@ -5,17 +5,17 @@
             <div class="col-md-4">
                 <h3>Secure payments with</h3>
                 <p>
-                    <img src="img/cards.png" alt="" class="img-fluid">
+                    <img src="{{ asset('/') }}site/img/cards.png" alt="" class="img-fluid">
                 </p>
             </div>
             <div class="col-md-3">
                 <h3>About</h3>
                 <ul>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="faq.html">Faq</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
+                    <li><a href="{{ route('about.us') }}">About us</a></li>
+                    <li><a href="#">Faq</a></li>
+                    <li><a href="{{ route('contact.us') }}">Contacts</a></li>
                     <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
-                    <li><a href="#0" data-toggle="modal" data-target="#register">Register</a></li>
+                    {{-- <li><a href="#0" data-toggle="modal" data-target="#register">Register</a></li> --}}
                     <li><a href="#0">Terms and conditions</a></li>
                 </ul>
             </div>

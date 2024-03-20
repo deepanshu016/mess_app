@@ -9,7 +9,7 @@
     <meta name="author" content="Ansonika">
     <title>@yield('title')</title>
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{{ asset('/') }}site/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('public/media/').'/'.setting()->getMedia("SITE_LOGO")[0]->id.'/'.setting()->getMedia("SITE_LOGO")[0]->file_name }}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('/') }}site/img/apple-touch-icon-57x57-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{ asset('/') }}site/img/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{ asset('/') }}site/img/apple-touch-icon-114x114-precomposed.png">
@@ -26,9 +26,16 @@
 	<link href="{{ asset('/') }}site/css/fontello/css/fontello.min.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/magnific-popup.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/pop_up.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main.css" id="stylesheet">
+    <link  href="{{ asset('/') }}frontend/assets/css/main.css" id="stylesheet">
+    <!-- Radio and check inputs -->
+    <link href="{{ asset('/') }}site/css/skins/square/grey.css" rel="stylesheet">
+
+    <!-- Gallery -->
+    <link href="{{ asset('/') }}site/css/slider-pro.min.css" rel="stylesheet">
+
+    <!-- YOUR CUSTOM CSS -->
+    <link href="{{ asset('/') }}site/css/custom.css" rel="stylesheet">
 	<!-- YOUR CUSTOM CSS -->
-	<link href="{{ asset('/') }}site/css/custom.css" rel="stylesheet">
     <!-- Modernizr -->
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
 </head>
@@ -51,20 +58,20 @@
         <div class="modal-dialog">
             <div class="modal-content modal-popup">
                 <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-                <form action="#" class="popup-form" id="myLogin">
+                <form action="{{ route('check.login') }}" class="popup-form" id="loginForms"  method="POST">
+                    @csrf
                     <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="text" class="form-control form-white" placeholder="Username">
-                    <input type="text" class="form-control form-white" placeholder="Password">
-                    <div class="text-left">
+                    <input type="text" class="form-control" placeholder="Email" name="email">
+                    <input type="text" class="form-control" placeholder="Password" name="password">
+                    {{-- <div class="text-left">
                         <a href="#">Forgot Password?</a>
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-submit">Submit</button>
                 </form>
             </div>
         </div>
     </div>
     <!-- End modal -->
-
     <!-- Register modal -->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
         <div class="modal-dialog">
@@ -91,12 +98,14 @@
     </div>
     <!-- End Register modal -->
     <!-- COMMON SCRIPTS -->
-    <script src="{{ asset('/') }}site/js/jquery-3.7.0.min.js"></script>
+    <script src="{{ asset('/') }}frontend/assets/js/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('/') }}site/js/common_scripts_min.js"></script>
     <script src="{{ asset('/') }}site/js/functions.js"></script>
     <script src="{{ asset('/') }}site/assets/validate.js"></script>
     <!-- SPECIFIC SCRIPTS -->
     <script src="{{ asset('/') }}site/js/video_header.js"></script>
+    <script src="{{ asset('/') }}site/js/map_single.js"></script>
+    <script src="{{ asset('/') }}site/js/jquery.sliderPro.min.js"></script>
     <script src="{{ asset('/') }}frontend/plugins/toastr/toastr.min.js"></script>
     <script src="{{ asset('/') }}frontend/plugins/toastr/toastr-init.js"></script>
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
@@ -109,6 +118,46 @@
                 header: $('.header-video--media'),
                 videoTrigger: $("#video-trigger"),
                 autoPlayVideo: true
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $( document ).ready(function( $ ) {
+            $( '#Img_carousel' ).sliderPro({
+                width: 960,
+                height: 500,
+                fade: true,
+                arrows: true,
+                buttons: false,
+                fullScreen: false,
+                smallSize: 500,
+                startSlide: 0,
+                mediumSize: 1000,
+                largeSize: 3000,
+                thumbnailArrows: true,
+                autoplay: false
+            });
+        });
+    </script>
+    <script>
+        $(function(){
+            $("body").on('submit','#loginForms',function(e){
+                e.preventDefault();
+                const url = $(this).attr('action');
+                const method = $(this).attr('method');
+                var formData = $('#loginForms')[0];
+                formData = new FormData(formData);
+                CommonLib.ajaxForm(formData,method,url).then(d=>{
+                    if(d.status === 200){
+                        CommonLib.notification.success(d.msg);
+                        window.location = d.url;
+                    }else{
+                        CommonLib.notification.error(d.errors);
+                    }
+                }).catch(e=>{
+                    const error = JSON.parse(e.responseText);
+                    CommonLib.notification.error(error.errors);
+                });
             });
         });
     </script>
