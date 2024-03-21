@@ -35,6 +35,7 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('/') }}site/css/custom.css" rel="stylesheet">
+    <link href="{{ asset('/') }}site/css/admin.css" rel="stylesheet">
 	<!-- YOUR CUSTOM CSS -->
     <!-- Modernizr -->
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
@@ -62,7 +63,7 @@
                     @csrf
                     <div class="login_icon"><i class="icon_lock_alt"></i></div>
                     <input type="text" class="form-control" placeholder="Email" name="email">
-                    <input type="text" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                     {{-- <div class="text-left">
                         <a href="#">Forgot Password?</a>
                     </div> --}}

@@ -1,12 +1,12 @@
 @extends('frontend.layout.master')
-@section('title','Mess App | Home Page')
+@section('title','Mess App | Mess Lists')
 @section('content')
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{{ asset('/') }}site/img/sub_header_short.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
         <div id="sub_content">
-            <h1>24 results in your zone</h1>
-            <div><i class="icon_pin"></i> 135 Newtownards Road, Belfast, BT4 1AB</div>
+            <h1>{{ count($messList) }} results in your pincode</h1>
+            {{-- <div><i class="icon_pin"></i> 135 Newtownards Road, Belfast, BT4 1AB</div> --}}
         </div><!-- End sub_content -->
     </div><!-- End subheader -->
 </section><!-- End section -->
@@ -42,14 +42,9 @@
                         <input type="text" id="range" value="" name="range">
                         <h6>Type</h6>
                         <ul>
-                            <li><label><input type="checkbox" checked class="icheck">All <small>(49)</small></label></li>
-                            <li><label><input type="checkbox" class="icheck">American <small>(12)</small></label><i class="color_1"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Chinese <small>(5)</small></label><i class="color_2"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Hamburger <small>(7)</small></label><i class="color_3"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Fish <small>(1)</small></label><i class="color_4"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Mexican <small>(49)</small></label><i class="color_5"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Pizza <small>(22)</small></label><i class="color_6"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Sushi <small>(43)</small></label><i class="color_7"></i></li>
+                            <li><label><input type="checkbox" checked class="icheck">Both <small>(49)</small></label></li>
+                            <li><label><input type="checkbox" class="icheck">Veg <small>(12)</small></label><i class="color_1"></i></li>
+                            <li><label><input type="checkbox" class="icheck">Non-Veg <small>(5)</small></label><i class="color_2"></i></li>
                         </ul>
                     </div>
                     <div class="filter_type">
@@ -72,7 +67,7 @@
                             </span></label></li>
                         </ul>
                     </div>
-                    <div class="filter_type">
+                    {{-- <div class="filter_type">
                         <h6>Options</h6>
                         <ul class="nomargin">
                             <li><label><input type="checkbox" class="icheck">Delivery</label></li>
@@ -80,7 +75,7 @@
                             <li><label><input type="checkbox" class="icheck">Distance 10Km</label></li>
                             <li><label><input type="checkbox" class="icheck">Distance 5Km</label></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div><!--End collapse -->
             </div><!--End filters col-->
         </div><!--End col-md -->
@@ -108,7 +103,7 @@
                 @include('frontend.common.mess_list')
             </div>
             <!-- End strip_list-->
-            <a href="javascript:void(0);" id="load-more" class="load_more_bt wow fadeIn" data-wow-delay="0.2s">Load more...</a>
+            <a href="javascript:void(0);" id="load-more" onclick="loadMore()" class="load_more_bt wow fadeIn">Load more...</a>
         </div><!-- End col-md-9-->
 
     </div><!-- End row -->
@@ -117,14 +112,19 @@
 @endsection
 @section('page_script')
 <script>
-
+    // var ENDPOINT = "{{ url('/') }}";
     var page = 1;
-    $("body").on("click",".load_more_bt",function(e){
-        e.preventDefault();
-        var url = "{{ url('load-more-mess') }}" + '?page=' + (parseInt(page) + 1);
+    infinteLoadMore(page);
+    function loadMore(){
+        page++;
+        infinteLoadMore(page);
+    };
+    function infinteLoadMore(page) {
+        alert(page);
+        var url = "{{ url('load-more-mess') }}" + '?page='+ page;
         const id = $(this).val();
         formData = new FormData();
-        formData.append('page',parseInt(page) + 1);
+        formData.append('page',page);
         CommonLib.ajaxForm(formData,'GET',url).then(d=>{
             if(d.status === 200){
                 CommonLib.notification.success(d.msg);
@@ -134,6 +134,6 @@
                 CommonLib.notification.error(d.msg);
             }
         });
-    });
+    }
 </script>
 @endsection

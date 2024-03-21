@@ -65,6 +65,9 @@ class PaymentService {
         }
         return $payment;
     }
+    public function totalPeopleServed(){
+        return Payment::distinct('user_id')->count();
+    }
  }
 
 

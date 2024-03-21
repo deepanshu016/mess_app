@@ -128,6 +128,7 @@ class CustomerService {
             $query->where('name', 'CUSTOMER');
         })->count();
     }
+
  }
 
 

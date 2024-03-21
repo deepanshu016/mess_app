@@ -35,6 +35,7 @@
                         <li class="submenu">
                             <a href="javascript:void(0);" class="show-submenu">{{ @Auth::user()->name }} <i class="icon-down-open-mini"></i></a>
                             <ul>
+                                <li><a href="{{ route('view.profile') }}">Profile</a></li>
                                 <li><a href="{{ route('logout') }}">Logout</a></li>
                             </ul>
                         </li>

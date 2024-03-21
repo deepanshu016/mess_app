@@ -39,7 +39,6 @@ Route::get('/about-us', [HomeController::class,'aboutUs'])->name('about.us');
 Route::get('/contact-us', [HomeController::class,'contactUs'])->name('contact.us');
 Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
 Route::get('/{mess_id}/mess-detail', [HomeController::class,'messDetail'])->name('mess.detail');
-
 Auth::routes();
 
 Route::get('/dummy', [App\Http\Controllers\SettingsController::class, 'dummyRoute'])->name('dummy');
@@ -48,10 +47,12 @@ Route::get('/become-mess-owner', [AuthController::class, 'becomeAMessOwner'])->n
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/check-login', [AuthController::class, 'login'])->name('check.login');
 Route::post('/user-signup', [AuthController::class, 'registration'])->name('user.signup');
+Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
+Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
 Route::group(['middleware' => ['auth']], function () {
-    Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
-    Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
+
     Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
+    Route::get('/user-profile', [HomeController::class,'profile'])->name('view.profile');
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');

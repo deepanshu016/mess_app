@@ -46,6 +46,41 @@
                                 <input type="password" class="form-control" name="password_confirmation" value="" placeholder="Re-type Password">
                             </div>
                         </div>
+                        @if($type == 'mess_owner')
+                        <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <select class="form-control get-state" name="country_id">
+                                <option value="">Select Country</option>
+                                @if(!empty($countries))
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}"  {{ (isset($messOwner) && ($messOwner->country_id  == $country->id)) ? 'selected' : ''}}>{{ $country->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group state-data">
+                            @if(!empty($messOwner) &&  !empty($states))
+                                <label class="form-label">State</label>
+                                <select class="form-control get-city" name="state_id">
+                                    <option value="">Select State</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}" {{ (isset($messOwner) && ($messOwner->state_id  == $state->id)) ? 'selected' : ''}}>{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        <div class="form-group city-data">
+                            @if(!empty($messOwner) && !empty($cities))
+                                <label class="form-label">City</label>
+                                <select class="form-control" name="city_id">
+                                    <option value="">Select City</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{ $city->id }}" {{ (isset($messOwner) && ($messOwner->city_id  == $city->id)) ? 'selected' : ''}}>{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        @endif
                         @if(!empty($data))
                         <input type="hidden" class="form-control" name="signup_type" value="customer" placeholder="Phone">
                         <div class="col-lg-12">
@@ -96,5 +131,37 @@
             });
         });
     });
+    $("body").on("change",".get-state",function(e){
+            e.preventDefault();
+            const url = "{{ route('get.state.list') }}";
+            const id = $(this).val();
+            formData = new FormData();
+            formData.append('country_id',id);
+            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+                if(d.status === 200){
+                    $(".state-data").html(d.html);
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
+        });
+        $("body").on("change",".get-city",function(e){
+            e.preventDefault();
+            const url = "{{ route('get.city.list') }}";
+            const id = $(this).val();
+            formData = new FormData();
+            formData.append('state_id',id);
+            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+                if(d.status === 200){
+                    $(".city-data").html(d.html);
+                }else{
+                    CommonLib.notification.error(d.msg);
+                }
+            }).catch(e=>{
+                CommonLib.notification.error(e.responseJSON.errors);
+            });
+        });
 </script>
 @endsection

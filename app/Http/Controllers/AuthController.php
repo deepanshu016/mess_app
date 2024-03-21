@@ -6,9 +6,9 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Services\MessOwnerService;
-use App\Http\Services\CommonService;
 use App\Models\MessOwner;
 use App\Http\Services\AuthService;
+use App\Http\Services\CommonService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -20,13 +20,17 @@ Class AuthController extends Controller {
 
     public function register(Request $request)
     {
+        $type = 'customer';
         $service = new MessOwnerService();
         $data = $service->messOwner();
-        return view('auth.register',compact('data'));
+        return view('auth.register',compact('data','type'));
     }
     public function becomeAMessOwner(Request $request)
     {
-        return view('auth.register');
+        $type = 'mess_owner';
+        $common = new CommonService();
+        $countries = $common->getCountries();
+        return view('auth.register',compact('type','countries'));
     }
     public function userProfile(Request $request)
     {

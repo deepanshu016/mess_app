@@ -9,23 +9,21 @@
             <p>
                 Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.
             </p>
-            <form method="post" action="http://www.ansonika.com/quickfood/list_page.html">
-                <div id="custom-search-input">
-                    <div class="input-group">
-                        <input type="text" class=" search-query" placeholder="Your Address or postal code">
-                        <span class="input-group-btn">
-                        <input type="submit" class="btn_search" value="">
-                        </span>
-                    </div>
+            <div id="custom-search-input">
+                <div class="input-group">
+                    <input type="text" class="search-query" placeholder="Your Address or postal code" id="pincode">
+                    <span class="input-group-btn">
+                    <input type="button" class="btn_search" value="">
+                    </span>
                 </div>
-            </form>
+            </div>
         </div><!-- End sub_content -->
     </div>
     <img src="{{ asset('/') }}site/img/video_fix.png" alt="" class="header-video--media" data-video-src="" data-teaser-source="video/intro" data-provider="" data-video-width="1920" data-video-height="960">
     <div id="count" class="d-none d-md-block">
         <ul>
             <li><span class="number">{{ $total_mess_owner }}</span> Mess</li>
-            <li><span class="number">5350</span> People Served</li>
+            <li><span class="number">{{ $total_people_served }}</span> People Served</li>
             <li><span class="number">{{ $total_customer }}</span> Registered Users</li>
         </ul>
     </div>
@@ -308,4 +306,15 @@
 
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up.min.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up_func.js"></script>
+<script>
+    $("body").on("click",'.btn_search',function(e){
+        e.preventDefault();
+        var pincode = $("#pincode").val();
+        if(pincode){
+            window.location = "{{ url('mess-list') }}"+'?pincode='+pincode;
+        }else{
+            return false;
+        }
+    });
+</script>
 @endsection
