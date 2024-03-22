@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 27, 2024 at 08:00 PM
+-- Generation Time: Mar 22, 2024 at 09:31 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -68,13 +68,6 @@ CREATE TABLE IF NOT EXISTS `banners` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `banners`
---
-
-INSERT INTO `banners` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Banner Two', 'active', '2024-02-26 12:51:01', '2024-02-26 13:00:23');
 
 -- --------------------------------------------------------
 
@@ -48877,7 +48870,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `media`
@@ -48903,7 +48896,6 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (46, 'App\\Models\\Payment', 2, '93038985-658d-4f8d-92be-05bff6c5e80b', 'PAYMENT_SCREENSHOT', 'imags', 'imags.png', 'image/png', 'public', 'public', 100947, '[]', '[]', '[]', '[]', 1, '2024-02-23 15:30:54', '2024-02-23 15:30:54'),
 (47, 'App\\Models\\Payment', 3, '5402044f-ab2c-48b9-a79d-c877cfaafcb3', 'PAYMENT_SCREENSHOT', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'public', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-23 16:29:20', '2024-02-23 16:29:20'),
 (48, 'App\\Models\\MessOwner', 1, 'ed7f0832-443e-4694-9b2d-b4388015b551', 'MESS_QR_CODE', 'imags', 'imags.png', 'image/png', 'public', 'local', 100947, '[]', '[]', '[]', '[]', 3, '2024-02-24 15:45:07', '2024-02-24 15:45:07'),
-(52, 'App\\Models\\Banner', 1, 'cb0b7939-73ac-4da4-9274-12a967d88acc', 'BANNER_IMAGE', 'sucess-animation', 'sucess-animation.png', 'image/png', 'public', 'local', 36029, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:00:34', '2024-02-26 13:00:34'),
 (55, 'App\\Models\\News', 1, 'fac520f5-b803-4349-972b-d952f0391457', 'NEWS_IMAGE', 'doc-pic', 'doc-pic.png', 'image/png', 'public', 'local', 44885, '[]', '[]', '[]', '[]', 1, '2024-02-26 13:36:44', '2024-02-26 13:36:44'),
 (58, 'App\\Models\\Gallery', 2, '20503e1e-85d6-4a0c-aaf0-662a4a87c243', 'GALLERY_MEDIA', 'ADIDAS', 'ADIDAS.png', 'image/png', 'public', 'public', 55555, '[]', '[]', '[]', '[]', 1, '2024-02-27 12:16:40', '2024-02-27 12:16:40'),
 (59, 'App\\Models\\Gallery', 2, 'deb72554-e8f4-4274-9c07-e80a2f4c5af7', 'GALLERY_MEDIA', 'FIZZY_GOBLET', 'FIZZY_GOBLET.png', 'image/png', 'public', 'public', 13056, '[]', '[]', '[]', '[]', 2, '2024-02-27 12:16:40', '2024-02-27 12:16:40'),
@@ -48911,7 +48903,9 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (62, 'App\\Models\\Gallery', 2, '8eb1b79b-495b-4870-a30a-2254e7d2a52f', 'GALLERY_MEDIA', 'oneplus', 'oneplus.jpg', 'image/jpeg', 'public', 'public', 14083, '[]', '[]', '[]', '[]', 4, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
 (63, 'App\\Models\\Gallery', 2, '754ff48b-7617-403c-aaec-abc9882e8296', 'GALLERY_MEDIA', 'PUMA', 'PUMA.png', 'image/png', 'public', 'public', 38893, '[]', '[]', '[]', '[]', 5, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
 (64, 'App\\Models\\Gallery', 2, '11640a6a-5057-4723-8131-e1516513b8de', 'GALLERY_MEDIA', 's22_ultra', 's22_ultra.jpg', 'image/jpeg', 'public', 'public', 166263, '[]', '[]', '[]', '[]', 6, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
-(65, 'App\\Models\\Gallery', 2, '9dcb17d7-6b27-4a75-9b5e-004b2167e4db', 'GALLERY_MEDIA', 'Samsung_galaxy_s23_Ultra_a', 'Samsung_galaxy_s23_Ultra_a.jpg', 'image/jpeg', 'public', 'public', 47119, '[]', '[]', '[]', '[]', 7, '2024-02-27 13:23:53', '2024-02-27 13:23:53');
+(65, 'App\\Models\\Gallery', 2, '9dcb17d7-6b27-4a75-9b5e-004b2167e4db', 'GALLERY_MEDIA', 'Samsung_galaxy_s23_Ultra_a', 'Samsung_galaxy_s23_Ultra_a.jpg', 'image/jpeg', 'public', 'public', 47119, '[]', '[]', '[]', '[]', 7, '2024-02-27 13:23:53', '2024-02-27 13:23:53'),
+(67, 'App\\Models\\MessOwner', 3, 'fbb979b9-6e63-4da9-8cd3-564fda2c4c84', 'MESS_LOGO_IMAGE', '4_large', '4_large.jpg', 'image/jpeg', 'public', 'public', 636126, '[]', '[]', '[]', '[]', 2, '2024-03-20 13:57:16', '2024-03-20 13:57:16'),
+(68, 'App\\Models\\MessOwner', 3, '2a0f681e-de6e-4aca-90a4-7f61ea4ef631', 'MESS_BANNER', '1_large', '1_large.jpg', 'image/jpeg', 'public', 'public', 267831, '[]', '[]', '[]', '[]', 3, '2024-03-20 13:57:16', '2024-03-20 13:57:16');
 
 -- --------------------------------------------------------
 
@@ -48925,6 +48919,7 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `added_by` bigint(20) UNSIGNED NOT NULL,
   `day` varchar(191) NOT NULL,
   `menu_type` varchar(191) NOT NULL,
+  `food_type` enum('veg','non_veg') DEFAULT NULL,
   `mess_detail_breakfast` longtext DEFAULT NULL,
   `mess_detail_lunch` longtext DEFAULT NULL,
   `mess_detail_dinner` longtext DEFAULT NULL,
@@ -48933,7 +48928,17 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `menus_added_by_foreign` (`added_by`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `menus`
+--
+
+INSERT INTO `menus` (`id`, `added_by`, `day`, `menu_type`, `food_type`, `mess_detail_breakfast`, `mess_detail_lunch`, `mess_detail_dinner`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Mon', 'dinner', 'veg', '<p>Paratha</p>', '<p>Dal + Chawal + Sabji + Raita + Salad</p>', '<p>Puri + Sabji + Dessert</p>', NULL, '2024-03-19 13:18:59', '2024-03-19 13:18:59'),
+(2, 2, 'Tue', 'dinner', 'veg', '<p>Poha</p>', '<p>Bati Chokha</p>', '<p>Sabji + Roti + Sweet</p>', NULL, '2024-03-22 14:08:36', '2024-03-22 14:08:36'),
+(3, 2, 'Wed', 'dinner', 'veg', '<p>gfhdfghgf</p>', '<p>hdgfhgfhgfh</p>', '<p>ghdgfhhgfh</p>', NULL, '2024-03-22 14:10:11', '2024-03-22 14:10:11'),
+(4, 2, 'Thu', 'dinner', 'veg', '<p>treyrtyrtyrtytry</p>', '<p>reyrtyrteyry</p>', '<p>tryrteyrtyrteyytryrte</p>', NULL, '2024-03-22 14:11:13', '2024-03-22 14:11:13');
 
 -- --------------------------------------------------------
 
@@ -48968,15 +48973,17 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `mess_owner_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `mess_owner`
 --
 
 INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `country_id`, `state_id`, `city_id`, `address`, `pincode`, `address_link`, `account_details`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Anna Restaurant', '<p>dfgdfgdfgdgdgdfgfg</p>', 'veg', NULL, 600.00, 700.00, 800.00, NULL, NULL, NULL, NULL, 101, 10, 706, 'fghdfhgfhdgfhgfhgfhdgfhgf', '225566', 'fghdgfhgfhgfhgfhfghgfhgfhgfh', '<p>dhfghgfhgfhdfghfhgfhf</p>', NULL, '2024-02-22 10:41:34', '2024-02-24 15:47:18'),
-(2, 4, 'Anna Food Corner', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, NULL, '2024-02-22 13:43:10', '2024-02-22 13:53:48');
+(1, 2, 'Anna Restaurant', '<p>dfgdfgdfgdgdgdfgfg</p>', 'veg', NULL, 600.00, 700.00, 800.00, NULL, NULL, NULL, NULL, 101, 10, 706, 'fghdfhgfhdgfhgfhgfhdgfhgf', '225566', 'fghdgfhgfhgfhgfhfghgfhgfhgfh', '<p>dhfghgfhgfhdfghfhgfhf</p>', '1', '2024-02-22 10:41:34', '2024-02-24 15:47:18'),
+(2, 4, 'Anna Food Corner', '<p>fghdgfhghgfdhgfhdgfhgfdhgfhgfhg</p>', 'veg', NULL, 900.00, 1500.00, 2000.00, NULL, NULL, NULL, NULL, 101, 7, 600, 'fdgfdgfdgdfg', '233666', 'https://maps.app.goo.gl/kRrQhAbixXhdmwR69', NULL, '1', '2024-02-22 13:43:10', '2024-02-22 13:53:48'),
+(3, 5, 'New Mess', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'both', NULL, 50.00, 70.00, 80.00, NULL, NULL, NULL, NULL, 101, 38, 4933, 'Aliganj Lucknow', '226028', 'http://map/lucknow.com', NULL, NULL, '2024-03-20 13:57:16', '2024-03-20 13:57:16'),
+(4, 7, 'Current Mess', NULL, 'non_veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 101, 17, 1529, NULL, NULL, NULL, NULL, NULL, '2024-03-21 14:16:45', '2024-03-21 14:16:45');
 
 -- --------------------------------------------------------
 
@@ -49059,7 +49066,10 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (2, 'App\\Models\\User', 2),
 (2, 'App\\Models\\User', 4),
-(3, 'App\\Models\\User', 3);
+(2, 'App\\Models\\User', 5),
+(2, 'App\\Models\\User', 7),
+(3, 'App\\Models\\User', 3),
+(3, 'App\\Models\\User', 6);
 
 -- --------------------------------------------------------
 
@@ -53464,17 +53474,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'eCj2YXSdQxqXRIVPAfXXjm546HaoSPOwgjw9yzdvGC4MiCxUoAmtJTZ3svo5', NULL, 'active', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-02-20 15:01:03', '$2y$12$dDRbcWsm64hlusAxfrDzpuWeM3e7jn7j7H3CPQyFq8VQaZywGRP5S', NULL, NULL, NULL, 'YzwMrFasl8EGd4Vg44FaXLO8L5Hegs5aEj6h6FM3QLCISVn7UUplb8o5iEVF', NULL, 'active', '2024-02-20 15:01:03', '2024-02-20 15:01:03'),
 (2, 'Anna Mess owner', 'annamesowner@mail.com', '7788996655', NULL, '$2y$12$0g.KPcSho1krWpGExGiQvuIkMIwTAlLFEYa6eYB28kt5yOrCa9gFq', NULL, NULL, NULL, NULL, NULL, '', '2024-02-22 10:41:34', '2024-02-24 15:48:45'),
 (3, 'Anna Customer', 'annacustomer@gmail.com', '7744112255', NULL, '$2y$12$gLPOAH78gyO9njvD4EO2XOenxkwJdub0mJhHjVMB3sVNhtFJliohe', 32953.33, '2024-02-20', 'veg', NULL, 1, 'inactive', '2024-02-22 10:42:54', '2024-02-24 15:14:51'),
-(4, 'Anna Iyyer', 'annaiyyer@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, 'active', '2024-02-22 13:43:10', '2024-02-22 13:43:10');
+(4, 'Anna Iyyer', 'annaiyyer@gmail.com', NULL, NULL, '$2y$12$jVSexvcujg71XrH5XgtcpOhBUmpbWpffAkIZ8oefO.gMHO6izcdzi', NULL, NULL, NULL, NULL, NULL, 'active', '2024-02-22 13:43:10', '2024-02-22 13:43:10'),
+(5, 'New Mess Owner', 'newmessowner@mail.com', NULL, NULL, '$2y$12$oEJMXuhLhBYHz6qr2viiOOpe8Djsgsm8k2lU2ISTuIwyASKz7rHEy', NULL, NULL, NULL, NULL, NULL, 'active', '2024-03-20 13:57:16', '2024-03-20 13:57:16'),
+(6, 'Deepanshu Mishrs', 'mishranew@gmail.com', '7744111002', NULL, '$2y$12$/qtLtU8cqkHMl94bcSEnVuU15o4GBkaAI4ouxBTKDZsqJBdQN59ni', NULL, NULL, NULL, NULL, NULL, 'active', '2024-03-20 14:16:43', '2024-03-20 14:16:43'),
+(7, 'fhdfghgfhgfhgf', 'hdgfhdgfh@gmail.com', '453464563464', NULL, '$2y$12$jps.TFszUH.yY/QwwJ0T7OPpntMmrenyhTgzA2krvdQu0x9RiJOhK', NULL, NULL, NULL, NULL, NULL, 'active', '2024-03-21 14:16:45', '2024-03-21 14:16:45');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
