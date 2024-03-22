@@ -13,18 +13,19 @@ class MenuService {
         return $messOwner;
     }
     public function list($request,$mess_id = ''){
+        $food_type = $request->menu;
         if($mess_id){
             $messOwner = MessOwner::find($mess_id);
         }else{
             $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         }
-        $menu['sunday'] = Menu::where('added_by',$messOwner->id)->where('day','Sun')->first();
-        $menu['monday'] = Menu::where('added_by',$messOwner->id)->where('day','Mon')->first();
-        $menu['tuesday'] = Menu::where('added_by',$messOwner->id)->where('day','Tue')->first();
-        $menu['wednesday'] = Menu::where('added_by',$messOwner->id)->where('day','Wed')->first();
-        $menu['thursday'] = Menu::where('added_by',$messOwner->id)->where('day','Thu')->first();
-        $menu['friday'] = Menu::where('added_by',$messOwner->id)->where('day','Fri')->first();
-        $menu['saturday'] = Menu::where('added_by',$messOwner->id)->where('day','Sat')->first();
+        $menu['sunday'] = Menu::where('added_by',$messOwner->id)->where('day','Sun')->where('food_type',$food_type)->first();
+        $menu['monday'] = Menu::where('added_by',$messOwner->id)->where('day','Mon')->where('food_type',$food_type)->first();
+        $menu['tuesday'] = Menu::where('added_by',$messOwner->id)->where('day','Tue')->where('food_type',$food_type)->first();
+        $menu['wednesday'] = Menu::where('added_by',$messOwner->id)->where('day','Wed')->where('food_type',$food_type)->first();
+        $menu['thursday'] = Menu::where('added_by',$messOwner->id)->where('day','Thu')->where('food_type',$food_type)->first();
+        $menu['friday'] = Menu::where('added_by',$messOwner->id)->where('day','Fri')->where('food_type',$food_type)->first();
+        $menu['saturday'] = Menu::where('added_by',$messOwner->id)->where('day','Sat')->where('food_type',$food_type)->first();
         return $menu;
     }
     public function edit($menu_id){
@@ -32,7 +33,7 @@ class MenuService {
     }
     public function store(Object $request){
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
-        $menu = Menu::create(['added_by'=>$messOwner->id,'day'=>$request->day,'menu_type'=>$request->menu_type,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
+        $menu = Menu::create(['added_by'=>$messOwner->id,'day'=>$request->day,'food_type'=>$request->food_type,'menu_type'=>$request->menu_type,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
         $menu = Menu::find($menu->id);
         if($request->hasFile('menu_template') && $request->file('menu_template')->isValid()){
             $menu->addMediaFromRequest('menu_template')->toMediaCollection('MENU_TEMPLATE');

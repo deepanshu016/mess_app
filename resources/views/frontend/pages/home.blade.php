@@ -102,7 +102,7 @@
                             </div>
                             <h3>{{ $mess->mess_name }}</h3>
                             <div class="type">
-                                {{ $mess->food_type }}
+                                {{ strtoupper(str_replace('_', '  ', $mess->food_type)) }}
                             </div>
                             <div class="location">
                                 {{ $mess->address }},{{ $mess->city->name }}, {{ $mess->state->name }}, {{ $mess->country->name }},{{ $mess->pincode }}

@@ -31,6 +31,9 @@ class HomeController extends Controller
     {
         $service = new MessOwnerService();
         $data['messList'] = $service->allMess($request,'',1);
+        $data['totalVegMess'] = $service->totalMess($request,'veg');
+        $data['totalNonVegMess'] = $service->totalMess($request,'non_veg');
+        $data['totalBothMess'] = $service->totalMess($request,'both');
         return view('frontend.pages.mess_list',$data);
     }
     public function loadMoreMess(Request $request)
@@ -38,9 +41,26 @@ class HomeController extends Controller
         $service = new MessOwnerService();
         $messList = $service->allMess($request,'DESC',1);
         $html = View::make('frontend.common.mess_list',compact('messList'))->render();
-        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>'','html'=>$html]);
+        $html2 = '';
+        if($messList->currentPage() < $messList->lastPage()){
+            $html2 = '<a href="javascript:void(0);" id="load-more" onclick="loadMore()" class="load_more_bt wow fadeIn">
+                    Load more...
+                    <div class="spinner-grow"  style="display:none;height: 17px;width: 17px;color: #78cfcf !important;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </a>';
+        }
+        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>'','html'=>$html,'html2'=>$html2]);
     }
     public function viewMenu($mess_id,Request $request)
+    {
+        $menu = new MenuService();
+        $mess = new MessOwnerService();
+        $data['menuList'] = $menu->list($request,$mess_id);
+        $data['singleMess'] = $mess->edit($mess_id);
+        return view('frontend.pages.view_menu',$data);
+    }
+    public function bookAMess($mess_id,Request $request)
     {
         $menu = new MenuService();
         $mess = new MessOwnerService();

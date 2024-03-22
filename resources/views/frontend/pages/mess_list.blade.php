@@ -42,9 +42,9 @@
                         <input type="text" id="range" value="" name="range">
                         <h6>Type</h6>
                         <ul>
-                            <li><label><input type="checkbox" checked class="icheck">Both <small>(49)</small></label></li>
-                            <li><label><input type="checkbox" class="icheck">Veg <small>(12)</small></label><i class="color_1"></i></li>
-                            <li><label><input type="checkbox" class="icheck">Non-Veg <small>(5)</small></label><i class="color_2"></i></li>
+                            <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('both',this)">Both <small>({{ @$totalBothMess}})</small></label></li>
+                            <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('veg',this)">Veg <small>({{ @$totalVegMess}})</small></label><i class="color_1"></i></li>
+                            <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('non_veg',this)">Non-Veg <small>({{ @$totalNonVegMess}})</small></label><i class="color_2"></i></li>
                         </ul>
                     </div>
                     <div class="filter_type">
@@ -99,11 +99,9 @@
                 </div>
             </div>
             <!--End tools -->
-            <div class="mess-wrapper">
-                @include('frontend.common.mess_list')
-            </div>
-            <!-- End strip_list-->
-            <a href="javascript:void(0);" id="load-more" onclick="loadMore()" class="load_more_bt wow fadeIn">Load more...</a>
+            <div class="mess-wrapper"></div>
+            <div class="load-more-wrapper"></div>
+
         </div><!-- End col-md-9-->
 
     </div><!-- End row -->
@@ -114,26 +112,59 @@
 <script>
     // var ENDPOINT = "{{ url('/') }}";
     var page = 1;
-    infinteLoadMore(page);
+    var food_type_selected = [];
+    var formData = new FormData();
+    infiniteLoadMore(page);
     function loadMore(){
         page++;
-        infinteLoadMore(page);
-    };
-    function infinteLoadMore(page) {
-        alert(page);
-        var url = "{{ url('load-more-mess') }}" + '?page='+ page;
-        const id = $(this).val();
-        formData = new FormData();
+        infiniteLoadMore(page);
+    }
+    function filterFoodType(food_type,parentRef){
+        var index = food_type_selected.indexOf(food_type);
+        if (parentRef.checked) {
+            if (index !== -1) {
+                food_type_selected.splice(index, 1);
+            }
+        } else {
+            if (index === -1) {
+                food_type_selected.push(food_type);
+            }
+        }
+        removeKeyFromFormData(formData, 'food_type');
+        formData.append('food_type',food_type_selected);
+        infiniteLoadMore(page,'filter')
+    }
+
+
+
+    function infiniteLoadMore(page,action_type = '') {
+        removeKeyFromFormData(formData, 'page');
+        var url = "{{ url('load-more-mess') }}";
         formData.append('page',page);
-        CommonLib.ajaxForm(formData,'GET',url).then(d=>{
+        CommonLib.ajaxForm(formData,'POST',url).then(d=>{
             if(d.status === 200){
                 CommonLib.notification.success(d.msg);
-                $(".mess-wrapper").append(d.html);
-                page = (parseInt(page) + 1);
+                if(action_type !== 'filter'){
+                    $(".mess-wrapper").append(d.html);
+                }else{
+                    $(".mess-wrapper").html(d.html);
+                }
+                $(".load-more-wrapper").html(d.html2);
+                $(".spinner-grow").hide();
             }else{
                 CommonLib.notification.error(d.msg);
             }
         });
+    }
+
+
+    function removeKeyFromFormData(formData, keyToRemove) {
+        for (const pair of formData.entries()) {
+            const [key, value] = pair;
+            if (key === keyToRemove) {
+                formData.delete(key);
+            }
+        }
     }
 </script>
 @endsection

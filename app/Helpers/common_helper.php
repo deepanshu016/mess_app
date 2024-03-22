@@ -111,4 +111,12 @@ if (!function_exists('getTotalPerDay')) {
         return number_format($totalSpend,2);
     }
 }
+
+if (!function_exists('getMessOwner')) {
+    function getMessOwner(){
+        $user_id = auth()->user()->id;
+        $messOwner = MessOwner::where('user_id',$user_id)->first();
+        return $messOwner;
+    }
+}
 ?>

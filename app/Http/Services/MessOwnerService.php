@@ -34,10 +34,15 @@ class MessOwnerService {
         return $listData;
     }
     public function allMess($request,$order_by='',$limit=''){
+
+        $food_type = explode(',',json_decode(json_encode($request->food_type),true));
         $page = $request->input('page');
         $messOwner = MessOwner::with(['user','country','state','city']);
         if($request->pincode){
             $messOwner = $messOwner->where('pincode',$request->pincode);
+        }
+        if($request->food_type){
+            $messOwner = $messOwner->whereIn('food_type',$food_type);
         }
         if($order_by){
             $messOwner = $messOwner->orderBy('id',$order_by);
@@ -47,7 +52,15 @@ class MessOwnerService {
         //     $offset = ($page - 1) * $perPage;
         //     return $messOwner->skip($offset)->take($perPage)->get();
         // }
-        return $messOwner->paginate(1);
+        return $messOwner->paginate($limit);
+    }
+    public function totalMess($request,$food_type){
+        $page = $request->input('page');
+        $messOwner = MessOwner::with(['user','country','state','city'])->where('food_type',$food_type);
+        if($request->pincode){
+            $messOwner = $messOwner->where('pincode',$request->pincode);
+        }
+        return $messOwner->count();
     }
     public function edit($owner_id){
         return MessOwner::with(['user','country','state','city'])->find($owner_id);

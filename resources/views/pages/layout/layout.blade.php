@@ -14,6 +14,7 @@
     <link href="{{ asset('frontend/assets/img/apple-touch-icon-144x144.html') }}" rel="apple-touch-icon" sizes="144x144">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main.css" id="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/') }}style.css" />
     @yield('page_styles')
 </head>
 <body class="bg-light">
@@ -98,6 +99,7 @@
     <script src="{{ asset('/') }}frontend/assets/js/theme.js"></script>
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    <script src="{{ asset('/') }}cute-alert.js"></script>
     @yield('page_scripts')
     <script>
         $(function() {

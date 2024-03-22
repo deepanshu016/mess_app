@@ -16,7 +16,26 @@
                 <div class="card-header bg-transparent border-0 p-5 pb-0">
                     <h5 class="mb-0">Menu</h5>
                 </div>
-
+                <div class="card-header bg-transparent border-0 p-5 pb-0">
+                    <label class="form-label">Food type</label>
+                    @if(getMessOwner()->food_type == 'both')
+                        <select class="form-control select-food-type" name="status">
+                            <option value="">Select Food type</option>
+                            <option value="veg" {{ (Request::get('menu') == 'veg') ? 'selected' : '' }}>Veg</option>
+                            <option value="non_veg" {{ (Request::get('menu') == 'non_veg') ? 'selected' : '' }}>Non Veg</option>
+                        </select>
+                    @elseif(getMessOwner()->food_type == 'veg')
+                        <select class="form-control select-food-type" name="status">
+                            <option value="">Select Food type</option>
+                            <option value="veg" {{ (Request::get('menu') == 'veg') ? 'selected' : '' }}>Veg</option>
+                        </select>
+                    @else
+                        <select class="form-control select-food-type" name="status">
+                            <option value="">Select Food type</option>
+                            <option value="non_veg" {{ (Request::get('menu') == 'non_veg') ? 'selected' : '' }}>Non Veg</option>
+                        </select>
+                    @endif
+                </div>
                 <div class="card-body">
                     <div class="table table-flex text-dark">
                         <div class="thead fw-bold border-bottom border-1 border-light-200">
@@ -130,6 +149,7 @@
             var serializedData = $(this).serialize();
             const url = $(this).attr('action');
             const method = $(this).attr('method');
+            const food_type = $(".select-food-type").val();
             var formData = new FormData();
             $.each(serializedData.split('&'), function(index, field) {
                 var keyValue = field.split('=');
@@ -137,6 +157,7 @@
                 var value = decodeURIComponent(keyValue[1]);
                 formData.append(key, value);
             });
+            formData.append("food_type", food_type);
             CommonLib.ajaxForm(formData,method,url).then(d=>{
                 if(d.status === 200){
                     CommonLib.notification.success(d.msg);
@@ -149,6 +170,11 @@
             }).catch(e=>{
                 CommonLib.notification.error(e.responseJSON.errors);
             });
+        });
+        $("body").on('change','.select-food-type',function(e){
+            e.preventDefault();
+            var food_type = $(this).val();
+            window.location = "{{ route('mess_owner.menu.create') }}"+`?menu=${food_type}`;
         });
     });
     const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];

@@ -44,7 +44,7 @@ class BannerController extends Controller
         $service = $service->update($request,'banner_image','BANNER_IMAGE');
         return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('admin.banner.list') : '']);
     }
-    public function delete($id,BannerRequest $request)
+    public function delete($id,Request $request)
     {
         $service = new BannerService(Banner::class);
         $service = $service->delete($id,'BANNER_IMAGE');

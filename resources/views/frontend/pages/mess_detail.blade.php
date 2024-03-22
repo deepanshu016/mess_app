@@ -52,6 +52,7 @@
                 <div class="box_style_2 d-none d-sm-block" id="help">
                     <i class="icon_lifesaver"></i>
                     <a href="{{ route('view.menu',['mess_id'=>$singleMess->id]) }}" class="phone">View Menu</a>
+                    <a href="{{ route('mess.booking',['mess_id'=>$singleMess->id]) }}" class="phone book_mess_data" data-id="{{ (auth()->user()) ? auth()->user()->id : ''}}">Book Now</a>
                     {{-- <small>Monday to Friday 9.00am - 7.30pm</small> --}}
                 </div>
             </div>
@@ -61,43 +62,43 @@
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                             </div>
                             <div class="sp-slide">
-                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}" data-large="{{ ($singleMess->logo) ? $singleMess->logo : assets('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->logo) ? $singleMess->logo : assets('site/Frame-5.avif') }}">
+                                <img alt="" class="sp-image" src="#" data-src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-small="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-medium="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}" data-large="{{ ($singleMess->logo) ? $singleMess->logo : asset('site/Frame-5.avif') }}" data-retina="{{ ($singleMess->logo) ? $singleMess->logo : asset('site/Frame-5.avif') }}">
                             </div>
                         </div>
                         <div class="sp-thumbnails">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
-                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : assets('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
+                            <img alt="" class="sp-thumbnail" src="{{ ($singleMess->banner) ? $singleMess->banner : asset('site/Frame-5.avif') }}">
                         </div>
                     </div>
                     <h3>About us</h3>
@@ -253,4 +254,20 @@
         </div><!-- End row -->
     </div><!-- End container -->
     <!-- End Content =============================================== -->
+@endsection
+@section('page_script')
+<script>
+    $(function(){
+        $("body").on("click",'.book_mess_data',function(e){
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var user_id = $(this).data('id');
+            if(user_id){
+                window.location = url;
+            }else{
+                $("#login_2").modal('show');
+            }
+        });
+    });
+</script>
 @endsection

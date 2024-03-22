@@ -15,7 +15,7 @@
                     </div>
                     <h3>{{ $current->mess_name }}</h3>
                     <div class="type">
-                        {{ $current->food_type }}
+                        {{ strtoupper(str_replace('_', '  ', $current->food_type)) }}
                     </div>
                     <div class="location">
                         {{ $current->address }},{{ $current->city->name }}, {{ $current->state->name }}, {{ $current->country->name }},{{ $current->pincode }}
@@ -33,3 +33,4 @@
     </div>
 @endforeach
 @endif
+

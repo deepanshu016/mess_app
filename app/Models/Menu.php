@@ -20,6 +20,7 @@ class Menu extends Model implements HasMedia
         'mess_detail_breakfast',
         'mess_detail_lunch',
         'mess_detail_dinner',
+        'food_type'
     ];
     protected function menuType(): Attribute
     {

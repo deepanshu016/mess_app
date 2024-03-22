@@ -7,6 +7,7 @@
     <meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="{{ asset('public/media/').'/'.setting()->getMedia("SITE_LOGO")[0]->id.'/'.setting()->getMedia("SITE_LOGO")[0]->file_name }}" type="image/x-icon">
@@ -39,6 +40,7 @@
 	<!-- YOUR CUSTOM CSS -->
     <!-- Modernizr -->
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
+    <link rel="stylesheet" href="{{ asset('/') }}style.css" />
 </head>
 <body>
     <div id="preloader">
@@ -110,6 +112,7 @@
     <script src="{{ asset('/') }}frontend/plugins/toastr/toastr.min.js"></script>
     <script src="{{ asset('/') }}frontend/plugins/toastr/toastr-init.js"></script>
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
+    <script src="{{ asset('/') }}cute-alert.js"></script>
     @yield('page_script')
     <script>
         $(document).ready(function() {
@@ -151,7 +154,9 @@
                 CommonLib.ajaxForm(formData,method,url).then(d=>{
                     if(d.status === 200){
                         CommonLib.notification.success(d.msg);
-                        window.location = d.url;
+                        setTimeout(function(){
+                            window.location = d.url;
+                        },1000);
                     }else{
                         CommonLib.notification.error(d.errors);
                     }

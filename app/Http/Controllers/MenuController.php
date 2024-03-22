@@ -40,7 +40,7 @@ class MenuController extends Controller
             $service = new MenuService();
             $service = $service->store($request);
             if($service){
-                return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$service,'url'=>route('mess_owner.menu.create')]);
+                return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$service,'url'=>route('mess_owner.menu.create').'?menu='.((getMessOwner()->food_type == 'both') ? 'veg' : getMessOwner()->food_type)]);
             }
             return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
         }catch(\Exception $e){
@@ -52,7 +52,7 @@ class MenuController extends Controller
         try{
             $service = new MenuService();
             $service = $service->update($request);
-            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.menu.create') : '']);
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.menu.create').'?menu='.((getMessOwner()->food_type == 'both') ? 'veg' : getMessOwner()->food_type) : '']);
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }

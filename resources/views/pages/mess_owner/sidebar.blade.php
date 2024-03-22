@@ -15,7 +15,7 @@
                 <ul class="main-menu">
                     <li class="menu-section-title text-gray ff-heading fs-16 fw-bold text-uppercase mt-4 mb-2"><span>Home</span></li>
                     <li class="menu-item {{ (Request::segment(2) == 'dashboard') ? 'active' : ''}}"><a href="{{ route('mess_owner.dashboard') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Dashboard</span></a></li>
-                    <li class="menu-item {{ (Request::segment(2) == 'menu') ? 'active' : ''}}"><a href="{{ route('mess_owner.menu.create') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Our Menus</span></a></li>
+                    <li class="menu-item {{ (Request::segment(2) == 'menu') ? 'active' : ''}}"><a href="{{ route('mess_owner.menu.create').'?menu='.((getMessOwner()->food_type == 'both') ? 'veg' : getMessOwner()->food_type) }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-18"></i></span> <span class="nav-text">Our Menus</span></a></li>
                     <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'customer' && (Request::segment(3) == 'create' || Request::segment(3) == 'list')) ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Our Customers</span></a>
                         <ul class="sub-menu">
                             <li class="menu-item {{ (Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('mess_owner.customer.create') }}"> Add New</a></li>

@@ -463,6 +463,7 @@
                 </table>
             </div><!-- End box_style_1 -->
         </div><!-- End col -->
+        <a class="btn_full" href="#">Book now</a>
         {{-- <div class="col-lg-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box">

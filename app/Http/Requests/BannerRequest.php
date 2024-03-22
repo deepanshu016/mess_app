@@ -32,8 +32,6 @@ class BannerRequest extends FormRequest
                 return $this->saveBannerRules();
             case 'admin.banner.update':
                 return $this->updateBannerRules();
-            case 'admin.banner.delete':
-                return $this->deleteBannerRules();
             default:
                 return [];
         }
@@ -51,9 +49,9 @@ class BannerRequest extends FormRequest
             'banner_image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
-    public function deleteBannerRules(){
-        return [
-            'id' => 'required|exists:banners,id',
-        ];
-    }
+    // public function deleteBannerRules(){
+    //     return [
+    //         'id' => 'required|exists:banners,id',
+    //     ];
+    // }
 }
