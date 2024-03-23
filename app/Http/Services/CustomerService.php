@@ -112,6 +112,26 @@ class CustomerService {
         $transaction = $transaction->orderBy('transaction_date','DESC')->get();
         return $transaction;
     }
+    public function transactionDataTables(Object $request){
+        $transaction = Transaction::with(['user','mess_owner']);
+        if($request->user_id){
+            $transaction = $transaction->where('user_id',$request->user_id);
+        }
+        if($request->transaction_type){
+            $transaction = $transaction->where('transaction_type',$request->transaction_type);
+        }
+        if($request->month){
+            $transaction = $transaction->whereMonth('transaction_date',$request->month);
+        }
+        $totalRecords = $transaction->count();
+        $transaction = $transaction->offset($request->input('start'))->limit($request->input('length'));
+        $transaction = $transaction->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $transaction;
+        return $listData;
+    }
     public function user_wallet_updatation($customer_id,$type,$amount){
         $user = User::find($customer_id);
         if($type == 'debit'){
@@ -129,6 +149,12 @@ class CustomerService {
         })->count();
     }
 
+
+    public function assignMess(Object $request){
+        $user = User::find(auth()->user()->id);
+        $customer = $user->update(['mess_id'=>$request->mess_id]);
+        return $customer;
+    }
  }
 
 

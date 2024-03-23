@@ -40,10 +40,11 @@
 	<!-- YOUR CUSTOM CSS -->
     <!-- Modernizr -->
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
+    <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main_one.css" id="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}style.css" />
 </head>
 <body>
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div class="sk-spinner sk-spinner-wave" id="status">
             <div class="sk-rect1"></div>
             <div class="sk-rect2"></div>
@@ -51,7 +52,7 @@
             <div class="sk-rect4"></div>
             <div class="sk-rect5"></div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Preload -->
     <!-- Login modal -->
     @include('frontend.layout.header')
@@ -101,7 +102,7 @@
     </div>
     <!-- End Register modal -->
     <!-- COMMON SCRIPTS -->
-    <script src="{{ asset('/') }}frontend/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('/') }}site/js/jquery-3.7.0.min.js"></script>
     <script src="{{ asset('/') }}site/js/common_scripts_min.js"></script>
     <script src="{{ asset('/') }}site/js/functions.js"></script>
     <script src="{{ asset('/') }}site/assets/validate.js"></script>
@@ -109,10 +110,11 @@
     <script src="{{ asset('/') }}site/js/video_header.js"></script>
     <script src="{{ asset('/') }}site/js/map_single.js"></script>
     <script src="{{ asset('/') }}site/js/jquery.sliderPro.min.js"></script>
-    <script src="{{ asset('/') }}frontend/plugins/toastr/toastr.min.js"></script>
-    <script src="{{ asset('/') }}frontend/plugins/toastr/toastr-init.js"></script>
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
     <script src="{{ asset('/') }}cute-alert.js"></script>
+    <script src="{{ asset('/') }}site/js/tabs.js"></script>
+    <script src="{{ asset('/') }}frontend/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/') }}frontend/plugins/datatables/js/datatables.init.js"></script>
     @yield('page_script')
     <script>
         $(document).ready(function() {

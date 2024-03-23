@@ -22,7 +22,6 @@
             <li><a href="{{ route('mess.list') }}">Mess</a></li>
             <li>{{ $singleMess->mess_name }} Menus</li>
         </ul>
-        <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
 </div><!-- Position -->
 
@@ -49,7 +48,28 @@
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div> --}}
         </div><!-- End col -->
+
         <div class="col-lg-9">
+            <div class="card-header bg-transparent">
+                <label class="form-label">Food type</label>
+                @if($singleMess->food_type == 'both')
+                    <select class="form-control select-food-type" name="status">
+                        <option value="">Select Food type</option>
+                        <option value="veg" {{ (Request::get('menu') == 'veg') ? 'selected' : '' }}>Veg</option>
+                        <option value="non_veg" {{ (Request::get('menu') == 'non_veg') ? 'selected' : '' }}>Non Veg</option>
+                    </select>
+                @elseif($singleMess->food_type == 'veg')
+                    <select class="form-control select-food-type" name="status">
+                        <option value="">Select Food type</option>
+                        <option value="veg" {{ (Request::get('menu') == 'veg') ? 'selected' : '' }}>Veg</option>
+                    </select>
+                @else
+                    <select class="form-control select-food-type" name="status">
+                        <option value="">Select Food type</option>
+                        <option value="non_veg" {{ (Request::get('menu') == 'non_veg') ? 'selected' : '' }}>Non Veg</option>
+                    </select>
+                @endif
+            </div>
             <div class="box_style_2" id="main_menu">
                 <h2 class="inner">Menu</h2>
                 <h3 class="nomargin_top" id="monday">Monday</h3>
@@ -70,11 +90,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -85,11 +105,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -100,11 +120,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{ $singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -129,11 +149,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -144,11 +164,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -159,11 +179,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -188,11 +208,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}}),(INR {{ $singleMess->non_veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -203,11 +223,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -218,11 +238,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -247,11 +267,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -262,11 +282,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -277,11 +297,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                   (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -305,11 +325,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                   (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -320,11 +340,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                   (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -335,11 +355,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                   (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -363,11 +383,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                   (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -378,11 +398,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                   (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -393,11 +413,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_dinner_price}})
+                                   (INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -421,11 +441,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}}), Non Veg(INR {{$singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_breakfast_price}})
+                                    (INR {{ $singleMess->veg_breakfast_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_breakfast_price}})
+                                    (INR {{ $singleMess->non_veg_breakfast_price}})
                                 @endif
                             </td>
                         </tr>
@@ -436,11 +456,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}}), Non Veg(INR {{$singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_lunch_price}})
+                                    (INR {{ $singleMess->veg_lunch_price}})
                                 @else
-                                    Non Veg (INR {{ $singleMess->non_veg_lunch_price}})
+                                    (INR {{ $singleMess->non_veg_lunch_price}})
                                 @endif
                             </td>
                         </tr>
@@ -451,11 +471,11 @@
                             </td>
                             <td>
                                 @if($singleMess->food_type == 'both')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}}), Non Veg(INR {{$singleMess->non_veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @elseif($singleMess->food_type == 'veg')
-                                    Veg (INR {{ $singleMess->veg_dinner_price}})
+                                    (INR {{ $singleMess->veg_dinner_price}})
                                 @else
-                                    Non Veg INR {{ $singleMess->non_veg_dinner_price}})
+                                    INR {{ $singleMess->non_veg_dinner_price}})
                                 @endif
                             </td>
                         </tr>
@@ -463,7 +483,7 @@
                 </table>
             </div><!-- End box_style_1 -->
         </div><!-- End col -->
-        <a class="btn_full" href="#">Book now</a>
+        <a class="btn_full book_a_mess" href="{{ route('book.a.mess',['mess_id'=>$singleMess->id]) }}" data-id="{{ $singleMess->id }}">Book now</a>
         {{-- <div class="col-lg-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box">
@@ -552,10 +572,18 @@
 @endsection
 @section('page_script')
 <script>
-    document.getElementById('load-more').addEventListener('click', function(event) {
-        event.preventDefault();
-        var nextPageUrl = document.querySelector('a#load-more').href;
-        window.location.href = nextPageUrl;
+    $('body').on("click",".book_a_mess",function(e){
+        e.preventDefault();
+        var messId=$(this).data('id');
+        var url = $(this).attr('href');
+        var formData = new FormData();
+        formData.append('mess_id',messId);
+        CommonLib.sweetalert.confirm(formData,'POST',url);
+    });
+    $('body').on("change",".select-food-type",function(e){
+        var menu=$(this).val();
+        alert(menu)
+        window.location = "{{ route('view.menu',['mess_id'=>$singleMess->id]) }}"+'?menu='+menu
     });
 </script>
 @endsection

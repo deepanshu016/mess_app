@@ -25,7 +25,7 @@
             <div class="col-md-3">
                 <div class="go_to">
                     <div>
-                        <a href="{{ route('view.menu',['mess_id'=>$current->id]) }}" class="btn_1">View Menu</a>
+                        <a href="{{ route('view.menu',['mess_id'=>$current->id]).'?menu='.(($current->food_type == 'both') ? 'veg' : $current->food_type) }}" class="btn_1">View Menu</a>
                     </div>
                 </div>
             </div>

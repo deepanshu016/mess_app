@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\MessOwnerService;
 use App\Http\Services\CustomerService;
+use App\Http\Services\AuthService;
 use App\Http\Services\PaymentService;
 use App\Http\Services\SettingsService;
 use App\Http\Services\MenuService;
@@ -86,6 +87,23 @@ class HomeController extends Controller
     }
     public function profile(Request $request)
     {
-        return view('frontend.pages.profile');
+        $service = new CustomerService();
+        $customers = $service->customerList();
+        $transaction = $service->filterTransaction($request);
+        $auth = new AuthService();
+        $user = $auth->getProfile();
+        return view('frontend.pages.profile',compact('customers','transaction','user'));
+    }
+    public function BookingAMess(Request $request)
+    {
+        $customer = new CustomerService();
+        $service = $customer->assignMess($request);
+        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('view.profile') : '']);
+    }
+    public function transactionList(Request $request)
+    {
+        $service = new CustomerService();
+        $data = $service->transactionDataTables($request);
+        return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
 }

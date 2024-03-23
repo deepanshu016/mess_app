@@ -38,8 +38,10 @@ Route::post('/load-more-mess', [HomeController::class,'loadMoreMess'])->name('lo
 Route::get('/about-us', [HomeController::class,'aboutUs'])->name('about.us');
 Route::get('/contact-us', [HomeController::class,'contactUs'])->name('contact.us');
 Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
-Route::get('/{mess_id}/booka-a-mess', [HomeController::class,'bookAMess'])->name('mess.booking');
+Route::get('/{mess_id}/book-a-mess', [HomeController::class,'bookAMess'])->name('mess.booking');
+Route::post('/{mess_id}/book-a-mess', [HomeController::class,'BookingAMess'])->name('book.a.mess');
 Route::get('/{mess_id}/mess-detail', [HomeController::class,'messDetail'])->name('mess.detail');
+Route::get('/transaction', [HomeController::class,'transactionList'])->name('transaction.data.datatables');
 Auth::routes();
 
 Route::get('/dummy', [App\Http\Controllers\SettingsController::class, 'dummyRoute'])->name('dummy');
