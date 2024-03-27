@@ -9,8 +9,13 @@ use App\Http\Services\AuthService;
 use App\Http\Services\PaymentService;
 use App\Http\Services\SettingsService;
 use App\Http\Services\MenuService;
+use App\Http\Services\BannerService;
 use Illuminate\Support\Facades\View;
-
+use App\Http\Requests\JobRequest;
+use App\Models\Blog;
+use App\Models\Job;
+use App\Models\ApplyJob;
+use App\Models\Faq;
 class HomeController extends Controller
 {
     public function __construct()
@@ -36,6 +41,37 @@ class HomeController extends Controller
         $data['totalNonVegMess'] = $service->totalMess($request,'non_veg');
         $data['totalBothMess'] = $service->totalMess($request,'both');
         return view('frontend.pages.mess_list',$data);
+    }
+    public function blogList(Request $request)
+    {
+        $service = new BannerService(Blog::class);
+        $data['blogList'] = $service->getAll();
+        $data['recentBlogs'] = Blog::orderBy('id','DESC')->limit(6)->get();
+        return view('frontend.pages.blogs',$data);
+    }
+    public function jobList(Request $request)
+    {
+        $service = new BannerService(Job::class);
+        $data['jobList'] = $service->getAll();
+        return view('frontend.pages.jobs',$data);
+    }
+    public function faqs(Request $request)
+    {
+        $service = new BannerService(Faq::class);
+        $data['faqList'] = $service->getAll();
+        return view('frontend.pages.faqs',$data);
+    }
+    public function getJob($job_id,Request $request)
+    {
+        $service = new BannerService(Job::class);
+        $data['singleJob'] = $service->edit($job_id);
+        return view('frontend.pages.viewJob',$data);
+    }
+    public function applyForJob(JobRequest $request)
+    {
+        $service = new BannerService(ApplyJob::class);
+        $service = $service->store($request);
+        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('job.list') : '']);
     }
     public function loadMoreMess(Request $request)
     {

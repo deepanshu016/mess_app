@@ -8,14 +8,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model implements HasMedia
+class Blog extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
-    protected $table = "banners";
+    protected $table = "blogs";
     protected $appends = ['medias'];
     protected $fillable = [
         'title',
-        'link',
+        'description',
         'status'
     ];
     protected function title(): Attribute
@@ -26,10 +26,11 @@ class Banner extends Model implements HasMedia
     }
     protected function getMediasAttribute()
     {
-        $media = $this->getMedia("BANNER_IMAGE")->first();
+        $media = $this->getMedia("BLOG_IMAGE")->first();
         if ($media) {
             return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
         }
         return null;
     }
 }
+

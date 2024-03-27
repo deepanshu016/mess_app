@@ -11,7 +11,7 @@ class BannerService {
         $this->model = $model;
         $this->media = new MediaService();
     }
-    public function list($request){
+    public function list($request,$conditions=[]){
         $listData = [];
         $searchValue = $request->query('search')['value'];
         $lists =  $this->model::where(function ($query) use ($searchValue,$request){
@@ -22,6 +22,9 @@ class BannerService {
                 }
             }
         });
+        if($conditions){
+            $lists = $lists->where($conditions);
+        }
         $totalRecords = $lists->count();
         $lists = $lists->offset($request->input('start'))->limit($request->input('length'));
         $lists = $lists->get();
@@ -36,6 +39,9 @@ class BannerService {
     }
     public function getAll(){
         return $this->model::all();
+    }
+    public function getList($job_id){
+        return $this->model::where('job_id',$job_id)->get();
     }
     public function filter(Object $request){
         $transaction = $this->model::with(['user','mess_owner']);

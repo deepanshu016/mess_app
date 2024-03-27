@@ -12,11 +12,13 @@
                 <h3>About</h3>
                 <ul>
                     <li><a href="{{ route('about.us') }}">About us</a></li>
-                    <li><a href="#">Faq</a></li>
+                    <li><a href="{{ route('faqs') }}">Faq</a></li>
                     <li><a href="{{ route('contact.us') }}">Contacts</a></li>
+                    <li><a href="{{ route('job.list') }}">Career</a></li>
                     <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
                     {{-- <li><a href="#0" data-toggle="modal" data-target="#register">Register</a></li> --}}
-                    <li><a href="#0">Terms and conditions</a></li>
+                    <li><a href="{{ route('login') }}">Admin Panel </a></li>
+                    <li><a href="{{ route('login') }}"">Mess Panel </a></li>
                 </ul>
             </div>
             <div class="col-md-3" id="newsletter">

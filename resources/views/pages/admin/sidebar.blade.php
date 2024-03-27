@@ -43,6 +43,20 @@
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'job') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-bookmarks"></i></span> <span class="nav-text">Jobs</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'job' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.job.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'job' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.job.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'blog') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-bookmarks"></i></span> <span class="nav-text">Blogs</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'blog' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.blog.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'blog' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.blog.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
                     <li class="menu-item {{ (Request::segment(2) == 'transaction') ? 'active' : ''}}"><a href="{{ route('admin.transaction.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Transaction</span></a></li>
                 </ul>
             </div>

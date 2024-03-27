@@ -42,6 +42,7 @@
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
     <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main_one.css" id="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}style.css" />
+    <link href="{{ asset('/') }}site/css/blog.css" rel="stylesheet">
 </head>
 <body>
     {{-- <div id="preloader">

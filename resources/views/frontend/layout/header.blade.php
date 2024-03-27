@@ -31,6 +31,9 @@
                     <li>
                         <a href="{{ route('mess.list') }}" class="show-submenu">Mess</a>
                     </li>
+                    <li>
+                        <a href="{{ route('blog.list') }}" class="show-submenu">Blogs</a>
+                    </li>
                     @if(Auth::user())
                         <li class="submenu">
                             <a href="javascript:void(0);" class="show-submenu">{{ @Auth::user()->name }} <i class="icon-down-open-mini"></i></a>

@@ -16,6 +16,8 @@ use App\Http\Controllers\MessOwner\GalleryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
@@ -34,9 +36,14 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/mess-list', [HomeController::class,'messList'])->name('mess.list');
+Route::get('/blogs', [HomeController::class,'blogList'])->name('blog.list');
+Route::get('/jobs', [HomeController::class,'jobList'])->name('job.list');
+Route::post('/apply-job', [HomeController::class,'applyForJob'])->name('apply.job');
+Route::get('{job_id}/job', [HomeController::class,'getJob'])->name('job.view');
 Route::post('/load-more-mess', [HomeController::class,'loadMoreMess'])->name('load.more.mess');
 Route::get('/about-us', [HomeController::class,'aboutUs'])->name('about.us');
 Route::get('/contact-us', [HomeController::class,'contactUs'])->name('contact.us');
+Route::get('/faqs', [HomeController::class,'faqs'])->name('faqs');
 Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
 Route::get('/{mess_id}/book-a-mess', [HomeController::class,'bookAMess'])->name('mess.booking');
 Route::post('/{mess_id}/book-a-mess', [HomeController::class,'BookingAMess'])->name('book.a.mess');
@@ -44,7 +51,6 @@ Route::get('/{mess_id}/mess-detail', [HomeController::class,'messDetail'])->name
 Route::get('/transaction', [HomeController::class,'transactionList'])->name('transaction.data.datatables');
 Auth::routes();
 
-Route::get('/dummy', [App\Http\Controllers\SettingsController::class, 'dummyRoute'])->name('dummy');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/become-mess-owner', [AuthController::class, 'becomeAMessOwner'])->name('become_mess_owner');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -53,7 +59,6 @@ Route::post('/user-signup', [AuthController::class, 'registration'])->name('user
 Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
 Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
 Route::group(['middleware' => ['auth']], function () {
-
     Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
     Route::get('/user-profile', [HomeController::class,'profile'])->name('view.profile');
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
@@ -95,6 +100,26 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{faq_id}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
             Route::post('/update', [FaqController::class, 'update'])->name('admin.faq.update');
             Route::post('delete', [FaqController::class, 'delete'])->name('admin.faq.delete');
+        });
+        Route::group(['prefix' => 'job'], function () {
+            Route::get('/create', [JobController::class, 'add'])->name('admin.job.add');
+            Route::get('/get-list', [JobController::class, 'list'])->name('admin.job.datatables');
+            Route::get('{job_id}/get-application-list', [JobController::class, 'applicationList'])->name('admin.job.application.datatables');
+            Route::get('/list', [JobController::class, 'index'])->name('admin.job.list');
+            Route::post('/create', [JobController::class, 'save'])->name('admin.job.save');
+            Route::get('/{job_id}/edit', [JobController::class, 'edit'])->name('admin.job.edit');
+            Route::get('/{job_id}/view-application', [JobController::class, 'viewApplications'])->name('admin.job.view');
+            Route::post('/update', [JobController::class, 'update'])->name('admin.job.update');
+            Route::post('delete', [JobController::class, 'delete'])->name('admin.job.delete');
+        });
+        Route::group(['prefix' => 'blog'], function () {
+            Route::get('/create', [BlogController::class, 'add'])->name('admin.blog.add');
+            Route::get('/get-list', [BlogController::class, 'list'])->name('admin.blog.datatables');
+            Route::get('/list', [BlogController::class, 'index'])->name('admin.blog.list');
+            Route::post('/create', [BlogController::class, 'save'])->name('admin.blog.save');
+            Route::get('/{blog_id}/edit', [BlogController::class, 'edit'])->name('admin.blog.edit');
+            Route::post('/update', [BlogController::class, 'update'])->name('admin.blog.update');
+            Route::delete('/{blog_id}/delete', [BlogController::class, 'delete'])->name('admin.blog.delete');
         });
         Route::group(['prefix' => 'transaction'], function () {
             Route::get('/list', [TransactionController::class, 'index'])->name('admin.transaction.list');
