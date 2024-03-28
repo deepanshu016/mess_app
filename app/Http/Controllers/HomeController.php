@@ -12,6 +12,7 @@ use App\Http\Services\MenuService;
 use App\Http\Services\BannerService;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\JobRequest;
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Job;
 use App\Models\ApplyJob;
@@ -27,8 +28,10 @@ class HomeController extends Controller
         $service = new MessOwnerService();
         $customer = new CustomerService();
         $payment = new PaymentService();
+        $banner = new BannerService(Banner::class);
         $data['total_mess_owner'] = $service->getAllCount();
         $data['total_customer'] = $customer->getAllCustomer();
+        $data['bannerList'] = $banner->getAll();
         $data['total_people_served'] = $payment->totalPeopleServed();
         $data['messList'] = $service->allMess($request,'DESC',6);
         return view('frontend.pages.home',$data);
@@ -36,6 +39,8 @@ class HomeController extends Controller
     public function messList(Request $request)
     {
         $service = new MessOwnerService();
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['messList'] = $service->allMess($request,'',1);
         $data['totalVegMess'] = $service->totalMess($request,'veg');
         $data['totalNonVegMess'] = $service->totalMess($request,'non_veg');
@@ -45,6 +50,8 @@ class HomeController extends Controller
     public function blogList(Request $request)
     {
         $service = new BannerService(Blog::class);
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['blogList'] = $service->getAll();
         $data['recentBlogs'] = Blog::orderBy('id','DESC')->limit(6)->get();
         return view('frontend.pages.blogs',$data);
@@ -52,24 +59,32 @@ class HomeController extends Controller
     public function jobList(Request $request)
     {
         $service = new BannerService(Job::class);
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['jobList'] = $service->getAll();
         return view('frontend.pages.jobs',$data);
     }
     public function faqs(Request $request)
     {
         $service = new BannerService(Faq::class);
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['faqList'] = $service->getAll();
         return view('frontend.pages.faqs',$data);
     }
     public function getJob($job_id,Request $request)
     {
         $service = new BannerService(Job::class);
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['singleJob'] = $service->edit($job_id);
         return view('frontend.pages.viewJob',$data);
     }
     public function applyForJob(JobRequest $request)
     {
         $service = new BannerService(ApplyJob::class);
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $service = $service->store($request);
         return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('job.list') : '']);
     }
@@ -93,6 +108,8 @@ class HomeController extends Controller
     {
         $menu = new MenuService();
         $mess = new MessOwnerService();
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['menuList'] = $menu->list($request,$mess_id);
         $data['singleMess'] = $mess->edit($mess_id);
         return view('frontend.pages.view_menu',$data);
@@ -101,6 +118,8 @@ class HomeController extends Controller
     {
         $menu = new MenuService();
         $mess = new MessOwnerService();
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['menuList'] = $menu->list($request,$mess_id);
         $data['singleMess'] = $mess->edit($mess_id);
         return view('frontend.pages.view_menu',$data);
@@ -109,17 +128,23 @@ class HomeController extends Controller
     {
         $menu = new MenuService();
         $mess = new MessOwnerService();
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
         $data['menuList'] = $menu->list($request,$mess_id);
         $data['singleMess'] = $mess->edit($mess_id);
         return view('frontend.pages.mess_detail',$data);
     }
     public function aboutUs(Request $request)
     {
-        return view('frontend.pages.about_us');
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
+        return view('frontend.pages.about_us',$data);
     }
     public function contactUs(Request $request)
     {
-        return view('frontend.pages.contact_us');
+        $banner = new BannerService(Banner::class);
+        $data['bannerList'] = $banner->getAll();
+        return view('frontend.pages.contact_us',$data);
     }
     public function profile(Request $request)
     {

@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main_one.css" id="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}style.css" />
     <link href="{{ asset('/') }}site/css/blog.css" rel="stylesheet">
+    <link href="{{ asset('/') }}frontend/layerslider/css/layerslider.css" rel="stylesheet">
 </head>
 <body>
     {{-- <div id="preloader">
@@ -125,6 +126,26 @@
                 header: $('.header-video--media'),
                 videoTrigger: $("#video-trigger"),
                 autoPlayVideo: true
+            });
+        });
+    </script>
+    <script src="{{ asset('/') }}frontend/layerslider/js/greensock.js"></script>
+    <script src="{{ asset('/') }}frontend/layerslider/js/layerslider.transitions.js"></script>
+    <script src="{{ asset('/') }}frontend/layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            'use strict';
+            $('#layerslider').layerSlider({
+                autoStart: true,
+                responsive: true,
+                responsiveUnder: 1280,
+                layersContainer: 1170,
+                navButtons:false,
+                showCircleTimer:false,
+                navStartStop:false,
+                skinsPath: "{{ asset('/') }}frontend/layerslider/skins/"
+                // Please make sure that you didn't forget to add a comma to the line endings
+                // except the last line!
             });
         });
     </script>
