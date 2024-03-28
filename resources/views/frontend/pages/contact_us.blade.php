@@ -43,14 +43,16 @@
         	</div>
         </div><!-- End row -->
     </div><!-- End container -->
+    @if(!empty($bannerList))
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            @foreach($bannerList as $key=>$banner)
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->iteration }}" class="{{ ($loop->first) ? 'active' : ''}}"></li>
+            @endforeach
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            @if(!empty($bannerList))
             @foreach($bannerList as $banner)
             <div class="carousel-item {{ ($loop->first) ? 'active' : ''}}">
                 @if(!empty($banner) && isset($banner->getMedia("BANNER_IMAGE")[0]))
@@ -60,7 +62,6 @@
                 @endif
             </div>
             @endforeach
-            @endif
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -71,6 +72,7 @@
         <span class="sr-only">Next</span>
         </a>
     </div>
+    @endif
     <!-- End Content =============================================== -->
 @endsection
 @section('page_script')
