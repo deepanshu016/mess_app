@@ -44,6 +44,7 @@
                         </li>
                     @else
                         <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
+                        <li><a href="#0" data-toggle="modal" data-target="#register_2">Register</a></li>
                     @endif
                 </ul>
             </div><!-- End main-menu -->

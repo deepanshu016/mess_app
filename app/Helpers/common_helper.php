@@ -6,6 +6,7 @@ use \App\Models\MessOwner;
 use \App\Models\User;
 use \App\Models\Payment;
 use \App\Models\Attendance;
+use \App\Models\Country;
 use \App\Models\CustomerMenu;
 
 if (!function_exists('setting')) {
@@ -117,6 +118,18 @@ if (!function_exists('getMessOwner')) {
         $user_id = auth()->user()->id;
         $messOwner = MessOwner::where('user_id',$user_id)->first();
         return $messOwner;
+    }
+}
+if (!function_exists('mess_owner_list')) {
+    function mess_owner_list(){
+        $messOwner = MessOwner::all();
+        return $messOwner;
+    }
+}
+if (!function_exists('country_list')) {
+    function country_list(){
+        $country = Country::all();
+        return $country;
     }
 }
 ?>

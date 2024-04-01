@@ -95,7 +95,7 @@
                         <div class="ribbon_1">Popular</div>
                         <div class="desc">
                             <div class="thumb_strip">
-                                <img src="{{ ($mess->logo) ? $mess->logo : assets('site/Frame-5.avif') }}" alt="">
+                                <img src="{{ ($mess->logo) ? $mess->logo : asset('site/Frame-5.avif') }}" alt="">
                             </div>
                             <div class="rating">
                                 <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>

@@ -18,7 +18,8 @@
                     <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
                     {{-- <li><a href="#0" data-toggle="modal" data-target="#register">Register</a></li> --}}
                     <li><a href="{{ route('login') }}">Admin Panel </a></li>
-                    <li><a href="{{ route('login') }}"">Mess Panel </a></li>
+                    <li><a href="{{ route('login') }}">Mess Panel </a></li>
+                    <li><a href="#0" data-toggle="modal" data-target="#mess_register_2">Mess Signup </a></li>
                 </ul>
             </div>
             <div class="col-md-3" id="newsletter">

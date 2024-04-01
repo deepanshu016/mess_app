@@ -132,36 +132,36 @@
         });
     });
     $("body").on("change",".get-state",function(e){
-            e.preventDefault();
-            const url = "{{ route('get.state.list') }}";
-            const id = $(this).val();
-            formData = new FormData();
-            formData.append('country_id',id);
-            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
-                if(d.status === 200){
-                    $(".state-data").html(d.html);
-                }else{
-                    CommonLib.notification.error(d.msg);
-                }
-            }).catch(e=>{
-                CommonLib.notification.error(e.responseJSON.errors);
-            });
+        e.preventDefault();
+        const url = "{{ route('get.state.list') }}";
+        const id = $(this).val();
+        formData = new FormData();
+        formData.append('country_id',id);
+        CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+            if(d.status === 200){
+                $(".state-data").html(d.html);
+            }else{
+                CommonLib.notification.error(d.msg);
+            }
+        }).catch(e=>{
+            CommonLib.notification.error(e.responseJSON.errors);
         });
-        $("body").on("change",".get-city",function(e){
-            e.preventDefault();
-            const url = "{{ route('get.city.list') }}";
-            const id = $(this).val();
-            formData = new FormData();
-            formData.append('state_id',id);
-            CommonLib.ajaxForm(formData,'POST',url).then(d=>{
-                if(d.status === 200){
-                    $(".city-data").html(d.html);
-                }else{
-                    CommonLib.notification.error(d.msg);
-                }
-            }).catch(e=>{
-                CommonLib.notification.error(e.responseJSON.errors);
-            });
+    });
+    $("body").on("change",".get-city",function(e){
+        e.preventDefault();
+        const url = "{{ route('get.city.list') }}";
+        const id = $(this).val();
+        formData = new FormData();
+        formData.append('state_id',id);
+        CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+            if(d.status === 200){
+                $(".city-data").html(d.html);
+            }else{
+                CommonLib.notification.error(d.msg);
+            }
+        }).catch(e=>{
+            CommonLib.notification.error(e.responseJSON.errors);
         });
+    });
 </script>
 @endsection
