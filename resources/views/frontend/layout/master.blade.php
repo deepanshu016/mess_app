@@ -297,7 +297,9 @@
                 CommonLib.ajaxForm(formData,method,url).then(d=>{
                     if(d.status === 200){
                         CommonLib.notification.success(d.msg);
-                        location.reload();
+                        setTimeout(function(){
+                            window.location = d.url;
+                        },1000);
                     }else{
                         CommonLib.notification.error(d.msg);
                     }

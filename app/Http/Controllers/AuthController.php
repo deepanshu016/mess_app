@@ -83,7 +83,18 @@ Class AuthController extends Controller {
         $auth = new AuthService();
         $result = $auth->signup($request);
         if($result){
-            return response()->json(['status'=>200,'msg'=>'Registration done successfully','data'=>$result,'url'=>route('login')]);
+            $login = $auth->login($request);
+            if($login){
+                $user = User::find(auth()->user()->id);
+                if($user->hasRole('ADMIN')){
+                    $url = route('admin.dashboard');
+                }elseif($user->hasRole('MESS_OWNER')){
+                    $url = route('mess_owner.dashboard');
+                }else{
+                    $url = route('home');
+                }
+            }
+            return response()->json(['status'=>200,'msg'=>'Registration done successfully','data'=>$result,'url'=>$url]);
         }else{
             return response()->json(['status'=>400,'msg'=>'Something went wrong','data'=>[],'url'=>'']);
         }
