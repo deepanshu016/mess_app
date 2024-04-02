@@ -5,6 +5,7 @@ use \App\Models\Settings;
 use \App\Models\MessOwner;
 use \App\Models\User;
 use \App\Models\Payment;
+use \App\Models\Banner;
 use \App\Models\Attendance;
 use \App\Models\Country;
 use \App\Models\CustomerMenu;
@@ -130,6 +131,12 @@ if (!function_exists('country_list')) {
     function country_list(){
         $country = Country::all();
         return $country;
+    }
+}
+if (!function_exists('random_ads')) {
+    function random_ads(){
+        $randomAdvertisement = Banner::inRandomOrder()->first();
+        return $randomAdvertisement;
     }
 }
 ?>

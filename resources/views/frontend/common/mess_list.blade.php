@@ -1,5 +1,8 @@
 @if(!empty($messList))
 @foreach($messList as $current)
+    @php
+        $advertisement = random_ads();
+    @endphp
     <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
         <div class="ribbon_1">
             Popular
@@ -31,6 +34,30 @@
             </div>
         </div><!-- End row-->
     </div>
+    @if(!empty($advertisement))
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    @if(!empty($advertisement) && isset($advertisement->getMedia("BANNER_IMAGE")[0]))
+                    <a href="{{ $advertisement->link}}">
+                        <img class="d-block w-100" src="{{ asset('public/media/').'/'.$advertisement->getMedia("BANNER_IMAGE")[0]->id.'/'.$advertisement->getMedia("BANNER_IMAGE")[0]->file_name }}" width="100" height="100">
+                    </a>
+                    @endif
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+        </div>
+    @endif
 @endforeach
 @endif
 
