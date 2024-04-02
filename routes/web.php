@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
         Route::group(['prefix' => 'mess-owner'], function () {
             Route::get('/create', [MessOwnerController::class, 'add'])->name('admin.mess_owner.add');
             Route::get('/get-list', [MessOwnerController::class, 'list'])->name('admin.mess_owner.datatables');
@@ -82,6 +83,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{banner_id}/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
             Route::post('/update', [BannerController::class, 'update'])->name('admin.banner.update');
             Route::delete('{id}/delete', [BannerController::class, 'delete'])->name('admin.banner.delete');
+        });
+        Route::group(['prefix' => 'customer'], function () {
+            Route::get('/list', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('admin.customer.list');
+            Route::get('/customer-list', [\App\Http\Controllers\Admin\CustomerController::class, 'list'])->name('admin.customer.datatables');
         });
         Route::group(['prefix' => 'news'], function () {
             Route::get('/create', [NewsController::class, 'add'])->name('admin.news.add');
@@ -146,7 +151,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/create', [CustomerController::class, 'add'])->name('mess_owner.customer.create');
             Route::get('/view-attendance', [CustomerController::class, 'viewAttendancePage'])->name('mess_owner.customer.view.attendance');
             Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('mess_owner.customer.view.transaction');
-            Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
+
             Route::get('/list', [CustomerController::class, 'index'])->name('mess_owner.customer.list');
             Route::post('/create', [CustomerController::class, 'save'])->name('mess_owner.customer.save');
             Route::post('/filter-attendance', [CustomerController::class, 'filterTransaction'])->name('mess_owner.customer.filter.transaction');

@@ -33,8 +33,37 @@ class CustomerService {
         $searchValue = $request->query('search')['value'];
         $user = User::with(['customer_menu','payments','attendances'])->whereHas('roles', function ($query) {
             $query->where('name', 'CUSTOMER');
-        })
-        ->where(function ($query) use ($searchValue){
+        });
+        if($request->mess_id){
+            $user = $user->where('mess_id',$request->mess_id);
+        }
+        $user = $user->where(function ($query) use ($searchValue){
+            $query->whereHas('customer_menu',function($query) use ($searchValue){
+                $query->where('meal_type','like','%'. $searchValue . '%');
+            });
+            $query->orWhere('name','like','%'. $searchValue . '%');
+            $query->orWhere('email','like','%'. $searchValue . '%');
+            $query->orWhere('phone','like','%'. $searchValue . '%');
+        });
+        $totalRecords = $user->count();
+        $user = $user->offset($request->input('start'))->limit($request->input('length'));
+        $user = $user->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $user;
+        return $listData;
+    }
+    public function listForAdmin($request){
+        $listData = [];
+        $searchValue = $request->query('search')['value'];
+        $user = User::with(['mess_owner'])->whereHas('roles', function ($query) {
+            $query->where('name', 'CUSTOMER');
+        });
+        if($request->mess_id){
+            $user = $user->where('mess_id',$request->mess_id);
+        }
+        $user = $user->where(function ($query) use ($searchValue){
             $query->whereHas('customer_menu',function($query) use ($searchValue){
                 $query->where('meal_type','like','%'. $searchValue . '%');
             });

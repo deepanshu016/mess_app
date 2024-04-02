@@ -53,7 +53,7 @@ class User extends Authenticatable implements HasMedia
 
     public function mess_owner()
     {
-        return $this->hasOne(MessOwner::class);
+        return $this->hasOne(MessOwner::class,'id','mess_id');
     }
     public function customer_menu()
     {

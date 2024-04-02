@@ -22,6 +22,9 @@
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
+                    <li class="menu-item {{ (Request::segment(2) == 'transaction') ? 'active' : ''}}"><a href="{{ route('admin.transaction.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Transaction</span></a></li>
+                    <li class="menu-item {{ (Request::segment(2) == 'customer') ? 'active' : ''}}"><a href="{{ route('admin.customer.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Customers</span></a></li>
+
                     <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Banners</span></a>
                         <ul class="sub-menu">
                             <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.banner.add') }}"> Add New</a></li>
