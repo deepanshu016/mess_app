@@ -15,7 +15,12 @@
                 </div>
 
                 <div class="card-body pt-3">
+                    @can('mess_owner')
                     <form id="subscriptionForm" method="POST" action="{{ route('mess_owner.customer.save.subscription')  }}" enctype="multipart/form-data">
+                    @else
+                    <form id="subscriptionForm" method="POST" action="{{ route('admin.customer.save.subscription')  }}" enctype="multipart/form-data">
+
+                    @endcan
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Name</label>

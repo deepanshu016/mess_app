@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\CustomerService;
 use App\Http\Requests\AddCustomerRequest;
+use Illuminate\Support\Facades\Gate;
+
+
 use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
@@ -42,7 +45,12 @@ class SubscriptionController extends Controller
         try{
             $service = new CustomerService();
             $service = $service->save_subscription($request);
-            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('mess_owner.customer.list') : '']);
+            if (Gate::allows('mess_owner')) {
+                $route = route('mess_owner.customer.list');
+            }else{
+                $route = route('admin.customer.list');
+            }
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? $route : '']);
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }

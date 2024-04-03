@@ -37,10 +37,12 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Mess Name</th>
                                     <th>Wallet Amount</th>
+                                    <th>Mess Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Wallet</th>
+                                    <th>Status</th>
                                     <th>Meal Type</th>
                                     <th></th>
                                 </tr>
@@ -72,6 +74,13 @@
             columns: [
                 { data: 'name', name: 'Name' },
                 {
+                    data: 'wallet_amount',
+                    name: 'Wallet Amount',
+                    render:function(data, type, row, meta){
+                        return (row.payment) ? `INR ${parseFloat(row.payment)}` : `INR 0.00`;
+                    }
+                },
+                {
                     data: 'mess_name',
                     name: 'Mess Name',
                     render:function(data, type, row, meta){
@@ -85,6 +94,13 @@
                 {
                     data: 'phone',
                     name: 'phone'
+                },
+                {
+                    data: 'subscription',
+                    name: 'Subscription',
+                    render:function(data, type, row, meta){
+                        return `<a href="${row.id}/manage-subscription" class="bg-primary text-white fs-12 lh-26 text-uppercase px-2 rounded-4 float-end">Refill</a>`;
+                    }
                 },
                 {
                     data: 'status',

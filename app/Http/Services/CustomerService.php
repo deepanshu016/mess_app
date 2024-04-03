@@ -85,10 +85,11 @@ class CustomerService {
     }
     public function save_subscription(Object $request){
         $common = new CommonService();
-        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         $customer = User::with(['customer_menu','payments'])->find($request->customer_id);
+        $messOwner = MessOwner::where('id',$customer->mess_id)->first();
         $wallet = $this->user_wallet_updatation($customer->id,'credit',$request->refill_amount);
         if($wallet){
+            $wallet->payment = ($wallet->payment) ? $wallet->payment : 0;
             $common->record_transaction($customer->id,$messOwner->id,'credit','REFILL','',$request->refill_amount,$wallet->payment);
         }
         return $customer;
@@ -162,6 +163,7 @@ class CustomerService {
         return $listData;
     }
     public function user_wallet_updatation($customer_id,$type,$amount){
+
         $user = User::find($customer_id);
         if($type == 'debit'){
             $user->decrement('payment', $amount);

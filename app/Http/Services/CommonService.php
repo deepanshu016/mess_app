@@ -24,6 +24,7 @@ class CommonService {
     }
 
     public function record_transaction($user_id,$mess_id,$transaction_type,$transaction_tag,$transaction_date,$amount,$balance){
+
         $transaction = Transaction::create(
             [
                 'user_id' => $user_id,

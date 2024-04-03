@@ -87,6 +87,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'customer'], function () {
             Route::get('/list', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('admin.customer.list');
             Route::get('/customer-list', [\App\Http\Controllers\Admin\CustomerController::class, 'list'])->name('admin.customer.datatables');
+            Route::get('{id}/manage-subscription', [SubscriptionController::class, 'manage_subscription'])->name('admin.customer.manage_subscription');
+            Route::post('/manage-subscription', [SubscriptionController::class, 'save_manage_subscription'])->name('admin.customer.save.subscription');
+
         });
         Route::group(['prefix' => 'news'], function () {
             Route::get('/create', [NewsController::class, 'add'])->name('admin.news.add');
@@ -149,6 +152,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::group(['prefix'=>'customer'], function () {
             Route::get('/create', [CustomerController::class, 'add'])->name('mess_owner.customer.create');
+            Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
             Route::get('/view-attendance', [CustomerController::class, 'viewAttendancePage'])->name('mess_owner.customer.view.attendance');
             Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('mess_owner.customer.view.transaction');
 

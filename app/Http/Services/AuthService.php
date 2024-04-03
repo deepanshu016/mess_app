@@ -28,6 +28,7 @@ class AuthService {
             $user->assignRole('MESS_OWNER');
         }else{
             $user->assignRole('CUSTOMER');
+            $user = $user->update(['mess_id'=>$request->mess_id]);
         }
         return $user;
     }
