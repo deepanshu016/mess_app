@@ -33,7 +33,7 @@
                 </p>
             </div>
             <h4>Apply for this Job</h4>
-            <form action="{{ route('apply.job') }}" method="post" id="applyForm">
+            <form action="{{ route('apply.job') }}" method="post" id="applyForm" enctype="multipart/form-data">
                 <div class="form-group">
                     <input class="form-control styled" type="text" name="name" placeholder="Enter name">
                     <input class="form-control styled" type="hidden" name="job_id" placeholder="Enter Name" value="{{ $singleJob->id }}">
@@ -43,6 +43,9 @@
                 </div>
                 <div class="form-group">
                     <input class="form-control styled" type="text" name="phone" placeholder="Enter Phone">
+                </div>
+                <div class="form-group">
+                    <input class="form-control styled" type="file" name="job_attachement" placeholder="Enter Phone">
                 </div>
                 <div class="form-group">
                     <textarea name="about" class="form-control styled" style="height:150px;" placeholder="About yourself"></textarea>

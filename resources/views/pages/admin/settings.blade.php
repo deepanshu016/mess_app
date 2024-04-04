@@ -79,6 +79,22 @@
                             <input type="text" class="form-control" name="gst" placeholder="GST Number" value="{{ @$setting->gst}}">
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Facebook Link</label>
+                            <input type="text" class="form-control" name="facebook_link" placeholder="Facebook Link" value="{{ @$setting->facebook_link}}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Instagram Link</label>
+                            <input type="text" class="form-control" name="instagram_link" placeholder="Instagram Link" value="{{ @$setting->instagram_link}}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Twitter Link</label>
+                            <input type="text" class="form-control" name="twitter_link" placeholder="Twitter Link" value="{{ @$setting->twitter_link}}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Google Link</label>
+                            <input type="text" class="form-control" name="google_link" placeholder="Google Link" value="{{ @$setting->google_link}}">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">About Us</label>
                             <textarea class="form-control" name="about_us"  placeholder="About Us" id="settings_about_us">{{ @$setting->about_us}}</textarea>
                         </div>
@@ -88,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Privacy Policy</label>
-                            <textarea class="form-control" name="privacy_policy"  placeholder="Privacy Policys" id="settings_privacy">{{ @$setting->privacy_policy}}</textarea>
+                            <textarea class="form-control" name="privacy_policy"  placeholder="Privacy Policy   " id="settings_privacy">{{ @$setting->privacy_policy}}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Return Refund</label>

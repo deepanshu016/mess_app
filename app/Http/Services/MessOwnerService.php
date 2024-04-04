@@ -4,6 +4,8 @@ namespace App\Http\Services;
 use App\Models\MessOwner;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
+
 class MessOwnerService {
 
     public function messOwner(){
@@ -34,12 +36,27 @@ class MessOwnerService {
         return $listData;
     }
     public function allMess($request,$order_by='',$limit=''){
-
         $food_type = explode(',',json_decode(json_encode($request->food_type),true));
         $page = $request->input('page');
-        $messOwner = MessOwner::with(['user','country','state','city']);
-        if($request->pincode){
-            $messOwner = $messOwner->where('pincode',$request->pincode);
+        $messOwner = MessOwner::with(['user', 'country', 'state', 'city']);
+        if($request->params){
+            $messOwner->where(function (Builder $query) use ($request) {
+                $pincode = $request->params;
+                // Match pincode
+                $query->orWhere('pincode', $pincode);
+                // Match country name
+                $query->orWhereHas('country', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+                // Match state name
+                $query->orWhereHas('state', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+                // Match city name
+                $query->orWhereHas('city', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+            });
         }
         if($request->food_type){
             $messOwner = $messOwner->whereIn('food_type',$food_type);
@@ -47,16 +64,31 @@ class MessOwnerService {
         if($order_by){
             $messOwner = $messOwner->orderBy('id',$order_by);
         }
-        // if($page){
-        //     $perPage = 1;
-        //     $offset = ($page - 1) * $perPage;
-        //     return $messOwner->skip($offset)->take($perPage)->get();
-        // }
         return $messOwner->paginate($limit);
     }
     public function totalMess($request,$food_type){
         $page = $request->input('page');
-        $messOwner = MessOwner::with(['user','country','state','city'])->where('food_type',$food_type);
+        $messOwner = MessOwner::with(['user','country','state','city']);
+        if($request->params){
+            $messOwner->where(function (Builder $query) use ($request) {
+                $pincode = $request->params;
+                // Match pincode
+                $query->orWhere('pincode', $pincode);
+                // Match country name
+                $query->orWhereHas('country', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+                // Match state name
+                $query->orWhereHas('state', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+                // Match city name
+                $query->orWhereHas('city', function (Builder $query) use ($pincode) {
+                    $query->where('name', 'like', "%$pincode%");
+                });
+            });
+        }
+        $messOwner = $messOwner->where('food_type',$food_type);
         if($request->pincode){
             $messOwner = $messOwner->where('pincode',$request->pincode);
         }

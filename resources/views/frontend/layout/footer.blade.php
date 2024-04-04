@@ -15,11 +15,6 @@
                     <li><a href="{{ route('faqs') }}">Faq</a></li>
                     <li><a href="{{ route('contact.us') }}">Contacts</a></li>
                     <li><a href="{{ route('job.list') }}">Career</a></li>
-                    <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
-                    {{-- <li><a href="#0" data-toggle="modal" data-target="#register">Register</a></li> --}}
-                    <li><a href="{{ route('login') }}">Admin Panel </a></li>
-                    <li><a href="{{ route('login') }}">Mess Panel </a></li>
-                    <li><a href="#0" data-toggle="modal" data-target="#mess_register_2">Mess Signup </a></li>
                 </ul>
             </div>
             <div class="col-md-3" id="newsletter">
@@ -37,39 +32,34 @@
                 </form>
             </div>
             <div class="col-md-2">
-                <h3>Settings</h3>
-                <div class="styled-select">
-                    <select name="lang" id="lang">
-                        <option value="English" selected>English</option>
-                        <option value="French">French</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="Russian">Russian</option>
-                    </select>
-                </div>
-                <div class="styled-select">
-                    <select name="currency" id="currency">
-                        <option value="USD" selected>USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="RUB">RUB</option>
-                    </select>
-                </div>
+                <h3>Important Links</h3>
+                <ul>
+                    <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
+                    <li><a href="{{ route('login') }}">Admin Panel </a></li>
+                    <li><a href="{{ route('login') }}">Mess Panel </a></li>
+                    <li><a href="#0" data-toggle="modal" data-target="#mess_register_2">Mess Signup </a></li>
+                </ul>
             </div>
         </div><!-- End row -->
         <div class="row">
             <div class="col-md-12">
                 <div id="social_footer">
                     <ul>
-                        <li><a href="#0"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#0"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#0"><i class="icon-google"></i></a></li>
-                        <li><a href="#0"><i class="icon-instagram"></i></a></li>
-                        <li><a href="#0"><i class="icon-pinterest"></i></a></li>
-                        <li><a href="#0"><i class="icon-vimeo"></i></a></li>
-                        <li><a href="#0"><i class="icon-youtube-play"></i></a></li>
+                        @if(setting() && isset(setting()->facebook_link))
+                            <li><a href="{{ setting()->facebook_link }}"><i class="icon-facebook"></i></a></li>
+                        @endif
+                        @if(setting() && isset(setting()->twitter_link))
+                            <li><a href="{{ setting()->twitter_link}}"><i class="icon-twitter"></i></a></li>
+                        @endif
+                        @if(setting() && isset(setting()->google_link))
+                            <li><a href="{{ setting()->google_link}}"><i class="icon-google"></i></a></li>
+                        @endif
+                        @if(setting() && isset(setting()->instagram_link))
+                            <li><a href="{{ setting()->instagram_link}}"><i class="icon-instagram"></i></a></li>
+                        @endif
                     </ul>
                     <p>
-                        © Quick Food 2023
+                        © FAMILY DHABA {{ date('Y')}}
                     </p>
                 </div>
             </div>

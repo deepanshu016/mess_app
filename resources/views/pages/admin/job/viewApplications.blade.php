@@ -21,6 +21,7 @@
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Attachment</th>
                                     <th>Application Date</th>
                                     <th>About</th>
                                     <th></th>
@@ -63,6 +64,17 @@
                     name: 'Email',
                     render:function(data, type, row, meta){
                         return row.email;
+                    }
+                },
+                {
+                    data: 'attachement',
+                    name: 'Attachement',
+                    render:function(data, type, row, meta){
+                        if(row.medias){
+                            return `<a href="${row.medias}" download>${row.media[0].uuid}</a>`;
+                        }else{
+                            return 'Not uploaded';
+                        }
                     }
                 },
                 {

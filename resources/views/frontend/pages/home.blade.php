@@ -112,142 +112,6 @@
                 </div>
                 @endforeach
             @endif
-            {{-- <div class="col-lg-6">
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>Taco Mexican</h3>
-                        <div class="type">
-                            Mexican / American
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant_2.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>Naples Pizza</h3>
-                        <div class="type">
-                            Italian / Pizza
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant_3.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>Japan Food</h3>
-                        <div class="type">
-                            Sushi / Japanese
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-            </div><!-- End col-md-6-->
-            <div class="col-lg-6">
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant_4.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>Sushi Gold</h3>
-                        <div class="type">
-                            Sushi / Japanese
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_close_alt2 no"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant_5.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>Dragon Tower</h3>
-                        <div class="type">
-                            Chinese / Thai
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-                <a href="detail_page.html" class="strip_list">
-                    <div class="ribbon_1">Popular</div>
-                    <div class="desc">
-                        <div class="thumb_strip">
-                            <img src="{{ asset('/') }}site/img/thumb_restaurant_6.jpg" alt="">
-                        </div>
-                        <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                        </div>
-                        <h3>China Food</h3>
-                        <div class="type">
-                            Chinese / Vietnam
-                        </div>
-                        <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                        </div>
-                        <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                        </ul>
-                    </div><!-- End desc-->
-                </a><!-- End strip_list-->
-            </div> --}}
         </div><!-- End row -->
     </div><!-- End container -->
 </div>
@@ -328,20 +192,32 @@
         </p>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-5">
-            <a class="box_work" href="submit_restaurant.html">
+        <div class="col-md-4">
+            <a class="box_work" href="#">
                 <img src="{{ asset('/') }}site/img/submit_restaurant.jpg" width="848" height="480" alt="" class="img-fluid">
                 <h3>Submit your Mess<span>Start to earn customers</span></h3>
                 <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
-                <div class="btn_1">Read more</div>
+                <a href="#0" data-toggle="modal" data-target="#mess_register_2"><div class="btn_1">Become a Mess Owner</div></a>
             </a>
         </div>
-        <div class="col-md-5">
-            <a class="box_work" href="submit_driver.html">
+        <div class="col-md-4">
+            <a class="box_work" href="#">
                 <img src="{{ asset('/') }}site/img/delivery.jpg" width="848" height="480" alt="" class="img-fluid">
                 <h3>We are looking for a Driver<span>Start to earn money</span></h3>
                 <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
                 <div class="btn_1">Read more</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a class="box_work" href="#">
+                <img src="{{ asset('/') }}site/img/delivery.jpg" width="848" height="480" alt="" class="img-fluid">
+                <h3>We are looking for a Driver<span>Start to earn money</span></h3>
+                <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
+                @if(Auth::user() && Auth::user()->hasRole('CUSTOMER'))
+                    <a href="{{ route('view.profile') }}"><div class="btn_1">Profile</div></a>
+                @else
+                    <a href="#0" data-toggle="modal" data-target="#login_2"><div class="btn_1">Book a Mess</div></a>
+                @endif
             </a>
         </div>
     </div><!-- End row -->
@@ -353,14 +229,24 @@
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up.min.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up_func.js"></script>
 <script>
+    $("body").on('keypress','#pincode',function(event) {
+        if (event.which === 13) {
+
+        alert("Hello");
+            filterMess();
+        }
+    });
     $("body").on("click",'.btn_search',function(e){
         e.preventDefault();
+        filterMess();
+    });
+    function filterMess(){
         var pincode = $("#pincode").val();
         if(pincode){
-            window.location = "{{ url('mess-list') }}"+'?pincode='+pincode;
+            window.location = "{{ url('mess-list') }}"+'?params='+pincode;
         }else{
             return false;
         }
-    });
+    }
 </script>
 @endsection

@@ -24,8 +24,6 @@
                         <input type="password" class="form-control" name="password" placeholder="Type Password" @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
                     </div>
                     <button type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Login</button>
-                    <a href="{{ route('register') }}" class="btn btn-secondary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold">Create an Account</a>
-                    <a href="{{ route('become_mess_owner') }}" class="btn btn-success w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold">Become a Mess Owner</a>
                 </form>
             </div>
         </div>

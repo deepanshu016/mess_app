@@ -28,7 +28,7 @@
             @if(!empty($blogList))
             @foreach($blogList as $blog)
             <div class="post">
-                <a href="blog_post.html">
+                <a href="#">
                     @if(!empty($blog) && isset($blog->getMedia("BLOG_IMAGE")[0]))
                         <img src="{{ asset('public/media/').'/'.$blog->getMedia("BLOG_IMAGE")[0]->id.'/'.$blog->getMedia("BLOG_IMAGE")[0]->file_name }}" class="img-fluid">
                     @else

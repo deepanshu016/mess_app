@@ -27,6 +27,10 @@
                             <input type="text" class="form-control" name="vacant_seat" placeholder="Vacant Seats" value="{{ @$job->vacant_seat}}">
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Attachement <span class="text-danger">*</span></label>
+                            <input type="file" class="form-control" name="vacant_seat" placeholder="Vacant Seats" value="{{ @$job->vacant_seat}}">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Description<span class="text-danger">*</span></label>
                             <textarea class="form-control full_description" id="answer" name="description" rows="4" cols="50" placeholder="Description">{{ @$job->description}}</textarea>
                         </div>

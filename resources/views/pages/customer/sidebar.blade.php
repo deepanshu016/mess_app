@@ -127,7 +127,7 @@
                         <div class="col-4">
                             <div class="form-check form-check-inline with-layout-image m-0">
                                 <label class="form-label mb-0">
-                                <a href="index.html" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
                                         <span class="d-inline-block mb-2">
                                             <img class="light-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/vertical-light.png" alt="img">
                                             <img class="dark-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/vertical-dark.png" alt="img">
@@ -140,7 +140,7 @@
                         <div class="col-4">
                             <div class="form-check form-check-inline with-layout-image m-0">
                                 <label class="form-label mb-0">
-                                <a href="index-horizontal.html" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
                                         <span class="d-inline-block mb-2">
                                             <img class="light-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/horizontal-light.png" alt="img">
                                             <img class="dark-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/horizontal-dark.png" alt="img">
@@ -153,7 +153,7 @@
                         <div class="col-4">
                             <div class="form-check form-check-inline with-layout-image m-0">
                                 <label class="form-label mb-0">
-                                <a href="index-combo.html" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="fs-14 fw-semibold text-dark">
                                         <span class="d-inline-block mb-2">
                                             <img class="light-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/combo-light.png" alt="img">
                                             <img class="dark-version img-fluid rounded-1" src="{{ asset('/') }}frontend/assets/img/customizer/combo-dark.png" alt="img">

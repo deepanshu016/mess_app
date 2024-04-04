@@ -40,6 +40,7 @@
                             <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('both',this)">Both <small>({{ @$totalBothMess}})</small></label></li>
                             <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('veg',this)">Veg <small>({{ @$totalVegMess}})</small></label><i class="color_1"></i></li>
                             <li><label><input type="checkbox" class="icheck food_type_filter" onClick="filterFoodType('non_veg',this)">Non-Veg <small>({{ @$totalNonVegMess}})</small></label><i class="color_2"></i></li>
+                            <li><label><input type="hidden" class="pincode" id="pincode"  value="{{ @$params}}"></li>
                         </ul>
                     </div>
                     {{-- <div class="filter_type">
@@ -75,23 +76,6 @@
             </div><!--End filters col-->
         </div><!--End col-md -->
         <div class="col-lg-9">
-            {{-- <div id="tools">
-                <div class="row">
-                    <div class="col-md-3 col-sm-4 col-5">
-                        <div class="styled-select">
-                            <select name="sort_rating" id="sort_rating">
-                                <option value="" selected>Sort by ranking</option>
-                                <option value="lower">Lowest ranking</option>
-                                <option value="higher">Highest ranking</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-9 col-sm-8 col-7">
-                        <a href="grid_list.html" class="bt_filters"><i class="icon-th"></i></a>
-                    </div>
-                </div>
-            </div> --}}
-            <!--End tools -->
             <div class="mess-wrapper"></div>
             <div class="load-more-wrapper"></div>
         </div>
@@ -133,8 +117,10 @@
 
     function infiniteLoadMore(page,action_type = '') {
         removeKeyFromFormData(formData, 'page');
+        var pincode = $("#pincode").val();
         var url = "{{ url('load-more-mess') }}";
         formData.append('page',page);
+        formData.append('params',pincode);
         CommonLib.ajaxForm(formData,'POST',url).then(d=>{
             if(d.status === 200){
                 if(action_type !== 'filter'){

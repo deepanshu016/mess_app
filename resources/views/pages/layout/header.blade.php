@@ -119,7 +119,7 @@
 
     <div class="small-header d-flex align-items-center justify-content-between d-xl-none">
         <div class="logo">
-            <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
+            <a href="#" class="d-flex align-items-center gap-3 flex-shrink-0">
                 <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
                 <div class="position-relative flex-shrink-0">
                     <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">
@@ -231,9 +231,6 @@
                                             <li>
                                                 <a href="{{ route('user.profile') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-person me-2"></i> Profile</a>
                                             </li>
-                                            <li >
-                                                <a href="email.html" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-envelope me-2 "></i> Inbox</a>
-                                            </li>
                                             <li>
                                                 <a href="{{route('settings') }}" class="fs-14 fw-normal text-dark d-block p-1"><i class="bi bi-gear me-2"></i> Setting & Privacy</a>
                                             </li>
@@ -259,7 +256,7 @@
         <div class="d-flex align-items-center justify-content-around justify-content-xl-between flex-wrap flex-xl-nowrap gap-3 gap-xl-5">
             <div class="d-flex align-items-center gap-7">
                 <div class="logo">
-                    <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
+                    <a href="#" class="d-flex align-items-center gap-3 flex-shrink-0">
                         <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
                         <div class="position-relative flex-shrink-0">
                             <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">
@@ -273,7 +270,7 @@
 
                         <li class="menu-item menu-item-has-children"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-16"></i></span> <span class="nav-text">Dashboards</span></a>
                             <ul class="sub-menu">
-                                <li class="menu-item"><a href="index.html">Invoice Management</a></li>
+                                <li class="menu-item"><a href="#">Invoice Management</a></li>
                                 <li class="menu-item"><a href="index-hr.html">HR Management</a></li>
                                 <li class="menu-item"><a href="index-job-hiring.html">Job Hiring Management</a></li>
                                 <li class="menu-item"><a href="index-project.html">Project Management v1</a></li>
@@ -717,7 +714,7 @@
 
     <div class="small-header d-flex align-items-center justify-content-between d-xl-none">
         <div class="logo">
-            <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
+            <a href="#" class="d-flex align-items-center gap-3 flex-shrink-0">
                 <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
                 <div class="position-relative flex-shrink-0">
                     <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">
@@ -1002,7 +999,7 @@
 
                         <li class="menu-item menu-item-has-children"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-speedometer fs-16"></i></span> <span class="nav-text">Dashboards</span></a>
                             <ul class="sub-menu">
-                                <li class="menu-item"><a href="index.html">Invoice Management</a></li>
+                                <li class="menu-item"><a href="#">Invoice Management</a></li>
                                 <li class="menu-item"><a href="index-hr.html">HR Management</a></li>
                                 <li class="menu-item"><a href="index-job-hiring.html">Job Hiring Management</a></li>
                                 <li class="menu-item"><a href="index-project.html">Project Management v1</a></li>
@@ -1395,7 +1392,7 @@
 
     <div class="small-header d-flex align-items-center justify-content-between d-xl-none">
         <div class="logo">
-            <a href="index.html" class="d-flex align-items-center gap-3 flex-shrink-0">
+            <a href="#" class="d-flex align-items-center gap-3 flex-shrink-0">
                 <img src="{{ asset('/') }}frontend/assets/img/logo-icon.svg" alt="logo">
                 <div class="position-relative flex-shrink-0">
                     <img src="{{ asset('/') }}frontend/assets/img/logo-text.svg" alt="" class="logo-text">

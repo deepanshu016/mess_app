@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 Class AuthController extends Controller {
+
     public function __construct()
     {
-
+        // $this->middleware('guest')->except('logout');
     }
 
     public function register(Request $request)
@@ -52,8 +53,10 @@ Class AuthController extends Controller {
         }
         return view('pages.profile',compact('user','messOwner','countries','states','cities'));
     }
-    public function loginAsGuestLogin($user_id)
+    public function loginAsGuestLogin($user_id,Request $request)
     {
+        $user = User::find(auth()->user()->id);
+        $request->session()->invalidate();
         $auth = Auth::loginUsingId($user_id);
         return redirect(route('mess_owner.dashboard'))->with('success','Loggedin successfully !!!');
     }

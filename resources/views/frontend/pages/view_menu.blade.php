@@ -6,7 +6,7 @@
     <div id="subheader">
         <div id="sub_content">
             <div id="thumb"><img src="{{ ($singleMess->logo) ? $singleMess->logo : asset('site/Frame-5.avif') }}" alt=""></div>
-            <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="detail_page_2.html">Read 98 reviews</a></small>)</div>
+            <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#">Read 98 reviews</a></small>)</div>
             <h1>{{ $singleMess->mess_name }}</h1>
             <div><em>{{ $singleMess->food_type }}</em></div>
             <div><i class="icon_pin"></i> {{ $singleMess->address }},{{ $singleMess->city->name }}, {{ $singleMess->state->name }}, {{ $singleMess->country->name }},{{ $singleMess->pincode }}

@@ -41,10 +41,11 @@ class HomeController extends Controller
         $service = new MessOwnerService();
         $banner = new BannerService(Banner::class);
         $data['bannerList'] = $banner->getAll();
-        $data['messList'] = $service->allMess($request,'',1);
+        $data['messList'] = $service->allMess($request,'',10);
         $data['totalVegMess'] = $service->totalMess($request,'veg');
         $data['totalNonVegMess'] = $service->totalMess($request,'non_veg');
         $data['totalBothMess'] = $service->totalMess($request,'both');
+        $data['params'] = $request->params;
         return view('frontend.pages.mess_list',$data);
     }
     public function blogList(Request $request)
@@ -85,13 +86,13 @@ class HomeController extends Controller
         $service = new BannerService(ApplyJob::class);
         $banner = new BannerService(Banner::class);
         $data['bannerList'] = $banner->getAll();
-        $service = $service->store($request);
+        $service = $service->store($request,'job_attachement','JOB_ATTACHEMENT');
         return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('job.list') : '']);
     }
     public function loadMoreMess(Request $request)
     {
         $service = new MessOwnerService();
-        $messList = $service->allMess($request,'DESC',1);
+        $messList = $service->allMess($request,'DESC',10);
         $html = View::make('frontend.common.mess_list',compact('messList'))->render();
         $html2 = '';
         if($messList->currentPage() < $messList->lastPage()){

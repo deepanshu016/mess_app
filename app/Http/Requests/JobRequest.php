@@ -53,7 +53,8 @@ class JobRequest extends FormRequest
             'name' => 'required',
             'phone' => 'required|integer',
             'email' => 'required|email',
-            'about' => 'required'
+            'about' => 'required',
+            'job_attachement' => 'image|mimes:jpeg,png,jpg,pdf|max:2048',
         ];
     }
     public function updateJobRules(){
