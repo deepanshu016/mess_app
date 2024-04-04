@@ -31,7 +31,7 @@
             <div class="col-xl-12 col-lg-12">
                 <h3 class="nomargin_top">Some words about us</h3>
                 <p>
-                    {!! setting()->about_us !!}
+                    {!! (setting()) ?  setting()->about_us : '' !!}
                 </p>
             </div>
         </div><!-- End row -->

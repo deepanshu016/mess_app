@@ -29,21 +29,21 @@
             	<div class="box_style_2">
                 	<h2 class="inner">Customer service</h2>
                     <p class="add_bottom_30">Adipisci conclusionemque ea duo, quo id fuisset prodesset, vis ea agam quas. <strong>Lorem iisque periculis</strong> id vis, no eum utinam interesset. Quis voluptaria id per, an nibh atqui vix. Mei falli simul nusquam te.</p>
-                    <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i> {!! ' +91'.setting()->mobile_no !!}</a></p>
-                    <p class="nopadding"><a href="mailto:customercare@quickfood.com"><i class="icon-mail-3"></i> {!! setting()->email !!}</a></p>
+                    <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i> {!! (setting()) ? ' +91'.setting()->mobile_no : '' !!}</a></p>
+                    <p class="nopadding"><a href="mailto:customercare@quickfood.com"><i class="icon-mail-3"></i> {!! (setting()) ? setting()->email : '' !!}</a></p>
                 </div>
         	</div>
             <div class="col-md-6">
             	<div class="box_style_2">
                 	<h2 class="inner">Restaurant Support</h2>
                     <p class="add_bottom_30">Quo ex rebum petentium, cum alia illud molestiae in, pro ea paulo gubergren. Ne case constituto pro, ex vis delenit complectitur, per ad <strong>everti timeam</strong> conclusionemque. Quis voluptaria id per, an nibh atqui vix.</p>
-                    <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i> {!! ' +91'.setting()->mobile_no !!}</a></p>
-                    <p class="nopadding"><a href="mailto:customercare@quickfood.com"><i class="icon-mail-3"></i> {!! setting()->email !!}</a></p>
+                    <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i> {!! (setting()) ? ' +91'.setting()->mobile_no : '' !!}</a></p>
+                    <p class="nopadding"><a href="mailto:customercare@quickfood.com"><i class="icon-mail-3"></i> {!!(setting()) ?  setting()->email : '' !!}</a></p>
                 </div>
         	</div>
         </div><!-- End row -->
     </div><!-- End container -->
-    @if(!empty($bannerList))
+    @if(!$bannerList->isEmpty())
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             @foreach($bannerList as $key=>$banner)
