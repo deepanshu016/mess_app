@@ -97,7 +97,7 @@ class MessOwnerService {
             $mess_owner->clearMediaCollection('MESS_QR_CODE');
             $mess_owner->addMedia($request->file('qr_code'))->storingConversionsOnDisk('local')->toMediaCollection('MESS_QR_CODE');
         }
-        $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone,'status'=>$request->status]);
+        // $user->update(['name'=>$request->mess_owner_name,'email'=>$request->email,'phone'=>$request->phone,'status'=>$request->status]);
         return MessOwner::with('user')->find($request->mess_owner_id);
     }
     public function delete($id){
