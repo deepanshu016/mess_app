@@ -91,6 +91,10 @@
                             <input type="text" class="form-control" name="twitter_link" placeholder="Twitter Link" value="{{ @$setting->twitter_link}}">
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Referral Fees</label>
+                            <input type="text" class="form-control" name="referral_fees" placeholder="Referral Fees" value="{{ @$setting->referral_fees}}">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Google Link</label>
                             <input type="text" class="form-control" name="google_link" placeholder="Google Link" value="{{ @$setting->google_link}}">
                         </div>

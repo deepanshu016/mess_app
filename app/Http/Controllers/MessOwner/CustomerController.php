@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\CustomerService;
 use App\Http\Services\CommonService;
+use App\Http\Services\MessOwnerService;
+use App\Http\Services\AuthService;
 use App\Http\Requests\AddCustomerRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
@@ -107,5 +109,18 @@ class CustomerController extends Controller
         }catch(\Exception $e){
             return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
         }
+    }
+    public function referAndEarnPage(Request $request)
+    {
+        $auth = new AuthService();
+        $user = $auth->getProfile();
+        return view('frontend.pages.refer_and_earn',compact('user'));
+    }
+    public function registerViaRefer(Request $request)
+    {
+        $service = new MessOwnerService();
+        $referral_code = $request->referral_code;
+        $messList = $service->allMess($request,'DESC',100);
+        return view('frontend.pages.register_via_refer',compact('referral_code','messList'));
     }
 }

@@ -33,7 +33,7 @@ class HomeController extends Controller
         $data['total_customer'] = $customer->getAllCustomer();
         $data['bannerList'] = $banner->getAll();
         $data['total_people_served'] = $payment->totalPeopleServed();
-        $data['messList'] = $service->allMess($request,'DESC',6);
+        $data['messList'] = $service->allMess($request,'DESC',100);
         return view('frontend.pages.home',$data);
     }
     public function messList(Request $request)

@@ -29,7 +29,8 @@ class Settings extends Model implements HasMedia
         'terms_condition',
         'privacy_policy',
         'return_refund',
-        'analytics_code'
+        'analytics_code',
+        'referral_fees'
     ];
 
 }

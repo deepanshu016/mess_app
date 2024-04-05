@@ -19,7 +19,6 @@
             <li><a href="{{ route('home') }}">Home</a></li>
             <li>Profile Page</li>
         </ul>
-        <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
 </div><!-- Position -->
 

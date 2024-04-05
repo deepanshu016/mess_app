@@ -203,9 +203,13 @@
         <div class="col-md-4">
             <a class="box_work" href="#">
                 <img src="{{ asset('/') }}site/img/delivery.jpg" width="848" height="480" alt="" class="img-fluid">
-                <h3>We are looking for a Driver<span>Start to earn money</span></h3>
+                <h3>Refer and Earn <span>Start to earn money</span></h3>
                 <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
-                <div class="btn_1">Read more</div>
+                @if(Auth::user() && Auth::user()->hasRole('CUSTOMER'))
+                    <a href="{{ route('customer.refer.earn') }}"><div class="btn_1">Refer & Earn</div></a>
+                @else
+                    <a href="#0" data-toggle="modal" data-target="#login_2"><div class="btn_1">Book a Mess</div></a>
+                @endif
             </a>
         </div>
         <div class="col-md-4">
@@ -225,14 +229,11 @@
 <!-- End container -->
 @endsection
 @section('page_script')
-
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up.min.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}site/js/pop_up_func.js"></script>
 <script>
     $("body").on('keypress','#pincode',function(event) {
         if (event.which === 13) {
-
-        alert("Hello");
             filterMess();
         }
     });

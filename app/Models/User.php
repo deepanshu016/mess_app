@@ -28,6 +28,9 @@ class User extends Authenticatable implements HasMedia
         'mess_id',
         'payment',
         'subscription_starts_at',
+        'referral_code',
+        'parent_id',
+        'is_referred',
         'status'
     ];
 

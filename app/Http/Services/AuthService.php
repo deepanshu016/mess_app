@@ -28,7 +28,14 @@ class AuthService {
             $user->assignRole('MESS_OWNER');
         }else{
             $user->assignRole('CUSTOMER');
-            $user = $user->update(['mess_id'=>$request->mess_id]);
+            $referral_code = 'FD'.$user->id.date('Y');
+            if($request->referral_code){
+                $referrelDetail = User::where('referral_code',$request->referral_code)->first();
+                $parent_id = $referrelDetail->id;
+            }else{
+                $parent_id =  NULL;
+            }
+            $user = $user->update(['mess_id'=>$request->mess_id,'referral_code'=>$referral_code,'parent_id'=>$parent_id]);
         }
         return $user;
     }

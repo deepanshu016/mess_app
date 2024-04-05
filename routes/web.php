@@ -58,6 +58,8 @@ Route::post('/check-login', [AuthController::class, 'login'])->name('check.login
 Route::post('/user-signup', [AuthController::class, 'registration'])->name('user.signup');
 Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
 Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
+Route::get('/customer/register-via-refer', [CustomerController::class, 'registerViaRefer'])->name('register.via.referral');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
     Route::get('/user-profile', [HomeController::class,'profile'])->name('view.profile');
@@ -155,7 +157,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/get-list', [CustomerController::class, 'list'])->name('mess_owner.customer.datatables');
             Route::get('/view-attendance', [CustomerController::class, 'viewAttendancePage'])->name('mess_owner.customer.view.attendance');
             Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('mess_owner.customer.view.transaction');
-
             Route::get('/list', [CustomerController::class, 'index'])->name('mess_owner.customer.list');
             Route::post('/create', [CustomerController::class, 'save'])->name('mess_owner.customer.save');
             Route::post('/filter-attendance', [CustomerController::class, 'filterTransaction'])->name('mess_owner.customer.filter.transaction');
@@ -192,6 +193,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/settings', [SettingsController::class, 'index'])->name('customer.settings');
         Route::get('/transaction', [CustomerController::class, 'viewTransaction'])->name('customer.view.transaction');
         Route::post('/filter-attendance', [CustomerController::class, 'filterTransaction'])->name('customer.filter.transaction');
+        Route::get('/refer-earn', [CustomerController::class, 'referAndEarnPage'])->name('customer.refer.earn');
         Route::group(['prefix'=>'request'], function () {
             Route::get('/create', [RequestController::class, 'add'])->name('customer.request.create');
             Route::get('/get-list', [RequestController::class, 'list'])->name('customer.request.datatables');
@@ -204,7 +206,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/list', [PaymentController::class, 'index'])->name('customer.payment.request.list');
             Route::post('/create', [PaymentController::class, 'save'])->name('customer.payment.request.save');
         });
-
         Route::group(['prefix'=>'menu'], function () {
             Route::get('/create', [MenuController::class, 'mark_day'])->name('customer.menu.mark_day');
             Route::get('/get-list', [MenuController::class, 'markDays'])->name('customer.menu.mark_day.datatables');

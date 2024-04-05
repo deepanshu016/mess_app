@@ -8,6 +8,7 @@ use App\Models\Complain;
 use App\Models\User;
 use App\Http\Services\CustomerService;
 use App\Http\Services\CommonService;
+use App\Models\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -55,13 +56,24 @@ class PaymentService {
     }
     public function update(Object $request){
         $payment = Payment::find($request->payment_id);
+        $paymentCheckCount = Payment::where('user_id',$payment->user_id)->whereStatus('accept')->count();
+        $userDetails = User::find($payment->user_id);
+        $parentData = User::find($userDetails->parent_id);
         $result = $payment->update(['status'=>$request->status,'notes'=>$request->notes]);
         $customer = new CustomerService();
         $common = new CommonService();
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         $wallet = $customer->user_wallet_updatation($payment->user_id,'credit',$payment->amount);
+
         if($wallet){
             $common->record_transaction($payment->user_id,$messOwner->id,'credit','REFILL','',$payment->amount,$wallet->payment);
+        }
+        if($paymentCheckCount == 0){
+            $settings = setting();
+            $wallets = $customer->user_wallet_updatation($parentData->id,'credit',$settings->referral_fees);
+            if($wallet){
+                $common->record_transaction($parentData->id,$messOwner->id,'credit','REFERRAL_MONEY','',$settings->referral_fees,$wallets->payment);
+            }
         }
         return $payment;
     }

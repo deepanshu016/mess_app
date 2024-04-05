@@ -9,13 +9,13 @@ class SettingsService {
         return $setting;
     }
     public function store(Object $request){
-        $settings =  Settings::find(1);
+        $settings =  Settings::first();
         if(!$settings){
             $settings = Settings::create($request->toArray());
         }else{
             $settings = $settings->update($request->toArray());
         }
-        $settings =  Settings::find(1);
+        $settings =  Settings::first();
         if($request->hasFile('site_logo') && $request->file('site_logo')->isValid()){
             $settings->clearMediaCollection('SITE_LOGO');
             $settings->addMedia($request->file('site_logo'))->storingConversionsOnDisk('local')->toMediaCollection('SITE_LOGO');
@@ -28,7 +28,6 @@ class SettingsService {
             $settings->clearMediaCollection('SITE_FAVICON');
             $settings->addMedia($request->file('site_favicon'))->storingConversionsOnDisk('local')->toMediaCollection('SITE_FAVICON');
         }
-
         return $settings;
     }
  }
