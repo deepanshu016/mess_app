@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
@@ -66,6 +67,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
+        Route::group(['prefix'=>'roles'],function(){
+            Route::get('/roles', [RolesController::class, 'index'])->name('roles.index');
+            Route::get('/roles-list', [RolesController::class, 'list'])->name('admin.roles.list.datatables');
+            Route::get('/create', [RolesController::class, 'create'])->name('admin.role.create');
+            Route::post('/create', [RolesController::class, 'save'])->name('admin.role.save');
+            Route::get('/{role_id}/edit', [RolesController::class, 'edit'])->name('admin.role.edit');
+            Route::post('/update', [RolesController::class, 'update'])->name('admin.role.update');
+            Route::delete('/{role_id}/delete', [RolesController::class, 'delete'])->name('admin.role.delete');
+            Route::get('/{role_id}/roles-premission', [RolesController::class, 'rolePermission'])->name('admin.role.permission');
+            Route::post('/update-roles-premission', [RolesController::class, 'updateRolePermission'])->name('admin.role.permission.update');
+
+        });
+
+
 
         Route::group(['prefix' => 'mess-owner'], function () {
             Route::get('/create', [MessOwnerController::class, 'add'])->name('admin.mess_owner.add');
