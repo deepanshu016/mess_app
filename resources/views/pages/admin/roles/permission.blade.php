@@ -30,7 +30,7 @@
                             @foreach($permission as $value)
                                 <div class="col-3">
                                     <label>
-                                        <input type="checkbox" name='permission[]' value="{{$value->id}}"  {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
+                                        <input type="checkbox" name='permission[]' value="{{$value->name}}"  {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
                                         {{ $value->name }}
                                     </label>
                                 </div>

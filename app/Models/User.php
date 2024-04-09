@@ -14,6 +14,8 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements HasMedia
 {
     use HasRoles, HasApiTokens, Notifiable,InteractsWithMedia;
+    protected $guard_name = 'web';
+
 
     /**
      * The attributes that are mass assignable.

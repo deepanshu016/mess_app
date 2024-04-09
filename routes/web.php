@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MessOwnerController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessOwner\CustomerController;
@@ -60,6 +61,9 @@ Route::post('/user-signup', [AuthController::class, 'registration'])->name('user
 Route::post('/get-state-list',[CommonController::class, 'getStateList'])->name('get.state.list');
 Route::post('/get-city-list',[CommonController::class, 'getCityList'])->name('get.city.list');
 Route::get('/customer/register-via-refer', [CustomerController::class, 'registerViaRefer'])->name('register.via.referral');
+Route::post('/get-country', [UsersController::class, 'getCountries'])->name('get.countries');
+Route::post('/get-states', [UsersController::class, 'getStates'])->name('get.states');
+Route::post('/get-cities', [UsersController::class, 'getCities'])->name('get.cities');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
@@ -67,7 +71,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
-
         Route::group(['prefix'=>'roles'],function(){
             Route::get('/roles', [RolesController::class, 'index'])->name('roles.index');
             Route::get('/roles-list', [RolesController::class, 'list'])->name('admin.roles.list.datatables');
@@ -78,10 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/{role_id}/delete', [RolesController::class, 'delete'])->name('admin.role.delete');
             Route::get('/{role_id}/roles-premission', [RolesController::class, 'rolePermission'])->name('admin.role.permission');
             Route::post('/update-roles-premission', [RolesController::class, 'updateRolePermission'])->name('admin.role.permission.update');
-
         });
-
-
 
         Route::group(['prefix' => 'mess-owner'], function () {
             Route::get('/create', [MessOwnerController::class, 'add'])->name('admin.mess_owner.add');
@@ -92,6 +92,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/update', [MessOwnerController::class, 'update'])->name('admin.mess_owner.update');
             Route::delete('{id}/delete', [MessOwnerController::class, 'delete'])->name('admin.mess_owner.delete');
             Route::get('{user_id}/guest-login', [AuthController::class, 'loginAsGuestLogin'])->name('guest.login');
+        });
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/create', [UsersController::class, 'add'])->name('admin.users.add');
+            Route::get('/get-list', [UsersController::class, 'list'])->name('admin.users.datatables');
+            Route::get('/list', [UsersController::class, 'index'])->name('admin.users.list');
+            Route::post('/create', [UsersController::class, 'save'])->name('admin.users.save');
+            Route::get('/{owner_id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
+            Route::post('/update', [UsersController::class, 'update'])->name('admin.users.update');
+            Route::delete('{id}/delete', [UsersController::class, 'delete'])->name('admin.users.delete');
         });
         Route::group(['prefix' => 'banner'], function () {
             Route::get('/create', [BannerController::class, 'add'])->name('admin.banner.add');

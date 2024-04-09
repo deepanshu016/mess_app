@@ -23,6 +23,13 @@
                         </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
+                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'users') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Users</span></a>
+                        <ul class="sub-menu">
+                            <li class="menu-item {{ (Request::segment(2) == 'users' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.users.add') }}"> Add New</a></li>
+                            <li class="menu-item {{ (Request::segment(2) == 'users' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.users.list') }}"> List</a></li>
+                        </ul>
+                        <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
+                    </li>
                     <li class="menu-item {{ (Request::segment(2) == 'customer') ? 'active' : ''}}"><a href="{{ route('admin.customer.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Customers</span></a></li>
 
                     <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Advertisement</span></a>
