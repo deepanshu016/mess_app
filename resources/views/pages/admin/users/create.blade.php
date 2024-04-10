@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="card-body pt-3">
-                    <form id="bannerForm" method="POST" action="{{ (empty($user)) ? route('admin.users.save') : route('admin.users.update') }}" enctype="multipart/form-data">
+                    <form id="userForm" method="POST" action="{{ (empty($user)) ? route('admin.users.save') : route('admin.users.update') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Name <span class="text-danger">*</span></label>
@@ -30,6 +30,7 @@
                             <label class="form-label">Phone <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{ @$user->phone }}">
                         </div>
+                        @if(empty($user))
                         <div class="form-group">
                             <label class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" name="password" placeholder="Password">
@@ -38,6 +39,7 @@
                             <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
                         </div>
+                        @endif
                         <div class="form-group">
                             <label class="form-label">Photo <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="user_image" accept="images/*">
@@ -45,20 +47,21 @@
                                 <img src="{{ asset('public/media/').'/'.$user->getMedia("USER_IMAGE")[0]->id.'/'.$user->getMedia("USER_IMAGE")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
+                        @if(empty($user))
                         <div class="form-group">
                             <label class="form-label">Roles</label>
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="role">
                                 <option value="">Select Role</option>
                                 @if(!empty($roleList))
                                     @foreach($roleList as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->name }}" {{ ($user->roles[0]->pivot->role_id === $role->id) ? 'selected' : ''}}>{{ $role->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Level Type</label>
-                            <select class="form-control level_type" name="status">
+                            <select class="form-control level_type" name="level_type">
                                 <option value="">Select Level Type</option>
                                 <option value="country" {{ (isset($user) && ($user->status  == 'country')) ? 'selected' : ''}}>Country</option>
                                 <option value="state" {{ (isset($user) && ($user->status  == 'state')) ? 'selected' : ''}}>State</option>
@@ -68,6 +71,7 @@
                         <div class="form-group country-wrapper"></div>
                         <div class="form-group state-wrapper"></div>
                         <div class="form-group city-wrapper"></div>
+                        @endif
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ (isset($banner)) ? 'Update' : 'Save' }}</button>
                         </div>
@@ -80,11 +84,11 @@
 @section('page_scripts')
 <script>
     $(function(){
-        $("body").on('submit','#bannerForm',function(e){
+        $("body").on('submit','#userForm',function(e){
             e.preventDefault();
             const url = $(this).attr('action');
             const method = $(this).attr('method');
-            var formData = $('#bannerForm')[0];
+            var formData = $('#userForm')[0];
             formData = new FormData(formData);
             CommonLib.ajaxForm(formData,method,url).then(d=>{
                 if(d.status === 200){
@@ -106,13 +110,11 @@
             const url = "{{ route('get.countries') }}";
             CommonLib.ajaxForm(formData,'POST',url).then(d=>{
                 if(d.status === 200){
-                    var class_name = (level_type == 'state' || level_type == 'city') ? 'get-states' : '';
-                    var html =`<label class="form-label">Country</label><select class="form-control ${class_name}" name="country">`;
-                    $.each(d.data,function(item){
-                        html += '<option value="'+ this.id +'">'+ this.name+'</option>';
-                    })
-                    html += '</select>';
-                    $(".country-wrapper").html(html);
+                    if(level_type === 'country'){
+                       showMultipleCountryList(d.data);
+                    }else{
+                       showSingleCountryList(d.data);
+                    }
                 }else{
                     CommonLib.notification.error(d.msg);
                 }
@@ -168,6 +170,28 @@
                 CommonLib.notification.error(e.responseJSON.errors);
             });
         });
+        function showMultipleCountryList(data){
+            var html =`<label class="form-label">Countries</label><select class="form-control countries" name="country_id[]"  multiple="multiple" placeholder="Select Multiple Countries">`;
+            $.each(data,function(item){
+                html += '<option value="'+ this.id +'">'+ this.name+'</option>';
+            })
+            html += '</select>';
+            $(".country-wrapper").html(html);
+            $(".countries").select2({
+                selectOnClose: false,
+                minimumResultsForSearch: -1,
+                placeholder: "Select multiple Counties",
+                allowClear: true
+            });
+        }
+        function showSingleCountryList(data){
+            var html =`<label class="form-label">Country</label><select class="form-control get-states" name="country_id" placeholder="Select Country">`;
+            $.each(data,function(item){
+                html += '<option value="'+ this.id +'">'+ this.name+'</option>';
+            })
+            html += '</select>';
+            $(".country-wrapper").html(html);
+        }
         function showMultipleStatesList(data){
             var html =`<label class="form-label">States</label><select class="form-control kleon-select-simple" name="state_id[]"  multiple="multiple" placeholder="Select Multiple State">`;
             $.each(data,function(item){
@@ -182,6 +206,7 @@
                 allowClear: true
             });
         }
+
         function showSingleStateList(data){
             var html =`<label class="form-label">States</label><select class="form-control get-cities" name="state_id" placeholder="Select State">`;
             $.each(data,function(item){

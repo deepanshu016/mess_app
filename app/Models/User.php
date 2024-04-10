@@ -15,6 +15,7 @@ class User extends Authenticatable implements HasMedia
 {
     use HasRoles, HasApiTokens, Notifiable,InteractsWithMedia;
     protected $guard_name = 'web';
+    protected $appends = ['medias'];
 
 
     /**
@@ -71,5 +72,13 @@ class User extends Authenticatable implements HasMedia
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+    protected function getMediasAttribute()
+    {
+        $media = $this->getMedia("USER_IMAGE")->first();
+        if ($media) {
+            return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
+        }
+        return null;
     }
 }

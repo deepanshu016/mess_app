@@ -11,11 +11,11 @@ class AdminService {
         $this->model = $model;
         $this->media = new MediaService();
     }
-    public function list($request,$conditions=[]){
+    public function list($request,$conditions=[],$relations=[]){
         $listData = [];
         $searchValue = $request->query('search')['value'];
-        $lists = $this->model::whereDoesntHave('roles', function ($query) {
-            $query->whereIn('name', ['ADMIN', 'MESS_OWNER', 'CUSTOMER']);
+        $lists = $this->model::whereHas('roles', function ($query) {
+            $query->whereNotIn('name', ['ADMIN', 'MESS_OWNER', 'CUSTOMER']);
         });
         $lists =  $lists->where(function ($query) use ($searchValue,$request){
             $filters = $request->input('params');
@@ -25,7 +25,7 @@ class AdminService {
                 }
             }
         });
-        if($conditions){
+        if(!empty($conditions)){
             $lists = $lists->where($conditions);
         }
         $totalRecords = $lists->count();
@@ -37,8 +37,8 @@ class AdminService {
         $listData['data'] = $lists;
         return $listData;
     }
-    public function edit($banner_id){
-        return $this->model::find($banner_id);
+    public function edit($banner_id,$relation){
+        return $this->model::with($relation)->find($banner_id);
     }
     public function getAll(){
         return $this->model::all();
@@ -61,6 +61,7 @@ class AdminService {
         return $transaction;
     }
     public function store(Object $request,$file_name = '',$file_tag=''){
+
         $banner = $this->model::create($request->toArray());
         $banner = $this->model::find($banner->id);
         if($file_name != '' && $file_tag != ''){
@@ -87,6 +88,15 @@ class AdminService {
     public function deleteMedia(Object $request){
         $media = $this->model::find($request->id);
         return $media->delete();
+    }
+
+
+
+    public function storeAsArray($request){
+
+        $banner = $this->model::create($request);
+        $banner = $this->model::find($banner->id);
+        return $banner;
     }
  }
 
