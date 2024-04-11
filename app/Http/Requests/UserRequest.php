@@ -5,7 +5,7 @@ use App\Exceptions\CommonValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Http\Request;
 class UserRequest extends FormRequest
 {
     /**
@@ -37,21 +37,31 @@ class UserRequest extends FormRequest
         }
     }
     public function saveUsersRules(){
-        return [
+        $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required',
             'level_type' => 'required|in:country,state,city',
-            'user_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'country_id' => 'array',
-            'country_id.*' => 'required_if:level_type,country|integer|exists:countries,id',
-            'state_id' => 'array',
-            'state_id.*' => 'required_if:level_type,state|integer|exists:states,id',
-            'city_id' => 'array',
-            'city_id.*' => 'required_if:level_type,city|integer|exists:cities,id',
+            'user_image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ];
+        if ($this->input('level_type') === 'country') {
+            $rules['country_id'] = 'required|array|exists:countries,id';
+        } else {
+            $rules['country_id'] = 'required|integer|exists:countries,id';
+        }
+        if ($this->input('level_type') === 'state') {
+            $rules['state_id'] = 'required|array|exists:states,id';
+        } else {
+            $rules['state_id'] = 'required|integer|exists:states,id';
+        }
+        if ($this->input('level_type') === 'city') {
+            $rules['city_id'] = 'required|array|exists:cities,id';
+        } else {
+            $rules['city_id'] = 'required|integer|exists:cities,id';
+        }
+        return $rules;
     }
     public function updateUsersRules(){
         return [
@@ -62,9 +72,9 @@ class UserRequest extends FormRequest
             'user_image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
-    
 
-    
+
+
 
     // public function deleteBannerRules(){
     //     return [

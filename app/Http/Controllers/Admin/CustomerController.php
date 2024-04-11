@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
+use App\Traits\UtilsTrait;
+use App\Http\Services\AdminService;
 class CustomerController extends Controller
 {
+    use UtilsTrait;
     public function __construct()
     {
 
@@ -26,8 +29,11 @@ class CustomerController extends Controller
     }
     public function list(Request $request)
     {
-        $service = new CustomerService();
-        $data = $service->listForAdmin($request);
+
+        $service = new CommonService();
+        $userDetails = $service->getProfile(['locationPreferences']);
+        $locationPreferences = $this->getUserLocationPreferences($userDetails);
+        $data = $service->listForAdmin($userDetails,$request,$locationPreferences);
         return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
 }

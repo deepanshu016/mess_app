@@ -143,6 +143,34 @@ class MessOwnerService {
     public function getAllCount(){
         return MessOwner::with('user')->where('status',1)->count();
     }
+
+
+    public function roleWiseList($userDetails,$request,$locationPreferences){
+        $listData = [];
+        $searchValue = $request->query('search')['value'];
+        $setting = MessOwner::with('user');
+        if(!$userDetails->hasRole('ADMIN')){
+            $setting = $setting->whereIn('city_id',$locationPreferences);
+        }
+        $setting = $setting->where(function ($query) use ($searchValue){
+            $query->whereHas('user',function($query) use ($searchValue){
+                $query->where('name','like','%'. $searchValue . '%');
+                $query->orWhere('email','like','%'. $searchValue . '%');
+                $query->orWhere('phone','like','%'. $searchValue . '%');
+            });
+            $query->orWhere('mess_name','like','%'. $searchValue . '%');
+            $query->orWhere('mess_description','like','%'. $searchValue . '%');
+            $query->orWhere('food_type','like','%'. $searchValue . '%');
+        });
+        $totalRecords = $setting->count();
+        $setting = $setting->offset($request->input('start'))->limit($request->input('length'));
+        $setting = $setting->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $setting;
+        return $listData;
+    }
  }
 
 

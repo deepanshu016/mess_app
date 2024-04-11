@@ -47,18 +47,18 @@
                                 <img src="{{ asset('public/media/').'/'.$user->getMedia("USER_IMAGE")[0]->id.'/'.$user->getMedia("USER_IMAGE")[0]->file_name }}" width="100" height="100">
                             @endif
                         </div>
-                        @if(empty($user))
                         <div class="form-group">
                             <label class="form-label">Roles</label>
-                            <select class="form-control" name="role">
+                            <select class="form-control" name="role" {{ (!empty($user)) ? 'disabled' : ''}}>
                                 <option value="">Select Role</option>
                                 @if(!empty($roleList))
                                     @foreach($roleList as $role)
-                                        <option value="{{ $role->name }}" {{ ($user->roles[0]->pivot->role_id === $role->id) ? 'selected' : ''}}>{{ $role->name }}</option>
+                                        <option value="{{ $role->name }}" {{ (!empty($user) && $user->roles[0]->pivot->role_id === $role->id) ? 'selected' : ''}}>{{ $role->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
                         </div>
+                        @if(empty($user))
                         <div class="form-group">
                             <label class="form-label">Level Type</label>
                             <select class="form-control level_type" name="level_type">

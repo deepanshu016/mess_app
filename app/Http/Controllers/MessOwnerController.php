@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\AdminService;
 use App\Http\Services\MessOwnerService;
 use App\Http\Services\CommonService;
 use App\Http\Requests\MessOwnerRequest;
+use App\Traits\UtilsTrait;
+use App\Models\User;
 class MessOwnerController extends Controller
 {
+    use UtilsTrait;
     public function __construct()
     {
 
     }
     public function index(Request $request)
     {
+
         return view('pages.admin.mess_owner.list');
     }
     public function add(Request $request)
@@ -25,8 +30,11 @@ class MessOwnerController extends Controller
     }
     public function list(Request $request)
     {
+        $users = new CommonService();
         $service = new MessOwnerService();
-        $data = $service->list($request);
+        $userDetails = $users->getProfile(['locationPreferences']);
+        $locationPreferences = $this->getUserLocationPreferences($userDetails);
+        $data = $service->roleWiseList($userDetails,$request,$locationPreferences);
         return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
     public function edit($owner_id)

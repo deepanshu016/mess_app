@@ -68,7 +68,7 @@ Route::post('/get-cities', [UsersController::class, 'getCities'])->name('get.cit
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete-media',[CommonController::class, 'deleteMedia'])->name('delete.media');
     Route::get('/user-profile', [HomeController::class,'profile'])->name('view.profile');
-    Route::group(['middleware' => ['role:ADMIN'],'prefix'=>'admin'], function () {
+    Route::group(['prefix'=>'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
         Route::group(['prefix'=>'roles'],function(){

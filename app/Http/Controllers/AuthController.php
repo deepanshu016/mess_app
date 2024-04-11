@@ -69,12 +69,12 @@ Class AuthController extends Controller {
             if($user->status == 'inactive'){
                 return response()->json(['status'=>400,'msg'=>'Account Inactive ,please contact to admin','url'=>'']);
             }
-            if($user->hasRole('ADMIN')){
-                $url = route('admin.dashboard');
-            }elseif($user->hasRole('MESS_OWNER')){
+            if($user->hasRole('CUSTOMER')){
+                $url = route('home');
+            }else if($user->hasRole('MESS_OWNER')){
                 $url = route('mess_owner.dashboard');
             }else{
-                $url = route('home');
+                $url = route('admin.dashboard');
             }
             return response()->json(['status'=>200,'msg'=>'Logged in successfully','url'=>$url]);
         }else{

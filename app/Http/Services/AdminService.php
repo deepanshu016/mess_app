@@ -3,6 +3,8 @@ namespace App\Http\Services;
 use App\Http\Services\MediaService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\MessOwner;
 class AdminService {
 
     public $model;
@@ -10,6 +12,11 @@ class AdminService {
     public function __construct($model){
         $this->model = $model;
         $this->media = new MediaService();
+    }
+
+    public function getProfile($relation=[]){
+        $user = $this->model::with($relation)->find(auth()->user()->id);
+        return $user;
     }
     public function list($request,$conditions=[],$relations=[]){
         $listData = [];

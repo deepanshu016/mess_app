@@ -34,7 +34,8 @@ class User extends Authenticatable implements HasMedia
         'referral_code',
         'parent_id',
         'is_referred',
-        'status'
+        'status',
+        'level_type'
     ];
 
     /**
@@ -80,5 +81,9 @@ class User extends Authenticatable implements HasMedia
             return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
         }
         return null;
+    }
+
+    public function locationPreferences(){
+        return $this->hasMany(UserLocation::class);
     }
 }

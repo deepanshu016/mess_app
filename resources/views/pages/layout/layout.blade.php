@@ -27,12 +27,10 @@
     </div>
     @if(!empty(Auth::user()))
         @include('pages.layout.header')
-        @can('admin')
-            @include('pages.admin.sidebar')
-        @elsecan('mess_owner')
+        @can('MESS_OWNER')
             @include('pages.mess_owner.sidebar')
-        @elsecan('customer')
-            @include('pages.customer.sidebar')
+        @else
+            @include('pages.admin.sidebar')
         @endif
     @endif
     @yield('content')
