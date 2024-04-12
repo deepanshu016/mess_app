@@ -13,7 +13,9 @@
                 <div class="card-header pb-5 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3">
                     <h4 class="mb-0">Users Info</h4>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('admin.users.add') }}" class="btn btn-outline-primary">Add New</a>
+                        @can('users-create')
+                            <a href="{{ route('admin.users.add') }}" class="btn btn-outline-primary">Add New</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body p-0">

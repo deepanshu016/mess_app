@@ -16,7 +16,7 @@ class UsersController extends Controller
 {
 
     public function __construct(){
-
+        $this->middleware(['permission:users-create|users-delete|users-update|users-list']);
     }
 
     public function index(Request $request)

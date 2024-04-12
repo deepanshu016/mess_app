@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Support\Facades\DB;
 class CountriesTableSeeder extends Seeder
 {
