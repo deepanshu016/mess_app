@@ -61,7 +61,7 @@
                     name: 'Action',
                     render:function(data, type, row, meta){
                         if(row.name !== 'ADMIN' && row.name !== 'MESS_OWNER' && row.name !== 'CUSTOMER'){
-                            return `<a href="${row.id}/edit-role" class="btn-video square btn btn-outline-primary rounded-2 px-0 py-0 me-3"><i class="bi bi-pencil-square"></i></a>
+                            return `<a href="${row.id}/edit" class="btn-video square btn btn-outline-primary rounded-2 px-0 py-0 me-3"><i class="bi bi-pencil-square"></i></a>
                             <a href="javascript:void(0);" class="btn-video square btn btn-outline-danger rounded-2 px-0 py-0 me-3 delete" data-url="${row.id}/delete" data-id="${row.id}"><i class="bi bi-trash"></i></a>
                             <a href="${row.id}/roles-premission" class="btn-video square btn btn-outline-success rounded-2 px-0 py-0 me-3"><i class="bi bi-card-list"></i></a>`;
                         }else{

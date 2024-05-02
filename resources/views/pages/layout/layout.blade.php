@@ -27,7 +27,7 @@
     </div>
     @if(!empty(Auth::user()))
         @include('pages.layout.header')
-        @can('MESS_OWNER')
+        @if(Auth::user()->hasRole('MESS_OWNER'))
             @include('pages.mess_owner.sidebar')
         @else
             @include('pages.admin.sidebar')

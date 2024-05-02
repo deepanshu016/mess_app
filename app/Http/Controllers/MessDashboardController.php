@@ -12,6 +12,7 @@ Class MessDashboardController extends Controller {
 
     public function index(Request $request)
     {
+
         return view('pages.mess_owner.dashboard');
     }
 }
