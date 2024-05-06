@@ -514,7 +514,9 @@
                 </table>
             </div><!-- End box_style_1 -->
         </div><!-- End col -->
-        <a class="btn_full book_a_mess" href="{{ route('book.a.mess',['mess_id'=>$singleMess->id]) }}" data-id="{{ $singleMess->id }}">Book now</a>
+        @if(!auth()->user()->mess_id)
+            <a class="btn_full book_a_mess" href="{{ route('book.a.mess.page',['mess_id'=>$singleMess->id]) }}" data-id="{{ $singleMess->id }}">Book now</a>
+        @endif
         {{-- <div class="col-lg-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box">
@@ -600,6 +602,22 @@
     </div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
+<div class="modal fade" id="bookMess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Book a Mess</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body book_a_mess_detail">
+
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+</div>
 @endsection
 @section('page_script')
 <script>
@@ -609,11 +627,36 @@
         var url = $(this).attr('href');
         var formData = new FormData();
         formData.append('mess_id',messId);
-        CommonLib.sweetalert.confirm(formData,'POST',url);
+        CommonLib.ajaxForm(formData,'GET',url).then(d=>{
+            if(d.status === 200){
+                $('.book_a_mess_detail').html(d.html);
+                $("#bookMess").modal("show");
+            }
+        }).catch(e=>{
+            CommonLib.notification.error(e.responseJSON.errors);
+        });
+    });
+    $("body").on("change",".check_checkbox",function(e){
+        $(this).prop('checked', !$(this).prop('checked'));
+    });
+    $('body').on("submit",".book_a_mess_final",function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+        var formData = $('.book_a_mess_final')[0]; // You need to use standard javascript object here
+        formData = new FormData(formData);
+        CommonLib.ajaxForm(formData,'POST',url).then(d=>{
+            if(d.status === 200){
+                CommonLib.notification.success(d.message);
+                setTimeout(() => {
+                    window.location = d.url;
+                }, 2000);
+            }
+        }).catch(e=>{
+            CommonLib.notification.error(e.responseJSON.errors);
+        });
     });
     $('body').on("change",".select-food-type",function(e){
         var menu=$(this).val();
-        alert(menu)
         window.location = "{{ route('view.menu',['mess_id'=>$singleMess->id]) }}"+'?menu='+menu
     });
 </script>

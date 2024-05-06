@@ -41,15 +41,15 @@
 
                         <p>Meal to be Deliver<span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-primary border-0" name="meal_time[]" value="breakfast" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->breakfast == 1) ? 'checked' : '' }}>
+                            <input type="checkbox" class="form-check-input bg-primary border-0" name="meal_time[]" value="breakfast" {{ (isset($customer) && $customer->breakfast == 1) ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio10">Breakfast</label><br>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-secondary border-0" name="meal_time[]" value="lunch" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->lunch == 1) ? 'checked' : '' }}>
+                            <input type="checkbox" class="form-check-input bg-secondary border-0" name="meal_time[]" value="lunch" {{ (isset($customer) && $customer->lunch == 1) ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio11">Lunch</label><br>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input bg-warning border-0" name="meal_time[]" value="dinner" {{ (isset($customer) && !empty($customer->customer_menu) && $customer->customer_menu->dinner == 1) ? 'checked' : '' }}>
+                            <input type="checkbox" class="form-check-input bg-warning border-0" name="meal_time[]" value="dinner" {{ (isset($customer) && $customer->dinner == 1) ? 'checked' : '' }}>
                             <label class="form-label mb-0" for="radio11">Dinner</label><br>
                         </div>
                         <div class="form-group">

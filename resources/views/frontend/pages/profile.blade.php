@@ -196,7 +196,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('transaction.data.datatables') }}",
+                url: "{{ route('transaction.data.datatables') }}" + "?user_id=" + {{ Auth::user()->id }},
                 type: 'GET',
             },
             columns: [

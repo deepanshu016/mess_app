@@ -158,9 +158,17 @@ class HomeController extends Controller
     }
     public function BookingAMess(Request $request)
     {
+
         $customer = new CustomerService();
         $service = $customer->assignMess($request);
         return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('view.profile') : '']);
+    }
+    public function BookingAMessPage($mess_id,Request $request)
+    {
+        $customer = new MessOwnerService();
+        $messDetail = $customer->edit($mess_id);
+        $html = view('frontend.common.book_a_mess_page',compact('messDetail'))->render();
+        return response()->json(['status'=>($messDetail) ? 200 : 400,'msg'=>($messDetail) ? 'Action performed successfully' : 'Something went wrong','html'=>$html]);
     }
     public function transactionList(Request $request)
     {

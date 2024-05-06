@@ -49,6 +49,7 @@ Route::get('/faqs', [HomeController::class,'faqs'])->name('faqs');
 Route::get('/{mess_id}/view-menu', [HomeController::class,'viewMenu'])->name('view.menu');
 Route::get('/{mess_id}/book-a-mess', [HomeController::class,'bookAMess'])->name('mess.booking');
 Route::post('/{mess_id}/book-a-mess', [HomeController::class,'BookingAMess'])->name('book.a.mess');
+Route::get('/{mess_id}/book-a-mess-popup', [HomeController::class,'BookingAMessPage'])->name('book.a.mess.page');
 Route::get('/{mess_id}/mess-detail', [HomeController::class,'messDetail'])->name('mess.detail');
 Route::get('/transaction', [HomeController::class,'transactionList'])->name('transaction.data.datatables');
 Auth::routes();

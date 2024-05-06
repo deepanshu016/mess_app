@@ -35,7 +35,10 @@ class User extends Authenticatable implements HasMedia
         'parent_id',
         'is_referred',
         'status',
-        'level_type'
+        'level_type',
+        'breakfast',
+        'lunch',
+        'dinner'
     ];
 
     /**

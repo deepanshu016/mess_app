@@ -158,7 +158,7 @@ class CustomerService {
 
     public function assignMess(Object $request){
         $user = User::find(auth()->user()->id);
-        $customer = $user->update(['mess_id'=>$request->mess_id]);
+        $customer = $user->update(['mess_id'=>$request->mess_id,'breakfast'=>($request->breakfast)?1:0,'lunch'=>($request->lunch)?1:0,'dinner'=>($request->dinner)?1:0]);
         return $customer;
     }
  }
