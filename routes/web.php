@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\CuisineController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
@@ -99,9 +100,18 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/get-list', [UsersController::class, 'list'])->name('admin.users.datatables');
             Route::get('/list', [UsersController::class, 'index'])->name('admin.users.list');
             Route::post('/create', [UsersController::class, 'save'])->name('admin.users.save');
-            Route::get('/{owner_id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
+            Route::get('/{cuisine_id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
             Route::post('/update', [UsersController::class, 'update'])->name('admin.users.update');
             Route::delete('{id}/delete', [UsersController::class, 'delete'])->name('admin.users.delete');
+        });
+        Route::group(['prefix' => 'cuisines'], function () {
+            Route::get('/create', [CuisineController::class, 'add'])->name('admin.cuisines.add');
+            Route::get('/get-list', [CuisineController::class, 'list'])->name('admin.cuisines.datatables');
+            Route::get('/list', [CuisineController::class, 'index'])->name('admin.cuisines.list');
+            Route::post('/create', [CuisineController::class, 'save'])->name('admin.cuisines.save');
+            Route::get('/{owner_id}/edit', [CuisineController::class, 'edit'])->name('admin.cuisines.edit');
+            Route::post('/update', [CuisineController::class, 'update'])->name('admin.cuisines.update');
+            Route::delete('{id}/delete', [CuisineController::class, 'delete'])->name('admin.cuisines.delete');
         });
         Route::group(['prefix' => 'banner'], function () {
             Route::get('/create', [BannerController::class, 'add'])->name('admin.banner.add');

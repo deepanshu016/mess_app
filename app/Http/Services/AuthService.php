@@ -3,6 +3,7 @@ namespace App\Http\Services;
 
 use App\Models\User;
 use App\Models\MessOwner;
+use App\Models\MessCuisine;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 class AuthService {
@@ -26,6 +27,11 @@ class AuthService {
         if(!$request->mess_id){
             $mess_owner = MessOwner::create(['user_id'=>$user->id,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id]);
             $user->assignRole('MESS_OWNER');
+            if($request->cuisine_id){
+                foreach($request->cuisine_id as $cuisine){
+                    MessCuisine::create(['cuisine_id'=>$cuisine,'mess_id'=>$mess_owner->id]);
+                }
+            }
         }else{
             $user->assignRole('CUSTOMER');
             $referral_code = 'FD'.$user->id.date('Y');

@@ -2178,9 +2178,9 @@ progress {
   vertical-align: bottom;
 }
 
-.table-group-divider {
+/* .table-group-divider {
   border-top: calc(2 * $table-border-width) solid currentcolor;
-}
+} */
 
 .caption-top {
   caption-side: top;
@@ -5856,9 +5856,9 @@ fieldset:disabled .btn {
   border-color: var(--kleon-pagination-disabled-border-color);
 }
 
-.page-item:not(:first-child) .page-link {
+/* .page-item:not(:first-child) .page-link {
   margin-left: calc($pagination-border-width * -1);
-}
+} */
 
 .page-item:first-child .page-link {
   border-top-left-radius: var(--kleon-pagination-border-radius);
@@ -20672,7 +20672,7 @@ a:hover .text-soft-dark {
       }
       content: '\e969';
     }
-  
+
     // hover state
     &:hover {
       background-color: $btn-video-hover-bg;

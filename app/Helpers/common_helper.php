@@ -9,6 +9,7 @@ use \App\Models\Banner;
 use \App\Models\Attendance;
 use \App\Models\Country;
 use \App\Models\CustomerMenu;
+use \App\Models\Cuisine;
 
 if (!function_exists('setting')) {
     function setting()
@@ -137,6 +138,13 @@ if (!function_exists('random_ads')) {
     function random_ads(){
         $randomAdvertisement = Banner::inRandomOrder()->first();
         return $randomAdvertisement;
+    }
+}
+
+if (!function_exists('get_all_cuisines')) {
+    function get_all_cuisines(){
+        $cuisine = Cuisine::all();
+        return $cuisine;
     }
 }
 ?>

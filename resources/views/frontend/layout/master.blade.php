@@ -19,6 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet">
     <!-- BASE CSS -->
     <link href="{{ asset('/') }}site/css/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 	<link href="{{ asset('/') }}site/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/menu.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/style.css" rel="stylesheet">
@@ -27,8 +29,7 @@
 	<link href="{{ asset('/') }}site/css/fontello/css/fontello.min.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/magnific-popup.css" rel="stylesheet">
 	<link href="{{ asset('/') }}site/css/pop_up.css" rel="stylesheet">
-    <link  href="{{ asset('/') }}frontend/assets/css/main.css" id="stylesheet">
-    <!-- Radio and check inputs -->
+
     <link href="{{ asset('/') }}site/css/skins/square/grey.css" rel="stylesheet">
 
     <!-- Gallery -->
@@ -40,10 +41,18 @@
 	<!-- YOUR CUSTOM CSS -->
     <!-- Modernizr -->
 	<script src="{{ asset('/') }}site/js/modernizr.js"></script>
-    <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main_one.css" id="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/main_one.css" id="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('/') }}style.css" />
     <link href="{{ asset('/') }}site/css/blog.css" rel="stylesheet">
     <link href="{{ asset('/') }}frontend/layerslider/css/layerslider.css" rel="stylesheet">
+    <style>
+        .select2-container{
+            display: block !important;
+            /* top: 753.4px !important;
+            left: 563.7px !important; */
+            z-index: 2147483647 !important;
+        }
+    </style>
 </head>
 <body>
     {{-- <div id="preloader">
@@ -128,6 +137,17 @@
                     <input type="email" class="form-control form-white" placeholder="Email" name="email">
                     <input type="password" class="form-control form-white" placeholder="Password" id="password1" name="password">
                     <input type="password" class="form-control form-white" placeholder="Confirm password" id="password2" name="password_confirmation">
+                    <select class="form-control" id="cuisine_list" name="cuisine_id[]" multiple="multiple">
+                        <option value="">Select Cuisines</option>
+                        @php
+                            $cuisines = get_all_cuisines();
+                        @endphp
+                        @if(!empty($cuisines))
+                            @foreach ($cuisines as $cuisine)
+                                <option value="{{ $cuisine->id }}">{{ $cuisine->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
                     <select class="form-control get-state" name="country_id">
                         <option value="">Select Country</option>
                         @php
@@ -153,10 +173,11 @@
     </div>
     <!-- End Register modal -->
     <!-- COMMON SCRIPTS -->
-    <script src="{{ asset('/') }}site/js/jquery-3.7.0.min.js"></script>
+    <script src="{{ asset('/') }}frontend/assets/js/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('/') }}site/js/common_scripts_min.js"></script>
     <script src="{{ asset('/') }}site/js/functions.js"></script>
     <script src="{{ asset('/') }}site/assets/validate.js"></script>
+    <!-- Select 2 -->
     <!-- SPECIFIC SCRIPTS -->
     <script src="{{ asset('/') }}site/js/video_header.js"></script>
     <script src="{{ asset('/') }}site/js/map_single.js"></script>
@@ -164,6 +185,8 @@
     <script src="{{ asset('/') }}frontend/common/CommonLib.js"></script>
     <script src="{{ asset('/') }}cute-alert.js"></script>
     <script src="{{ asset('/') }}site/js/tabs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="{{ asset('/') }}frontend/plugins/datatables/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/') }}frontend/plugins/datatables/js/datatables.init.js"></script>
     @yield('page_script')
@@ -176,6 +199,9 @@
                 videoTrigger: $("#video-trigger"),
                 autoPlayVideo: true
             });
+        });
+        $(function(){
+            $('#cuisine_list').select2();
         });
     </script>
     <script src="{{ asset('/') }}frontend/layerslider/js/greensock.js"></script>
