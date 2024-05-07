@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Apr 09, 2024 at 08:57 PM
+-- Generation Time: May 07, 2024 at 08:20 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.1.26
 
@@ -48745,6 +48745,30 @@ INSERT INTO `countries` (`id`, `code`, `name`, `phonecode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cuisines`
+--
+
+DROP TABLE IF EXISTS `cuisines`;
+CREATE TABLE IF NOT EXISTS `cuisines` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(75) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=''Inactive'',1=''Active''',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cuisines`
+--
+
+INSERT INTO `cuisines` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Punjabi', '1', '2024-05-07 13:58:46', '2024-05-07 13:58:46'),
+(3, 'South Indian', '1', '2024-05-07 14:00:33', '2024-05-07 14:00:44');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer_menus`
 --
 
@@ -48902,7 +48926,14 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `media_uuid_unique` (`uuid`),
   KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
   KEY `media_order_column_index` (`order_column`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 2, 'c03bfb6e-37da-4631-8dab-22ed01f1e3f4', 'USER_IMAGE', 'sticker-smash', 'sticker-smash.jpeg', 'image/jpeg', 'public', 'public', 48193, '[]', '[]', '[]', '[]', 1, '2024-04-12 14:21:59', '2024-04-12 14:21:59');
 
 -- --------------------------------------------------------
 
@@ -48926,6 +48957,32 @@ CREATE TABLE IF NOT EXISTS `menus` (
   PRIMARY KEY (`id`),
   KEY `menus_added_by_foreign` (`added_by`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mess_cuisines`
+--
+
+DROP TABLE IF EXISTS `mess_cuisines`;
+CREATE TABLE IF NOT EXISTS `mess_cuisines` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `mess_id` bigint(20) UNSIGNED NOT NULL,
+  `cuisine_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mess_cuisines_mess_id_foreign` (`mess_id`),
+  KEY `mess_cuisines_cuisine_id_foreign` (`cuisine_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mess_cuisines`
+--
+
+INSERT INTO `mess_cuisines` (`id`, `mess_id`, `cuisine_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, '2024-05-07 14:46:18', '2024-05-07 14:46:18'),
+(2, 3, 3, '2024-05-07 14:46:18', '2024-05-07 14:46:18');
 
 -- --------------------------------------------------------
 
@@ -48960,7 +49017,16 @@ CREATE TABLE IF NOT EXISTS `mess_owner` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `mess_owner_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mess_owner`
+--
+
+INSERT INTO `mess_owner` (`id`, `user_id`, `mess_name`, `mess_description`, `food_type`, `non_veg_price`, `veg_breakfast_price`, `veg_lunch_price`, `veg_dinner_price`, `non_veg_breakfast_price`, `non_veg_lunch_price`, `non_veg_dinner_price`, `veg_price`, `country_id`, `state_id`, `city_id`, `address`, `pincode`, `address_link`, `account_details`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Mes New', NULL, 'veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 101, 38, 52929, NULL, NULL, NULL, NULL, '1', '2024-05-02 12:13:40', '2024-05-02 12:13:40'),
+(2, 4, 'New Mess Mine', NULL, 'veg', NULL, 23.00, 32.00, 45.00, NULL, NULL, NULL, NULL, 101, 38, 52874, NULL, NULL, NULL, NULL, '1', '2024-05-06 12:11:00', '2024-05-06 12:12:19'),
+(3, 7, '', NULL, 'veg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2024-05-07 14:46:17', '2024-05-07 14:46:17');
 
 -- --------------------------------------------------------
 
@@ -48974,7 +49040,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -49007,7 +49073,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2024_03_27_174726_create_job_table', 16),
 (30, '2024_03_27_182918_create_blogs_table', 17),
 (31, '2024_03_27_194108_create_job_applications_table', 18),
-(32, '2024_04_09_201112_create_users_locations_table', 19);
+(32, '2024_04_09_201112_create_users_locations_table', 19),
+(33, '2024_05_07_184316_create_cuisines_table', 20),
+(34, '2024_05_07_195758_create_mess_cuisines_table', 21);
 
 -- --------------------------------------------------------
 
@@ -49044,31 +49112,12 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 2),
-(2, 'App\\Models\\User', 4),
+(1, 'App\\Models\\User', 4),
+(1, 'App\\Models\\User', 7),
 (2, 'App\\Models\\User', 5),
-(2, 'App\\Models\\User', 7),
-(2, 'App\\Models\\User', 10),
-(2, 'App\\Models\\User', 12),
-(2, 'App\\Models\\User', 13),
-(2, 'App\\Models\\User', 14),
-(2, 'App\\Models\\User', 15),
-(2, 'App\\Models\\User', 19),
-(3, 'App\\Models\\User', 3),
-(3, 'App\\Models\\User', 6),
-(3, 'App\\Models\\User', 9),
-(3, 'App\\Models\\User', 11),
-(3, 'App\\Models\\User', 16),
-(3, 'App\\Models\\User', 18),
-(3, 'App\\Models\\User', 20),
-(3, 'App\\Models\\User', 21),
-(3, 'App\\Models\\User', 22),
-(3, 'App\\Models\\User', 23),
-(3, 'App\\Models\\User', 24),
-(3, 'App\\Models\\User', 25),
-(3, 'App\\Models\\User', 26),
-(3, 'App\\Models\\User', 27);
+(2, 'App\\Models\\User', 6),
+(3, 'App\\Models\\User', 1),
+(4, 'App\\Models\\User', 2);
 
 -- --------------------------------------------------------
 
@@ -49154,56 +49203,63 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`) USING HASH
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'role-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(2, 'role-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(3, 'role-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(4, 'role-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(5, 'guest-login', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(6, 'transaction-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(7, 'transaction-filter', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(8, 'customer-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(9, 'customer-filter', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(10, 'role-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(11, 'dashboard', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(12, 'messowner-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(13, 'messowner-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(14, 'messowner-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(15, 'messowner-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(16, 'messowner-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(17, 'advertisement-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(18, 'advertisement-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(19, 'advertisement-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(20, 'advertisement-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(21, 'advertisement-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(22, 'news-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(23, 'news-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(24, 'news-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(25, 'news-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(26, 'news-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(27, 'faq-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(28, 'faq-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(29, 'faq-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(30, 'faq-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(31, 'faq-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(32, 'jobs-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(33, 'jobs-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(34, 'jobs-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(35, 'jobs-update', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(36, 'jobs-create', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(37, 'blogs-list', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(38, 'blogs-delete', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(39, 'blogs-edit', 'web', '2024-04-08 11:28:31', '2024-04-08 11:28:31'),
-(40, 'blogs-update', 'web', '2024-04-08 11:28:32', '2024-04-08 11:28:32'),
-(41, 'blogs-create', 'web', '2024-04-08 11:28:32', '2024-04-08 11:28:32'),
-(42, 'setting-list', 'web', '2024-04-08 11:28:32', '2024-04-08 11:28:32'),
-(43, 'setting-update', 'web', '2024-04-08 11:28:32', '2024-04-08 11:28:32');
+(1, 'advertisement-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(2, 'advertisement-delete', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(3, 'advertisement-edit', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(4, 'advertisement-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(5, 'advertisement-update', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(6, 'blogs-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(7, 'blogs-delete', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(8, 'blogs-edit', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(9, 'blogs-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(10, 'blogs-update', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(11, 'customer-filter', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(12, 'customer-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(13, 'dashboard', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(14, 'faq-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(15, 'faq-delete', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(16, 'faq-edit', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(17, 'faq-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(18, 'faq-update', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(19, 'guest-login', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(20, 'jobs-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(21, 'jobs-delete', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(22, 'jobs-edit', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(23, 'jobs-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(24, 'jobs-update', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(25, 'messowner-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(26, 'messowner-delete', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(27, 'messowner-edit', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(28, 'messowner-list', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(29, 'messowner-update', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(30, 'news-create', 'web', '2024-04-12 14:10:56', '2024-04-12 14:10:56'),
+(31, 'news-delete', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(32, 'news-edit', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(33, 'news-list', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(34, 'news-update', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(35, 'role-create', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(36, 'role-delete', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(37, 'role-edit', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(38, 'role-list', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(39, 'role-update', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(40, 'settings-update', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(41, 'transaction-filter', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(42, 'transaction-list', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(43, 'users-create', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(44, 'users-delete', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(45, 'users-list', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(46, 'users-update', 'web', '2024-04-12 14:10:57', '2024-04-12 14:10:57'),
+(47, 'cuisines-create', 'web', '2024-04-12 08:40:57', '2024-04-12 08:40:57'),
+(48, 'cuisines-delete', 'web', '2024-04-12 08:40:57', '2024-04-12 08:40:57'),
+(49, 'cuisines-list', 'web', '2024-04-12 08:40:57', '2024-04-12 08:40:57'),
+(50, 'cuisines-update', 'web', '2024-04-12 08:40:57', '2024-04-12 08:40:57');
 
 -- --------------------------------------------------------
 
@@ -49243,17 +49299,17 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`) USING HASH
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'ADMIN', 'web', '2024-04-08 11:33:04', '2024-04-08 11:33:04'),
-(2, 'MESS_OWNER', 'web', '2024-04-08 13:32:09', '2024-04-08 13:32:09'),
-(3, 'CUSTOMER', 'web', '2024-04-08 13:32:50', '2024-04-08 13:32:50'),
-(5, 'dfgddsgfdgsgfd', 'web', '2024-04-08 13:35:50', '2024-04-08 13:35:50');
+(1, 'MESS_OWNER', 'web', '2024-04-12 14:12:45', '2024-04-12 14:12:45'),
+(2, 'CUSTOMER', 'web', '2024-04-12 14:12:45', '2024-04-12 14:12:45'),
+(3, 'ADMIN', 'web', '2024-04-12 14:13:13', '2024-04-12 14:13:13'),
+(4, 'Manager', 'web', '2024-04-12 14:13:30', '2024-04-12 14:13:30');
 
 -- --------------------------------------------------------
 
@@ -49274,56 +49330,58 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(1, 1),
-(1, 5),
-(2, 1),
-(2, 5),
-(3, 1),
-(3, 5),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(9, 1),
-(10, 1),
-(11, 1),
-(12, 1),
-(13, 1),
-(13, 5),
-(14, 1),
-(14, 5),
-(15, 1),
-(15, 5),
-(16, 1),
-(16, 5),
-(17, 1),
-(18, 1),
-(19, 1),
-(20, 1),
-(21, 1),
-(22, 1),
-(23, 1),
-(24, 1),
-(25, 1),
-(26, 1),
-(27, 1),
-(28, 1),
-(29, 1),
-(30, 1),
-(31, 1),
-(32, 1),
-(33, 1),
-(34, 1),
-(35, 1),
-(36, 1),
-(37, 1),
-(38, 1),
-(39, 1),
-(40, 1),
-(41, 1),
-(42, 1),
-(43, 1);
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 3),
+(7, 3),
+(8, 3),
+(9, 3),
+(10, 3),
+(11, 3),
+(12, 3),
+(13, 3),
+(14, 3),
+(15, 3),
+(16, 3),
+(17, 3),
+(18, 3),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3),
+(23, 3),
+(24, 3),
+(25, 3),
+(26, 3),
+(27, 3),
+(28, 3),
+(29, 3),
+(30, 3),
+(30, 4),
+(31, 3),
+(32, 3),
+(33, 3),
+(34, 3),
+(35, 3),
+(36, 3),
+(37, 3),
+(37, 4),
+(38, 3),
+(39, 3),
+(40, 3),
+(41, 3),
+(42, 3),
+(43, 3),
+(44, 3),
+(45, 3),
+(46, 3),
+(47, 3),
+(48, 3),
+(49, 3),
+(50, 3);
 
 -- --------------------------------------------------------
 
@@ -53522,7 +53580,17 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   PRIMARY KEY (`id`),
   KEY `transactions_user_id_foreign` (`user_id`),
   KEY `transactions_mess_id_foreign` (`mess_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `user_id`, `mess_id`, `transaction_type`, `transaction_tag`, `transaction_date`, `amount`, `balance`, `created_at`, `updated_at`) VALUES
+(1, 5, 2, 'debit', 'SPEND', '2024-05-06', 0, 0, '2024-05-06 12:13:23', '2024-05-06 12:13:23'),
+(2, 5, 2, 'credit', 'REFILL', '2024-05-06', 5000, 5000, '2024-05-06 12:59:00', '2024-05-06 12:59:00'),
+(3, 5, 2, 'debit', 'SPEND', '2024-05-05', 0, 5000, '2024-05-06 12:59:23', '2024-05-06 12:59:23'),
+(4, 5, 2, 'debit', 'SPEND', '2024-05-03', 3.33, 4996.67, '2024-05-06 13:13:34', '2024-05-06 13:13:34');
 
 -- --------------------------------------------------------
 
@@ -53547,19 +53615,28 @@ CREATE TABLE IF NOT EXISTS `users` (
   `parent_id` bigint(20) DEFAULT NULL,
   `is_referred` enum('0','1') DEFAULT NULL,
   `level_type` enum('country','state','city') DEFAULT NULL,
+  `breakfast` tinyint(5) NOT NULL DEFAULT 0,
+  `lunch` tinyint(5) NOT NULL DEFAULT 0,
+  `dinner` tinyint(5) NOT NULL DEFAULT 0,
   `status` enum('active','inactive') NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `referral_code`, `parent_id`, `is_referred`, `level_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '2024-04-08 11:33:04', '$2y$12$ecGqRt77mroNW4Ivv4cpueTYCb8Hb1vXU1gltJG8OzDx6Y6DS1Y6a', 0.00, NULL, NULL, 'AbSCHvhG2aPE7tLgSFKA84f8xpr2VvT0MNA5FkyZyW47L6EufXJgNqoLnc6U', NULL, NULL, NULL, NULL, NULL, 'active', '2024-04-08 11:33:04', '2024-04-08 11:33:04');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `payment`, `subscription_starts_at`, `meal_type`, `remember_token`, `mess_id`, `referral_code`, `parent_id`, `is_referred`, `level_type`, `breakfast`, `lunch`, `dinner`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, '2024-04-12 14:13:13', '$2y$12$Kh/qb0zWCvcgl6LSotKpyOpNyX2gZQiynm6UAx3cSssYTjF2nUVYe', 0.00, NULL, NULL, 'eIYBLZTiyF8AXhQwiE2Um5dqg1BJGenj2QaEdojze2eX8Db0WrUy58QkiTDW', NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 'active', '2024-04-12 14:13:13', '2024-04-12 14:13:13'),
+(2, 'Tamannah Rajpurohit', 'tamannahrajpurohit@mail.com', '5566332211', NULL, '$2y$12$sZJVUPaVohbCZXJC4q4rPO9UhntTFNJcqlkcKi1cXnmFY636mDIUm', 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'city', 0, 0, 0, 'active', '2024-04-12 14:21:59', '2024-04-12 14:21:59'),
+(3, 'New Mess', 'newcustomersd@mail.com', '7776890987', NULL, '$2y$12$pqFGP2yo7PIrcb4pK0v9KuZ8dLqgse3NKxN76JhLjKHJLNMAepen6', 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 'active', '2024-05-02 12:13:40', '2024-05-02 12:13:40'),
+(4, 'New Mess Owner', 'new_mess@mail.com', '9900887798', NULL, '$2y$12$sPgcMp7wUfJPM6cLi6e4lOUd00UHu1hcV2Bx1QpyrHVo2nkpyDlmi', 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 'active', '2024-05-06 12:11:00', '2024-05-06 12:11:00'),
+(5, 'new Customer', 'new_customer@mail.com', '7788990099', NULL, '$2y$12$ApYUZknNjhTarIefdokw0OGhNgoPQporVLBw1tdIMYS27KUeKNWUm', 4996.67, NULL, 'veg', NULL, 2, 'FD52024', NULL, NULL, NULL, 1, 1, 1, 'active', '2024-05-06 12:12:46', '2024-05-06 13:13:34'),
+(6, 'Deepanshu Mishra Customer', 'deepanshu678@mail.com', '9988776655', NULL, '$2y$12$GhvyH35/JeavdJHHoFz21.38KiJ7Lt3XWP2dY05EZkwxIFO2ytkJC', 0.00, NULL, NULL, NULL, 2, 'FD62024', NULL, NULL, NULL, 0, 0, 0, 'active', '2024-05-06 13:23:38', '2024-05-06 14:06:13'),
+(7, 'Deepanshu Mishra', 'annacustome4455345r@gmail.com', '4455667788', NULL, '$2y$12$jEI/nyuRpjX8jrGzR5XKXeYbJztm.uWncPdY3mMf1DImg.2rmr2LK', 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 'active', '2024-05-07 14:46:17', '2024-05-07 14:46:17');
 
 -- --------------------------------------------------------
 
@@ -53576,7 +53653,17 @@ CREATE TABLE IF NOT EXISTS `users_locations` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `users_locations_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_locations`
+--
+
+INSERT INTO `users_locations` (`id`, `user_id`, `locations`, `created_at`, `updated_at`) VALUES
+(1, 2, 52864, '2024-04-12 14:21:59', '2024-04-12 14:21:59'),
+(2, 2, 52879, '2024-04-12 14:21:59', '2024-04-12 14:21:59'),
+(3, 2, 52882, '2024-04-12 14:21:59', '2024-04-12 14:21:59'),
+(4, 2, 52891, '2024-04-12 14:21:59', '2024-04-12 14:21:59');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
