@@ -105,7 +105,7 @@
                                 {{ strtoupper(str_replace('_', '  ', $mess->food_type)) }}
                             </div>
                             <div class="location">
-                                {{ $mess->address }},{{ $mess->city->name }}, {{ $mess->state->name }}, {{ $mess->country->name }},{{ $mess->pincode }}
+                                {{ @$mess->address }},{{ @$mess->city->name }}, {{ @$mess->state->name }}, {{ @$mess->country->name }},{{ @$mess->pincode }}
                             </div>
                         </div><!-- End desc-->
                     </a>
