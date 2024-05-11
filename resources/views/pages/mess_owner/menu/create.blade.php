@@ -36,6 +36,17 @@
                         </select>
                     @endif
                 </div>
+                <div class="card-header bg-transparent border-0 p-5 pb-0">
+                    <label class="form-label">Menu type</label>
+                    <select class="form-control cuisine_id" name="cuisine_id">
+                        <option value="">Select Menu type</option>
+                        @if(!empty($cuisinesList))
+                            @foreach ($cuisinesList as $cuisines)
+                                <option value="{{ $cuisines->id}}">{{ $cuisines->cuisine->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
                 <div class="card-body">
                     <div class="table table-flex text-dark">
                         <div class="thead fw-bold border-bottom border-1 border-light-200">
@@ -52,7 +63,7 @@
                             <form class="all-form" method="POST" action="{{ (empty($menu['monday'])) ? route('mess_owner.menu.save') : route('mess_owner.menu.update') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row px-2 border-bottom border-1 border-light-200">
-                                    <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['sunday']->id}}"><input type="hidden" class="form-control" name="day" value="Mon">Monday</div>
+                                    <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['monday']->id}}"><input type="hidden" class="form-control" name="day" value="Mon">Monday</div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_mon" name="mess_detail_breakfast">{!! @$menu['monday']->mess_detail_breakfast !!}</textarea></div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_mon" name="mess_detail_lunch">{!! @$menu['monday']->mess_detail_lunch !!}</textarea></div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_mon" name="mess_detail_dinner">{!! @$menu['monday']->mess_detail_dinner !!}</textarea></div>
@@ -64,7 +75,7 @@
                             <form class="all-form" method="POST" action="{{ (empty($menu['tuesday'])) ? route('mess_owner.menu.save') : route('mess_owner.menu.update') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row px-2 border-bottom border-1 border-light-200">
-                                    <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['monday']->id}}"><input type="hidden" class="form-control" name="day" value="Tue">Tuesday</div>
+                                    <div class="col col-2 text-center"><input type="hidden" class="form-control" name="id" value="{{ @$menu['tuesday']->id}}"><input type="hidden" class="form-control" name="day" value="Tue">Tuesday</div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="breakfast"><textarea id="breakfast_tue" name="mess_detail_breakfast">{{ @$menu['tuesday']->mess_detail_breakfast}}</textarea></div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="lunch"><textarea id="lunch_tue" name="mess_detail_lunch">{!! @$menu['tuesday']->mess_detail_lunch !!}</textarea></div>
                                     <div class="col col-3 text-center"><input type="hidden" class="form-control" name="menu_type" value="dinner"><textarea id="dinner_tue" name="mess_detail_dinner">{!! @$menu['tuesday']->mess_detail_dinner !!}</textarea></div>
@@ -150,6 +161,7 @@
             const url = $(this).attr('action');
             const method = $(this).attr('method');
             const food_type = $(".select-food-type").val();
+            const cuisine_id = $(".cuisine_id").val();
             var formData = new FormData();
             $.each(serializedData.split('&'), function(index, field) {
                 var keyValue = field.split('=');
@@ -158,6 +170,7 @@
                 formData.append(key, value);
             });
             formData.append("food_type", food_type);
+            formData.append("cuisine_id", cuisine_id);
             CommonLib.ajaxForm(formData,method,url).then(d=>{
                 if(d.status === 200){
                     CommonLib.notification.success(d.msg);

@@ -14,4 +14,14 @@ class MessCuisine extends Model
         'mess_id',
         'cuisine_id'
     ];
+
+
+    public function mess()
+    {
+        return $this->belongsTo(MessOwner::class,'mess_id');
+    }
+    public function cuisine()
+    {
+        return $this->belongsTo(Cuisine::class,'cuisine_id');
+    }
 }

@@ -33,7 +33,7 @@ class MenuService {
     }
     public function store(Object $request){
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
-        $menu = Menu::create(['added_by'=>$messOwner->id,'day'=>$request->day,'food_type'=>$request->food_type,'menu_type'=>$request->menu_type,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
+        $menu = Menu::create(['added_by'=>$messOwner->id,'day'=>$request->day,'food_type'=>$request->food_type,'menu_type'=>$request->menu_type,'cuisine_id'=>$request->cuisine_id,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
         $menu = Menu::find($menu->id);
         if($request->hasFile('menu_template') && $request->file('menu_template')->isValid()){
             $menu->addMediaFromRequest('menu_template')->toMediaCollection('MENU_TEMPLATE');
@@ -43,7 +43,7 @@ class MenuService {
     public function update(Object $request){
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         $menu = Menu::find($request->id);
-        $m = $menu->update(['added_by'=>$messOwner->id,'day'=>$request->day,'menu_type'=>$request->menu_type,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
+        $m = $menu->update(['added_by'=>$messOwner->id,'day'=>$request->day,'menu_type'=>$request->menu_type,'cuisine_id'=>$request->cuisine_id,'mess_detail_breakfast'=>$request->mess_detail_breakfast,'mess_detail_lunch'=>$request->mess_detail_lunch,'mess_detail_dinner'=>$request->mess_detail_dinner]);
         if($request->hasFile('menu_template') && $request->file('menu_template')->isValid()){
             $menu->clearMediaCollection('MENU_TEMPLATE');
             $menu->addMedia($request->file('menu_template'))->storingConversionsOnDisk('local')->toMediaCollection('MENU_TEMPLATE');

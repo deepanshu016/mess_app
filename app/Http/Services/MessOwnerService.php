@@ -2,6 +2,8 @@
 namespace App\Http\Services;
 
 use App\Models\MessOwner;
+use App\Models\MessCuisine;
+use App\Models\Cuisine;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
@@ -170,6 +172,12 @@ class MessOwnerService {
         $listData['recordsFiltered'] = $totalRecords;
         $listData['data'] = $setting;
         return $listData;
+    }
+
+    public function getMessCuisines(){
+        $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
+        $cuisineList = MessCuisine::with(['cuisine','mess'])->where('mess_id',$messOwner->id)->groupBy('cuisine_id')->get();
+        return $cuisineList;
     }
  }
 

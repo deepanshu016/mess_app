@@ -17,6 +17,7 @@ class Menu extends Model implements HasMedia
         'added_by',
         'day',
         'menu_type',
+        'cuisine_id',
         'mess_detail_breakfast',
         'mess_detail_lunch',
         'mess_detail_dinner',

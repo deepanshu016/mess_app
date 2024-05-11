@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\MenuService;
 use App\Http\Requests\MenuRequest;
 use App\Http\Requests\MarkDayRequest;
+use App\Http\Services\MessOwnerService;
 class MenuController extends Controller
 {
     public function __construct()
@@ -19,8 +20,12 @@ class MenuController extends Controller
     public function add(Request $request)
     {
         $service = new MenuService();
+        $mess = new MessOwnerService();
         $menu = $service->list($request);
-        return view('pages.mess_owner.menu.create',compact('menu'));
+        $cuisinesList = $mess->getMessCuisines();
+        // echo "<pre>";
+        // print_r(json_decode(json_encode($menu),true)); die;
+        return view('pages.mess_owner.menu.create',compact('menu','cuisinesList'));
     }
     public function list(Request $request)
     {
