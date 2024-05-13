@@ -40,6 +40,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Status</th>
+                                    <th>Is Home Delivery Available</th>
                                     <th>Food Type</th>
                                     <th>Action</th>
                                     <th></th>
@@ -89,6 +90,19 @@
                             status = '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-success"></span> ACTIVE</h6>';
                         }else{
                             status = '<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> INACTIVE</h6>'
+                        }
+                        return status;
+                    }
+                },
+                {
+                    data: 'home_delivery',
+                    name: 'Is Home Delivery Available',
+                    render:function(data, type, row, meta){
+                        var status = '';
+                        if(row.is_delivery_boy_available == '1'){
+                            status = '<h6 class="fw-semibold text-success mb-0"><span class="indicator bg-success"></span> Yes</h6>';
+                        }else{
+                            status = '<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> No</h6>'
                         }
                         return status;
                     }

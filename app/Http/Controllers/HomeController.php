@@ -93,6 +93,8 @@ class HomeController extends Controller
     {
         $service = new MessOwnerService();
         $messList = $service->allMess($request,'DESC',10);
+        // echo "<pre>";
+        // print_r($messList); die;
         $html = View::make('frontend.common.mess_list',compact('messList'))->render();
         $html2 = '';
         if($messList->currentPage() < $messList->lastPage()){

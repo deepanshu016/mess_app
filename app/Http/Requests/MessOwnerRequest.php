@@ -44,7 +44,9 @@ class MessOwnerRequest extends FormRequest
             'state_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
-            'pincode' => 'required'
+            'pincode' => 'required',
+            'is_delivery_boy_available' => 'required|in:0,1',
+            'cuisine_id.*' => 'required'
         ];
     }
 }

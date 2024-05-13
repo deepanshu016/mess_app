@@ -30,13 +30,19 @@ class MessOwner extends Model implements HasMedia
         'address',
         'pincode',
         'address_link',
-        'account_details'
+        'account_details',
+        'is_delivery_boy_available'
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+
+    public function cuisines()
+    {
+        return $this->hasMany(MessCuisine::class,'mess_id','id');
+    }
     protected function getLogoAttribute()
     {
         $media = $this->getMedia("MESS_LOGO_IMAGE")->first();

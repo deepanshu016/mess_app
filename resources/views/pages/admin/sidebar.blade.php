@@ -47,24 +47,24 @@
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
                     @endcanany
-                    {{-- @canany(['cuisines-create','cuisines-list','cuisines-update','cuisines-delete']) --}}
+                    @canany(['cuisines-create','cuisines-list','cuisines-update','cuisines-delete'])
                     <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'cuisines') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-people fs-18"></i></span> <span class="nav-text">Cuisines</span></a>
                         <ul class="sub-menu">
-                            {{-- @can('cuisines-create') --}}
+                            @can('cuisines-create')
                                 <li class="menu-item {{ (Request::segment(2) == 'cuisines' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.cuisines.add') }}"> Add New</a></li>
-                            {{-- @endcan
-                            @canany(['cuisines-list','cuisines-update','cuisines-delete']) --}}
+                            @endcan
+                            @canany(['cuisines-list','cuisines-update','cuisines-delete'])
                                 <li class="menu-item {{ (Request::segment(2) == 'cuisines' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.cuisines.list') }}"> List</a></li>
-                            {{-- @endcanany --}}
+                            @endcanany
                             </ul>
                         <span class='submenu-opener'><i class='bi bi-chevron-right'></i></span>
                     </li>
-                    {{-- @endcanany --}}
+                    @endcanany
                     @canany(['customer-list','customer-filter'])
                         <li class="menu-item {{ (Request::segment(2) == 'customer') ? 'active' : ''}}"><a href="{{ route('admin.customer.list') }}"> <span class="nav-icon flex-shrink-0"><i class="bi bi-currency-exchange"></i></span> <span class="nav-text">Customers</span></a></li>
                     @endcanany
-                    @canany(['banners-create','banners-list','banners-update','banners-delete'])
-                    <li class="menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Advertisement</span></a>
+                    @canany(['advertisement-create','advertisement-list','advertisement-update','advertisement-delete'])
+                    <li class=  "menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Advertisement</span></a>
                         <ul class="sub-menu">
                             @can('banners-create')
                                 <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.banner.add') }}"> Add New</a></li>

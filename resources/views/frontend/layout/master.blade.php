@@ -159,6 +159,11 @@
                             @endforeach
                         @endif
                     </select>
+                    <select class="form-control" name="is_delivery_boy_available">
+                        <option value="">Is Home Delivery Available</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
                     <div class="form-group state-data"></div>
                     <div class="form-group city-data"></div>
                     <div id="pass-info" class="clearfix"></div>

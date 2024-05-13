@@ -14,14 +14,17 @@
                         <a href="{{ route('mess.detail',['mess_id'=>$current->id]) }}"><img src="{{ ($current->logo) ? $current->logo : asset('site/Frame-5.avif') }}" alt=""></a>
                     </div>
                     <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
+                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">0 reviews</a></small>)
                     </div>
                     <h3>{{ $current->mess_name }}</h3>
                     <div class="type">
                         {{ strtoupper(str_replace('_', '  ', $current->food_type)) }}
                     </div>
                     <div class="location">
-                        {{ $current->address }},{{ $current->city->name }}, {{ $current->state->name }}, {{ $current->country->name }},{{ $current->pincode }}
+                        {{ @$current->address }},{{ @$current->city->name }}, {{ @$current->state->name }}, {{ @$current->country->name }},{{ @$current->pincode }}
+                    </div>
+                    <div class="location">
+                        <b>{{ ($current->is_delivery_boy_available == '1') ? 'Home Delivery Available' : ''  }}</b>
                     </div>
                 </div>
             </div>

@@ -105,6 +105,19 @@
                             <label class="form-label">About Mess <span class="text-danger">*</span></label>
                             <textarea class="form-control" name="mess_description" id="about_mess"  placeholder="About Mess" maxlength="500">{{ @$messOwner->mess_description}}</textarea>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">Cuisines</label>
+                            <select class="form-control kleon-select-simple" name="cuisine_id[]"  multiple="multiple">
+                                @php
+                                    $cuisines = get_all_cuisines();
+                                @endphp
+                                @if(!empty($cuisines))
+                                    @foreach ($cuisines as $cuisine)
+                                        <option value="{{ $cuisine->id }}" {{ (!empty($messOwner) && in_array($cuisine->id,$messOwner->mess_cuisines)) ? 'selected' : ''}}>{{ $cuisine->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                         <p>Food type <span class="text-danger">*</span></p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input bg-primary border-0 choose_food_type" id="radio10" name="food_type" value="veg" {{ (isset($messOwner) && $messOwner->food_type == 'veg') ? 'checked' : '' }}>
@@ -185,6 +198,14 @@
                                 </div>
                             </div>
                         @endif
+                        <div class="form-group">
+                            <label class="form-label">Is Home delivery Available</label>
+                            <select class="form-control" name="is_delivery_boy_available">
+                                <option value="">Home delivery</option>
+                                <option value="1" {{ (isset($messOwner) && ($messOwner->is_delivery_boy_available  == '1')) ? 'selected' : ''}}>Yes</option>
+                                <option value="0" {{ (isset($messOwner) && ($messOwner->is_delivery_boy_available  == '0')) ? 'selected' : ''}}>No</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
                             <select class="form-control" name="status">

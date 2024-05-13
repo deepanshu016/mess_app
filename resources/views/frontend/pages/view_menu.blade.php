@@ -514,9 +514,9 @@
                 </table>
             </div><!-- End box_style_1 -->
         </div><!-- End col -->
-        @if(!auth()->user()->mess_id)
+        {{-- @if(!auth()->user()->mess_id) --}}
             <a class="btn_full book_a_mess" href="{{ route('book.a.mess.page',['mess_id'=>$singleMess->id]) }}" data-id="{{ $singleMess->id }}">Book now</a>
-        @endif
+        {{-- @endif --}}
         {{-- <div class="col-lg-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box">

@@ -45,6 +45,15 @@ class MessOwnerController extends Controller
         $countries = $common->getCountries();
         $states = $common->getStateList($messOwner->country_id);
         $cities = $common->getCityList($messOwner->state_id);
+        $messCuisines = [];
+        if(!empty($messOwner->cuisines)){
+            foreach($messOwner->cuisines as $key=>$cuisine){
+                array_push($messCuisines,$cuisine->cuisine_id);
+            }
+        }
+        $messOwner->mess_cuisines = $messCuisines;
+        // echo "<pre>";
+        // print_r($messOwner); die;
         return view('pages.admin.mess_owner.create',compact('messOwner','states','countries','cities'));
     }
     public function save(MessOwnerRequest $request)

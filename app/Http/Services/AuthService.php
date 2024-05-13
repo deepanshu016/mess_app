@@ -25,7 +25,7 @@ class AuthService {
     public function signup(Object $request){
         $user = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password)]);
         if(!$request->mess_id){
-            $mess_owner = MessOwner::create(['user_id'=>$user->id,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id]);
+            $mess_owner = MessOwner::create(['user_id'=>$user->id,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'is_delivery_boy_available'=>$request->is_delivery_boy_available]);
             $user->assignRole('MESS_OWNER');
             if($request->cuisine_id){
                 foreach($request->cuisine_id as $cuisine){
