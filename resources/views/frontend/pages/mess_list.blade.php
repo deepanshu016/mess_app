@@ -43,6 +43,24 @@
                             <li><label><input type="hidden" class="pincode" id="pincode"  value="{{ @$params}}"></li>
                         </ul>
                     </div>
+                    <div class="filter_type">
+                        @php
+                            $cuisineList = get_all_cuisines();
+                        @endphp
+                        {{-- <h6>Distance</h6>
+                        <input type="text" id="range" value="" name="range" class="btn_search"> --}}
+                        <h6>Cuisines</h6>
+                        <ul>
+                            @if(!empty($cuisineList))
+                                @foreach($cuisineList as $cuisine)
+                                @php
+                                    $cuisine->messCount = \App\Models\MessCuisine::where('cuisine_id',$cuisine->id)->count();
+                                @endphp
+                                    <li><label><input type="checkbox" class="icheck cuisine_filter" onClick="filterCusineType('{{ $cuisine->id}}',this)" value="{{ $cuisine->id}}">{{ $cuisine->name}} <small>({{ @$cuisine->messCount}})</small></label></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                     {{-- <div class="filter_type">
                         <h6>Rating</h6>
                         <ul>
@@ -110,6 +128,10 @@
         }
         removeKeyFromFormData(formData, 'food_type');
         formData.append('food_type',food_type_selected);
+        infiniteLoadMore(page,'filter')
+    }
+    function filterCusineType(cuisine_id,parentRef){
+        formData.append('cuisine_id',cuisine_id);
         infiniteLoadMore(page,'filter')
     }
 

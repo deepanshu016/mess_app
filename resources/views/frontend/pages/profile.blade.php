@@ -148,6 +148,11 @@
                                     <label>Phone</label>
                                     <input class="form-control" name="phone" id="phone" type="text" placeholder="Phone" value="{{ @$user->phone}}">
                                 </div>
+                                <div class="form-group">
+                                    <label>Referral Code</label>
+                                    <span>{{ @$user->referral_code}}</span>
+                                    <input class="form-control" id="textToCopy" type="hidden" value="{{ @$user->referral_code}}">
+                                </div>
                                 <button type="submit" class="btn_1 green">Update Email</button>
                             </form>
                         </div><!-- End wrapper_indent -->
@@ -190,6 +195,13 @@
         $(this).closest("li").addClass("tab-curren");
         $(".content_wrapper").find('section').removeClass("content-current");
         $("#"+ref).addClass("content-current");
+    });
+    document.getElementById('copyButton').addEventListener('click', function() {
+        var textToCopy = document.getElementById('textToCopy');
+        textToCopy.select();
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        CommonLib.notification.success('Text has been copied to clipboard');
     });
     $(function(){
         $('#transactionList').DataTable({

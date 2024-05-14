@@ -150,7 +150,19 @@
                                     <input type="radio" class="form-check-input bg-warning border-0 choose_food_type" id="radio11" name="food_type" value="both" {{ (isset($messOwner) && $messOwner->food_type == 'both') ? 'checked' : '' }}>
                                     <label class="form-label mb-0" for="radio11">Both</label><br>
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="form-label">Cuisines</label>
+                                    <select class="form-control kleon-select-simple" name="cuisine_id[]"  multiple="multiple">
+                                        @php
+                                            $cuisines = get_all_cuisines();
+                                        @endphp
+                                        @if(!empty($cuisines))
+                                            @foreach ($cuisines as $cuisine)
+                                                <option value="{{ $cuisine->id }}" {{ (!empty($messOwner) && in_array($cuisine->id,$messOwner->mess_cuisines)) ? 'selected' : ''}}>{{ $cuisine->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
                                 @if(!empty($messOwner) && ($messOwner->food_type == 'veg' || $messOwner->food_type == 'both'))
                                     <div class="veg_price">
                                         <p>Veg Price <span class="text-danger">*</span></p>

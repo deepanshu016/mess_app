@@ -40,7 +40,7 @@ class MessOwnerService {
     public function allMess($request,$order_by='',$limit=''){
         $food_type = explode(',',json_decode(json_encode($request->food_type),true));
         $page = $request->input('page');
-        $messOwner = MessOwner::with(['user', 'country', 'state', 'city']);
+        $messOwner = MessOwner::with(['user', 'country', 'state', 'city','cuisines']);
         if($request->params){
             $messOwner->where(function (Builder $query) use ($request) {
                 $pincode = $request->params;
@@ -62,6 +62,11 @@ class MessOwnerService {
         }
         if($request->food_type){
             $messOwner = $messOwner->whereIn('food_type',$food_type);
+        }
+        if ($request->cuisine_id) {
+            $messOwner->whereHas('cuisines', function ($query) use ($request) {
+                $query->where('cuisine_id', $request->cuisine_id);
+            });
         }
         if($order_by){
             $messOwner = $messOwner->orderBy('id',$order_by);
@@ -221,6 +226,7 @@ class MessOwnerService {
     }
 
     public function getMessCuisines(){
+        $user = User::find(auth()->user()->id);
         $messOwner = MessOwner::where('user_id',auth()->user()->id)->first();
         $cuisineList = MessCuisine::with(['cuisine','mess'])->where('mess_id',$messOwner->id)->groupBy('cuisine_id')->get();
         return $cuisineList;

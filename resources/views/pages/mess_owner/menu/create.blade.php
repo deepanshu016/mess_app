@@ -42,7 +42,7 @@
                         <option value="">Select Menu type</option>
                         @if(!empty($cuisinesList))
                             @foreach ($cuisinesList as $cuisines)
-                                <option value="{{ $cuisines->id}}">{{ $cuisines->cuisine->name }}</option>
+                                <option value="{{ $cuisines->cuisine->id}}">{{ $cuisines->cuisine->name }}</option>
                             @endforeach
                         @endif
                     </select>

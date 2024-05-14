@@ -23,6 +23,8 @@ class AuthService {
         }
     }
     public function signup(Object $request){
+        $customer = new CustomerService();
+        $common = new CommonService();
         $user = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password)]);
         if(!$request->mess_id){
             $mess_owner = MessOwner::create(['user_id'=>$user->id,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'is_delivery_boy_available'=>$request->is_delivery_boy_available]);
@@ -38,6 +40,10 @@ class AuthService {
             if($request->referral_code){
                 $referrelDetail = User::where('referral_code',$request->referral_code)->first();
                 $parent_id = $referrelDetail->id;
+                $wallets = $customer->user_wallet_updatation($parent_id,'credit',50);
+                if($wallets){
+                    $common->record_transaction($parent_id,$user->id,'credit','REFERRAL_MONEY','',50,$wallets->payment);
+                }
             }else{
                 $parent_id =  NULL;
             }
@@ -55,7 +61,7 @@ class AuthService {
             $mess_owner = $mess_owner->update(['mess_name'=>$request->mess_name,'mess_description'=>$request->mess_description]);
         }
         $user = User::find($request->user_id);
-        $user = $user->update(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone]);
+        $user = $user->update(['name'=>$request->name,'phone'=>$request->phone]);
         return $user;
     }
     public function changePassword(Object $request){

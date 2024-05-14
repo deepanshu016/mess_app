@@ -28,7 +28,7 @@ class MenuRequest extends FormRequest
         return [
             'day' => 'required',
             'menu_type' => 'required',
-            'cuisine_id' => 'required|exists:cuisines,column'
+            'cuisine_id' => 'required|exists:cuisines,id'
         ];
     }
 }

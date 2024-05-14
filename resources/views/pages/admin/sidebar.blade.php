@@ -66,10 +66,10 @@
                     @canany(['advertisement-create','advertisement-list','advertisement-update','advertisement-delete'])
                     <li class=  "menu-item menu-item-has-children {{ (Request::segment(2) == 'banner') ? 'active' : ''}}"><a href="#"> <span class="nav-icon flex-shrink-0"><i class="bi bi-align-center"></i></span> <span class="nav-text">Advertisement</span></a>
                         <ul class="sub-menu">
-                            @can('banners-create')
+                            @can('advertisement-create')
                                 <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'create') ? 'active' : ''}}"><a href="{{ route('admin.banner.add') }}"> Add New</a></li>
                             @endcan
-                            @canany(['banners-list','banners-update','banners-delete'])
+                            @canany(['advertisement-list','advertisement-update','advertisement-delete'])
                                 <li class="menu-item {{ (Request::segment(2) == 'banner' && Request::segment(3) == 'list') ? 'active' : ''}}"><a href="{{ route('admin.banner.list') }}"> List</a></li>
                             @endcanany
                         </ul>

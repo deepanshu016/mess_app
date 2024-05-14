@@ -112,6 +112,8 @@
                         @endforeach
                         @endif
                     </select>
+                    <input type="text" class="form-control form-white" name="referral_code" placeholder="Referal Code ?">
+
                     <div id="pass-info" class="clearfix"></div>
                     <div class="checkbox-holder text-left">
                         <div class="checkbox">

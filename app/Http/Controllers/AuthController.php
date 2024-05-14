@@ -38,7 +38,8 @@ Class AuthController extends Controller {
         $auth = new AuthService();
         $user = $auth->getProfile();
         $service = new MessOwnerService();
-        $messOwner = MessOwner::where('user_id',$user->id)->first();
+        $messOwner = MessOwner::with(['cuisines'])->where('user_id',$user->id)->first();
+
         $common = new CommonService();
         $countries = $common->getCountries();
         if(isset($messOwner->country_id)){
@@ -51,7 +52,20 @@ Class AuthController extends Controller {
         }else{
             $cities = [];
         }
-        return view('pages.profile',compact('user','messOwner','countries','states','cities'));
+        $messCuisines = [];
+        if(!empty($messOwner->cuisines)){
+            foreach($messOwner->cuisines as $key=>$cuisine){
+                array_push($messCuisines,$cuisine->cuisine_id);
+            }
+        }
+        if($user->hasRole('MESS_OWNER')){
+            $cuisinesList = $service->getMessCuisines();
+            $messOwner->mess_cuisines = $messCuisines;
+        }else{
+            $cuisinesList = [];
+        }
+
+        return view('pages.profile',compact('user','messOwner','countries','states','cities','cuisinesList'));
     }
     public function loginAsGuestLogin($user_id,Request $request)
     {

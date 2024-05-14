@@ -23,8 +23,7 @@ class MenuController extends Controller
         $mess = new MessOwnerService();
         $menu = $service->list($request);
         $cuisinesList = $mess->getMessCuisines();
-        // echo "<pre>";
-        // print_r(json_decode(json_encode($menu),true)); die;
+
         return view('pages.mess_owner.menu.create',compact('menu','cuisinesList'));
     }
     public function list(Request $request)
@@ -41,7 +40,11 @@ class MenuController extends Controller
     }
     public function save(MenuRequest $request)
     {
+
+
         try{
+
+
             $service = new MenuService();
             $service = $service->store($request);
             if($service){
@@ -54,6 +57,7 @@ class MenuController extends Controller
     }
     public function update(Request $request)
     {
+
         try{
             $service = new MenuService();
             $service = $service->update($request);
