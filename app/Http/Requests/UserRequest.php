@@ -37,6 +37,7 @@ class UserRequest extends FormRequest
         }
     }
     public function saveUsersRules(){
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -46,19 +47,19 @@ class UserRequest extends FormRequest
             'level_type' => 'required|in:country,state,city',
             'user_image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ];
-        if ($this->input('level_type') === 'country') {
+        if ($this->input('level_type') === 'country' && is_array($this->input('country_id'))   && $this->input('level_type') != 'state' &&  $this->input('level_type') != 'city') {
             $rules['country_id'] = 'required|array|exists:countries,id';
-        } else {
+        } else if($this->input('level_type') != 'city' &&  $this->input('level_type') != 'state'){
             $rules['country_id'] = 'required|integer|exists:countries,id';
         }
-        if ($this->input('level_type') === 'state') {
+        if ($this->input('level_type') === 'state' && is_array($this->input('state_id'))) {
             $rules['state_id'] = 'required|array|exists:states,id';
-        } else {
+        } else if($this->input('level_type') != 'country' &&  $this->input('level_type') != 'city'){
             $rules['state_id'] = 'required|integer|exists:states,id';
         }
-        if ($this->input('level_type') === 'city') {
+        if ($this->input('level_type') === 'city' && is_array($this->input('city_id'))  && $this->input('level_type') != 'state' &&  $this->input('level_type') != 'country') {
             $rules['city_id'] = 'required|array|exists:cities,id';
-        } else {
+        } else if($this->input('level_type') != 'country' &&  $this->input('level_type') != 'state'){
             $rules['city_id'] = 'required|integer|exists:cities,id';
         }
         return $rules;
