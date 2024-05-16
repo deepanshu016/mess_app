@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Services\CommonService;
+use App\Http\Services\MessOwnerService;
 use App\Http\Services\AdminService;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
@@ -12,9 +14,10 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\User;
 use App\Models\City;
+use App\Traits\UtilsTrait;
 class UsersController extends Controller
 {
-
+    use UtilsTrait;
     public function __construct(){
         $this->middleware(['permission:users-create|users-delete|users-update|users-list']);
     }
@@ -33,6 +36,10 @@ class UsersController extends Controller
     {
         $service = new AdminService(User::class);
         $data = $service->list($request,[],['roles']);
+        // $users = new CommonService();
+        // $userDetails = $users->getProfile(['locationPreferences']);
+        // $locationPreferences = $this->getUserLocationPreferences($userDetails);
+        // $data = $service->roleWiseList($request,[],[],$locationPreferences);
         return response()->json(['status'=>200,'msg'=>'Action performed successfully !!','data'=>$data['data'],'draw'=>$data['draw'],'recordsTotal'=>$data['recordsTotal'],'recordsFiltered' => $data['recordsFiltered']]);
     }
     public function edit($user_id,Request $request)

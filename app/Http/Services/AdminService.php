@@ -105,6 +105,40 @@ class AdminService {
         $banner = $this->model::find($banner->id);
         return $banner;
     }
+
+    public function roleWiseList($request,$conditions=[],$relations=[],$locationPreference){
+        echo "<pre>";
+        print_r($locationPreference); die;
+        $listData = [];
+        $searchValue = $request->query('search') ?? $request->query('search')['value'] ;
+        $lists = $this->model::with('locationPreferences');
+        if($request->input('params')){
+            $lists =  $lists->where(function ($query) use ($searchValue,$request){
+                $filters = $request->input('params') ??$request->input('params');
+                if ($filters) {
+                    foreach ($filters as $filter) {
+                        $query->orWhere($filter,'like','%'. $searchValue . '%');
+                    }
+                }
+            });
+        }
+        if(!empty($locationPreference)){
+            $lists = $lists->whereHas('locationPreferences',function($query) use($locationPreference){
+                $query->whereIn('locations',$locationPreference);
+            });
+        }
+        if(!empty($conditions)){
+            $lists = $lists->where($conditions);
+        }
+        $totalRecords = $lists->count();
+        $lists = $lists->offset($request->input('start'))->limit($request->input('length'));
+        $lists = $lists->get();
+        $listData['draw'] = intval($request->input('draw'));
+        $listData['recordsTotal'] = $totalRecords;
+        $listData['recordsFiltered'] = $totalRecords;
+        $listData['data'] = $lists;
+        return $listData;
+    }
  }
 
 

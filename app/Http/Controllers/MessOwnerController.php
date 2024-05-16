@@ -52,8 +52,6 @@ class MessOwnerController extends Controller
             }
         }
         $messOwner->mess_cuisines = $messCuisines;
-        // echo "<pre>";
-        // print_r($messOwner); die;
         return view('pages.admin.mess_owner.create',compact('messOwner','states','countries','cities'));
     }
     public function save(MessOwnerRequest $request)
