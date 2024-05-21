@@ -196,13 +196,7 @@
         $(".content_wrapper").find('section').removeClass("content-current");
         $("#"+ref).addClass("content-current");
     });
-    document.getElementById('copyButton').addEventListener('click', function() {
-        var textToCopy = document.getElementById('textToCopy');
-        textToCopy.select();
-        document.execCommand('copy');
-        window.getSelection().removeAllRanges();
-        CommonLib.notification.success('Text has been copied to clipboard');
-    });
+
     $(function(){
         $('#transactionList').DataTable({
             processing: true,
