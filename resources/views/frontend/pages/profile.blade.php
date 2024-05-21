@@ -58,6 +58,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-popup">
+            <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+            <h4>Please use below payment methods to make payment </h4>
+            <div class="form-group">
+                <p>QR CODE </label><br/>
+                @if($user->assigned_mess->qr_code)
+                    <img src="{{ @$user->assigned_mess->qr_code}}" width="250" height="250">
+                @else
+                    <h6 class="fw-semibold text-warning mb-0"><span class="indicator bg-warning"></span> Please contact to mess to upload QR Code </h6>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="form-label">UPI Details </label>
+                <span>{!! @$user->assigned_mess->account_details !!}</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Content ================================================== -->
 <div class="container margin_60">
@@ -67,6 +87,7 @@
                 <li class="tab-current"><a href="section-2" class="icon-settings change-tabs"><span>Transaction</span></a>
                 <li><a href="payment-requests" class="icon-settings change-tabs"><span>Payment Requests</span></a> </li>
                 <li><a href="section-3" class="icon-settings change-tabs"><span>Settings</span></a> </li>
+                <li><a href="assigned-mess" class="icon-settings change-tabs"><span>Mess Details</span></a> </li>
             </ul>
         </nav>
         <div class="content content_wrapper">
@@ -90,15 +111,14 @@
                 </div>
 
                 <div class="wrapper_indent">
-                    <a class="btn_1" href="#0" data-toggle="modal" data-target="#paymentRequests" style="float: right;margin-bottom: 10px;">Add New</a>
+                    <a class="btn_1" href="#0" data-toggle="modal" data-target="#paymentDetails" style="float: right;margin-bottom: 10px;">View Payment Details</a>
+                    <a class="btn_1" href="#0" data-toggle="modal" data-target="#paymentRequests" style="float: right;margin-bottom: 10px;margin-right: 18px !important;">Add New</a>
                     <table class="table table-striped cart-list" id="paymentList"></table>
                 </div>
 
             </section><!-- End section 1 -->
             <section id="section-3">
-
                 <div class="row">
-
                     <div class="col-md-6 col-sm-6 add_bottom_15">
                         <div class="indent_title_in">
                             <i class="icon_lock_alt"></i>
@@ -123,7 +143,6 @@
                             </form>
                         </div><!-- End wrapper_indent -->
                     </div>
-
                     <div class="col-md-6 col-sm-6 add_bottom_15">
                         <div class="indent_title_in">
                             <i class="icon_mail_alt"></i>
@@ -157,11 +176,45 @@
                             </form>
                         </div><!-- End wrapper_indent -->
                     </div>
-
-                </div><!-- End row -->
-
-            </section><!-- End section 3 -->
-
+                </div>
+                <!-- End row -->
+            </section>
+            <section id="assigned-mess">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 add_bottom_15">
+                        <div class="indent_title_in">
+                            <h3>Mess Detail</h3>
+                            <h4>Mess Name</h4>
+                            <img width="100" height="100" style="border-radius: 50%;" src="{{ $user->assigned_mess->logo}}">
+                            <h3>
+                                {{ @$user->assigned_mess->mess_name }}
+                            </h3>
+                        </div>
+                        <div class="wrapper_indent">
+                            <div class="form-group">
+                                <label>Location</label>
+                                {{ @$user->assigned_mess->address }},{{ @$user->assigned_mess->city->name }}, {{ @$user->assigned_mess->state->name }}, {{ @$user->assigned_mess->country->name }},{{ @$user->assigned_mess->pincode }}
+                            </div>
+                        </div>
+                        <div class="wrapper_indent">
+                            <div class="form-group">
+                                <label>Your Wallet Amount</label>
+                                INR {{ @$user->payment }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 add_bottom_15">
+                        <div class="indent_title_in">
+                            <h3>Selected Menus</h3>
+                            <p>Breakfast:- {{ ($user && $user->breakfast == 1) ? 'Yes' : 'No'}}</p>
+                            <p>Lunch:- {{ ($user && $user->lunch  == 1) ? 'Yes' : 'No'}}</p>
+                            <p>Dinner:- {{ ($user && $user->dinner == 1) ? 'Yes' : 'No'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End row -->
+            </section>
+            <!-- End section 3 -->
         </div><!-- End content -->
     </div>
 </div><!-- End container  -->

@@ -9,7 +9,7 @@
                 <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> ( <small><a href="#0">98 reviews</a></small> )</div>
                 <h1>{{ $singleMess->mess_name }}</h1>
                 <div><em>{{ $singleMess->food_type }}</em></div>
-                <div><i class="icon_pin"></i> {{ $singleMess->address }},{{ $singleMess->city->name }}, {{ $singleMess->state->name }}, {{ $singleMess->country->name }},{{ $singleMess->pincode }}
+                <div><i class="icon_pin"></i> {{ @$singleMess->address }},{{ @$singleMess->city->name }}, {{ @$singleMess->state->name }}, {{ @$singleMess->country->name }},{{ @$singleMess->pincode }}
             </div><!-- End sub_content -->
         </div><!-- End subheader -->
     </section><!-- End section -->

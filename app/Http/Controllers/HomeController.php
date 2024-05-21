@@ -154,6 +154,8 @@ class HomeController extends Controller
         $transaction = $service->filterTransaction($request);
         $auth = new AuthService();
         $user = $auth->getProfile();
+        // echo "<pre>";
+        // print_r(json_decode(json_encode($user),true)); die;
         return view('frontend.pages.profile',compact('customers','transaction','user'));
     }
     public function BookingAMess(Request $request)

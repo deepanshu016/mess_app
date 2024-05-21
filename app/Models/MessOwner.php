@@ -12,7 +12,7 @@ class MessOwner extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
     protected $table = "mess_owner";
-    protected $appends = ['logo','banner'];
+    protected $appends = ['logo','banner','qr_code'];
     protected $fillable = [
         'user_id',
         'mess_name',
@@ -54,6 +54,14 @@ class MessOwner extends Model implements HasMedia
     protected function getBannerAttribute()
     {
         $media = $this->getMedia("MESS_BANNER")->first();
+        if ($media) {
+            return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
+        }
+        return null;
+    }
+    protected function getQrCodeAttribute()
+    {
+        $media = $this->getMedia("MESS_QR_CODE")->first();
         if ($media) {
             return asset('public/media/') . '/' . $media->id . '/' . $media->file_name;
         }

@@ -21,8 +21,9 @@ class AdminService {
     public function list($request,$conditions=[],$relations=[]){
         $listData = [];
         $searchValue = $request->query('search')['value'];
-        $lists = $this->model::whereHas('roles', function ($query) {
-            $query->whereNotIn('name', ['ADMIN', 'MESS_OWNER', 'CUSTOMER']);
+        $auth = auth()->user();
+        $lists = $this->model::with($relations)->whereHas('roles', function ($query)  use($auth){
+            $query->where('reporting_person',$auth->id)->whereNotIn('name', ['ADMIN', 'MESS_OWNER', 'CUSTOMER']);
         });
         $lists =  $lists->where(function ($query) use ($searchValue,$request){
             $filters = $request->input('params');
@@ -138,6 +139,14 @@ class AdminService {
         $listData['recordsFiltered'] = $totalRecords;
         $listData['data'] = $lists;
         return $listData;
+    }
+
+    public function getAllResponsiblePersons(){
+        $auth = auth()->user();
+        $lists = $this->model::with('roles')->whereHas('roles', function ($query) use($auth){
+            $query->where('reporting_person',$auth->id)->whereNotIn('name', ['MESS_OWNER', 'CUSTOMER']);
+        })->get();
+        return $lists;
     }
  }
 

@@ -12,6 +12,8 @@ class AuthService {
         $user = User::find(auth()->user()->id);
         if($user->hasRole('MESS_OWNER')){
             $user = User::with('mess_owner')->find(auth()->user()->id);
+        }else{
+            $user = User::with('assigned_mess','assigned_mess.country','assigned_mess.state','assigned_mess.city')->find(auth()->user()->id);
         }
         return $user;
     }

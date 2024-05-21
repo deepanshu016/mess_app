@@ -38,7 +38,8 @@ class User extends Authenticatable implements HasMedia
         'level_type',
         'breakfast',
         'lunch',
-        'dinner'
+        'dinner',
+        'reporting_person'
     ];
 
     /**
@@ -73,6 +74,10 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Payment::class);
     }
+    public function reporting_user()
+    {
+        return $this->hasOne(User::class,'id','reporting_person');
+    }
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
@@ -88,5 +93,9 @@ class User extends Authenticatable implements HasMedia
 
     public function locationPreferences(){
         return $this->hasMany(UserLocation::class);
+    }
+
+    public function assigned_mess(){
+        return $this->hasOne(MessOwner::class,'id','mess_id');
     }
 }

@@ -26,6 +26,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Reporting Person</th>
                                     <th>Level Type</th>
                                     <th>Image</th>
                                     <th>Status</th>
@@ -57,6 +58,13 @@
                 { data: 'email', name: 'Email' },
                 { data: 'phone', name: 'Phone' },
                 {
+                    data: 'reporting_user',
+                    name: 'Reporting Person',
+                    render:function(data, type, row, meta){
+                        return `${row.reporting_user.name}(${row.reporting_user.roles[0].name})`;
+                    }
+                },
+                {
                     data: 'level_type',
                     name: 'Level Type',
                     render:function(data, type, row, meta){
@@ -67,7 +75,11 @@
                     data: 'image',
                     name: 'Image',
                     render:function(data, type, row, meta){
-                        return `<img src="${row.medias}" height="100" width="100">`;
+                        if(row.medias){
+                            return `<img src="${row.medias}" height="100" width="100">`;
+                        }else{
+                            return `<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> Not Uploaded</h6>`;
+                        }
                     }
                 },
                 {

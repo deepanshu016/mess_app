@@ -44,8 +44,9 @@ class UserRequest extends FormRequest
             'phone' => 'required',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required',
+            'reporting_person' => 'required|exists:users,id',
             'level_type' => 'required|in:country,state,city',
-            'user_image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'user_image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ];
         if ($this->input('level_type') === 'country' && is_array($this->input('country_id'))   && $this->input('level_type') != 'state' &&  $this->input('level_type') != 'city') {
             $rules['country_id'] = 'required|array|exists:countries,id';

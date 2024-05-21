@@ -41,7 +41,7 @@
                         </div>
                         @endif
                         <div class="form-group">
-                            <label class="form-label">Photo <span class="text-danger">*</span></label>
+                            <label class="form-label">Photo</label>
                             <input type="file" class="form-control" name="user_image" accept="images/*">
                             @if(!empty($user) && isset($user->getMedia("USER_IMAGE")[0]))
                                 <img src="{{ asset('public/media/').'/'.$user->getMedia("USER_IMAGE")[0]->id.'/'.$user->getMedia("USER_IMAGE")[0]->file_name }}" width="100" height="100">
@@ -54,6 +54,17 @@
                                 @if(!empty($roleList))
                                     @foreach($roleList as $role)
                                         <option value="{{ $role->name }}" {{ (!empty($user) && $user->roles[0]->pivot->role_id === $role->id) ? 'selected' : ''}}>{{ $role->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Reporting Person</label>
+                            <select class="form-control" name="reporting_person">
+                                <option value="">Select Reporting Person</option>
+                                @if(!empty($allParents))
+                                    @foreach($allParents as $parent)
+                                        <option value="{{$parent->id}}" {{ (isset($user) && ($user->reporting_person  == $parent->id)) ? 'selected' : ''}}>{{ $parent->name }}({{ $parent->roles[0]->name }})</option>
                                     @endforeach
                                 @endif
                             </select>

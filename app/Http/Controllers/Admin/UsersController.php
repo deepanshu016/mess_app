@@ -29,13 +29,17 @@ class UsersController extends Controller
     public function add(Request $request)
     {
         $service = new AdminService(Role::class);
+        $service1 = new AdminService(User::class);
         $roleList = $service->getAll($request);
-        return view('pages.admin.users.create',compact('roleList'));
+        $allParents = $service1->getAllResponsiblePersons();
+        // echo "<pre>";
+        // print_r($allParents); die;
+        return view('pages.admin.users.create',compact('roleList','allParents'));
     }
     public function list(Request $request)
     {
         $service = new AdminService(User::class);
-        $data = $service->list($request,[],['roles']);
+        $data = $service->list($request,[],['roles','reporting_user.roles']);
         // $users = new CommonService();
         // $userDetails = $users->getProfile(['locationPreferences']);
         // $locationPreferences = $this->getUserLocationPreferences($userDetails);
@@ -48,7 +52,8 @@ class UsersController extends Controller
         $roles = new AdminService(Role::class);
         $roleList = $roles->getAll($request);
         $user = $service->edit($user_id,['roles']);
-        return view('pages.admin.users.create',compact('user','roleList'));
+        $allParents = $service->getAllResponsiblePersons();
+        return view('pages.admin.users.create',compact('user','roleList','allParents'));
     }
     public function save(UserRequest $request)
     {

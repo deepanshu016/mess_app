@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RoleRequest;
+use Spatie\Permission\Exceptions\RoleAlreadyExists;
 class RolesController extends Controller
 {
     public function __construct() {
@@ -47,9 +48,19 @@ class RolesController extends Controller
     }
     public function save(RoleRequest $request)
     {
-        $service = new BannerService(Role::class);
-        $service = $service->store($request);
-        return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('roles.index') : '']);
+        try{
+            $service = new BannerService(Role::class);
+            $service = $service->store($request);
+            return response()->json(['status'=>($service) ? 200 : 400,'msg'=>($service) ? 'Action performed successfully' : 'Something went wrong','url'=>($service) ? route('roles.index') : '']);
+        }catch(\Exception $e){
+            if ($e instanceof RoleAlreadyExists ) {
+                // Handle ModelNotFoundException specifically
+                return response()->json(['status'=>400,'msg'=>$e->getMessage(),'url'=>'']);
+            } else {
+                // Handle other exceptions generically
+                return response()->json(['status'=>401,'msg'=>$e->getMessage(),'url'=>'']);
+            }
+        }
     }
     public function update(RoleRequest $request)
     {
