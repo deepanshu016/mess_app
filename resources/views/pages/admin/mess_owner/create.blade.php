@@ -199,7 +199,7 @@
                             </div>
                         @endif
                         <div class="form-group">
-                            <label class="form-label">Is Home delivery Available</label>
+                            <label class="form-label">Is Home delivery Available <span class="text-danger">*</span></label>
                             <select class="form-control" name="is_delivery_boy_available">
                                 <option value="">Home delivery</option>
                                 <option value="1" {{ (isset($messOwner) && ($messOwner->is_delivery_boy_available  == '1')) ? 'selected' : ''}}>Yes</option>
@@ -207,7 +207,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Status</label>
+                            <label class="form-label">Status <span class="text-danger">*</span></label>
                             <select class="form-control" name="status">
                                 <option value="">Select Status</option>
                                 <option value="active" {{ (isset($messOwner) && ($messOwner->user->status  == 'active')) ? 'selected' : ''}}>Active</option>

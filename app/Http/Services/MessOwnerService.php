@@ -142,6 +142,7 @@ class MessOwnerService {
     }
     public function update(Object $request){
         $user = User::find($request->user_id);
+        $user->update(['status'=>$request->status]);
         $mess_owner = MessOwner::find($request->mess_owner_id);
         $m = $mess_owner->update([
             'mess_name'=>$request->mess_name,
@@ -159,7 +160,8 @@ class MessOwnerService {
             'address'=>$request->address,
             'pincode'=>$request->pincode,
             'address_link'=>$request->address_link,
-            'is_delivery_boy_available'=>$request->is_delivery_boy_available
+            'is_delivery_boy_available'=>$request->is_delivery_boy_available,
+            'status'=>$request->status
         ]);
         MessCuisine::where(['mess_id'=>$request->mess_owner_id])->delete();
         if($request->cuisine_id){

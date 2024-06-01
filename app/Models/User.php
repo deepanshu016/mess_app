@@ -39,7 +39,8 @@ class User extends Authenticatable implements HasMedia
         'breakfast',
         'lunch',
         'dinner',
-        'reporting_person'
+        'reporting_person',
+        'status'
     ];
 
     /**

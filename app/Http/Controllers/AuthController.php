@@ -80,12 +80,13 @@ Class AuthController extends Controller {
         $login = $auth->login($request);
         if($login){
             $user = User::find(auth()->user()->id);
-            if($user->status == 'inactive'){
-                return response()->json(['status'=>400,'msg'=>'Account Inactive ,please contact to admin','url'=>'']);
-            }
+
             if($user->hasRole('CUSTOMER')){
                 $url = route('home');
             }else if($user->hasRole('MESS_OWNER')){
+                if($user->status == 'inactive'){
+                    return response()->json(['status'=>400,'msg'=>'Account Inactive ,please contact to admin','url'=>'']);
+                }
                 $url = route('mess_owner.dashboard');
             }else{
                 $url = route('admin.dashboard');
@@ -100,14 +101,15 @@ Class AuthController extends Controller {
         $auth = new AuthService();
         $result = $auth->signup($request);
         if($result){
-            $login = $auth->login($request);
-            if($login){
-                $user = User::find(auth()->user()->id);
+            $user = User::find($result->id);
+            if($user){
                 if($user->hasRole('ADMIN')){
+                    $login = $auth->login($request);
                     $url = route('admin.dashboard');
                 }elseif($user->hasRole('MESS_OWNER')){
-                    $url = route('mess_owner.dashboard');
+                    $url = route('home');
                 }else{
+                    $login = $auth->login($request);
                     $url = route('home');
                 }
             }

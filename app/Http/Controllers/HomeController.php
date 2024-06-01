@@ -16,6 +16,7 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Job;
 use App\Models\ApplyJob;
+use App\Models\User;
 use App\Models\Faq;
 class HomeController extends Controller
 {
@@ -149,14 +150,19 @@ class HomeController extends Controller
     }
     public function profile(Request $request)
     {
-        $service = new CustomerService();
-        $customers = $service->customerList();
-        $transaction = $service->filterTransaction($request);
-        $auth = new AuthService();
-        $user = $auth->getProfile();
-        // echo "<pre>";
-        // print_r(json_decode(json_encode($user),true)); die;
-        return view('frontend.pages.profile',compact('customers','transaction','user'));
+        $user = User::find(auth()->user()->id);
+        if($user->hasRole('CUSTOMER')){
+            $service = new CustomerService();
+            $customers = $service->customerList();
+            $transaction = $service->filterTransaction($request);
+            $auth = new AuthService();
+            $user = $auth->getProfile();
+            return view('frontend.pages.profile',compact('customers','transaction','user'));
+        }elseif($user->hasRole('MESS_OWNER')){
+            return redirect(route('mess_owner.dashboard'));
+        }else{
+            return redirect(route('admin.dashboard'));
+        }
     }
     public function BookingAMess(Request $request)
     {
