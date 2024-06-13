@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
             'phone' => 'required|numeric|unique:users,phone',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
-            'mess_id' => 'required_if:signup_type,customer',
+            // 'mess_id' => 'required_if:signup_type,customer',
             'cuisine_id.*' => 'required_if:signup_type,mess_owner',
             'terms_condition' => 'required'
         ];

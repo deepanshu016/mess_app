@@ -27,7 +27,7 @@ class AuthService {
     public function signup(Object $request){
         $customer = new CustomerService();
         $common = new CommonService();
-        if(!$request->mess_id){
+        if($request->signup_type  != 'customer'){
             $user = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password),'status'=>'inactive']);
             $mess_owner = MessOwner::create(['user_id'=>$user->id,'country_id'=>$request->country_id,'state_id'=>$request->state_id,'city_id'=>$request->city_id,'is_delivery_boy_available'=>$request->is_delivery_boy_available]);
             $user->assignRole('MESS_OWNER');
@@ -39,6 +39,7 @@ class AuthService {
         }else{
             $user = User::create(['name'=>$request->name,'email'=>$request->email,'phone'=>$request->phone,'password'=>Hash::make($request->password)]);
             $user->assignRole('CUSTOMER');
+            $customer = $user;
             $referral_code = 'FD'.$user->id.date('Y');
             if($request->referral_code){
                 $referrelDetail = User::where('referral_code',$request->referral_code)->first();
@@ -51,6 +52,7 @@ class AuthService {
                 $parent_id =  NULL;
             }
             $user = $user->update(['mess_id'=>$request->mess_id,'referral_code'=>$referral_code,'parent_id'=>$parent_id]);
+            $user = User::find($customer->id);
         }
         return $user;
     }

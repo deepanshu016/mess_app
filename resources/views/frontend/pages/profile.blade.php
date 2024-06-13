@@ -65,7 +65,7 @@
             <h4>Please use below payment methods to make payment </h4>
             <div class="form-group">
                 <p>QR CODE </label><br/>
-                @if($user->assigned_mess->qr_code)
+                @if(!empty( $user->assigned_mes) && $user->assigned_mess->qr_code)
                     <img src="{{ @$user->assigned_mess->qr_code}}" width="250" height="250">
                 @else
                     <h6 class="fw-semibold text-warning mb-0"><span class="indicator bg-warning"></span> Please contact to mess to upload QR Code </h6>
@@ -182,20 +182,24 @@
             <section id="assigned-mess">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 add_bottom_15">
-                        <div class="indent_title_in">
-                            <h3>Mess Detail</h3>
-                            <h4>Mess Name</h4>
-                            <img width="100" height="100" style="border-radius: 50%;" src="{{ $user->assigned_mess->logo}}">
-                            <h3>
-                                {{ @$user->assigned_mess->mess_name }}
-                            </h3>
-                        </div>
-                        <div class="wrapper_indent">
-                            <div class="form-group">
-                                <label>Location</label>
-                                {{ @$user->assigned_mess->address }},{{ @$user->assigned_mess->city->name }}, {{ @$user->assigned_mess->state->name }}, {{ @$user->assigned_mess->country->name }},{{ @$user->assigned_mess->pincode }}
+                        @if(!empty($user->assigned_mess))
+                            <div class="indent_title_in">
+                                <h3>Mess Detail</h3>
+                                <h4>Mess Name</h4>
+                                <img width="100" height="100" style="border-radius: 50%;" src="{{ @$user->assigned_mess->logo}}">
+                                <h3>
+                                    {{ @$user->assigned_mess->mess_name }}
+                                </h3>
                             </div>
-                        </div>
+                            <div class="wrapper_indent">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    {{ @$user->assigned_mess->address }},{{ @$user->assigned_mess->city->name }}, {{ @$user->assigned_mess->state->name }}, {{ @$user->assigned_mess->country->name }},{{ @$user->assigned_mess->pincode }}
+                                </div>
+                            </div>
+                        @else
+                            <p class="text-danger">Mess not Selected yet</p>
+                        @endif
                         <div class="wrapper_indent">
                             <div class="form-group">
                                 <label>Your Wallet Amount</label>
@@ -204,12 +208,16 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 add_bottom_15">
+                        @if(!empty($user->assigned_mess))
                         <div class="indent_title_in">
                             <h3>Selected Menus</h3>
                             <p>Breakfast:- {{ ($user && $user->breakfast == 1) ? 'Yes' : 'No'}}</p>
                             <p>Lunch:- {{ ($user && $user->lunch  == 1) ? 'Yes' : 'No'}}</p>
                             <p>Dinner:- {{ ($user && $user->dinner == 1) ? 'Yes' : 'No'}}</p>
                         </div>
+                        @else
+                            <p class="text-danger">Mess not Selected yet</p>
+                        @endif
                     </div>
                 </div>
                 <!-- End row -->

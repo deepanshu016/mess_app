@@ -72,7 +72,14 @@ Class AuthController extends Controller {
         $user = User::find(auth()->user()->id);
         $request->session()->invalidate();
         $auth = Auth::loginUsingId($user_id);
-        return redirect(route('mess_owner.dashboard'))->with('success','Loggedin successfully !!!');
+        $user = User::find($auth->id);
+        if($user->hasRole('MESS_OWNER')){
+            return redirect(route('mess_owner.dashboard'))->with('success','Loggedin successfully !!!');
+        }else if($user->hasRole('CUSTOMER')){
+            return redirect(route('view.profile'))->with('success','Loggedin successfully !!!');
+        }else{
+            return redirect(route('admin.dashboard'))->with('success','Loggedin successfully !!!');
+        }
     }
     public function login(LoginRequest $request)
     {

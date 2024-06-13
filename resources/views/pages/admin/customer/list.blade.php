@@ -44,7 +44,7 @@
                                     <th>Wallet</th>
                                     <th>Status</th>
                                     <th>Meal Type</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -84,7 +84,7 @@
                     data: 'mess_name',
                     name: 'Mess Name',
                     render:function(data, type, row, meta){
-                        return (row.mess_owner) ? row.mess_owner.mess_name : '';
+                        return (row.mess_owner) ? row.mess_owner.mess_name : '<h6 class="fw-semibold text-danger mb-0"><span class="indicator bg-danger"></span> Not Assigned</h6>';
                     }
                 },
                 {
@@ -121,6 +121,12 @@
                     render:function(data, type, row, meta){
                         return (row.meal_type == 'veg') ? 'Veg' : 'Non Veg';
                     }
+                },
+                {
+                    data: 'action',
+                    name: 'Action',
+                    render:function(data, type, row, meta){
+                        return `<a href="${row.id}/guest-login" class="btn-video square btn btn-outline-success rounded-2 px-0 py-0 me-3"><i class="bi bi-box-arrow-right"></i></a>`;                    }
                 }
             ],
             language: {

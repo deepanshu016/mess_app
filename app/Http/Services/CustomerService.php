@@ -35,7 +35,8 @@ class CustomerService {
             $query->where('name', 'CUSTOMER');
         });
         if($request->mess_id){
-            $user = $user->where('mess_id',$request->mess_id);
+            $messOwner = MessOwner::where('user_id',$request->mess_id)->first();
+            $user = $user->where('mess_id',$messOwner->id);
         }
         $user = $user->where(function ($query) use ($searchValue){
             $query->whereHas('customer_menu',function($query) use ($searchValue){
@@ -158,7 +159,7 @@ class CustomerService {
 
     public function assignMess(Object $request){
         $user = User::find(auth()->user()->id);
-        $customer = $user->update(['mess_id'=>$request->mess_id,'breakfast'=>($request->breakfast)?1:0,'lunch'=>($request->lunch)?1:0,'dinner'=>($request->dinner)?1:0]);
+        $customer = $user->update(['mess_id'=>$request->mess_id,'breakfast'=>($request->breakfast == 'Yes')?1:0,'lunch'=>($request->lunch == 'Yes')?1:0,'dinner'=>($request->dinner == 'Yes')?1:0]);
         return $customer;
     }
  }

@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{cuisine_id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
             Route::post('/update', [UsersController::class, 'update'])->name('admin.users.update');
             Route::delete('{id}/delete', [UsersController::class, 'delete'])->name('admin.users.delete');
+            Route::get('{user_id}/guest-login', [AuthController::class, 'loginAsGuestLogin'])->name('guest.login');
         });
         Route::group(['prefix' => 'cuisines'], function () {
             Route::get('/create', [CuisineController::class, 'add'])->name('admin.cuisines.add');
@@ -127,7 +128,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/customer-list', [\App\Http\Controllers\Admin\CustomerController::class, 'list'])->name('admin.customer.datatables');
             Route::get('{id}/manage-subscription', [SubscriptionController::class, 'manage_subscription'])->name('admin.customer.manage_subscription');
             Route::post('/manage-subscription', [SubscriptionController::class, 'save_manage_subscription'])->name('admin.customer.save.subscription');
-
+            Route::get('{user_id}/guest-login', [AuthController::class, 'loginAsGuestLogin'])->name('guest.login');
         });
         Route::group(['prefix' => 'news'], function () {
             Route::get('/create', [NewsController::class, 'add'])->name('admin.news.add');

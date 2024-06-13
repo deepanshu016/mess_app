@@ -43,12 +43,16 @@
 @section('page_scripts')
 <script>
     $(function(){
+        var mess_id = "{{ Auth::user()->id }}";
         $('#messOwnerLists').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
                 url: "{{ route('mess_owner.customer.datatables') }}",
                 type: 'GET',
+                data: function (d) {
+                    d.mess_id = mess_id;
+                }
             },
             columns: [
                 { data: 'name', name: 'Name' },

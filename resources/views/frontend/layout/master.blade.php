@@ -316,10 +316,12 @@
                             window.location = d.url;
                         },1000);
                     }else{
-                        CommonLib.notification.error(d.msg);
+                        CommonLib.notification.error(d.errors);
                     }
                 }).catch(e=>{
+
                     const error = JSON.parse(e.responseText);
+                    console.log(error)
                     CommonLib.notification.error(error.errors);
                 });
             });
