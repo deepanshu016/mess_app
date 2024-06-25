@@ -37,6 +37,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Total Referrals</th>
                                     <th>Wallet Amount</th>
                                     <th>Mess Name</th>
                                     <th>Email</th>
@@ -73,6 +74,13 @@
             },
             columns: [
                 { data: 'name', name: 'Name' },
+                {
+                    data: 'referral_counts',
+                    name: 'Total Referrals',
+                    render:function(data, type, row, meta){
+                        return row.referral_counts;
+                    }
+                },
                 {
                     data: 'wallet_amount',
                     name: 'Wallet Amount',

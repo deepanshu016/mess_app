@@ -15,7 +15,7 @@ class User extends Authenticatable implements HasMedia
 {
     use HasRoles, HasApiTokens, Notifiable,InteractsWithMedia;
     protected $guard_name = 'web';
-    protected $appends = ['medias'];
+    protected $appends = ['medias','referral_counts'];
 
 
     /**
@@ -98,5 +98,9 @@ class User extends Authenticatable implements HasMedia
 
     public function assigned_mess(){
         return $this->hasOne(MessOwner::class,'id','mess_id');
+    }
+
+    public function getReferralCountsAttribute(){
+        return User::where('parent_id',$this->id)->count();
     }
 }

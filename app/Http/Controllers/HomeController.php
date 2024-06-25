@@ -18,6 +18,7 @@ use App\Models\Job;
 use App\Models\ApplyJob;
 use App\Models\User;
 use App\Models\Faq;
+use Jorenvh\Share\ShareFacade;
 class HomeController extends Controller
 {
     public function __construct()
@@ -157,7 +158,14 @@ class HomeController extends Controller
             $transaction = $service->filterTransaction($request);
             $auth = new AuthService();
             $user = $auth->getProfile();
-            return view('frontend.pages.profile',compact('customers','transaction','user'));
+            $shareButtons = ShareFacade::page(
+                $user->referral_code,
+            )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->whatsapp();
+            return view('frontend.pages.profile',compact('shareButtons','customers','transaction','user'));
         }elseif($user->hasRole('MESS_OWNER')){
             return redirect(route('mess_owner.dashboard'));
         }else{

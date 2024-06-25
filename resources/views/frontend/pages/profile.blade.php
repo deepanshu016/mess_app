@@ -1,6 +1,36 @@
 @extends('frontend.layout.master')
 @section('title','Mess App | Profile Page')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<style>
+    div#social-links {
+        margin: 0 auto;
+        max-width: 500px;
+    }
+    div#social-links ul li {
+        display: inline-block;
+    }
+    div#social-links ul li a {
+        padding: 20px;
+        margin: 1px;
+        font-size: 30px;
+        color: #2daf6a;
+    }
+    span.fab.fa-facebook-square {
+        color: #3e4eef;
+    }
+
+    span.fab.fa-twitter {
+        color: #5aadf6;
+    }
+
+    span.fab.fa-linkedin {
+        color: #0a66c2;
+    }
+    span.fab.fa-whatsapp {
+        color: #2daf6a;
+    }
+</style>
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{{ asset('/') }}site/img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
@@ -172,6 +202,7 @@
                                     <span>{{ @$user->referral_code}}</span>
                                     <input class="form-control" id="textToCopy" type="hidden" value="{{ @$user->referral_code}}">
                                 </div>
+                                {!! $shareButtons !!}
                                 <button type="submit" class="btn_1 green">Update Email</button>
                             </form>
                         </div><!-- End wrapper_indent -->
