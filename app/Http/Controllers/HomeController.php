@@ -19,6 +19,7 @@ use App\Models\Job;
 use App\Models\ApplyJob;
 use App\Models\User;
 use App\Models\Faq;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -158,7 +159,7 @@ class HomeController extends Controller
             $transaction = $service->filterTransaction($request);
             $auth = new AuthService();
             $user = $auth->getProfile();
-             $shareButtons = ShareFacade::page(
+            $shareButtons = ShareFacade::page(
                 $user->referral_code,
             )
             ->facebook()
